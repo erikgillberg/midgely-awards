@@ -549,6 +549,7 @@ export default {
       }
     }
     const share = url.pathname.match(/^\/n\/([A-Za-z0-9-]{1,64})\/?$/);
+    if (share && share[1] === "midgley") return Response.redirect(url.origin + "/midgley", 301);
     if (share && request.method === "GET") return sharePage(request, env, url, share[1]);
     const res = await env.ASSETS.fetch(request);
     if (request.method === "GET" && (url.pathname === "/" || url.pathname === "/index.html") && res.ok) {

@@ -12,6 +12,7 @@ The site is a static page plus a small server, both hosted on Cloudflare Pages. 
 | `public/labels.js` | Display names for fields, statuses, kinds of harm and awards |
 | `public/admin.html`, `admin.js` | The moderation screen at `/admin` |
 | `public/guidelines.html`, `terms.html` | Community guidelines, and terms and privacy |
+| `public/midgley.html` | The page about Thomas Midgley Jr., who holds the first award. He is kept out of the voting list, and `/n/midgley` redirects here |
 | `public/_worker.js` | The server: the JSON API, share pages at `/n/<id>`, and database setup |
 | `.github/workflows/deploy.yml` | Deploys to Cloudflare on every push to `main` |
 

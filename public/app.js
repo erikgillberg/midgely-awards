@@ -8,6 +8,7 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   };
   const POLL_MS = 60000;
+  const HONOREE = "midgley";
 
   function makeId() {
     if (crypto.randomUUID) return crypto.randomUUID();
@@ -73,7 +74,8 @@
   async function load() {
     try {
       const [d, mv] = await Promise.all([api("/api/state"), api("/api/my-votes?voter=" + encodeURIComponent(voter)).catch(() => null)]);
-      state.noms = d.nominees;
+      // The namesake holds the first award and sits above the race, on /midgley.
+      state.noms = d.nominees.filter((n) => n.id !== HONOREE);
       state.comments = d.comments;
       if (mv) state.myVotes = new Set(mv.myVotes);
       const now = Date.now();

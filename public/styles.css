@@ -166,3 +166,17 @@ nav.foot span{color:var(--ink-3);text-transform:none;letter-spacing:0}
 .doc strong{color:var(--ink)}
 .doc .updated{font:500 12px var(--mono);color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
 @media (max-width:640px){ .subscribe{grid-template-columns:1fr} }
+/* memorial to the namesake */
+.memorial{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;background:var(--tile);color:var(--tile-ink);padding:22px;text-decoration:none}
+.memorial .element{background:var(--ethyl);color:#fff}
+.memorial .label{color:inherit;opacity:.7;margin:0 0 6px}
+.memorial h2{margin:0 0 8px;font:800 30px/1 var(--display);text-transform:uppercase}
+.memorial p{margin:0;font-size:15px;max-width:62ch;opacity:.9}
+.memorial .more{display:inline-block;margin-top:12px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid currentColor}
+.memorial:hover .more{opacity:.8}
+.charter .lede{font-size:19px;line-height:1.5;margin:8px 0 0;max-width:40ch}
+.doc .figure{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin:8px 0 4px}
+.doc .citation{border:1.5px solid var(--ink);background:var(--surface);padding:16px 18px;margin:18px 0}
+.doc .citation p{margin:0;color:var(--ink)}
+.doc .citation .label{margin-bottom:6px}
+@media (max-width:640px){ .memorial{grid-template-columns:1fr;padding:18px} .memorial .element{width:84px} }
