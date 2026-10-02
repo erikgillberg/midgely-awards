@@ -1,0 +1,12 @@
+{
+  "name": "midgley-awards",
+  "private": true,
+  "description": "The Midgley Awards: for outstanding achievement in unintended consequences.",
+  "scripts": {
+    "dev": "wrangler pages dev public --d1 DB=midgley-local --binding ADMIN_TOKEN=dev-token",
+    "deploy": "wrangler pages deploy public --project-name=midgley-awards --branch=main"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

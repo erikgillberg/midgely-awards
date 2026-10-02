@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Midgley Awards</title>
+<meta name="description" content="For outstanding achievement in unintended consequences. Nominate, upvote and argue about solutions that worked too well.">
+<link rel="canonical" href="/">
+<meta property="og:title" content="The Midgley Awards">
+<meta property="og:description" content="For outstanding achievement in unintended consequences. Nominate, upvote and argue about solutions that worked too well.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="/">
+<meta property="og:image" content="/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Midgley Awards">
+<meta name="twitter:description" content="For outstanding achievement in unintended consequences. Nominate, upvote and argue about solutions that worked too well.">
+<meta name="twitter:image" content="/og.png">
+<meta name="theme-color" content="#12161C">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div class="element" aria-hidden="true"><span class="n">1889</span><span class="sym">Mg</span><span class="w">MIDGLEY · Jr.</span></div>
+    <div>
+      <h1><a href="/">The Midgley Awards</a></h1>
+      <p>For outstanding achievement in unintended consequences</p>
+    </div>
+  </header>
+
+  <section class="charter">
+    <blockquote>Recognizing an individual whose ingenious solution to one problem <em>succeeded beyond expectations</em> and, in doing so, created an entirely new class of problems nobody adequately accounted for.</blockquote>
+    <div class="rules">
+      <h2>Eligibility</h2>
+      <ul>
+        <li><strong>A terrible product doesn't qualify.</strong> The original idea has to be a clever, successful answer to a real problem.</li>
+        <li><strong>The backfire lives outside the frame.</strong> The damage shows up where the problem boundary was drawn too narrowly.</li>
+        <li><strong>Say what was knowable.</strong> Midgley's lead hazard was known at the time; the ozone chemistry wasn't.</li>
+      </ul>
+      <a href="/guidelines" style="font-size:13px">Read the community guidelines</a>
+    </div>
+  </section>
+
+  <p class="question"><b>The serious question behind the joke:</b> what would qualify us for a Midgley thirty years from now? Mark a nominee <b>Prospective</b> to name a decision being made today, in transportation, housing, energy, AI or city-building, before it wins.</p>
+
+  <div class="bar">
+    <div class="seg" role="group" aria-label="Sort">
+      <button id="sort-top" data-sort="top" aria-pressed="true">Top</button>
+      <button id="sort-new" data-sort="new" aria-pressed="false">New</button>
+      <button id="sort-debated" data-sort="debated" aria-pressed="false">Debated</button>
+    </div>
+    <button class="primary" id="open-form">Submit a nominee</button>
+    <div class="filters">
+      <select id="flt-domain" aria-label="Filter by field"></select>
+      <select id="flt-harm" aria-label="Filter by kind of harm"></select>
+      <select id="flt-status" aria-label="Filter by status"></select>
+      <select id="flt-know" aria-label="Filter by knowability"></select>
+    </div>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+
+  <p class="thanks" id="thanks" hidden></p>
+
+  <form class="nominate" id="form" hidden novalidate>
+    <h3>Submit a nominee</h3>
+    <p class="hint">Make the case on both sides of the ledger: what it solved, then what it caused. New nominees appear after a quick review against the <a href="/guidelines">guidelines</a>.</p>
+    <div class="field"><label class="label" for="f-name">Nominee</label><input id="f-name" maxlength="80" required placeholder="Person, agency or program"></div>
+    <div class="field"><label class="label" for="f-years">Years</label><input id="f-years" maxlength="30" placeholder="e.g. 1889–1944 or 2026–"></div>
+    <div class="field full"><label class="label" for="f-work">The achievement</label><input id="f-work" maxlength="120" required placeholder="What they made or decided"></div>
+    <div class="field full"><label class="label" for="f-solved">The problem it solved</label><textarea id="f-solved" maxlength="600" required placeholder="The real problem, and how well it worked"></textarea></div>
+    <div class="field full"><label class="label" for="f-backfire">The problem it created</label><textarea id="f-backfire" maxlength="600" required placeholder="What showed up outside the frame"></textarea></div>
+    <div class="field"><label class="label" for="f-domain">Field</label><select id="f-domain"></select></div>
+    <div class="field"><label class="label" for="f-status">Status</label><select id="f-status"></select></div>
+    <fieldset class="field full"><legend class="label">Kind of harm (pick any)</legend><div class="checks" id="f-harms"></div></fieldset>
+    <div class="field full"><label class="label" for="f-know">Was the backfire knowable?</label><select id="f-know"></select><small>Keep documented effects apart from contested claims.</small></div>
+    <div class="field full"><label class="label" for="f-fix">The fix <span style="text-transform:none;letter-spacing:0">(optional)</span></label><textarea id="f-fix" maxlength="400" placeholder="Who or what is cleaning it up? A treaty, a reform, an organization."></textarea></div>
+    <div class="field full"><label class="label" for="f-fixurl">Link for the fix <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="f-fixurl" type="url" maxlength="500" placeholder="https://"></div>
+    <div class="field full"><label class="label" for="f-author">Your name <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="f-author" maxlength="60" autocomplete="name" placeholder="Shown as the submitter"></div>
+    <div class="hp" aria-hidden="true"><label for="f-website">Leave empty</label><input id="f-website" tabindex="-1" autocomplete="off"></div>
+    <div class="field full ts" id="f-ts"></div>
+    <div class="actions"><button class="primary" type="submit" id="f-submit">Submit nominee</button><button class="ghost" type="button" id="f-cancel">Cancel</button><span class="msg" id="f-msg" role="status"></span></div>
+  </form>
+
+  <p class="notice" id="notice" hidden></p>
+  <div class="list" id="list" aria-live="polite"><p class="empty">Loading the nominees…</p></div>
+
+  <section class="subscribe" aria-labelledby="sub-h">
+    <div>
+      <h2 id="sub-h">Get the winners</h2>
+      <p>One email when the year's Midgleys are announced. Nothing else.</p>
+    </div>
+    <form id="sub-form" novalidate>
+      <label for="sub-email" class="hp">Email</label>
+      <input id="sub-email" type="email" required placeholder="you@example.com" autocomplete="email" aria-label="Email address">
+      <input id="sub-website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="primary" type="submit" id="sub-btn">Notify me</button>
+    </form>
+    <div class="ts" id="sub-ts"></div>
+    <span class="msg" id="sub-msg" role="status"></span>
+  </section>
+
+  <nav class="foot" aria-label="Site">
+    <a href="/guidelines">Guidelines</a>
+    <a href="/terms">Terms &amp; privacy</a>
+    <span>One vote per browser per nominee; tap again to withdraw.</span>
+  </nav>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="/labels.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
