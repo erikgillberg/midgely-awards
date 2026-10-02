@@ -54,6 +54,16 @@
     if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 86400 * 30) return Math.floor(s / 86400) + "d ago";
     return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
   }
+  // "https://en.wikipedia.org/wiki/Haber_process" -> "Haber process"
+  function wikiTitle(u) {
+    try { const m = new URL(u).pathname.match(/\/wiki\/(.+)$/); if (m) return decodeURIComponent(m[1]).replace(/_/g, " "); } catch (e) {}
+    return "Wikipedia";
+  }
+  const wikiLinks = (n) => {
+    const links = [n.wikiName, n.wikiWork].filter(Boolean).map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(wikiTitle(u))}</a>`);
+    return links.length ? `<p class="wiki">On Wikipedia: ${links.join(" · ")}</p>` : "";
+  };
+  const isWiki = (u) => { try { return /(^|\.)wikipedia\.org$/i.test(new URL(u).hostname); } catch (e) { return false; } };
   const upIcon = `<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2 L13 10 H1 Z" fill="currentColor"/></svg>`;
   const byline = (a, seeded) => (seeded ? "Founding class" : a || "Anonymous");
   let toastTimer = null;
@@ -132,6 +142,7 @@
         <div class="body">
           <div class="head"><h3>${esc(n.name)}</h3>${n.years ? `<span class="yrs">${esc(n.years)}</span>` : ""}</div>
           <p class="work">${esc(n.work)}</p>
+          ${wikiLinks(n)}
           <dl class="ledger">
             <dt class="s">Solved</dt><dd>${esc(n.solved)}</dd>
             <dt class="b">Created</dt><dd>${esc(n.backfire)}</dd>
@@ -274,17 +285,18 @@
       name: v("#f-name"), years: v("#f-years"), work: v("#f-work"), solved: v("#f-solved"), backfire: v("#f-backfire"),
       domain: $("#f-domain").value, status: $("#f-status").value, knowable: $("#f-know").value,
       harms: [...document.querySelectorAll("#f-harms input:checked")].map((x) => x.value),
-      fix: v("#f-fix"), fixUrl: v("#f-fixurl"), author: v("#f-author"), website: v("#f-website"),
+      fix: v("#f-fix"), fixUrl: v("#f-fixurl"), wikiName: v("#f-wikiname"), wikiWork: v("#f-wikiwork"), author: v("#f-author"), website: v("#f-website"),
       turnstile: tsTokens["f-ts"] || ""
     };
     if (!nom.name || !nom.work || !nom.solved || !nom.backfire) { $("#f-msg").textContent = "Fill in the nominee, the achievement, and both sides of the ledger."; return; }
+    if ((nom.wikiName && !isWiki(nom.wikiName)) || (nom.wikiWork && !isWiki(nom.wikiWork))) { $("#f-msg").textContent = "Wikipedia links have to point to a page on wikipedia.org."; return; }
     if (!nom.domain) { $("#f-msg").textContent = "Pick the field it belongs to."; return; }
     if (state.config.turnstileSiteKey && !nom.turnstile) { $("#f-msg").textContent = "Complete the human check first."; return; }
     if (nom.author) store.set("midgley.name", nom.author);
     $("#f-submit").disabled = true; $("#f-msg").textContent = "";
     try {
       const r = await api("/api/nominees", { method: "POST", body: JSON.stringify(nom) });
-      ["#f-name", "#f-years", "#f-work", "#f-solved", "#f-backfire", "#f-fix", "#f-fixurl"].forEach((id) => ($(id).value = ""));
+      ["#f-name", "#f-years", "#f-work", "#f-solved", "#f-backfire", "#f-fix", "#f-fixurl", "#f-wikiname", "#f-wikiwork"].forEach((id) => ($(id).value = ""));
       document.querySelectorAll("#f-harms input").forEach((x) => (x.checked = false));
       $("#form").hidden = true; $("#open-form").hidden = false;
       if (r.status === "approved" && r.nominee) {

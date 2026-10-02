@@ -9,7 +9,7 @@
 //
 // The schema creates and migrates itself on first request (v1 databases upgrade in place).
 
-const SCHEMA_VERSION = 2;
+const SCHEMA_VERSION = 3;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 
@@ -51,6 +51,7 @@ const NEW_COLUMNS = {
   nominees: [
     ["domain", "TEXT"], ["harms", "TEXT"], ["status", "TEXT"], ["award", "TEXT"],
     ["fix", "TEXT"], ["fix_url", "TEXT"], ["state", "TEXT DEFAULT 'approved'"], ["reports", "INTEGER DEFAULT 0"],
+    ["wiki_name", "TEXT"], ["wiki_work", "TEXT"], // v3
   ],
   comments: [["hidden", "INTEGER DEFAULT 0"], ["reports", "INTEGER DEFAULT 0"]],
 };
@@ -105,6 +106,20 @@ const SEED = [
     "Berners-Lee's own Solid project aims to give people control of their personal data.", "https://solidproject.org/"],
 ];
 
+// Wikipedia pages for the founding class (v3): id -> [the nominee, the achievement].
+const SEED_WIKI = {
+  midgley: ["https://en.wikipedia.org/wiki/Thomas_Midgley_Jr.", "https://en.wikipedia.org/wiki/Tetraethyllead"],
+  haber: ["https://en.wikipedia.org/wiki/Fritz_Haber", "https://en.wikipedia.org/wiki/Haber_process"],
+  nobel: ["https://en.wikipedia.org/wiki/Alfred_Nobel", "https://en.wikipedia.org/wiki/Dynamite"],
+  franz: ["https://en.wikipedia.org/wiki/John_E._Franz", "https://en.wikipedia.org/wiki/Glyphosate"],
+  muller: ["https://en.wikipedia.org/wiki/Paul_Hermann_M%C3%BCller", "https://en.wikipedia.org/wiki/DDT"],
+  baekeland: ["https://en.wikipedia.org/wiki/Leo_Baekeland", "https://en.wikipedia.org/wiki/Bakelite"],
+  borlaug: ["https://en.wikipedia.org/wiki/Norman_Borlaug", "https://en.wikipedia.org/wiki/Green_Revolution"],
+  moses: ["https://en.wikipedia.org/wiki/Robert_Moses", "https://en.wikipedia.org/wiki/Car_dependency"],
+  zuckerberg: ["https://en.wikipedia.org/wiki/Mark_Zuckerberg", "https://en.wikipedia.org/wiki/Facebook"],
+  "berners-lee": ["https://en.wikipedia.org/wiki/Tim_Berners-Lee", "https://en.wikipedia.org/wiki/World_Wide_Web"],
+};
+
 // ---------------------------------------------------------------- setup
 
 function findD1(env) {
@@ -156,6 +171,9 @@ async function migrate(db) {
       ).bind(domain, harms, status, award || null, fix || null, fixUrl || null, id));
     }
   });
+  for (const [id, [wn, ww]] of Object.entries(SEED_WIKI)) {
+    stmts.push(db.prepare("UPDATE nominees SET wiki_name = COALESCE(wiki_name, ?), wiki_work = COALESCE(wiki_work, ?) WHERE id = ? AND seeded = 1").bind(wn, ww, id));
+  }
   // v1 community submissions: carry the old single category over to the new facets where it maps cleanly.
   stmts.push(db.prepare(`UPDATE nominees SET domain = COALESCE(domain, 'cities') WHERE seeded = 0 AND category = 'urban'`));
   stmts.push(db.prepare(`UPDATE nominees SET domain = COALESCE(domain, 'governance') WHERE seeded = 0 AND category = 'policy'`));
@@ -186,6 +204,15 @@ function cleanUrl(v) {
     const u = new URL(s);
     return u.protocol === "https:" || u.protocol === "http:" ? u.toString() : "";
   } catch { return ""; }
+}
+// A Wikipedia article link, or "" when empty. Returns null when it points anywhere else.
+function cleanWiki(v) {
+  const s = cleanUrl(v);
+  if (!s) return clean(v, 500) ? null : "";
+  const u = new URL(s);
+  if (!/(^|\.)wikipedia\.org$/i.test(u.hostname)) return null;
+  u.protocol = "https:";
+  return u.toString();
 }
 const pick = (v, list) => (list.includes(v) ? v : "");
 function pickMany(v, list) {
@@ -236,6 +263,7 @@ function nomineeOut(r, admin = false) {
     id: r.id, name: r.name, years: r.years || "", work: r.work, solved: r.solved, backfire: r.backfire,
     knowable: r.knowable || "", domain: r.domain || "", harms: r.harms ? r.harms.split(",").filter(Boolean) : [],
     status: r.status || "", award: r.award || "", fix: r.fix || "", fixUrl: r.fix_url || "",
+    wikiName: r.wiki_name || "", wikiWork: r.wiki_work || "",
     author: r.author || "", seeded: !!r.seeded, createdAt: r.created_at, score: r.score || 0,
   };
   if (admin) { out.state = r.state || "approved"; out.reports = r.reports || 0; out.legacyCategory = r.category || ""; }
@@ -314,20 +342,22 @@ async function handleApi(request, env, url, ctx) {
       domain: pick(b.domain, DOMAINS), harms: pickMany(b.harms, HARMS),
       knowable: pick(b.knowable, KNOWABLE), status: pick(b.status, STATUSES),
       fix: clean(b.fix, 400), fixUrl: cleanUrl(b.fixUrl), author: clean(b.author, 60),
+      wikiName: cleanWiki(b.wikiName), wikiWork: cleanWiki(b.wikiWork),
     };
+    if (n.wikiName === null || n.wikiWork === null) return bad("Wikipedia links have to point to a page on wikipedia.org.");
     if (!n.name || !n.work || !n.solved || !n.backfire) return bad("Fill in the nominee, the achievement, and both sides of the ledger.");
     const id = crypto.randomUUID();
     const createdAt = new Date().toISOString();
     const state = env.AUTO_APPROVE === "1" ? "approved" : "pending";
     await db.prepare(
-      `INSERT INTO nominees (id,name,years,work,solved,backfire,domain,harms,knowable,status,fix,fix_url,author,seeded,state,created_at,category)
-       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,0,?,?,'')`
+      `INSERT INTO nominees (id,name,years,work,solved,backfire,domain,harms,knowable,status,fix,fix_url,wiki_name,wiki_work,author,seeded,state,created_at,category)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?,?,'')`
     ).bind(id, n.name, n.years, n.work, n.solved, n.backfire, n.domain || null, n.harms || null, n.knowable || null,
-      n.status || null, n.fix || null, n.fixUrl || null, n.author, state, createdAt).run();
+      n.status || null, n.fix || null, n.fixUrl || null, n.wikiName || null, n.wikiWork || null, n.author, state, createdAt).run();
     if (state === "approved") await bustState(url);
     return json({
       status: state,
-      nominee: state === "approved" ? nomineeOut({ id, ...n, fix_url: n.fixUrl, created_at: createdAt, seeded: 0, score: 0 }) : null,
+      nominee: state === "approved" ? nomineeOut({ id, ...n, fix_url: n.fixUrl, wiki_name: n.wikiName, wiki_work: n.wikiWork, created_at: createdAt, seeded: 0, score: 0 }) : null,
     }, 201);
   }
 
@@ -436,6 +466,12 @@ async function handleAdmin(request, env, url, db, path, method) {
     const text = { name: 80, years: 30, work: 120, solved: 600, backfire: 600, fix: 400, author: 60 };
     for (const [k, max] of Object.entries(text)) if (k in b) { sets.push(`${k} = ?`); vals.push(clean(b[k], max) || null); }
     if ("fixUrl" in b) { sets.push("fix_url = ?"); vals.push(cleanUrl(b.fixUrl) || null); }
+    for (const [k, col] of [["wikiName", "wiki_name"], ["wikiWork", "wiki_work"]]) {
+      if (!(k in b)) continue;
+      const w = cleanWiki(b[k]);
+      if (w === null) return bad("Wikipedia links have to point to a page on wikipedia.org.");
+      sets.push(`${col} = ?`); vals.push(w || null);
+    }
     if ("domain" in b) { sets.push("domain = ?"); vals.push(pick(b.domain, DOMAINS) || null); }
     if ("harms" in b) { sets.push("harms = ?"); vals.push(pickMany(b.harms, HARMS) || null); }
     if ("knowable" in b) { sets.push("knowable = ?"); vals.push(pick(b.knowable, KNOWABLE) || null); }

@@ -70,6 +70,8 @@
       <label class="full">Kinds of harm<span class="checks">${Object.entries(HARMS).map(([k, v]) => `<label style="flex-direction:row;text-transform:none;letter-spacing:0;font:13px var(--sans);color:var(--ink)"><input type="checkbox" data-harm="${k}" ${n.harms.includes(k) ? "checked" : ""} style="width:auto">${esc(v)}</label>`).join("")}</span></label>
       <label class="full">The fix<textarea id="e-fix-${id}" maxlength="400">${esc(n.fix)}</textarea></label>
       <label class="full">Fix link<input id="e-fixUrl-${id}" value="${esc(n.fixUrl)}" maxlength="500"></label>
+      <label class="full">Wikipedia: nominee<input id="e-wikiName-${id}" value="${esc(n.wikiName)}" maxlength="500"></label>
+      <label class="full">Wikipedia: achievement<input id="e-wikiWork-${id}" value="${esc(n.wikiWork)}" maxlength="500"></label>
       <label>Submitted by<input id="e-author-${id}" value="${esc(n.author)}" maxlength="60"></label>
       <div class="btns full"><button class="ok" data-act="save" data-id="${esc(id)}">Save changes</button><button data-act="cancel" data-id="${esc(id)}">Cancel</button></div>
     </div>`;
@@ -80,6 +82,7 @@
       <div class="top"><b>${esc(n.name)}</b><span class="yrs" style="font:13px var(--mono);color:var(--ink-3)">${esc(n.years)}</span>
         <span class="by" style="font-size:12px;color:var(--ink-3)">${n.seeded ? "Founding class" : esc(n.author || "Anonymous") + " · " + new Date(n.createdAt).toLocaleString()} · ${n.score} votes</span></div>
       <p><strong>${esc(n.work)}</strong></p>
+      ${n.wikiName || n.wikiWork ? `<p style="font-size:13px">Wikipedia: ${[n.wikiName, n.wikiWork].filter(Boolean).map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join(" · ")}</p>` : ""}
       <p><b style="color:var(--ozone)">Solved:</b> ${esc(n.solved)}</p>
       <p><b style="color:var(--ethyl)">Created:</b> ${esc(n.backfire)}</p>
       ${n.fix ? `<p><b style="color:var(--amber)">Fix:</b> ${esc(n.fix)} ${n.fixUrl ? `<a href="${esc(n.fixUrl)}" target="_blank" rel="noopener">${esc(n.fixUrl)}</a>` : ""}</p>` : ""}
@@ -141,7 +144,7 @@
         return patchNominee(id, {
           name: v("name"), years: v("years"), work: v("work"), solved: v("solved"), backfire: v("backfire"),
           domain: v("domain"), status: v("status"), knowable: v("knowable"), award: v("award"),
-          harms, fix: v("fix"), fixUrl: v("fixUrl"), author: v("author")
+          harms, fix: v("fix"), fixUrl: v("fixUrl"), wikiName: v("wikiName"), wikiWork: v("wikiWork"), author: v("author")
         }, "Saved");
       }
       case "delete":
