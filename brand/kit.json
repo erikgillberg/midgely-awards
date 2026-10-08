@@ -1,0 +1,217 @@
+{
+  "id": "midgley-awards",
+  "name": "The Midgley Awards",
+  "scope": "The Midgley Awards site: the nominee list, the Midgley page, the guidelines, terms, share pages at /n/<id>, the og card and the winners email list.",
+  "colorNote": "A cool gray ground with near-black ink, like a lab report. Ethyl red (for leaded gasoline) is the one action color; ozone blue carries links and focus. Amber marks contested or mixed evidence. Every color has a night value.",
+  "status": "Draft for Erik's review",
+  "updated": "2026-10-08",
+  "site": "https://midgley-awards.pages.dev",
+  "fonts": "https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap",
+  "logos": [
+    {
+      "label": "Mg mark",
+      "file": "logos/midgley-mark.svg",
+      "kind": "svg",
+      "on": "light",
+      "note": "The favicon: Mg on a near-black tile. On the site the full mark is a periodic-table element drawn in HTML (1889 above, Mg in Big Shoulders Display 900, MIDGLEY · Jr. below in Plex Mono), dark on the masthead and ethyl red for the first award."
+    }
+  ],
+  "imagery": [
+    {
+      "label": "Home page",
+      "file": "images/screenshot-home.jpg",
+      "kind": "jpg",
+      "note": "Captured from the live site on 2026-10-08. The element tile beside the uppercase display title, the ethyl red mono tagline, a heavy ink rule, and the dark panel for the first award."
+    },
+    {
+      "label": "The Midgley page",
+      "file": "images/screenshot-midgley.jpg",
+      "kind": "jpg",
+      "note": "Captured from the live site on 2026-10-08. A narrow reading column, an outlined citation box in mono caps, and display subheads."
+    },
+    {
+      "label": "Share card",
+      "file": "images/og-card.png",
+      "kind": "png",
+      "note": "The 1200 by 630 og image from public/og.png: the night palette, with the element tile inverted."
+    }
+  ],
+  "theme": {
+    "accent": "#c8301f",
+    "accentLight": "#f7e1dc",
+    "accentNight": "#f0624f",
+    "secondary": "#2f6e8f",
+    "secondaryNight": "#78b7d6"
+  },
+  "colors": {
+    "brand": [
+      {
+        "name": "Ground",
+        "hex": "#edf0f2",
+        "night": "#0e1216",
+        "token": "--ground",
+        "use": "The page background, and field backgrounds."
+      },
+      {
+        "name": "Surface",
+        "hex": "#ffffff",
+        "night": "#161c22",
+        "token": "--surface",
+        "use": "The nomination form, buttons and vote boxes."
+      },
+      {
+        "name": "Ink",
+        "hex": "#12161c",
+        "night": "#e6eaee",
+        "token": "--ink",
+        "use": "Text, the masthead rule and the element tile (--tile)."
+      },
+      {
+        "name": "Ink 2",
+        "hex": "#48525e",
+        "night": "#a7b1bc",
+        "token": "--ink-2",
+        "use": "Secondary text: rules, hints, question boxes."
+      },
+      {
+        "name": "Ink 3",
+        "hex": "#7a8491",
+        "night": "#7d8894",
+        "token": "--ink-3",
+        "use": "Mono labels, years and fine print. 3.31 on ground, so short of AA for small text."
+      },
+      {
+        "name": "Line",
+        "hex": "#d5dbe1",
+        "night": "#29323b",
+        "token": "--line",
+        "use": "Borders and dividers."
+      },
+      {
+        "name": "Ethyl",
+        "hex": "#c8301f",
+        "night": "#f0624f",
+        "token": "--ethyl",
+        "use": "The primary button, a cast vote, the tagline, the first award's tile and knowable-harm chips."
+      },
+      {
+        "name": "Ethyl soft",
+        "hex": "#f7e1dc",
+        "night": "#3a1c18",
+        "token": "--ethyl-soft",
+        "use": "Knowable-harm chip fills and the highlighter under emphasis in the charter."
+      },
+      {
+        "name": "Ozone",
+        "hex": "#2f6e8f",
+        "night": "#78b7d6",
+        "token": "--ozone",
+        "use": "Links, focus rings, the question rule and unforeseeable-harm chips."
+      },
+      {
+        "name": "Ozone soft",
+        "hex": "#ddebf2",
+        "night": "#16303d",
+        "token": "--ozone-soft",
+        "use": "Unforeseeable-harm chip fills."
+      }
+    ],
+    "data": [
+      {
+        "name": "Amber",
+        "hex": "#9a6a00",
+        "night": "#e3b04b",
+        "token": "--amber",
+        "use": "Mixed and contested evidence chips. 4.14 on ground."
+      },
+      {
+        "name": "Amber soft",
+        "hex": "#f5eacb",
+        "night": "#342911",
+        "token": "--amber-soft",
+        "use": "Mixed and contested chip fills."
+      }
+    ]
+  },
+  "type": [
+    {
+      "role": "Display",
+      "family": "Big Shoulders Display",
+      "weights": "600, 800, 900",
+      "sample": "The Midgley Awards",
+      "spec": "Uppercase. The masthead title in 900 at 44 to 76px, line-height 0.9; nominee names and form titles in 800 at 28 to 30px; the Mg symbol in 900."
+    },
+    {
+      "role": "Body",
+      "family": "IBM Plex Sans",
+      "weights": "400, 500, 600, italic 400",
+      "sample": "A list of inventions and decisions that solved one problem and caused another.",
+      "spec": "15px, line-height 1.55. The charter quote at 19px. Buttons in 600."
+    },
+    {
+      "role": "Labels and data",
+      "family": "IBM Plex Mono",
+      "weights": "400, 500",
+      "sample": "For outstanding achievement in unintended consequences",
+      "spec": "Labels, the tagline, years, vote counts and the element tile. 11 to 13px, 500, uppercase, tracked .06 to .1em. Counts use tabular numerals."
+    }
+  ],
+  "voice": {
+    "exemplar": {
+      "headline": "For outstanding achievement in unintended consequences",
+      "body": "A list of inventions and decisions that solved one problem and caused another. You vote on them, argue about them in the comments, and add your own."
+    },
+    "rules": [
+      {
+        "rule": "Deadpan, not snide",
+        "detail": "The joke is the award itself. The copy stays plain and factual and lets the facts carry the irony."
+      },
+      {
+        "rule": "Credit the solution first",
+        "detail": "A nominee has to have worked. Say what problem it solved before saying what it caused."
+      },
+      {
+        "rule": "Say what people knew",
+        "detail": "State whether the harm was knowable, unforeseeable, partly knowable or still contested, and stick to documented effects."
+      },
+      {
+        "rule": "Judge decisions, not people",
+        "detail": "Describe the decision and its effects. Leave out motives, character and private life, and nominate only public work."
+      },
+      {
+        "rule": "Plain words for a general reader",
+        "detail": "Explain the chemistry or policy in a sentence a reader without the background can follow, as the Midgley page does."
+      },
+      {
+        "rule": "Prose to argue, lists to scan",
+        "detail": "Argue a nomination in sentences. Criteria, moderation rules and fields go in lists."
+      },
+      {
+        "rule": "US English, no long dashes",
+        "detail": "Write year ranges as 1889 to 1944. Use commas, colons, periods or parentheses instead of em and en dashes."
+      }
+    ],
+    "use": [
+      "unintended consequences",
+      "worked too well",
+      "nominee",
+      "the fix",
+      "still contested",
+      "knowable at the time"
+    ],
+    "avoid": [
+      "villain, evil, idiot",
+      "claims about a nominee's motives",
+      "undocumented effects",
+      "private individuals as nominees"
+    ]
+  },
+  "gaps": [
+    "There is no logo file for the full element mark: the masthead tile is drawn in HTML and CSS, and the only SVG is the favicon, which carries Mg alone.",
+    "The favicon sets Mg as live text in Arial Narrow, not Big Shoulders Display, and the text is not outlined, so it renders differently by platform.",
+    "The repository is named midgely-awards while the site, the package and the Pages project spell it Midgley.",
+    "Ink 3 #7a8491 carries the 11px mono labels but measures 3.31 on ground, short of the 4.5 AA minimum. Amber #9a6a00 chips measure 4.14 on ground.",
+    "At night, white text on ethyl #f0624f (the primary button and a cast vote) measures 3.20, which passes only for large text.",
+    "The Years field placeholder in index.html writes its example ranges with an en dash, while the Midgley page writes 1889 to 1944."
+  ]
+}
