@@ -3,3 +3,6 @@ node_modules/
 .dev.vars
 .DS_Store
 _to_delete/
+
+# Local scratch (STANDARDS §4)
+.scratch/
