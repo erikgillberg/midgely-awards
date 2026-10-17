@@ -292,37 +292,72 @@ export function jewelOf(domain) {
 }
 const jewelVars = (j) => `--deep:${j.deep};--base:${j.base};--light:${j.light}`;
 
-// A nominee as an element: atomic number (its place in the order nominees joined), symbol,
-// name, years, category, and the Oops Score where an element would show its mass.
-export function elementHTML(n, num, size = "") {
+// A nominee as an element. Everything on the tile is a fixed fact, so a saved image never goes stale:
+//   top left   catalog number: given once when the nominee joins, never reused (Midgley is 1)
+//   top right  the year it began
+//   center     symbol: two letters from the surname
+//   bottom     lag: years from the start to the main backfire being documented
+//              reach: how many people it touches, as a power of ten (9 = billions)
+//   word       the surname
+// The category is the tile's color, and its group number heads the column in the table.
+// Live numbers (scores, ranks) stay on the website, never on the tile.
+const SUP = { 0: "⁰", 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹" };
+export const lagOf = (n) => (n.began != null && n.recognized != null ? Math.max(0, n.recognized - n.began) : null);
+export const reachText = (r) => (r == null ? "?" : "10" + String(r).split("").map((d) => SUP[d]).join(""));
+export const surnameOf = (name) => String(name).replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i, "").split(/\s+/).pop();
+export const groupOf = (domain) => { const i = Object.keys(DOMAINS).indexOf(domain); return i >= 0 ? i + 1 : null; };
+
+export function elementHTML(n, size = "") {
   const j = jewelOf(n.domain);
-  const surname = String(n.name).replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i, "").split(/\s+/).pop();
+  const lag = lagOf(n);
   return `<div class="el ${size}" style="${jewelVars(j)}">
-    <span class="el-num">${num}</span>
-    <span class="el-mass">${n.oops != null ? n.oops : ""}</span>
+    <span class="el-num" title="Catalog number">${n.catalogNo ?? "?"}</span>
+    <span class="el-year" title="Year it began">${n.began ?? "?"}</span>
     <span class="el-sym">${esc(symbol(n.name))}</span>
-    <span class="el-name">${esc(surname)}</span>
-    <span class="el-group">${esc(DOMAINS[n.domain] || "Not sure yet")}</span>
+    <span class="el-name">${esc(surnameOf(n.name))}</span>
+    <span class="el-lag" title="Years until the backfire was documented">${lag ?? "?"}</span>
+    <span class="el-reach" title="People it reaches">${reachText(n.reach)}</span>
+  </div>`;
+}
+
+// The key: how to read a tile, using the nominee's own numbers.
+export function keyHTML(n) {
+  const lag = lagOf(n);
+  const g = groupOf(n.domain);
+  return `<div class="el-key" style="${jewelVars(jewelOf(n.domain))}">
+    ${elementHTML(n, "lg")}
+    <dl>
+      <div><dt>${n.catalogNo ?? "?"}</dt><dd><b>Catalog number.</b> Its place in the table, given once and kept for good.</dd></div>
+      <div><dt>${n.began ?? "?"}</dt><dd><b>Year it began.</b> When the invention or decision went into wide use.</dd></div>
+      <div><dt>${esc(symbol(n.name))}</dt><dd><b>Symbol.</b> Two letters from the name.</dd></div>
+      <div><dt>${lag ?? "?"}</dt><dd><b>Lag.</b> Years until the backfire was documented${n.recognized ? ` (${n.recognized})` : ""}.</dd></div>
+      <div><dt>${reachText(n.reach)}</dt><dd><b>Reach.</b> How many people it touches, as a power of ten. 10⁹ means billions.</dd></div>
+      <div><dt class="sw"></dt><dd><b>Color.</b> The category${g ? `, group ${g}` : ""}: ${esc(DOMAINS[n.domain] || "not sure yet")}.</dd></div>
+    </dl>
   </div>`;
 }
 
 // The carousel: a headline card, the write-up one idea per card, then the payoff and the ask.
 // data comes from /carousels/<slug>.json.
-export function carouselHTML(n, num, data, flags = {}) {
+export function carouselHTML(n, data, flags = {}) {
   const j = jewelOf(n.domain);
   const cards = [];
-  const total = data.slides.length + 2;
+  const total = data.slides.length + 3;
   const foot = (i) => `<footer class="cc-foot"><span>midgleyawards.com</span><span>${i} / ${total}</span></footer>`;
   cards.push(`<section class="cc cc-hook" aria-roledescription="slide" aria-label="1 of ${total}">
     ${data.portrait ? `<figure class="cc-portrait"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="eager"></figure>` : ""}
-    <div class="cc-hook-top">${elementHTML(n, num, "lg")}<p class="cc-kicker">Nominee No. ${num}<br>${esc(n.years || "")}</p></div>
+    <div class="cc-hook-top">${elementHTML(n, "lg")}<p class="cc-kicker">${esc(n.name)}<br>${esc(n.years || "")}<br>${esc(DOMAINS[n.domain] || "")}</p></div>
     <h2 class="cc-headline">${esc(data.headline)}</h2>
     <p class="cc-dek">${esc(data.dek)}</p>
     <p class="cc-swipe" aria-hidden="true">Swipe <span>→</span></p>
     ${foot(1)}
   </section>`);
+  cards.push(`<section class="cc cc-key" aria-roledescription="slide" aria-label="2 of ${total}">
+    <div class="cc-body"><p class="cc-label">How to read the tile</p>${keyHTML(n)}</div>
+    ${foot(2)}
+  </section>`);
   data.slides.forEach((s, k) => {
-    const i = k + 2;
+    const i = k + 3;
     const img = s.image ? `<figure class="cc-img"><img src="${esc(s.image)}" alt="${esc(s.alt || "")}" loading="lazy"><figcaption>${esc(s.credit || "")}</figcaption></figure>` : "";
     const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
     const chip = s.kind === "foresight" ? foresightHTML(n.knowable) : "";
@@ -371,13 +406,13 @@ function foresightHTML(k) {
 }
 
 // The whole table: categories are columns (groups); each new nominee joins the bottom of its column.
-export function tableHTML(noms, numOf) {
+export function tableHTML(noms) {
   const keys = Object.keys(DOMAINS);
   const cols = keys.map((k) => {
     const j = jewelOf(k);
     const items = noms.filter((n) => n.domain === k);
-    return `<div class="pt-col" style="${jewelVars(j)}"><p class="pt-head">${esc(DOMAINS[k])}</p>
-      ${items.map((n) => `<a href="${nomineePath(n)}" title="${esc(n.name)}: ${esc(n.work)}">${elementHTML(n, numOf[n.id], "sm")}</a>`).join("")}</div>`;
+    return `<div class="pt-col" style="${jewelVars(j)}"><p class="pt-head"><b>${groupOf(k)}</b> ${esc(DOMAINS[k])}</p>
+      ${items.sort((a, b) => (a.catalogNo || 0) - (b.catalogNo || 0)).map((n) => `<a href="${nomineePath(n)}" title="${esc(n.name)}: ${esc(n.work)}">${elementHTML(n, "sm")}</a>`).join("")}</div>`;
   });
   return `<div class="ptable">${cols.join("")}</div>`;
 }

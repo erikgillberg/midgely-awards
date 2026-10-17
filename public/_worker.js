@@ -18,10 +18,10 @@
 import {
   SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, weeklyOopsHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
-  carouselHTML, tableHTML, JEWELS, CATEGORY_JEWEL, BUILD,
+  carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD,
 } from "./shared.js";
 
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Other hostnames that send visitors to the home page at SITE.
@@ -65,6 +65,12 @@ const TABLES = [
   `CREATE TABLE IF NOT EXISTS herd_votes (
     nominee_id TEXT NOT NULL, voter TEXT NOT NULL, yes INTEGER NOT NULL, created_at TEXT NOT NULL,
     PRIMARY KEY (nominee_id, voter))`,
+  // v5: where every image came from and on what terms we use it.
+  `CREATE TABLE IF NOT EXISTS media (
+    id TEXT PRIMARY KEY, nominee_id TEXT NOT NULL, role TEXT, path TEXT NOT NULL, alt TEXT,
+    title TEXT, creator TEXT, made TEXT, license TEXT NOT NULL, license_url TEXT,
+    source_page TEXT NOT NULL, source_file TEXT, credit TEXT NOT NULL, width INTEGER, height INTEGER,
+    edits TEXT, retrieved_at TEXT NOT NULL, created_at TEXT NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS judge_scores (
     nominee_id TEXT NOT NULL, judge TEXT NOT NULL, score INTEGER NOT NULL, created_at TEXT NOT NULL,
     PRIMARY KEY (nominee_id, judge))`,
@@ -79,6 +85,8 @@ const NEW_COLUMNS = {
     // v4: the nominee page write-up and a readable URL
     ["slug", "TEXT"], ["meant", "TEXT"], ["got_right", "TEXT"], ["foresight", "TEXT"], ["pattern", "TEXT"],
     ["source1", "TEXT"], ["source2", "TEXT"],
+    // v5: the element tile. catalog_no never changes once given; began, recognized and reach are facts, not rankings.
+    ["catalog_no", "INTEGER"], ["began", "INTEGER"], ["recognized", "INTEGER"], ["reach", "INTEGER"],
   ],
   comments: [["hidden", "INTEGER DEFAULT 0"], ["reports", "INTEGER DEFAULT 0"]],
 };
@@ -147,6 +155,35 @@ const SEED_WIKI = {
   "berners-lee": ["https://en.wikipedia.org/wiki/Tim_Berners-Lee", "https://en.wikipedia.org/wiki/World_Wide_Web"],
 };
 
+// Element facts: [id, year it began, year the main backfire was documented, reach as a power of ten (9 = billions)].
+const SEED_ELEMENTS = [
+  ["haber", 1913, 1972, 9],
+];
+
+// Image provenance. Every image on a carousel needs a row here before it goes public.
+const SEED_MEDIA = [
+  { id: "haber-portrait", nominee: "haber", role: "portrait", path: "/img/n/haber/portrait.jpg",
+    alt: "Etched profile portrait of Fritz Haber, bald, with round glasses",
+    title: "Autographed etching of Fritz Haber", creator: "Emil Orlik (1870 to 1932)", made: "1922",
+    license: "Public domain", sourcePage: "https://commons.wikimedia.org/wiki/File:Autographed_etching_of_Fritz_Haber_-_DPLA_-_6e2889b98aad264ed25931f79c5dbad8.jpg",
+    credit: "Fritz Haber, etching by Emil Orlik, 1922. Public domain.", edits: "Cropped to the plate; resized", retrieved: "2026-10-17" },
+  { id: "haber-guano", nominee: "haber", role: "meant", path: "/img/n/haber/guano.jpg",
+    alt: "Workers loading guano into a rail cart at the foot of a huge pale heap, Chincha Islands, Peru, 1865",
+    title: "Guano Mining in Chincha Islands Peru (1865)", creator: "Henry de Witt Moulton", made: "1865",
+    license: "Public domain", sourcePage: "https://commons.wikimedia.org/wiki/File:Guano_Mining_in_Chincha_Islands_Peru_(1865)_Moulton.jpg",
+    credit: "Guano mining, Chincha Islands, Peru, 1865. Henry de Witt Moulton. Public domain.", edits: "Resized", retrieved: "2026-10-17" },
+  { id: "haber-wheat", nominee: "haber", role: "right", path: "/img/n/haber/wheat.jpg",
+    alt: "A combine harvesting a vast golden wheat field on rolling hills",
+    title: "Wheat harvest on the Palouse", creator: "U.S. Department of Agriculture", made: "Before 2004",
+    license: "Public domain (U.S. government work)", sourcePage: "https://commons.wikimedia.org/wiki/File:Wheat_harvest_on_the_Palouse.jpg",
+    credit: "Wheat harvest on the Palouse. USDA. Public domain.", edits: "Resized", retrieved: "2026-10-17" },
+  { id: "haber-gulf", nominee: "haber", role: "oops", path: "/img/n/haber/gulf.jpg",
+    alt: "Satellite view of brown and green water spreading from the Louisiana coast into the deep blue Gulf of Mexico",
+    title: "Sediment and Phytoplankton in the Gulf of Mexico (MODIS)", creator: "NASA GSFC, MODIS Land Rapid Response Team", made: "2023-02-13",
+    license: "Public domain (NASA)", sourcePage: "https://commons.wikimedia.org/wiki/File:Sediment_and_Phytoplankton_in_the_Gulf_of_Mexico_(MODIS).jpg",
+    credit: "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain.", edits: "Resized", retrieved: "2026-10-17" },
+];
+
 // ---------------------------------------------------------------- setup
 
 function findD1(env) {
@@ -210,10 +247,24 @@ async function migrate(db) {
   stmts.push(db.prepare("UPDATE nominees SET award = NULL WHERE award IS NOT NULL AND award NOT IN (" + AWARDS.map(() => "?").join(",") + ")").bind(...AWARDS));
   stmts.push(db.prepare("UPDATE nominees SET years = REPLACE(years, '–', ' to ') WHERE years LIKE '%_–_%'"));
   stmts.push(db.prepare("UPDATE nominees SET years = 'Born ' || REPLACE(years, '–', '') WHERE years LIKE '%–'"));
+  // v5: element facts for founding nominees that have been researched, and the provenance of their images.
+  for (const [id, began, recognized, reach] of SEED_ELEMENTS) {
+    stmts.push(db.prepare("UPDATE nominees SET began = COALESCE(began, ?), recognized = COALESCE(recognized, ?), reach = COALESCE(reach, ?) WHERE id = ? AND seeded = 1").bind(began, recognized, reach, id));
+  }
+  for (const m of SEED_MEDIA) {
+    stmts.push(db.prepare(`INSERT OR IGNORE INTO media (id,nominee_id,role,path,alt,title,creator,made,license,license_url,source_page,source_file,credit,width,height,edits,retrieved_at,created_at)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind(m.id, m.nominee, m.role, m.path, m.alt, m.title, m.creator, m.made, m.license, m.licenseUrl || null,
+      m.sourcePage, m.sourceFile || null, m.credit, m.width || null, m.height || null, m.edits || null, m.retrieved, new Date().toISOString()));
+  }
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('seeded','1')"));
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)));
   await db.batch(stmts);
   await db.prepare("CREATE UNIQUE INDEX IF NOT EXISTS nominees_slug ON nominees (slug)").run();
+  // v5: catalog numbers, given once in the order nominees joined (Midgley is No. 1) and never reused.
+  const noNum = await db.prepare("SELECT id FROM nominees WHERE catalog_no IS NULL ORDER BY created_at").all();
+  for (const row of noNum.results) {
+    await db.prepare("UPDATE nominees SET catalog_no = (SELECT COALESCE(MAX(catalog_no), 0) + 1 FROM nominees) WHERE id = ?").bind(row.id).run();
+  }
   const noSlug = await db.prepare("SELECT id, name, seeded FROM nominees WHERE slug IS NULL ORDER BY created_at").all();
   for (const row of noSlug.results) {
     await db.prepare("UPDATE nominees SET slug = ? WHERE id = ?").bind(await freeSlug(db, row.seeded ? row.id : slugify(row.name)), row.id).run();
@@ -312,6 +363,7 @@ function nomineeOut(r, admin = false) {
     wikiName: r.wiki_name || "", wikiWork: r.wiki_work || "",
     slug: r.slug || r.id, meant: r.meant || "", gotRight: r.got_right || "", foresight: r.foresight || "",
     pattern: r.pattern || "", source1: r.source1 || "", source2: r.source2 || "",
+    catalogNo: r.catalog_no || null, began: r.began || null, recognized: r.recognized || null, reach: r.reach ?? null,
     herdYes: r.herd_yes || 0, herdTotal: r.herd_total || 0,
     oops: r.oops_judges >= MIN_JUDGES ? Math.round(r.oops_avg) : null, oopsJudges: r.oops_judges >= MIN_JUDGES ? r.oops_judges : 0,
     author: r.author || "", seeded: !!r.seeded, createdAt: r.created_at, score: r.score || 0,
@@ -385,15 +437,16 @@ async function insertNominee(db, n, state) {
   const slug = await freeSlug(db, slugify(n.name));
   await db.prepare(
     `INSERT INTO nominees (id,slug,name,years,work,meant,solved,backfire,got_right,foresight,pattern,domain,harms,knowable,status,award,
-       fix,fix_url,wiki_name,wiki_work,source1,source2,author,seeded,state,created_at,category)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?,?,'')`
+       fix,fix_url,wiki_name,wiki_work,source1,source2,began,recognized,reach,author,seeded,state,created_at,category,catalog_no)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?,?,'',(SELECT COALESCE(MAX(catalog_no), 0) + 1 FROM nominees))`
   ).bind(id, slug, n.name, n.years, n.work, n.meant || null, n.solved, n.backfire, n.gotRight || null, n.foresight || null, n.pattern || null,
     n.domain || null, n.harms || null, n.knowable || null, n.status || null, n.award || null,
     n.fix || null, n.fixUrl || null, n.wikiName || null, n.wikiWork || null, n.source1 || null, n.source2 || null,
-    n.author, state, createdAt).run();
+    n.began || null, n.recognized || null, n.reach ?? null, n.author, state, createdAt).run();
+  const num = await db.prepare("SELECT catalog_no FROM nominees WHERE id = ?").bind(id).first();
   return nomineeOut({
     id, slug, ...n, got_right: n.gotRight, fix_url: n.fixUrl, wiki_name: n.wikiName, wiki_work: n.wikiWork,
-    created_at: createdAt, seeded: 0, score: 0,
+    created_at: createdAt, seeded: 0, score: 0, catalog_no: num && num.catalog_no,
   });
 }
 
@@ -530,6 +583,9 @@ async function handleApi(request, env, url, ctx) {
 // With Cloudflare Access in front of /admin, the signed-in email names the judge.
 const accessEmail = (request) => clean(request.headers.get("cf-access-authenticated-user-email") || "", 60);
 
+const yearOf = (v) => { const y = parseInt(v, 10); return y >= -3000 && y <= 2100 ? y : null; };
+const reachOf = (v) => { const r = parseInt(v, 10); return r >= 0 && r <= 10 ? r : null; };
+
 function adminFields(b, create) {
   const n = {
     name: clean(b.name, 80), years: clean(b.years, 30), work: clean(b.work, 120), meant: clean(b.meant, 600),
@@ -539,6 +595,7 @@ function adminFields(b, create) {
     status: pick(b.status, STATUSES), award: pick(b.award, AWARDS), fix: clean(b.fix, 400), fixUrl: cleanUrl(b.fixUrl),
     source1: cleanUrl(b.source1), source2: cleanUrl(b.source2), wikiName: cleanWiki(b.wikiName), wikiWork: cleanWiki(b.wikiWork),
     author: clean(b.author, 60),
+    began: yearOf(b.began), recognized: yearOf(b.recognized), reach: reachOf(b.reach),
   };
   if (n.wikiName === null || n.wikiWork === null) return { error: "Wikipedia links have to point to a page on wikipedia.org." };
   return n;
@@ -621,6 +678,9 @@ async function handleAdmin(request, env, url, db, path, method) {
       const key = k === "got_right" ? "gotRight" : k;
       if (key in b) { sets.push(`${k} = ?`); vals.push(clean(b[key], max) || null); }
     }
+    if ("began" in b) { sets.push("began = ?"); vals.push(yearOf(b.began)); }
+    if ("recognized" in b) { sets.push("recognized = ?"); vals.push(yearOf(b.recognized)); }
+    if ("reach" in b) { sets.push("reach = ?"); vals.push(reachOf(b.reach)); }
     for (const [k, col] of [["fixUrl", "fix_url"], ["source1", "source1"], ["source2", "source2"]]) {
       if (k in b) { sets.push(`${col} = ?`); vals.push(cleanUrl(b[k]) || null); }
     }
@@ -823,20 +883,12 @@ async function nomineePage(request, env, url, ctx, key) {
   });
 }
 
-// Atomic numbers: each nominee's place in the order nominees joined. Midgley is No. 1.
-function numbers(noms) {
-  const out = {};
-  [...noms].sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt))).forEach((n, i) => (out[n.id] = i + 1));
-  return out;
-}
-
 // Design lab (staging and local only): the carousel for one nominee, the table and the palette.
 async function labPage(request, env, url, ctx, key) {
   const st = await siteState(env, url, ctx);
   const n = st && st.nominees.find((x) => x.slug === key || x.id === key);
   const data = await asset(env, url, request, `/carousels/${key}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
   const page = await asset(env, url, request, "/lab");
-  const num = st ? numbers(st.nominees) : {};
   const used = Object.values(CATEGORY_JEWEL);
   const swatches = JEWELS.map((j) => {
     const cat = Object.keys(CATEGORY_JEWEL).find((k) => CATEGORY_JEWEL[k] === j.name);
@@ -845,11 +897,18 @@ async function labPage(request, env, url, ctx, key) {
   }).join("");
   const fill = {
     "#lab-swatches": swatches,
-    "#lab-table": st ? tableHTML(st.nominees, num) : "",
+    "#lab-table": st ? tableHTML(st.nominees) : "",
     "#lab-title": esc(n ? `Carousel: ${n.name}` : "Carousel"),
     "#lab-note": n && data ? "Square cards at Instagram's 1:1 ratio. Swipe, use the arrows, or the arrow keys." : `No carousel written for “${esc(key)}” yet.`,
   };
-  if (n && data) fill["#lab-carousel"] = carouselHTML(n, num[n.id], data, flagsOf(env));
+  if (n && data) fill["#lab-carousel"] = carouselHTML(n, data, flagsOf(env));
+  if (n) fill["#lab-key"] = keyHTML(n);
+  const db = findD1(env);
+  if (n && db) {
+    const media = await db.prepare("SELECT * FROM media WHERE nominee_id = ? ORDER BY role").bind(n.id).all().catch(() => ({ results: [] }));
+    fill["#lab-media"] = media.results.length ? `<table class="prov"><thead><tr><th>Image</th><th>Title and maker</th><th>License</th><th>Source</th></tr></thead><tbody>${media.results.map((m) =>
+      `<tr><td><img src="${esc(m.path)}" alt="" width="72"></td><td><b>${esc(m.title)}</b><br>${esc(m.creator || "")}, ${esc(m.made || "")}<br><small>${esc(m.edits || "")}</small></td><td>${esc(m.license)}</td><td><a href="${esc(m.source_page)}" target="_blank" rel="noopener">Wikimedia Commons</a><br><small>Retrieved ${esc(m.retrieved_at)}</small></td></tr>`).join("")}</tbody></table>` : "<p>No image records yet.</p>";
+  }
   return decorate(page, env, url, { title: `Lab: ${n ? n.name : key} · The Midgley Awards`, fill });
 }
 
