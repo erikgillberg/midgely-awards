@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Category · The Midgley Awards</title>
+<meta name="description" content="Nominees by category.">
+<link rel="canonical" href="https://midgleyawards.com/">
+<meta property="og:title" content="Category · The Midgley Awards">
+<meta property="og:description" content="Nominees by category.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://midgleyawards.com/">
+<meta property="og:image" content="https://midgleyawards.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Category · The Midgley Awards">
+<meta name="twitter:description" content="Nominees by category.">
+<meta name="twitter:image" content="https://midgleyawards.com/og.png">
+<meta name="theme-color" content="#12161C">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body data-page="category">
+<header class="site-head" id="site-head"></header>
+<div class="wrap">
+  <header class="pagehead">
+    <p class="label"><a href="/">The Midgley Awards</a> · Category</p>
+    <h1 id="cat-title">Category</h1>
+  </header>
+  <nav class="cats" id="cats" aria-label="Categories"></nav>
+  <div class="bar">
+    <div class="seg" role="group" aria-label="Sort">
+      <button data-sort="top" aria-pressed="true">Top</button>
+      <button data-sort="new" aria-pressed="false">New</button>
+      <button data-sort="debated" aria-pressed="false">Debated</button>
+      <button data-sort="oops" aria-pressed="false" data-needs="scores">Top Oops</button>
+      <button data-sort="herd" aria-pressed="false" data-needs="scores">Top Herd</button>
+    </div>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+  <p class="notice" id="notice" hidden></p>
+  <div class="list" id="list" aria-live="polite"></div>
+  <footer class="site-foot" id="site-foot"></footer>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

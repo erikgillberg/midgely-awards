@@ -33,6 +33,10 @@
 .st-pending{background:var(--amber-soft);color:var(--amber);border-color:transparent}
 .st-rejected{background:var(--ethyl-soft);color:var(--ethyl);border-color:transparent}
 .empty-row{color:var(--ink-3);font-size:14px;border-top:1px solid var(--line);padding:12px 0}
+.judges{width:100%;border-collapse:collapse;font-size:14px}
+.judges th{text-align:left;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding:6px 8px 6px 0;border-bottom:1px solid var(--line)}
+.judges td{padding:10px 8px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.score-in{width:80px;border:1px solid var(--line);background:var(--surface);padding:7px 9px;font:15px var(--mono)}
 textarea.subs{width:100%;min-height:120px;font:13px var(--mono);border:1px solid var(--line);background:var(--surface);padding:10px}
 </style>
 </head>
@@ -51,7 +55,13 @@ textarea.subs{width:100%;min-height:120px;font:13px var(--mono);border:1px solid
     <section><h2>Waiting for review <span class="label" id="c-pending"></span></h2><div id="pending"></div></section>
     <section><h2>Reported nominees <span class="label" id="c-rnom"></span></h2><div id="rnom"></div></section>
     <section><h2>Flagged comments <span class="label" id="c-flag"></span></h2><div id="flag"></div></section>
+    <section><h2>Oops Scores <span class="label">Judges</span></h2><div id="judging"></div></section>
+    <section><h2>Add a nominee <span class="label">Publishes right away</span></h2><div id="new-form"></div></section>
     <section><h2>All nominees <span class="label" id="c-all"></span></h2><div id="all"></div></section>
+    <section><h2>Launch <span class="label" id="flags"></span></h2>
+      <p style="margin:0 0 10px;color:var(--ink-2);font-size:14px">Votes so far: <span id="c-votes"></span>. At launch, clear the test votes so every vote counts from day one.</p>
+      <div class="btns"><button class="danger" data-act="clear-votes">Clear all votes</button></div>
+    </section>
     <section><h2>Email list <span class="label" id="c-subs"></span></h2>
       <div class="btns"><button id="load-subs">Show addresses</button></div>
       <textarea class="subs" id="subs" readonly hidden aria-label="Subscriber emails"></textarea>
@@ -59,7 +69,7 @@ textarea.subs{width:100%;min-height:120px;font:13px var(--mono);border:1px solid
   </div>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="/labels.js"></script>
-<script src="/admin.js"></script>
+<script type="module" src="/labels.js"></script>
+<script type="module" src="/admin.js"></script>
 </body>
 </html>

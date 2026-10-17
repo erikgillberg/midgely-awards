@@ -1,4 +1,4 @@
-// The Midgley Awards — Cloudflare Pages advanced-mode worker (v2).
+// The Midgley Awards: Cloudflare Pages advanced-mode worker.
 //
 // Serves the static site from ./public and a JSON API backed by a D1 database.
 // Bindings / settings (Cloudflare dashboard → Pages project → Settings):
@@ -6,13 +6,23 @@
 //   ADMIN_TOKEN       secret — unlocks /admin             required for moderation
 //   TURNSTILE_SITE_KEY + TURNSTILE_SECRET                 optional bot check on submissions
 //   AUTO_APPROVE = "1"                                    optional — skip the approval queue
+//   FEATURE_SCORES = "1"                                  Oops Score and Herd Score (replaces upvotes)
+//   FEATURE_CATEGORIES = "1"                              category chips and /category pages
+//   CF_BEACON_TOKEN                                       optional — Cloudflare Web Analytics, injected into every page
+//
+// Only requests to SITE count as production. Every other host (pages.dev, staging, previews)
+// is sent with X-Robots-Tag: noindex.
 //
 // The schema creates and migrates itself on first request (v1 databases upgrade in place).
 
-const SCHEMA_VERSION = 3;
+import {
+  SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE,
+  esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
+} from "./shared.js";
+
+const SCHEMA_VERSION = 4;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
-const SITE = "https://midgleyawards.com"; // the one public address
 // Other hostnames that send visitors to the home page at SITE.
 const FORWARD_HOSTS = ["www.midgleyawards.com", "midgelyawards.com", "www.midgelyawards.com"];
 
@@ -20,13 +30,16 @@ const DOMAINS = ["energy", "materials", "food", "cities", "information", "health
 const HARMS = ["environmental", "health", "social", "economic"];
 const KNOWABLE = ["knowable", "unforeseeable", "mixed", "contested"];
 const STATUSES = ["historic", "unfolding", "prospective"];
-const AWARDS = ["lifetime", "tech", "policy", "urban", "intended"];
+const AWARDS = Object.keys(AWARD_LABELS);
+const SITE_HOST = new URL(SITE).hostname;
 const VOTER_RE = /^[A-Za-z0-9-]{16,64}$/;
 const ID_RE = /^[A-Za-z0-9-]{1,64}$/;
 const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,24}$/;
 
 // Per-visitor limits over a rolling 10 minutes.
 const LIMITS = { nominee: 3, comment: 12, vote: 120, report: 20, subscribe: 3 };
+
+const flagsOf = (env) => ({ scores: env.FEATURE_SCORES === "1", categories: env.FEATURE_CATEGORIES === "1" });
 
 const TABLES = [
   `CREATE TABLE IF NOT EXISTS nominees (
@@ -47,6 +60,13 @@ const TABLES = [
   `CREATE TABLE IF NOT EXISTS hits (k TEXT NOT NULL, ts INTEGER NOT NULL)`,
   `CREATE INDEX IF NOT EXISTS comments_nominee ON comments (nominee_id, created_at)`,
   `CREATE INDEX IF NOT EXISTS hits_k_ts ON hits (k, ts)`,
+  // v4: Herd Score votes (yes = 1, no = 0) and judges' Oops Scores (1 to 100)
+  `CREATE TABLE IF NOT EXISTS herd_votes (
+    nominee_id TEXT NOT NULL, voter TEXT NOT NULL, yes INTEGER NOT NULL, created_at TEXT NOT NULL,
+    PRIMARY KEY (nominee_id, voter))`,
+  `CREATE TABLE IF NOT EXISTS judge_scores (
+    nominee_id TEXT NOT NULL, judge TEXT NOT NULL, score INTEGER NOT NULL, created_at TEXT NOT NULL,
+    PRIMARY KEY (nominee_id, judge))`,
 ];
 
 // Columns added in v2 (ALTER TABLE ADD COLUMN when missing).
@@ -55,6 +75,9 @@ const NEW_COLUMNS = {
     ["domain", "TEXT"], ["harms", "TEXT"], ["status", "TEXT"], ["award", "TEXT"],
     ["fix", "TEXT"], ["fix_url", "TEXT"], ["state", "TEXT DEFAULT 'approved'"], ["reports", "INTEGER DEFAULT 0"],
     ["wiki_name", "TEXT"], ["wiki_work", "TEXT"], // v3
+    // v4: the nominee page write-up and a readable URL
+    ["slug", "TEXT"], ["meant", "TEXT"], ["got_right", "TEXT"], ["foresight", "TEXT"], ["pattern", "TEXT"],
+    ["source1", "TEXT"], ["source2", "TEXT"],
   ],
   comments: [["hidden", "INTEGER DEFAULT 0"], ["reports", "INTEGER DEFAULT 0"]],
 };
@@ -182,9 +205,28 @@ async function migrate(db) {
   stmts.push(db.prepare(`UPDATE nominees SET domain = COALESCE(domain, 'governance') WHERE seeded = 0 AND category = 'policy'`));
   stmts.push(db.prepare(`UPDATE nominees SET status = COALESCE(status, 'prospective') WHERE seeded = 0 AND category = 'prospective'`));
   stmts.push(db.prepare(`UPDATE nominees SET state = 'approved' WHERE state IS NULL`));
+  // v4: awards from v2 that are no longer offered; year ranges written without dashes; readable URLs.
+  stmts.push(db.prepare("UPDATE nominees SET award = NULL WHERE award IS NOT NULL AND award NOT IN (" + AWARDS.map(() => "?").join(",") + ")").bind(...AWARDS));
+  stmts.push(db.prepare("UPDATE nominees SET years = REPLACE(years, '–', ' to ') WHERE years LIKE '%_–_%'"));
+  stmts.push(db.prepare("UPDATE nominees SET years = 'Born ' || REPLACE(years, '–', '') WHERE years LIKE '%–'"));
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('seeded','1')"));
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)));
   await db.batch(stmts);
+  await db.prepare("CREATE UNIQUE INDEX IF NOT EXISTS nominees_slug ON nominees (slug)").run();
+  const noSlug = await db.prepare("SELECT id, name, seeded FROM nominees WHERE slug IS NULL ORDER BY created_at").all();
+  for (const row of noSlug.results) {
+    await db.prepare("UPDATE nominees SET slug = ? WHERE id = ?").bind(await freeSlug(db, row.seeded ? row.id : slugify(row.name)), row.id).run();
+  }
+}
+
+// A slug nobody else has: "edward-bassett", then "edward-bassett-2" and so on.
+async function freeSlug(db, base, exceptId = "") {
+  for (let i = 1; i < 100; i++) {
+    const slug = i === 1 ? base : `${base}-${i}`;
+    const taken = await db.prepare("SELECT 1 FROM nominees WHERE slug = ? AND id != ?").bind(slug, exceptId).first();
+    if (!taken) return slug;
+  }
+  return base + "-" + crypto.randomUUID().slice(0, 8);
 }
 
 // ---------------------------------------------------------------- helpers
@@ -267,9 +309,16 @@ function nomineeOut(r, admin = false) {
     knowable: r.knowable || "", domain: r.domain || "", harms: r.harms ? r.harms.split(",").filter(Boolean) : [],
     status: r.status || "", award: r.award || "", fix: r.fix || "", fixUrl: r.fix_url || "",
     wikiName: r.wiki_name || "", wikiWork: r.wiki_work || "",
+    slug: r.slug || r.id, meant: r.meant || "", gotRight: r.got_right || "", foresight: r.foresight || "",
+    pattern: r.pattern || "", source1: r.source1 || "", source2: r.source2 || "",
+    herdYes: r.herd_yes || 0, herdTotal: r.herd_total || 0,
+    oops: r.oops_judges >= MIN_JUDGES ? Math.round(r.oops_avg) : null, oopsJudges: r.oops_judges >= MIN_JUDGES ? r.oops_judges : 0,
     author: r.author || "", seeded: !!r.seeded, createdAt: r.created_at, score: r.score || 0,
   };
-  if (admin) { out.state = r.state || "approved"; out.reports = r.reports || 0; out.legacyCategory = r.category || ""; }
+  if (admin) {
+    out.state = r.state || "approved"; out.reports = r.reports || 0; out.legacyCategory = r.category || "";
+    out.judgeCount = r.oops_judges || 0; out.judgeAvg = r.oops_judges ? Math.round(r.oops_avg) : null;
+  }
   return out;
 }
 const commentOut = (c, admin = false) => {
@@ -289,21 +338,37 @@ function isAdmin(request, env) {
 
 // ---------------------------------------------------------------- public API
 
+// Nominees with their upvotes, Herd Score and Oops Score, plus visible comments.
+async function loadNominees(db, where, withComments, admin = false) {
+  const q = [
+    db.prepare(`SELECT * FROM nominees WHERE ${where} ORDER BY created_at`),
+    db.prepare(`SELECT nominee_id, COUNT(*) AS c FROM votes GROUP BY nominee_id`),
+    db.prepare(`SELECT nominee_id, SUM(yes) AS y, COUNT(*) AS t FROM herd_votes GROUP BY nominee_id`),
+    db.prepare(`SELECT nominee_id, AVG(score) AS a, COUNT(*) AS c FROM judge_scores GROUP BY nominee_id`),
+  ];
+  if (withComments) q.push(db.prepare(`SELECT id, nominee_id, text, author, created_at FROM comments WHERE COALESCE(hidden,0) = 0 ORDER BY created_at LIMIT 5000`));
+  const [noms, votes, herd, judges, comments] = await db.batch(q);
+  const by = (res) => Object.fromEntries(res.results.map((r) => [r.nominee_id, r]));
+  const v = by(votes), h = by(herd), j = by(judges);
+  return {
+    nominees: noms.results.map((r) => nomineeOut({
+      ...r, score: v[r.id] ? v[r.id].c : 0, herd_yes: h[r.id] ? h[r.id].y : 0, herd_total: h[r.id] ? h[r.id].t : 0,
+      oops_avg: j[r.id] ? j[r.id].a : null, oops_judges: j[r.id] ? j[r.id].c : 0,
+    }, admin)),
+    comments: withComments ? comments.results.map((c) => commentOut(c)) : [],
+  };
+}
+
 async function getState(db, url, ctx) {
   const key = stateCacheKey(url);
   try {
     const hit = await caches.default.match(key);
     if (hit) return hit;
   } catch {}
-  const [noms, scores, comments] = await db.batch([
-    db.prepare(`SELECT * FROM nominees WHERE state = 'approved' ORDER BY created_at`),
-    db.prepare(`SELECT nominee_id, COUNT(*) AS c FROM votes GROUP BY nominee_id`),
-    db.prepare(`SELECT id, nominee_id, text, author, created_at FROM comments WHERE COALESCE(hidden,0) = 0 ORDER BY created_at LIMIT 5000`),
-  ]);
-  const score = Object.fromEntries(scores.results.map((r) => [r.nominee_id, r.c]));
+  const { nominees, comments } = await loadNominees(db, "state = 'approved'", true);
   const body = JSON.stringify({
-    nominees: noms.results.map((r) => nomineeOut({ ...r, score: score[r.id] || 0 })),
-    comments: comments.results.map((c) => commentOut(c)),
+    nominees,
+    comments,
     generatedAt: new Date().toISOString(),
   });
   const res = new Response(body, {
@@ -311,6 +376,24 @@ async function getState(db, url, ctx) {
   });
   try { ctx.waitUntil(caches.default.put(key, res.clone())); } catch {}
   return res;
+}
+
+async function insertNominee(db, n, state) {
+  const id = crypto.randomUUID();
+  const createdAt = new Date().toISOString();
+  const slug = await freeSlug(db, slugify(n.name));
+  await db.prepare(
+    `INSERT INTO nominees (id,slug,name,years,work,meant,solved,backfire,got_right,foresight,pattern,domain,harms,knowable,status,award,
+       fix,fix_url,wiki_name,wiki_work,source1,source2,author,seeded,state,created_at,category)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?,?,'')`
+  ).bind(id, slug, n.name, n.years, n.work, n.meant || null, n.solved, n.backfire, n.gotRight || null, n.foresight || null, n.pattern || null,
+    n.domain || null, n.harms || null, n.knowable || null, n.status || null, n.award || null,
+    n.fix || null, n.fixUrl || null, n.wikiName || null, n.wikiWork || null, n.source1 || null, n.source2 || null,
+    n.author, state, createdAt).run();
+  return nomineeOut({
+    id, slug, ...n, got_right: n.gotRight, fix_url: n.fixUrl, wiki_name: n.wikiName, wiki_work: n.wikiWork,
+    created_at: createdAt, seeded: 0, score: 0,
+  });
 }
 
 async function handleApi(request, env, url, ctx) {
@@ -321,16 +404,19 @@ async function handleApi(request, env, url, ctx) {
   const method = request.method;
 
   if (path === "/api/config" && method === "GET") {
-    return json({ turnstileSiteKey: env.TURNSTILE_SECRET ? env.TURNSTILE_SITE_KEY || "" : "", autoApprove: env.AUTO_APPROVE === "1" });
+    return json({ turnstileSiteKey: env.TURNSTILE_SECRET ? env.TURNSTILE_SITE_KEY || "" : "", autoApprove: env.AUTO_APPROVE === "1", flags: flagsOf(env) });
   }
 
   if (path === "/api/state" && method === "GET") return getState(db, url, ctx);
 
   if (path === "/api/my-votes" && method === "GET") {
     const voter = url.searchParams.get("voter") || "";
-    if (!VOTER_RE.test(voter)) return json({ myVotes: [] });
-    const r = await db.prepare("SELECT nominee_id FROM votes WHERE voter = ?").bind(voter).all();
-    return json({ myVotes: r.results.map((x) => x.nominee_id) });
+    if (!VOTER_RE.test(voter)) return json({ myVotes: [], myHerd: {} });
+    const [r, h] = await db.batch([
+      db.prepare("SELECT nominee_id FROM votes WHERE voter = ?").bind(voter),
+      db.prepare("SELECT nominee_id, yes FROM herd_votes WHERE voter = ?").bind(voter),
+    ]);
+    return json({ myVotes: r.results.map((x) => x.nominee_id), myHerd: Object.fromEntries(h.results.map((x) => [x.nominee_id, !!x.yes])) });
   }
 
   if (path === "/api/nominees" && method === "POST") {
@@ -349,19 +435,11 @@ async function handleApi(request, env, url, ctx) {
     };
     if (n.wikiName === null || n.wikiWork === null) return bad("Wikipedia links have to point to a page on wikipedia.org.");
     if (!n.name || !n.work || !n.solved || !n.backfire) return bad("Fill in the nominee, the achievement, and both sides of the ledger.");
-    const id = crypto.randomUUID();
-    const createdAt = new Date().toISOString();
+    n.meant = clean(b.meant, 600);
     const state = env.AUTO_APPROVE === "1" ? "approved" : "pending";
-    await db.prepare(
-      `INSERT INTO nominees (id,name,years,work,solved,backfire,domain,harms,knowable,status,fix,fix_url,wiki_name,wiki_work,author,seeded,state,created_at,category)
-       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?,?,'')`
-    ).bind(id, n.name, n.years, n.work, n.solved, n.backfire, n.domain || null, n.harms || null, n.knowable || null,
-      n.status || null, n.fix || null, n.fixUrl || null, n.wikiName || null, n.wikiWork || null, n.author, state, createdAt).run();
+    const created = await insertNominee(db, n, state);
     if (state === "approved") await bustState(url);
-    return json({
-      status: state,
-      nominee: state === "approved" ? nomineeOut({ id, ...n, fix_url: n.fixUrl, wiki_name: n.wikiName, wiki_work: n.wikiWork, created_at: createdAt, seeded: 0, score: 0 }) : null,
-    }, 201);
+    return json({ status: state, nominee: state === "approved" ? created : null }, 201);
   }
 
   if (path === "/api/vote" && method === "POST") {
@@ -378,6 +456,28 @@ async function handleApi(request, env, url, ctx) {
     const s = await db.prepare("SELECT COUNT(*) AS c FROM votes WHERE nominee_id = ?").bind(nomineeId).first();
     await bustState(url);
     return json({ voted: !had, score: s.c });
+  }
+
+  if (path === "/api/herd" && method === "POST") {
+    if (!flagsOf(env).scores) return bad("Herd voting isn't open yet.", 404);
+    const b = await readBody(request);
+    const nomineeId = clean(b && b.nomineeId, 64);
+    const voter = b && b.voter;
+    const vote = b && b.vote; // "yes", "no", or "" to withdraw
+    if (!ID_RE.test(nomineeId) || !VOTER_RE.test(voter || "") || !["yes", "no", ""].includes(vote)) return bad("Invalid vote.");
+    if (await rateLimited(db, request, env, "vote")) return bad("Slow down a little and try again shortly.", 429);
+    const exists = await db.prepare("SELECT 1 FROM nominees WHERE id = ? AND state = 'approved'").bind(nomineeId).first();
+    if (!exists) return bad("That nominee isn't available.", 404);
+    if (vote) {
+      await db.prepare(`INSERT INTO herd_votes (nominee_id, voter, yes, created_at) VALUES (?,?,?,?)
+        ON CONFLICT (nominee_id, voter) DO UPDATE SET yes = excluded.yes, created_at = excluded.created_at`)
+        .bind(nomineeId, voter, vote === "yes" ? 1 : 0, new Date().toISOString()).run();
+    } else {
+      await db.prepare("DELETE FROM herd_votes WHERE nominee_id = ? AND voter = ?").bind(nomineeId, voter).run();
+    }
+    const t = await db.prepare("SELECT COALESCE(SUM(yes),0) AS y, COUNT(*) AS t FROM herd_votes WHERE nominee_id = ?").bind(nomineeId).first();
+    await bustState(url);
+    return json({ vote, herdYes: t.y, herdTotal: t.t });
   }
 
   if (path === "/api/comments" && method === "POST") {
@@ -438,23 +538,84 @@ async function handleApi(request, env, url, ctx) {
 
 // ---------------------------------------------------------------- admin API
 
+// With Cloudflare Access in front of /admin, the signed-in email names the judge.
+const accessEmail = (request) => clean(request.headers.get("cf-access-authenticated-user-email") || "", 60);
+
+function adminFields(b, create) {
+  const n = {
+    name: clean(b.name, 80), years: clean(b.years, 30), work: clean(b.work, 120), meant: clean(b.meant, 600),
+    solved: clean(b.solved, 600), backfire: clean(b.backfire, 600), gotRight: clean(b.gotRight, 600),
+    foresight: clean(b.foresight, 600), pattern: clean(b.pattern, 200),
+    domain: pick(b.domain, DOMAINS), harms: pickMany(b.harms, HARMS), knowable: pick(b.knowable, KNOWABLE),
+    status: pick(b.status, STATUSES), award: pick(b.award, AWARDS), fix: clean(b.fix, 400), fixUrl: cleanUrl(b.fixUrl),
+    source1: cleanUrl(b.source1), source2: cleanUrl(b.source2), wikiName: cleanWiki(b.wikiName), wikiWork: cleanWiki(b.wikiWork),
+    author: clean(b.author, 60),
+  };
+  if (n.wikiName === null || n.wikiWork === null) return { error: "Wikipedia links have to point to a page on wikipedia.org." };
+  return n;
+}
+
 async function handleAdmin(request, env, url, db, path, method) {
   if (!env.ADMIN_TOKEN) return bad("Moderation is off. Add an ADMIN_TOKEN secret in the Pages project settings and redeploy.", 503);
   if (!isAdmin(request, env)) return bad("Wrong admin token.", 401);
 
   if (path === "/api/admin/overview" && method === "GET") {
-    const [noms, scores, comments, subs] = await db.batch([
-      db.prepare("SELECT * FROM nominees ORDER BY created_at DESC"),
-      db.prepare("SELECT nominee_id, COUNT(*) AS c FROM votes GROUP BY nominee_id"),
+    const { nominees } = await loadNominees(db, "1 = 1", false, true);
+    const [comments, subs, judges, votes] = await db.batch([
       db.prepare("SELECT c.*, n.name AS nominee_name FROM comments c LEFT JOIN nominees n ON n.id = c.nominee_id WHERE COALESCE(c.reports,0) > 0 OR COALESCE(c.hidden,0) = 1 ORDER BY c.created_at DESC LIMIT 500"),
       db.prepare("SELECT COUNT(*) AS c FROM subscribers"),
+      db.prepare("SELECT nominee_id, judge, score FROM judge_scores ORDER BY judge"),
+      db.prepare("SELECT (SELECT COUNT(*) FROM votes) AS up, (SELECT COUNT(*) FROM herd_votes) AS herd"),
     ]);
-    const score = Object.fromEntries(scores.results.map((r) => [r.nominee_id, r.c]));
     return json({
-      nominees: noms.results.map((r) => nomineeOut({ ...r, score: score[r.id] || 0 }, true)),
+      nominees: nominees.reverse(),
+      judgeScores: judges.results,
+      judge: accessEmail(request),
+      flags: flagsOf(env),
+      voteCounts: votes.results[0],
       flaggedComments: comments.results.map((c) => ({ ...commentOut(c, true), nomineeName: c.nominee_name || "" })),
       subscriberCount: subs.results[0].c,
     });
+  }
+
+  // Create a nominee directly, published (for the team's write-ups).
+  if (path === "/api/admin/nominees" && method === "POST") {
+    const b = (await readBody(request)) || {};
+    const n = adminFields(b, true);
+    if (n.error) return bad(n.error);
+    if (!n.name || !n.work || !n.solved || !n.backfire) return bad("Fill in the nominee, the achievement, what went right and what went oops.");
+    const created = await insertNominee(db, { ...n, author: n.author || "Goat Farm" }, "approved");
+    await bustState(url);
+    return json({ nominee: created }, 201);
+  }
+
+  // A judge's Oops Score for one nominee, 1 to 100. An empty score removes it.
+  if (path === "/api/admin/scores" && method === "PUT") {
+    const b = (await readBody(request)) || {};
+    const nomineeId = clean(b.nomineeId, 64);
+    const judge = accessEmail(request) || clean(b.judge, 60);
+    if (!ID_RE.test(nomineeId)) return bad("Pick a nominee.");
+    if (!judge) return bad("Type your judge name first.");
+    if (b.score === "" || b.score == null) {
+      await db.prepare("DELETE FROM judge_scores WHERE nominee_id = ? AND judge = ?").bind(nomineeId, judge).run();
+    } else {
+      const score = Math.round(Number(b.score));
+      if (!(score >= 1 && score <= 100)) return bad("Scores go from 1 to 100.");
+      await db.prepare(`INSERT INTO judge_scores (nominee_id, judge, score, created_at) VALUES (?,?,?,?)
+        ON CONFLICT (nominee_id, judge) DO UPDATE SET score = excluded.score, created_at = excluded.created_at`)
+        .bind(nomineeId, judge, score, new Date().toISOString()).run();
+    }
+    await bustState(url);
+    return json({ ok: true, judge });
+  }
+
+  // Launch: remove every upvote and Herd vote cast before launch.
+  if (path === "/api/admin/clear-votes" && method === "POST") {
+    const b = (await readBody(request)) || {};
+    if (b.confirm !== "CLEAR") return bad("Send confirm: CLEAR to remove all votes.");
+    await db.batch([db.prepare("DELETE FROM votes"), db.prepare("DELETE FROM herd_votes")]);
+    await bustState(url);
+    return json({ ok: true });
   }
 
   if (path === "/api/admin/subscribers" && method === "GET") {
@@ -466,14 +627,24 @@ async function handleAdmin(request, env, url, db, path, method) {
   if (m && method === "PATCH") {
     const b = (await readBody(request)) || {};
     const sets = [], vals = [];
-    const text = { name: 80, years: 30, work: 120, solved: 600, backfire: 600, fix: 400, author: 60 };
-    for (const [k, max] of Object.entries(text)) if (k in b) { sets.push(`${k} = ?`); vals.push(clean(b[k], max) || null); }
-    if ("fixUrl" in b) { sets.push("fix_url = ?"); vals.push(cleanUrl(b.fixUrl) || null); }
+    const text = { name: 80, years: 30, work: 120, meant: 600, solved: 600, backfire: 600, got_right: 600, foresight: 600, pattern: 200, fix: 400, author: 60 };
+    for (const [k, max] of Object.entries(text)) {
+      const key = k === "got_right" ? "gotRight" : k;
+      if (key in b) { sets.push(`${k} = ?`); vals.push(clean(b[key], max) || null); }
+    }
+    for (const [k, col] of [["fixUrl", "fix_url"], ["source1", "source1"], ["source2", "source2"]]) {
+      if (k in b) { sets.push(`${col} = ?`); vals.push(cleanUrl(b[k]) || null); }
+    }
     for (const [k, col] of [["wikiName", "wiki_name"], ["wikiWork", "wiki_work"]]) {
       if (!(k in b)) continue;
       const w = cleanWiki(b[k]);
       if (w === null) return bad("Wikipedia links have to point to a page on wikipedia.org.");
       sets.push(`${col} = ?`); vals.push(w || null);
+    }
+    if ("slug" in b) {
+      const slug = slugify(b.slug);
+      if (await db.prepare("SELECT 1 FROM nominees WHERE slug = ? AND id != ?").bind(slug, m[1]).first()) return bad("Another nominee already uses that address.");
+      sets.push("slug = ?"); vals.push(slug);
     }
     if ("domain" in b) { sets.push("domain = ?"); vals.push(pick(b.domain, DOMAINS) || null); }
     if ("harms" in b) { sets.push("harms = ?"); vals.push(pickMany(b.harms, HARMS) || null); }
@@ -525,7 +696,7 @@ async function handleAdmin(request, env, url, db, path, method) {
   return bad("Not found.", 404);
 }
 
-// ---------------------------------------------------------------- share pages
+// ---------------------------------------------------------------- pages
 
 class SetAttr {
   constructor(attr, value) { this.attr = attr; this.value = value; }
@@ -535,14 +706,28 @@ class SetText {
   constructor(value) { this.value = value; }
   element(el) { el.setInnerContent(this.value); }
 }
+class SetHTML {
+  constructor(value) { this.value = value; }
+  element(el) { el.setInnerContent(this.value, { html: true }); }
+}
+class Append {
+  constructor(value) { this.value = value; }
+  element(el) { el.append(this.value, { html: true }); }
+}
 
-function withMeta(page, url, meta) {
-  const abs = (p) => SITE + p;
+// Every HTML page: shared header and footer, link-preview tags, analytics, and noindex off production.
+function decorate(res, env, url, meta = {}) {
+  const flags = flagsOf(env);
   let rw = new HTMLRewriter()
-    .on('meta[property="og:image"]', new SetAttr("content", abs("/og.png")))
-    .on('meta[name="twitter:image"]', new SetAttr("content", abs("/og.png")))
-    .on('meta[property="og:url"]', new SetAttr("content", meta.canonical))
-    .on('link[rel="canonical"]', new SetAttr("href", meta.canonical));
+    .on("#site-head", new SetHTML(headerHTML(flags)))
+    .on("#site-foot", new SetHTML(footerHTML()))
+    .on('meta[property="og:image"]', new SetAttr("content", SITE + "/og.png"))
+    .on('meta[name="twitter:image"]', new SetAttr("content", SITE + "/og.png"))
+    .on("body", new SetAttr("data-flags", [flags.scores && "scores", flags.categories && "categories"].filter(Boolean).join(" ")));
+  if (meta.canonical) {
+    rw = rw.on('meta[property="og:url"]', new SetAttr("content", meta.canonical))
+      .on('link[rel="canonical"]', new SetAttr("href", meta.canonical));
+  }
   if (meta.title) {
     rw = rw.on("title", new SetText(meta.title))
       .on('meta[property="og:title"]', new SetAttr("content", meta.title))
@@ -553,25 +738,108 @@ function withMeta(page, url, meta) {
       .on('meta[property="og:description"]', new SetAttr("content", meta.desc))
       .on('meta[name="twitter:description"]', new SetAttr("content", meta.desc));
   }
-  return rw.transform(page);
+  for (const [sel, html] of Object.entries(meta.fill || {})) rw = rw.on(sel, new SetHTML(html));
+  for (const [sel, [attr, value]] of Object.entries(meta.attrs || {})) rw = rw.on(sel, new SetAttr(attr, value));
+  if (env.CF_BEACON_TOKEN) {
+    rw = rw.on("body", new Append(`<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='${esc(JSON.stringify({ token: env.CF_BEACON_TOKEN }))}'></script>`));
+  }
+  const out = rw.transform(res);
+  if (url.hostname === SITE_HOST) return out;
+  const r = new Response(out.body, out);
+  r.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return r;
 }
 
-async function sharePage(request, env, url, id) {
-  const page = await env.ASSETS.fetch(new Request(new URL("/", url), request));
+const asset = (env, url, request, path) => env.ASSETS.fetch(new Request(new URL(path, url), request));
+
+async function siteState(env, url, ctx) {
   const db = findD1(env);
-  let n = null;
-  if (db) {
-    try {
-      await ensureSchema(db);
-      n = await db.prepare("SELECT name, work, backfire FROM nominees WHERE id = ? AND state = 'approved'").bind(id).first();
-    } catch {}
+  if (!db) return null;
+  try {
+    await ensureSchema(db);
+    return await (await getState(db, url, ctx)).json();
+  } catch (e) {
+    console.error(e && e.stack);
+    return null;
   }
-  if (!n) return withMeta(page, url, { canonical: SITE + "/" });
-  return withMeta(page, url, {
-    canonical: `${SITE}/n/${id}`,
-    title: `${n.name}: ${n.work} · The Midgley Awards`,
-    desc: `Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
+}
+
+function listHTML(noms, comments, flags) {
+  if (!noms.length) return `<p class="empty">No nominees here yet. Submit the first.</p>`;
+  const ranked = [...noms].sort(byTop(flags));
+  const ccount = {};
+  comments.forEach((c) => (ccount[c.nomineeId] = (ccount[c.nomineeId] || 0) + 1));
+  return ranked.map((n, i) => cardHTML(n, { flags, rank: i + 1, total: ranked.length, top: i === 0 && topValue(n, flags) > 0, ccount: ccount[n.id] || 0 })).join("");
+}
+
+async function homePage(request, env, url, ctx, category) {
+  const flags = flagsOf(env);
+  const st = await siteState(env, url, ctx);
+  const all = st ? st.nominees.filter((n) => n.id !== HONOREE) : [];
+  const counts = {};
+  all.forEach((n) => n.domain && (counts[n.domain] = (counts[n.domain] || 0) + 1));
+  const noms = category ? all.filter((n) => n.domain === category) : all;
+  const fill = {};
+  if (st) fill["#list"] = listHTML(noms, st.comments, flags);
+  if (flags.categories) fill["#cats"] = categoryChipsHTML(category, counts);
+  const page = await asset(env, url, request, category ? "/category-page" : "/");
+  if (!category) return decorate(page, env, url, { canonical: SITE + "/", fill });
+  const name = DOMAIN_LABELS[category];
+  const path = `/category/${CATEGORY_SLUGS[category]}`;
+  fill["#cat-title"] = esc(name);
+  return decorate(page, env, url, {
+    canonical: SITE + path, title: `${name} · The Midgley Awards`,
+    desc: `Nominees in ${name}: inventions and decisions that solved one problem and caused another.`,
+    fill, attrs: { body: ["data-category", category] },
   });
+}
+
+async function nomineePage(request, env, url, ctx, key) {
+  const st = await siteState(env, url, ctx);
+  const n = st && st.nominees.find((x) => x.slug === key || x.id === key);
+  if (!n) {
+    const page = await asset(env, url, request, "/nominee");
+    return decorate(page, env, url, {
+      title: "Nominee not found · The Midgley Awards",
+      fill: { "#list": `<p class="notice">That nominee isn't on the list. It may still be waiting for review. <a href="/">See all nominees</a>.</p>` },
+    });
+  }
+  if (n.id === HONOREE) return Response.redirect(SITE_ORIGIN(url) + "/midgley", 301);
+  if (key !== n.slug) return Response.redirect(SITE_ORIGIN(url) + nomineePath(n), 301);
+  const flags = flagsOf(env);
+  const thread = st.comments.filter((c) => c.nomineeId === n.id);
+  const page = await asset(env, url, request, "/nominee");
+  const pct = herdPct(n);
+  const scores = flags.scores ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Herd Score ${pct}%` : ""].filter(Boolean).join(", ") : "";
+  return decorate(page, env, url, {
+    canonical: SITE + nomineePath(n),
+    title: `${n.name}: ${n.work} · The Midgley Awards`,
+    desc: `${scores ? scores + ". " : ""}Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
+    fill: { "#list": cardHTML(n, { flags, full: true, open: true, thread }) },
+    attrs: { body: ["data-nominee", n.id] },
+  });
+}
+
+// Links on a non-production host stay on that host, so staging and previews keep working.
+const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
+
+async function sitemap(env, url, ctx) {
+  const flags = flagsOf(env);
+  const st = await siteState(env, url, ctx);
+  const paths = ["/", "/midgley", "/goat", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
+  if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
+  if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
+  const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    paths.map((p) => `  <url><loc>${SITE}${p}</loc></url>`).join("\n") + `\n</urlset>\n`;
+  return new Response(body, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" } });
+}
+
+// /micro sends people to the Micro Midgley form, keeping utm_ tags so the form can record where they came from.
+function microRedirect(url) {
+  if (!LINKS.microForm) return null;
+  const to = new URL(LINKS.microForm);
+  for (const [k, v] of url.searchParams) if (k.startsWith("utm_")) to.searchParams.set(k, v);
+  return Response.redirect(to.toString(), 302);
 }
 
 // ---------------------------------------------------------------- entry
@@ -588,13 +856,32 @@ export default {
         return bad("Server error. Try again in a moment.", 500);
       }
     }
-    const share = url.pathname.match(/^\/n\/([A-Za-z0-9-]{1,64})\/?$/);
-    if (share && share[1] === "midgley") return Response.redirect(url.origin + "/midgley", 301);
-    if (share && request.method === "GET") return sharePage(request, env, url, share[1]);
-    const res = await env.ASSETS.fetch(request);
-    if (request.method === "GET" && (url.pathname === "/" || url.pathname === "/index.html") && res.ok) {
-      return withMeta(res, url, { canonical: SITE + "/" });
+    if (request.method !== "GET" && request.method !== "HEAD") return env.ASSETS.fetch(request);
+    const p = url.pathname.replace(/\/+$/, "") || "/";
+    const flags = flagsOf(env);
+
+    if (p === "/" || p === "/index.html") return homePage(request, env, url, ctx, "");
+    const n = p.match(/^\/n\/([A-Za-z0-9-]{1,64})$/);
+    if (n) return nomineePage(request, env, url, ctx, n[1]);
+    if (p === "/category") return flags.categories ? Response.redirect(SITE_ORIGIN(url) + "/#cats", 302) : Response.redirect(SITE_ORIGIN(url) + "/", 302);
+    const c = p.match(/^\/category\/([a-z0-9-]{1,60})$/);
+    if (c) {
+      const key = Object.keys(CATEGORY_SLUGS).find((k) => CATEGORY_SLUGS[k] === c[1]);
+      if (!flags.categories || !key) return Response.redirect(SITE_ORIGIN(url) + "/", 302);
+      return homePage(request, env, url, ctx, key);
     }
-    return res;
+    if (p === "/nominee" || p === "/category-page") return Response.redirect(SITE_ORIGIN(url) + "/", 302); // page shells, filled above
+    if (p === "/sitemap.xml") return sitemap(env, url, ctx);
+    if (p === "/micro") return microRedirect(url) || decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/micro" });
+
+    const res = await env.ASSETS.fetch(request);
+    const type = res.headers.get("content-type") || "";
+    if (!type.includes("text/html")) {
+      if (url.hostname === SITE_HOST) return res;
+      const r = new Response(res.body, res);
+      r.headers.set("X-Robots-Tag", "noindex, nofollow");
+      return r;
+    }
+    return decorate(res, env, url, res.ok ? { canonical: SITE + p } : {});
   },
 };

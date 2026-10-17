@@ -182,3 +182,90 @@ nav.foot span{color:var(--ink-3);text-transform:none;letter-spacing:0}
 .doc .citation p{margin:0;color:var(--ink)}
 .doc .citation .label{margin-bottom:6px}
 @media (max-width:640px){ .memorial{grid-template-columns:1fr;padding:18px} .memorial .element{width:84px} }
+
+/* ---- v3: site header and footer, shared by every page ---- */
+.site-head{border-bottom:1px solid var(--line);background:var(--surface);margin:0 -16px;padding:0 16px}
+.site-head-in{max-width:880px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;padding:10px 0}
+.site-head .brand{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font:800 18px/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.site-head .mini{display:inline-grid;place-items:center;width:28px;height:28px;background:var(--tile);color:var(--tile-ink);font:900 16px/1 var(--display);text-transform:none}
+.site-head nav{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.site-head nav a{color:var(--ink-2);text-decoration:none}
+.site-head nav a:hover{color:var(--ink)}
+.site-head .micro-btn{background:var(--ethyl);color:#fff;padding:7px 10px}
+.site-head .micro-btn:hover{color:#fff;opacity:.9}
+.site-foot{display:flex;flex-direction:column;gap:16px;border-top:1px solid var(--line);padding-top:20px}
+.site-foot-in{display:flex;flex-direction:column;gap:14px}
+.oops-mini label{display:block;font-size:14px;color:var(--ink-2);margin-bottom:8px}
+.oops-mini label b{color:var(--ink);font:800 18px/1 var(--display);text-transform:uppercase;margin-right:6px}
+.oops-mini .row{display:flex;gap:8px;flex-wrap:wrap}
+.oops-mini input[type=email]{flex:1 1 220px;min-width:0;border:1px solid var(--line);background:var(--surface);padding:9px 11px;font-size:15px}
+.msg.ok{color:var(--ozone)}
+.socials{display:flex;flex-wrap:wrap;gap:6px 16px;font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.socials a{color:var(--ink-2)}
+.runby{margin:0;font-size:13px;color:var(--ink-3)}
+.placeholder{color:var(--amber);background:var(--amber-soft);padding:2px 6px;font-size:13px}
+.crumbs{margin:0;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.pagehead h1{font:900 clamp(40px,7vw,60px)/.95 var(--display);text-transform:uppercase;margin:6px 0 0}
+.pagehead .label a{color:inherit}
+.btn{display:inline-block;text-decoration:none}
+
+/* feature flags: parts that only show when a feature is on */
+body:not([data-flags~="scores"]) [data-needs="scores"],
+body:not([data-flags~="categories"]) [data-needs="categories"]{display:none}
+
+/* categories */
+.cats{display:flex;flex-wrap:wrap;gap:8px}
+.catchip{font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);text-decoration:none}
+.catchip span{color:var(--ink-3)}
+.catchip[aria-current="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.catchip[aria-current="true"] span{color:inherit;opacity:.7}
+a.chip.cat{text-decoration:none}
+.head h3 a{color:inherit;text-decoration:none}
+.head h3 a:hover{text-decoration:underline}
+
+/* scores */
+.scores{display:flex;gap:10px;flex-wrap:wrap}
+.score{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:center;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surface);padding:6px 10px}
+.score .label{grid-column:1/-1;font:500 10px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.score .num{font:800 26px/1 var(--display);font-variant-numeric:tabular-nums}
+.score .num.none{color:var(--ink-3)}
+.score .sub{font:400 11px var(--mono);color:var(--ink-3)}
+.score .band{grid-column:2;font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.score .band + .sub{grid-column:1/-1}
+.scores.large .score{padding:12px 16px;min-width:180px}
+.scores.large .num{font-size:52px}
+.band{display:inline-block;padding:2px 6px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.b-certified{background:var(--ethyl);color:#fff}
+.b-big{background:var(--ethyl-soft);color:var(--ethyl)}
+.b-fine{background:var(--ozone-soft);color:var(--ozone)}
+.herdvote{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.herdvote .q{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.herdvote button{border:1px solid var(--line);background:var(--surface);padding:6px 14px;cursor:pointer;font:600 13px var(--sans)}
+.herdvote button[data-vote="yes"][aria-pressed="true"]{background:var(--ethyl);border-color:var(--ethyl);color:#fff}
+.herdvote button[data-vote="no"][aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+
+/* a nominee's own page */
+.list.single{border-top:0}
+.nom.full{border-bottom:0}
+.nom.full h1{margin:0;font:900 clamp(40px,7vw,60px)/.95 var(--display);text-transform:uppercase}
+.nom.full .work{font-size:18px}
+.writeup{display:flex;flex-direction:column;gap:18px;max-width:68ch}
+.writeup h2{margin:0 0 4px;font:800 22px/1.1 var(--display);text-transform:uppercase}
+.writeup p{margin:0;color:var(--ink-2);font-size:16px}
+.writeup ul{margin:0;padding-left:18px;color:var(--ink-2)}
+
+/* goat and shop */
+.goat,.product{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:24px;align-items:start}
+.goat-photo,.tee{aspect-ratio:1;background:var(--surface);border:1.5px dashed var(--line);display:grid;place-items:center;color:var(--ink-3);font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;text-align:center;padding:12px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.stats div{border:1px solid var(--line);background:var(--surface);padding:10px}
+.stats dt{font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.stats dd{margin:4px 0 0;font:800 26px/1 var(--display)}
+.product h2{margin:0 0 6px}
+.price{font:800 32px/1 var(--display)}
+.product .primary{padding:12px 22px}
+@media (max-width:640px){
+  .goat,.product{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .site-head-in{justify-content:flex-start}
+}

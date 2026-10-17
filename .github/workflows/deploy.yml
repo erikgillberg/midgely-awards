@@ -1,12 +1,14 @@
 name: Deploy to Cloudflare Pages
 
+# main is production (midgleyawards.com). staging deploys as a preview at
+# staging.midgley-awards.pages.dev, which staging.midgleyawards.com points to.
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
   workflow_dispatch:
 
 concurrency:
-  group: deploy
+  group: deploy-${{ github.ref_name }}
   cancel-in-progress: true
 
 jobs:
@@ -22,4 +24,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 78390fee6fe502f739aea09d836698ef
-          command: pages deploy public --project-name=midgley-awards --branch=main --commit-dirty=true
+          command: pages deploy public --project-name=midgley-awards --branch=${{ github.ref_name }} --commit-dirty=true

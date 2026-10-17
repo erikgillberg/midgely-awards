@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  const { DOMAINS, HARMS, STATUSES, KNOW, AWARDS } = window.MIDGLEY;
+  const { DOMAINS, HARMS, STATUSES, KNOW, AWARDS, oopsBand } = window.MIDGLEY;
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const store = {
@@ -55,26 +55,59 @@
     return c.join(" ");
   }
 
+  // The nominee write-up, in page order. [key, label, max, kind]
+  const FIELDS = [
+    ["name", "Nominee", 80], ["years", "Years (1889 to 1944, or Born 1955)", 30], ["work", "The achievement", 120, "full"],
+    ["slug", "Page address (/n/...)", 60],
+    ["meant", "1. What it was meant to do", 600, "text"], ["solved", "2. What went right", 600, "text"],
+    ["backfire", "3. What went oops", 600, "text"], ["gotRight", "4. What they got right", 600, "text"],
+    ["foresight", "5. Could anyone have seen it coming? (the knowable setting below gives the short answer)", 600, "text"],
+    ["pattern", "6. Pattern, in plain words", 200, "full"],
+    ["source1", "7. Source link 1", 500, "full"], ["source2", "7. Source link 2", 500, "full"],
+    ["wikiName", "Wikipedia: nominee", 500, "full"], ["wikiWork", "Wikipedia: achievement", 500, "full"],
+    ["fix", "The fix", 400, "text"], ["fixUrl", "Fix link", 500, "full"], ["author", "Submitted by", 60],
+  ];
+  function fieldsHTML(n, pre) {
+    const f = FIELDS.filter(([k]) => !(pre === "new" && k === "slug")).map(([k, label, max, kind]) => {
+      const id = `e-${k}-${pre}`, val = esc(n[k] || "");
+      const input = kind === "text" ? `<textarea id="${id}" maxlength="${max}">${val}</textarea>` : `<input id="${id}" value="${val}" maxlength="${max}">`;
+      return `<label class="${kind ? "full" : ""}">${esc(label)}${input}</label>`;
+    }).join("");
+    return f + `
+      <label>Category${sel("e-domain-" + pre, DOMAINS, n.domain || "", "Not sure")}</label>
+      <label>Status${sel("e-status-" + pre, STATUSES, n.status || "", "None")}</label>
+      <label>Knowable${sel("e-knowable-" + pre, KNOW, n.knowable || "", "None")}</label>
+      <label>Special award${sel("e-award-" + pre, AWARDS, n.award || "", "None")}</label>
+      <label class="full">Kinds of harm<span class="checks">${Object.entries(HARMS).map(([k, v]) => `<label style="flex-direction:row;text-transform:none;letter-spacing:0;font:13px var(--sans);color:var(--ink)"><input type="checkbox" data-harm="${k}" ${(n.harms || []).includes(k) ? "checked" : ""} style="width:auto">${esc(v)}</label>`).join("")}</span></label>`;
+  }
+  function readFields(pre) {
+    const box = document.querySelector(`[data-edit="${pre}"]`);
+    const out = {};
+    FIELDS.forEach(([k]) => { const el = document.getElementById(`e-${k}-${pre}`); if (el) out[k] = el.value; });
+    ["domain", "status", "knowable", "award"].forEach((k) => (out[k] = document.getElementById(`e-${k}-${pre}`).value));
+    out.harms = [...box.querySelectorAll("[data-harm]:checked")].map((x) => x.dataset.harm);
+    return out;
+  }
   function editor(n) {
-    const id = n.id;
-    return `<div class="edit" data-edit="${esc(id)}">
-      <label>Nominee<input id="e-name-${id}" value="${esc(n.name)}" maxlength="80"></label>
-      <label>Years<input id="e-years-${id}" value="${esc(n.years)}" maxlength="30"></label>
-      <label class="full">Achievement<input id="e-work-${id}" value="${esc(n.work)}" maxlength="120"></label>
-      <label class="full">Solved<textarea id="e-solved-${id}" maxlength="600">${esc(n.solved)}</textarea></label>
-      <label class="full">Created<textarea id="e-backfire-${id}" maxlength="600">${esc(n.backfire)}</textarea></label>
-      <label>Field${sel("e-domain-" + id, DOMAINS, n.domain, "None")}</label>
-      <label>Status${sel("e-status-" + id, STATUSES, n.status, "None")}</label>
-      <label>Knowable${sel("e-knowable-" + id, KNOW, n.knowable, "None")}</label>
-      <label>Award${sel("e-award-" + id, AWARDS, n.award, "No award")}</label>
-      <label class="full">Kinds of harm<span class="checks">${Object.entries(HARMS).map(([k, v]) => `<label style="flex-direction:row;text-transform:none;letter-spacing:0;font:13px var(--sans);color:var(--ink)"><input type="checkbox" data-harm="${k}" ${n.harms.includes(k) ? "checked" : ""} style="width:auto">${esc(v)}</label>`).join("")}</span></label>
-      <label class="full">The fix<textarea id="e-fix-${id}" maxlength="400">${esc(n.fix)}</textarea></label>
-      <label class="full">Fix link<input id="e-fixUrl-${id}" value="${esc(n.fixUrl)}" maxlength="500"></label>
-      <label class="full">Wikipedia: nominee<input id="e-wikiName-${id}" value="${esc(n.wikiName)}" maxlength="500"></label>
-      <label class="full">Wikipedia: achievement<input id="e-wikiWork-${id}" value="${esc(n.wikiWork)}" maxlength="500"></label>
-      <label>Submitted by<input id="e-author-${id}" value="${esc(n.author)}" maxlength="60"></label>
-      <div class="btns full"><button class="ok" data-act="save" data-id="${esc(id)}">Save changes</button><button data-act="cancel" data-id="${esc(id)}">Cancel</button></div>
+    return `<div class="edit" data-edit="${esc(n.id)}">${fieldsHTML(n, n.id)}
+      <div class="btns full"><button class="ok" data-act="save" data-id="${esc(n.id)}">Save changes</button><button data-act="cancel" data-id="${esc(n.id)}">Cancel</button></div>
     </div>`;
+  }
+
+  // Judges: one 1 to 100 Oops Score per nominee. Scores go public once two judges have scored.
+  function judgesHTML() {
+    const judge = data.judge || store.get("midgley.judge") || "";
+    const mine = {}; const counts = {};
+    data.judgeScores.forEach((r) => { counts[r.nominee_id] = (counts[r.nominee_id] || 0) + 1; if (r.judge === judge) mine[r.nominee_id] = r.score; });
+    const rows = data.nominees.filter((n) => n.state === "approved").map((n) => {
+      const band = n.judgeAvg != null ? oopsBand(n.judgeAvg) : null;
+      return `<tr><td><b>${esc(n.name)}</b><br><span style="color:var(--ink-3);font-size:12px">${esc(n.work)}</span></td>
+        <td><input class="score-in" type="number" min="1" max="100" inputmode="numeric" data-score="${esc(n.id)}" value="${mine[n.id] ?? ""}" aria-label="Your score for ${esc(n.name)}"></td>
+        <td style="font:13px var(--mono)">${n.judgeAvg != null ? `${n.judgeAvg} · ${esc(band.label)}` : "None"}<br><span style="color:var(--ink-3)">${counts[n.id] || 0} judge${counts[n.id] === 1 ? "" : "s"}${(counts[n.id] || 0) < 2 ? ", not public yet" : ""}</span></td></tr>`;
+    }).join("");
+    return `<div class="login" style="margin-bottom:12px">${data.judge ? `<span>Scoring as <b>${esc(data.judge)}</b></span>` : `<label class="label" for="judge">Judge name</label><input id="judge" value="${esc(judge)}" placeholder="Your name, the same every time" maxlength="60">`}</div>
+      <p style="margin:0 0 10px;color:var(--ink-2);font-size:14px">Score how big the backfire was and how long it lasts, from 1 to 100. A score saves when you leave the box. Clear the box to remove your score.</p>
+      <table class="judges"><thead><tr><th>Nominee</th><th>Your score</th><th>Average</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
 
   function nomRow(n, actions) {
@@ -118,6 +151,14 @@
     const rest = noms.filter((n) => n.state !== "pending");
     $("#c-all").textContent = rest.length;
     $("#all").innerHTML = rest.map((n) => nomRow(n, act(n))).join("");
+    $("#judging").innerHTML = judgesHTML();
+    $("#c-votes").textContent = `${data.voteCounts.up} upvotes, ${data.voteCounts.herd} Herd votes`;
+    $("#flags").textContent = `Scores ${data.flags.scores ? "on" : "off"} · Categories ${data.flags.categories ? "on" : "off"}`;
+    if (!$("#new-form").dataset.ready) {
+      $("#new-form").innerHTML = `<div class="edit" data-edit="new">${fieldsHTML({ harms: [] }, "new")}
+        <div class="btns full"><button class="ok" data-act="create">Publish nominee</button></div></div>`;
+      $("#new-form").dataset.ready = "1";
+    }
     $("#c-subs").textContent = data.subscriberCount + (data.subscriberCount === 1 ? " address" : " addresses");
   }
 
@@ -137,15 +178,21 @@
       case "edit": editing.add(id); return render();
       case "cancel": editing.delete(id); return render();
       case "save": {
-        const v = (k) => document.getElementById(`e-${k}-${id}`).value;
-        const box = document.querySelector(`[data-edit="${id}"]`);
-        const harms = [...box.querySelectorAll("[data-harm]:checked")].map((x) => x.dataset.harm);
+        const body = readFields(id);
         editing.delete(id);
-        return patchNominee(id, {
-          name: v("name"), years: v("years"), work: v("work"), solved: v("solved"), backfire: v("backfire"),
-          domain: v("domain"), status: v("status"), knowable: v("knowable"), award: v("award"),
-          harms, fix: v("fix"), fixUrl: v("fixUrl"), wikiName: v("wikiName"), wikiWork: v("wikiWork"), author: v("author")
-        }, "Saved");
+        return patchNominee(id, body, "Saved");
+      }
+      case "create": {
+        try {
+          const r = await api("/api/admin/nominees", { method: "POST", body: JSON.stringify(readFields("new")) });
+          $("#new-form").dataset.ready = ""; toast(`Published at /n/${r.nominee.slug}`); load();
+        } catch (err) { toast(err.message); }
+        return;
+      }
+      case "clear-votes": {
+        if (prompt("This removes every upvote and Herd vote. Type CLEAR to confirm.") !== "CLEAR") return;
+        try { await api("/api/admin/clear-votes", { method: "POST", body: JSON.stringify({ confirm: "CLEAR" }) }); toast("All votes removed"); load(); } catch (err) { toast(err.message); }
+        return;
       }
       case "delete":
         if (!confirm("Delete this nominee with its votes and comments? This can't be undone.")) return;
@@ -162,6 +209,19 @@
         try { await api("/api/admin/comments/" + cid, { method: "DELETE" }); toast("Comment deleted"); load(); } catch (err) { toast(err.message); }
         return;
     }
+  });
+
+  // Judge scores save when a score box loses focus.
+  document.addEventListener("change", async (e) => {
+    if (e.target.id === "judge") { store.set("midgley.judge", e.target.value.trim()); return; }
+    const id = e.target.dataset && e.target.dataset.score;
+    if (!id) return;
+    const judge = data.judge || ($("#judge") && $("#judge").value.trim()) || "";
+    if (!judge) { toast("Type your judge name first."); return; }
+    try {
+      await api("/api/admin/scores", { method: "PUT", body: JSON.stringify({ nomineeId: id, judge, score: e.target.value }) });
+      toast("Score saved"); load();
+    } catch (err) { toast(err.message); }
   });
 
   $("#load-subs").onclick = async () => {

@@ -14,7 +14,10 @@ The site is a static page plus a small server, both hosted on Cloudflare Pages. 
 | `public/guidelines.html`, `terms.html` | Community guidelines, and terms and privacy |
 | `public/midgley.html` | The page about Thomas Midgley Jr., who holds the first award. He is kept out of the voting list, and `/n/midgley` redirects here |
 | `public/_worker.js` | The server: the JSON API, share pages at `/n/<id>`, and database setup |
-| `.github/workflows/deploy.yml` | Deploys to Cloudflare on every push to `main` |
+| `public/shared.js` | Labels, outside links (`LINKS`), and the markup for nominee cards, the header and the footer. Used by both the server and the browser |
+| `public/nominee.html`, `category-page.html` | Page shells the server fills for `/n/<slug>` and `/category/<slug>` |
+| `public/goat.html`, `shop.html`, `shop/waitlist.html`, `micro.html`, `scores.html`, `privacy.html` | The other pages |
+| `.github/workflows/deploy.yml` | Deploys `main` to production and `staging` to staging |
 
 The database sets itself up on the first request. A database from version 1 upgrades in place, keeping its nominees, votes and comments.
 
@@ -26,6 +29,10 @@ Every push to `main` deploys to the `midgley-awards` Pages project through GitHu
 
 The site lives at https://midgleyawards.com. The misspelled midgelyawards.com and both www hosts are attached to the same Pages project and forward to the home page (see `SITE` and `FORWARD_HOSTS` in `_worker.js`).
 
+## Staging
+
+Work goes to the `staging` branch first. It deploys as a preview at `staging.midgley-awards.pages.dev` and `staging.midgleyawards.com`, uses the Preview settings and database, and sends `X-Robots-Tag: noindex`. When Erik approves, merge `staging` into `main`. Database changes only add tables and columns, so the code on `main` keeps working with a database that has already been upgraded.
+
 ## Settings in Cloudflare
 
 Set these under the Pages project's **Settings**, for **Production**:
@@ -36,6 +43,9 @@ Set these under the Pages project's **Settings**, for **Production**:
 | `ADMIN_TOKEN` | Secret | Yes | Unlocks `/admin`. New nominees wait for approval, so without it nothing new can be published |
 | `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET` | Variable and secret | No | Adds Cloudflare's human check to the nomination and sign-up forms |
 | `AUTO_APPROVE` | Variable, set to `1` | No | Publishes nominees immediately instead of queueing them |
+| `FEATURE_SCORES` | Variable, set to `1` | No | Turns on the Oops Score and the Herd Score, which replace upvotes |
+| `FEATURE_CATEGORIES` | Variable, set to `1` | No | Turns on category chips and the `/category/...` pages |
+| `CF_BEACON_TOKEN` | Variable | No | Cloudflare Web Analytics token. The server adds the analytics script to every page |
 
 Changes to settings take effect on the next deployment.
 
