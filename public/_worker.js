@@ -16,7 +16,7 @@
 // The schema creates and migrates itself on first request (v1 databases upgrade in place).
 
 import {
-  SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE,
+  SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, weeklyOopsHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
 } from "./shared.js";
 
@@ -721,6 +721,10 @@ function decorate(res, env, url, meta = {}) {
   let rw = new HTMLRewriter()
     .on("#site-head", new SetHTML(headerHTML(flags)))
     .on("#site-foot", new SetHTML(footerHTML()))
+    .on("#weekly-oops", new SetHTML(weeklyOopsHTML()))
+    .on("#waitlist-embed", new SetHTML(waitlistHTML()))
+    // Beehiiv attribution: passes utm_ tags on the page through to new subscribers.
+    .on("body", new Append(`<script async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>`))
     .on('meta[property="og:image"]', new SetAttr("content", SITE + "/og.png"))
     .on('meta[name="twitter:image"]', new SetAttr("content", SITE + "/og.png"))
     .on("body", new SetAttr("data-flags", [flags.scores && "scores", flags.categories && "categories"].filter(Boolean).join(" ")));
@@ -749,6 +753,11 @@ function decorate(res, env, url, meta = {}) {
   r.headers.set("X-Robots-Tag", "noindex, nofollow");
   return r;
 }
+
+// The shop waitlist form from Tally. Tally's embed script passes the page's utm_ tags to the form.
+const waitlistHTML = () =>
+  `<iframe data-tally-src="https://tally.so/embed/${LINKS.waitlistForm}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="320" frameborder="0" title="Shop waitlist"></iframe>` +
+  `<script async src="https://tally.so/widgets/embed.js" onload="Tally.loadEmbeds()"></script>`;
 
 const asset = (env, url, request, path) => env.ASSETS.fetch(new Request(new URL(path, url), request));
 

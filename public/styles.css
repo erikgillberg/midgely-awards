@@ -271,3 +271,13 @@ a.chip.cat{text-decoration:none}
 }
 img.goat-photo,img.tee{display:block;width:100%;height:auto;aspect-ratio:auto;border:0;padding:0;background:none}
 img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rendering:pixelated}
+.oops-mini p{margin:0 0 8px;font-size:14px;color:var(--ink-2)}
+.oops-mini p b{color:var(--ink);font:800 18px/1 var(--display);text-transform:uppercase;margin-right:6px}
+.beehiiv-embed{min-height:52px;max-width:520px}
+#waitlist-embed iframe{display:block;border:0}
+.subscribe{grid-template-columns:1fr}
+.beehiiv-embed{max-width:420px;margin-left:-40px}
+@media (max-width:640px){ .beehiiv-embed{margin-left:-24px} }
+/* Beehiiv's frame centers a 46px form in about 207px of space; show just the form. */
+.beehiiv-embed{height:80px;overflow:hidden}
+.beehiiv-embed iframe{margin-top:-64px!important}

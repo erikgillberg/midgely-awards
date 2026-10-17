@@ -42,10 +42,15 @@ export const AWARDS = {
 
 // Outside links. Empty means "not set up yet": the site shows a placeholder instead.
 export const LINKS = {
-  microForm: "",      // Tally form for Micro Midgleys
-  waitlistForm: "",   // Tally form for the shop waitlist
+  microForm: "https://tally.so/r/KpQa0D",    // Tally: Share your Micro Midgley
+  waitlistForm: "kbakOe",                    // Tally: Midgley Awards shop waitlist (form id, embedded on /shop/waitlist)
+  beehiivForm: "71cdf4c1-b2c8-4913-bb03-cc836734a7b1", // Beehiiv: The Weekly Oops sign-up form
   socials: [],        // [{ name: "Instagram", url: "https://..." }]
 };
+
+// The Weekly Oops sign-up form from Beehiiv. The loader script draws the form where it sits.
+export const weeklyOopsHTML = () =>
+  `<div class="beehiiv-embed"><script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="${LINKS.beehiivForm}"></script></div>`;
 
 // Scores
 export const MIN_JUDGES = 2;      // an Oops Score is public once this many judges have scored
@@ -218,11 +223,10 @@ export function footerHTML() {
     ? LINKS.socials.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("")
     : `<span class="placeholder">Social links coming soon</span>`;
   return `<div class="site-foot-in">
-    <form class="oops-mini" data-subscribe novalidate>
-      <label for="foot-email"><b>The Weekly Oops</b> One short email a week about things that worked too well.</label>
-      <div class="row"><input id="foot-email" type="email" required placeholder="you@example.com" autocomplete="email"><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="primary" type="submit">Subscribe</button></div>
-      <span class="msg" role="status"></span>
-    </form>
+    <div class="oops-mini">
+      <p><b>The Weekly Oops</b> One short email a week about things that worked too well.</p>
+      ${weeklyOopsHTML()}
+    </div>
     <nav class="foot" aria-label="Site">
       <a href="/">Nominees</a>
       <a href="/midgley">Lifetime Midgley</a>
