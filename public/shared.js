@@ -4,6 +4,9 @@
 
 export const SITE = "https://midgleyawards.com";
 
+// Build id, set by the deploy workflow. Added to stylesheet and script URLs so browsers fetch new copies.
+export const BUILD = "__BUILD__";
+
 // Categories. Keys are stored on each nominee (the `domain` column); slugs are the /category/ URLs.
 export const DOMAINS = {
   materials: "Chemistry and Materials",

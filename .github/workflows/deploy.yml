@@ -19,6 +19,8 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v4
+      - name: Stamp the build id into stylesheet and script URLs
+        run: sed -i "s/__BUILD__/${GITHUB_SHA::8}/" public/shared.js
       - name: Deploy public/ to the midgley-awards Pages project
         uses: cloudflare/wrangler-action@v3
         with:

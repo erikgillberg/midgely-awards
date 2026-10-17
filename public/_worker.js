@@ -18,7 +18,7 @@
 import {
   SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, weeklyOopsHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
-  carouselHTML, tableHTML, JEWELS, CATEGORY_JEWEL,
+  carouselHTML, tableHTML, JEWELS, CATEGORY_JEWEL, BUILD,
 } from "./shared.js";
 
 const SCHEMA_VERSION = 4;
@@ -699,6 +699,11 @@ class SetHTML {
   constructor(value) { this.value = value; }
   element(el) { el.setInnerContent(this.value, { html: true }); }
 }
+// "/styles.css" -> "/styles.css?v=<build>", so a new deploy is never hidden by a cached copy.
+class Versioned {
+  constructor(attr) { this.attr = attr; }
+  element(el) { const v = el.getAttribute(this.attr); if (v && !v.includes("?")) el.setAttribute(this.attr, `${v}?v=${BUILD}`); }
+}
 class Append {
   constructor(value) { this.value = value; }
   element(el) { el.append(this.value, { html: true }); }
@@ -708,6 +713,8 @@ class Append {
 function decorate(res, env, url, meta = {}) {
   const flags = flagsOf(env);
   let rw = new HTMLRewriter()
+    .on('link[rel="stylesheet"][href^="/"]', new Versioned("href"))
+    .on('script[src^="/"]', new Versioned("src"))
     .on("#site-head", new SetHTML(headerHTML(flags)))
     .on("#site-foot", new SetHTML(footerHTML()))
     .on("#weekly-oops", new SetHTML(weeklyOopsHTML()))
@@ -904,6 +911,14 @@ export default {
 
     const res = await env.ASSETS.fetch(request);
     const type = res.headers.get("content-type") || "";
+    // Scripts import each other as "./shared.js"; version those imports too.
+    if (type.includes("javascript") && res.ok) {
+      const js = (await res.text()).replace(/from "\.\/([a-z-]+\.js)"/g, `from "./$1?v=${BUILD}"`);
+      const out = new Response(js, res);
+      if (url.searchParams.get("v")) out.headers.set("cache-control", "public, max-age=31536000, immutable");
+      if (url.hostname !== SITE_HOST) out.headers.set("X-Robots-Tag", "noindex, nofollow");
+      return out;
+    }
     if (!type.includes("text/html")) {
       if (url.hostname === SITE_HOST) return res;
       const r = new Response(res.body, res);
