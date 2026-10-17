@@ -24,6 +24,8 @@ Every push to `main` deploys to the `midgley-awards` Pages project through GitHu
 
 - `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with the **Cloudflare Pages: Edit** permission for this account.
 
+The site lives at https://midgleyawards.com. The misspelled midgelyawards.com and both www hosts are attached to the same Pages project and forward to the home page (see `SITE` and `FORWARD_HOSTS` in `_worker.js`).
+
 ## Settings in Cloudflare
 
 Set these under the Pages project's **Settings**, for **Production**:

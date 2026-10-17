@@ -12,6 +12,9 @@
 const SCHEMA_VERSION = 3;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
+const SITE = "https://midgleyawards.com"; // the one public address
+// Other hostnames that send visitors to the home page at SITE.
+const FORWARD_HOSTS = ["www.midgleyawards.com", "midgelyawards.com", "www.midgelyawards.com"];
 
 const DOMAINS = ["energy", "materials", "food", "cities", "information", "health", "finance", "governance"];
 const HARMS = ["environmental", "health", "social", "economic"];
@@ -534,7 +537,7 @@ class SetText {
 }
 
 function withMeta(page, url, meta) {
-  const abs = (p) => url.origin + p;
+  const abs = (p) => SITE + p;
   let rw = new HTMLRewriter()
     .on('meta[property="og:image"]', new SetAttr("content", abs("/og.png")))
     .on('meta[name="twitter:image"]', new SetAttr("content", abs("/og.png")))
@@ -563,9 +566,9 @@ async function sharePage(request, env, url, id) {
       n = await db.prepare("SELECT name, work, backfire FROM nominees WHERE id = ? AND state = 'approved'").bind(id).first();
     } catch {}
   }
-  if (!n) return withMeta(page, url, { canonical: url.origin + "/" });
+  if (!n) return withMeta(page, url, { canonical: SITE + "/" });
   return withMeta(page, url, {
-    canonical: `${url.origin}/n/${id}`,
+    canonical: `${SITE}/n/${id}`,
     title: `${n.name}: ${n.work} · The Midgley Awards`,
     desc: `Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
   });
@@ -576,6 +579,7 @@ async function sharePage(request, env, url, id) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (FORWARD_HOSTS.includes(url.hostname)) return Response.redirect(SITE + "/", 301);
     if (url.pathname.startsWith("/api/")) {
       try {
         return await handleApi(request, env, url, ctx);
@@ -589,7 +593,7 @@ export default {
     if (share && request.method === "GET") return sharePage(request, env, url, share[1]);
     const res = await env.ASSETS.fetch(request);
     if (request.method === "GET" && (url.pathname === "/" || url.pathname === "/index.html") && res.ok) {
-      return withMeta(res, url, { canonical: url.origin + "/" });
+      return withMeta(res, url, { canonical: SITE + "/" });
     }
     return res;
   },
