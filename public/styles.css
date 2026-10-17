@@ -269,3 +269,5 @@ a.chip.cat{text-decoration:none}
   .stats{grid-template-columns:1fr}
   .site-head-in{justify-content:flex-start}
 }
+img.goat-photo,img.tee{display:block;width:100%;height:auto;aspect-ratio:auto;border:0;padding:0;background:none}
+img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rendering:pixelated}
