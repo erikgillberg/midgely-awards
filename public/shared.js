@@ -293,7 +293,7 @@ export function jewelOf(domain) {
 const jewelVars = (j) => `--deep:${j.deep};--base:${j.base};--light:${j.light}`;
 
 // A nominee as an element. Everything on the tile is a fixed fact, so a saved image never goes stale:
-//   top left     catalog number: given once when the nominee joins, never reused (Midgley is 1)
+//   top left     the category's group number (the color says the same thing)
 //   top right    year born (a person) or founded (an organization)
 //   center       symbol: two letters from the surname
 //   word         the surname
@@ -319,7 +319,7 @@ function ordinal(k) {
 export function elementHTML(n, size = "") {
   const j = jewelOf(n.domain);
   return `<div class="el ${size}" style="${jewelVars(j)}">
-    <span class="el-num" title="Catalog number">${n.catalogNo ?? "?"}</span>
+    <span class="el-num" title="Group">${groupOf(n.domain) ?? "?"}</span>
     <span class="el-year" title="Born">${n.born ?? "?"}</span>
     <span class="el-sym">${esc(symbol(n.name))}</span>
     <span class="el-name">${esc(surnameOf(n.name))}</span>
@@ -328,20 +328,33 @@ export function elementHTML(n, size = "") {
   </div>`;
 }
 
-// The key: what each spot on this nominee's tile says, in plain words.
+// The key: the tile in the middle, a label around it for each spot, with a line to what it names.
+// Positions are percentages of a square, so the diagram scales like an image.
+const KEY_SPOTS = [
+  // [label position class, line from (x, y), line to (x, y)]: measured against the tile at 36% wide, 28% from the top
+  ["k-group", [29, 18], [35.8, 31.8]],
+  ["k-born", [71, 15], [64.2, 31.8]],
+  ["k-sym", [29, 44], [43.5, 44]],
+  ["k-name", [71, 54.4], [54.6, 54.4]],
+  ["k-up", [20, 73], [35.8, 60.4]],
+  ["k-down", [80, 73], [64.2, 60.4]],
+];
 export function keyHTML(n) {
   const g = groupOf(n.domain);
   const who = surnameOf(n.name);
-  return `<div class="el-key" style="${jewelVars(jewelOf(n.domain))}">
-    ${elementHTML(n, "lg")}
-    <dl>
-      <div><dt>${n.catalogNo ?? "?"}</dt><dd><b>Catalog number.</b> ${n.catalogNo ? `${esc(who)} was the ${ordinal(n.catalogNo)} nominee added to the table.` : "Its place in the table."}</dd></div>
-      <div><dt>${n.born ?? "?"}</dt><dd><b>Born.</b> ${n.born ? `${esc(who)} was born in ${n.born}.` : "The year born, or founded for an organization."}</dd></div>
-      <div><dt>${esc(symbol(n.name))}</dt><dd><b>Symbol.</b> The first two letters of ${esc(who)}.</dd></div>
-      <div><dt><i class="mk">▲</i>${powerText(n.helped)}</dt><dd><b>Helped.</b> People it helped: ${powerWords(n.helped)}.</dd></div>
-      <div><dt><i class="mk">▼</i>${powerText(n.harmed)}</dt><dd><b>Harmed.</b> People it harmed: ${powerWords(n.harmed)}.</dd></div>
-      <div><dt><span class="sw"></span>${g ?? ""}</dt><dd><b>Color.</b> Group ${g ?? "?"}, ${esc(DOMAINS[n.domain] || "category not set")}.</dd></div>
-    </dl>
+  const text = {
+    "k-group": [g ?? "?", "Group", `${DOMAINS[n.domain] || "Category not set"}. The color matches.`],
+    "k-born": [n.born ?? "?", "Born", n.born ? `${who} was born in ${n.born}.` : "Year born, or founded."],
+    "k-sym": [symbol(n.name), "Symbol", "The first two letters of the name."],
+    "k-name": [who, "Name", "The surname, or the short name of a program."],
+    "k-up": ["▲" + powerText(n.helped), "Helped", `People it helped: ${powerWords(n.helped)}.`],
+    "k-down": ["▼" + powerText(n.harmed), "Harmed", `People it harmed: ${powerWords(n.harmed)}.`],
+  };
+  const lines = KEY_SPOTS.map(([, a, b]) => `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/><circle cx="${b[0]}" cy="${b[1]}" r="0.8"/>`).join("");
+  return `<div class="el-diagram" style="${jewelVars(jewelOf(n.domain))}">
+    <svg class="dg-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${lines}</svg>
+    <div class="dg-tile">${elementHTML(n, "dg")}</div>
+    ${KEY_SPOTS.map(([cls]) => { const [v, h, d] = text[cls]; return `<div class="dg-label ${cls}"><b>${esc(String(v))}</b><span>${esc(h)}</span><p>${esc(d)}</p></div>`; }).join("")}
   </div>`;
 }
 
@@ -361,7 +374,7 @@ export function carouselHTML(n, data, flags = {}) {
     ${foot(1)}
   </section>`);
   cards.push(`<section class="cc cc-key" aria-roledescription="slide" aria-label="2 of ${total}">
-    <div class="cc-body"><p class="cc-label">How to read the tile</p>${keyHTML(n)}</div>
+    <p class="cc-label cc-key-title">How to read the tile</p>${keyHTML(n)}
     ${foot(2)}
   </section>`);
   data.slides.forEach((s, k) => {
