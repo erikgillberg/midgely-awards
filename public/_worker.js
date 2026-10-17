@@ -21,7 +21,7 @@ import {
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD,
 } from "./shared.js";
 
-const SCHEMA_VERSION = 5;
+const SCHEMA_VERSION = 6;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Other hostnames that send visitors to the home page at SITE.
@@ -87,6 +87,8 @@ const NEW_COLUMNS = {
     ["source1", "TEXT"], ["source2", "TEXT"],
     // v5: the element tile. catalog_no never changes once given; began, recognized and reach are facts, not rankings.
     ["catalog_no", "INTEGER"], ["began", "INTEGER"], ["recognized", "INTEGER"], ["reach", "INTEGER"],
+    // v6: the tile shows the birth (or founding) year, and how many people it helped and harmed, as powers of ten.
+    ["born", "INTEGER"], ["helped", "INTEGER"], ["harmed", "INTEGER"],
   ],
   comments: [["hidden", "INTEGER DEFAULT 0"], ["reports", "INTEGER DEFAULT 0"]],
 };
@@ -158,6 +160,10 @@ const SEED_WIKI = {
 // Element facts: [id, year it began, year the main backfire was documented, reach as a power of ten (9 = billions)].
 const SEED_ELEMENTS = [
   ["haber", 1913, 1972, 9],
+];
+// Tile facts: [id, born or founded, people helped and people harmed, each as a power of ten (9 = a billion or more)].
+const SEED_TILES = [
+  ["haber", 1868, 9, 8],
 ];
 
 // Image provenance. Every image on a carousel needs a row here before it goes public.
@@ -250,6 +256,9 @@ async function migrate(db) {
   // v5: element facts for founding nominees that have been researched, and the provenance of their images.
   for (const [id, began, recognized, reach] of SEED_ELEMENTS) {
     stmts.push(db.prepare("UPDATE nominees SET began = COALESCE(began, ?), recognized = COALESCE(recognized, ?), reach = COALESCE(reach, ?) WHERE id = ? AND seeded = 1").bind(began, recognized, reach, id));
+  }
+  for (const [id, born, helped, harmed] of SEED_TILES) {
+    stmts.push(db.prepare("UPDATE nominees SET born = COALESCE(born, ?), helped = COALESCE(helped, ?), harmed = COALESCE(harmed, ?) WHERE id = ? AND seeded = 1").bind(born, helped, harmed, id));
   }
   for (const m of SEED_MEDIA) {
     stmts.push(db.prepare(`INSERT OR IGNORE INTO media (id,nominee_id,role,path,alt,title,creator,made,license,license_url,source_page,source_file,credit,width,height,edits,retrieved_at,created_at)
@@ -364,6 +373,7 @@ function nomineeOut(r, admin = false) {
     slug: r.slug || r.id, meant: r.meant || "", gotRight: r.got_right || "", foresight: r.foresight || "",
     pattern: r.pattern || "", source1: r.source1 || "", source2: r.source2 || "",
     catalogNo: r.catalog_no || null, began: r.began || null, recognized: r.recognized || null, reach: r.reach ?? null,
+    born: r.born || null, helped: r.helped ?? null, harmed: r.harmed ?? null,
     herdYes: r.herd_yes || 0, herdTotal: r.herd_total || 0,
     oops: r.oops_judges >= MIN_JUDGES ? Math.round(r.oops_avg) : null, oopsJudges: r.oops_judges >= MIN_JUDGES ? r.oops_judges : 0,
     author: r.author || "", seeded: !!r.seeded, createdAt: r.created_at, score: r.score || 0,
@@ -437,12 +447,12 @@ async function insertNominee(db, n, state) {
   const slug = await freeSlug(db, slugify(n.name));
   await db.prepare(
     `INSERT INTO nominees (id,slug,name,years,work,meant,solved,backfire,got_right,foresight,pattern,domain,harms,knowable,status,award,
-       fix,fix_url,wiki_name,wiki_work,source1,source2,began,recognized,reach,author,seeded,state,created_at,category,catalog_no)
+       fix,fix_url,wiki_name,wiki_work,source1,source2,born,helped,harmed,author,seeded,state,created_at,category,catalog_no)
      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?,?,'',(SELECT COALESCE(MAX(catalog_no), 0) + 1 FROM nominees))`
   ).bind(id, slug, n.name, n.years, n.work, n.meant || null, n.solved, n.backfire, n.gotRight || null, n.foresight || null, n.pattern || null,
     n.domain || null, n.harms || null, n.knowable || null, n.status || null, n.award || null,
     n.fix || null, n.fixUrl || null, n.wikiName || null, n.wikiWork || null, n.source1 || null, n.source2 || null,
-    n.began || null, n.recognized || null, n.reach ?? null, n.author, state, createdAt).run();
+    n.born || null, n.helped ?? null, n.harmed ?? null, n.author, state, createdAt).run();
   const num = await db.prepare("SELECT catalog_no FROM nominees WHERE id = ?").bind(id).first();
   return nomineeOut({
     id, slug, ...n, got_right: n.gotRight, fix_url: n.fixUrl, wiki_name: n.wikiName, wiki_work: n.wikiWork,
@@ -595,7 +605,7 @@ function adminFields(b, create) {
     status: pick(b.status, STATUSES), award: pick(b.award, AWARDS), fix: clean(b.fix, 400), fixUrl: cleanUrl(b.fixUrl),
     source1: cleanUrl(b.source1), source2: cleanUrl(b.source2), wikiName: cleanWiki(b.wikiName), wikiWork: cleanWiki(b.wikiWork),
     author: clean(b.author, 60),
-    began: yearOf(b.began), recognized: yearOf(b.recognized), reach: reachOf(b.reach),
+    born: yearOf(b.born), helped: reachOf(b.helped), harmed: reachOf(b.harmed),
   };
   if (n.wikiName === null || n.wikiWork === null) return { error: "Wikipedia links have to point to a page on wikipedia.org." };
   return n;
@@ -678,9 +688,9 @@ async function handleAdmin(request, env, url, db, path, method) {
       const key = k === "got_right" ? "gotRight" : k;
       if (key in b) { sets.push(`${k} = ?`); vals.push(clean(b[key], max) || null); }
     }
-    if ("began" in b) { sets.push("began = ?"); vals.push(yearOf(b.began)); }
-    if ("recognized" in b) { sets.push("recognized = ?"); vals.push(yearOf(b.recognized)); }
-    if ("reach" in b) { sets.push("reach = ?"); vals.push(reachOf(b.reach)); }
+    if ("born" in b) { sets.push("born = ?"); vals.push(yearOf(b.born)); }
+    if ("helped" in b) { sets.push("helped = ?"); vals.push(reachOf(b.helped)); }
+    if ("harmed" in b) { sets.push("harmed = ?"); vals.push(reachOf(b.harmed)); }
     for (const [k, col] of [["fixUrl", "fix_url"], ["source1", "source1"], ["source2", "source2"]]) {
       if (k in b) { sets.push(`${col} = ?`); vals.push(cleanUrl(b[k]) || null); }
     }

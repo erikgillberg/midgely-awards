@@ -59,8 +59,9 @@
   const FIELDS = [
     ["name", "Nominee", 80], ["years", "Years (1889 to 1944, or Born 1955)", 30], ["work", "The achievement", 120, "full"],
     ["slug", "Page address (/n/...)", 60],
-    ["began", "Tile: year it began", 5], ["recognized", "Tile: year the backfire was documented", 5],
-    ["reach", "Tile: reach, power of ten (9 = billions)", 2],
+    ["born", "Tile: year born (or founded)", 5],
+    ["helped", "Tile: people helped, power of ten (6 = a million or more, 9 = a billion or more)", 2],
+    ["harmed", "Tile: people harmed, power of ten (same scale)", 2],
     ["meant", "1. What it was meant to do", 600, "text"], ["solved", "2. What went right", 600, "text"],
     ["backfire", "3. What went oops", 600, "text"], ["gotRight", "4. What they got right", 600, "text"],
     ["foresight", "5. Could anyone have seen it coming? (the knowable setting below gives the short answer)", 600, "text"],

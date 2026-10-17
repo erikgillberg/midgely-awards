@@ -431,3 +431,20 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .swatch .bar{height:56px}
 .swatch .bar span{display:block;height:100%}
 @media (max-width:640px){ .el-key{grid-template-columns:1fr} }
+
+/* ---- element tile v3: helped and harmed ---- */
+.el-up{grid-column:1;grid-row:4;font-size:10px}
+.el-down{grid-column:2;grid-row:4;font-size:10px;text-align:right}
+.el-up i,.el-down i{font-style:normal;font-size:.75em;margin-right:.2em;opacity:.8}
+.el.lg .el-up,.el.lg .el-down{font-size:18px}
+.el.sm .el-up,.el.sm .el-down{font-size:9px}
+.cc-hook .el.lg .el-up,.cc-hook .el.lg .el-down{font-size:clamp(9px,3cqi,18px)}
+.cc-key .el-key .el.lg .el-up,.cc-key .el-key .el.lg .el-down{font-size:2.6cqi}
+.el-key dt{white-space:nowrap}
+.el-key dt i{font-style:normal;font-size:.6em;margin-right:.15em;vertical-align:.2em}
+.el-key dt .sw{display:inline-block;width:.8em;height:.8em;background:var(--base);margin-right:.25em;vertical-align:0}
+.cc-key .el-key dt .sw{box-shadow:0 0 0 1px var(--light)}
+/* Beehiiv's frame paints itself white on a dark page unless it uses the light scheme like its content does */
+.beehiiv-embed iframe{color-scheme:light}
+.cc-key .el-key dl div{grid-template-columns:5.2em 1fr}
+.el-key dl div{grid-template-columns:64px 1fr}

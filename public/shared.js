@@ -293,46 +293,54 @@ export function jewelOf(domain) {
 const jewelVars = (j) => `--deep:${j.deep};--base:${j.base};--light:${j.light}`;
 
 // A nominee as an element. Everything on the tile is a fixed fact, so a saved image never goes stale:
-//   top left   catalog number: given once when the nominee joins, never reused (Midgley is 1)
-//   top right  the year it began
-//   center     symbol: two letters from the surname
-//   bottom     lag: years from the start to the main backfire being documented
-//              reach: how many people it touches, as a power of ten (9 = billions)
-//   word       the surname
-// The category is the tile's color, and its group number heads the column in the table.
+//   top left     catalog number: given once when the nominee joins, never reused (Midgley is 1)
+//   top right    year born (a person) or founded (an organization)
+//   center       symbol: two letters from the surname
+//   word         the surname
+//   bottom left  ▲ people helped, as a power of ten
+//   bottom right ▼ people harmed, as a power of ten
+// Color is the category; its group number heads the column in the table.
 // Live numbers (scores, ranks) stay on the website, never on the tile.
 const SUP = { 0: "⁰", 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹" };
-export const lagOf = (n) => (n.began != null && n.recognized != null ? Math.max(0, n.recognized - n.began) : null);
-export const reachText = (r) => (r == null ? "?" : "10" + String(r).split("").map((d) => SUP[d]).join(""));
+export const powerText = (r) => (r == null ? "?" : "10" + String(r).split("").map((d) => SUP[d]).join(""));
+// Plain words for a power of ten: 9 -> "a billion or more", 8 -> "100 million or more".
+export function powerWords(r) {
+  if (r == null) return "not yet researched";
+  const names = { 3: "a thousand", 4: "10,000", 5: "100,000", 6: "a million", 7: "10 million", 8: "100 million", 9: "a billion" };
+  return names[r] ? `${names[r]} or more` : r < 3 ? "fewer than a thousand" : "more than a billion";
+}
 export const surnameOf = (name) => String(name).replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i, "").split(/\s+/).pop();
 export const groupOf = (domain) => { const i = Object.keys(DOMAINS).indexOf(domain); return i >= 0 ? i + 1 : null; };
+function ordinal(k) {
+  const t = k % 100, u = k % 10;
+  return k + (t >= 11 && t <= 13 ? "th" : u === 1 ? "st" : u === 2 ? "nd" : u === 3 ? "rd" : "th");
+}
 
 export function elementHTML(n, size = "") {
   const j = jewelOf(n.domain);
-  const lag = lagOf(n);
   return `<div class="el ${size}" style="${jewelVars(j)}">
     <span class="el-num" title="Catalog number">${n.catalogNo ?? "?"}</span>
-    <span class="el-year" title="Year it began">${n.began ?? "?"}</span>
+    <span class="el-year" title="Born">${n.born ?? "?"}</span>
     <span class="el-sym">${esc(symbol(n.name))}</span>
     <span class="el-name">${esc(surnameOf(n.name))}</span>
-    <span class="el-lag" title="Years until the backfire was documented">${lag ?? "?"}</span>
-    <span class="el-reach" title="People it reaches">${reachText(n.reach)}</span>
+    <span class="el-up" title="People helped"><i>▲</i>${powerText(n.helped)}</span>
+    <span class="el-down" title="People harmed"><i>▼</i>${powerText(n.harmed)}</span>
   </div>`;
 }
 
-// The key: how to read a tile, using the nominee's own numbers.
+// The key: what each spot on this nominee's tile says, in plain words.
 export function keyHTML(n) {
-  const lag = lagOf(n);
   const g = groupOf(n.domain);
+  const who = surnameOf(n.name);
   return `<div class="el-key" style="${jewelVars(jewelOf(n.domain))}">
     ${elementHTML(n, "lg")}
     <dl>
-      <div><dt>${n.catalogNo ?? "?"}</dt><dd><b>Catalog number.</b> Its place in the table, given once and kept for good.</dd></div>
-      <div><dt>${n.began ?? "?"}</dt><dd><b>Year it began.</b> When the invention or decision went into wide use.</dd></div>
-      <div><dt>${esc(symbol(n.name))}</dt><dd><b>Symbol.</b> Two letters from the name.</dd></div>
-      <div><dt>${lag ?? "?"}</dt><dd><b>Lag.</b> Years until the backfire was documented${n.recognized ? ` (${n.recognized})` : ""}.</dd></div>
-      <div><dt>${reachText(n.reach)}</dt><dd><b>Reach.</b> How many people it touches, as a power of ten. 10⁹ means billions.</dd></div>
-      <div><dt class="sw"></dt><dd><b>Color.</b> The category${g ? `, group ${g}` : ""}: ${esc(DOMAINS[n.domain] || "not sure yet")}.</dd></div>
+      <div><dt>${n.catalogNo ?? "?"}</dt><dd><b>Catalog number.</b> ${n.catalogNo ? `${esc(who)} was the ${ordinal(n.catalogNo)} nominee added to the table.` : "Its place in the table."}</dd></div>
+      <div><dt>${n.born ?? "?"}</dt><dd><b>Born.</b> ${n.born ? `${esc(who)} was born in ${n.born}.` : "The year born, or founded for an organization."}</dd></div>
+      <div><dt>${esc(symbol(n.name))}</dt><dd><b>Symbol.</b> The first two letters of ${esc(who)}.</dd></div>
+      <div><dt><i class="mk">▲</i>${powerText(n.helped)}</dt><dd><b>Helped.</b> People it helped: ${powerWords(n.helped)}.</dd></div>
+      <div><dt><i class="mk">▼</i>${powerText(n.harmed)}</dt><dd><b>Harmed.</b> People it harmed: ${powerWords(n.harmed)}.</dd></div>
+      <div><dt><span class="sw"></span>${g ?? ""}</dt><dd><b>Color.</b> Group ${g ?? "?"}, ${esc(DOMAINS[n.domain] || "category not set")}.</dd></div>
     </dl>
   </div>`;
 }
