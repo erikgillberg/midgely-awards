@@ -18,6 +18,7 @@
 import {
   SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, weeklyOopsHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
+  carouselHTML, tableHTML, JEWELS, CATEGORY_JEWEL,
 } from "./shared.js";
 
 const SCHEMA_VERSION = 4;
@@ -284,7 +285,7 @@ async function rateLimited(db, request, env, action) {
   const row = await db.prepare("SELECT COUNT(*) AS c FROM hits WHERE k = ? AND ts > ?").bind(k, now - 600).first();
   if (row.c >= LIMITS[action]) return true;
   await db.prepare("INSERT INTO hits (k, ts) VALUES (?, ?)").bind(k, now).run();
-  if (Math.random() < 0.02) await db.prepare("DELETE FROM hits WHERE ts < ?").bind(now - 3600).run();
+  await db.prepare("DELETE FROM hits WHERE ts < ?").bind(now - 3600).run(); // keep these for one hour at most
   return false;
 }
 
@@ -519,18 +520,6 @@ async function handleApi(request, env, url, ctx) {
     return json({ ok: true });
   }
 
-  if (path === "/api/subscribe" && method === "POST") {
-    const b = await readBody(request);
-    if (!b) return bad("Couldn't read that.");
-    if (b.website) return json({ ok: true });
-    const email = clean(b.email, 254).toLowerCase();
-    if (!EMAIL_RE.test(email)) return bad("That email address doesn't look right.");
-    if (!(await turnstileOk(request, env, b.turnstile))) return bad("Please complete the human check and try again.", 403);
-    if (await rateLimited(db, request, env, "subscribe")) return bad("Try again in a few minutes.", 429);
-    await db.prepare("INSERT OR IGNORE INTO subscribers (email, created_at) VALUES (?, ?)").bind(email, new Date().toISOString()).run();
-    return json({ ok: true });
-  }
-
   if (path.startsWith("/api/admin")) return handleAdmin(request, env, url, db, path, method);
 
   return bad("Not found.", 404);
@@ -723,8 +712,6 @@ function decorate(res, env, url, meta = {}) {
     .on("#site-foot", new SetHTML(footerHTML()))
     .on("#weekly-oops", new SetHTML(weeklyOopsHTML()))
     .on("#waitlist-embed", new SetHTML(waitlistHTML()))
-    // Beehiiv attribution: passes utm_ tags on the page through to new subscribers.
-    .on("body", new Append(`<script async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>`))
     .on('meta[property="og:image"]', new SetAttr("content", SITE + "/og.png"))
     .on('meta[name="twitter:image"]', new SetAttr("content", SITE + "/og.png"))
     .on("body", new SetAttr("data-flags", [flags.scores && "scores", flags.categories && "categories"].filter(Boolean).join(" ")));
@@ -829,6 +816,36 @@ async function nomineePage(request, env, url, ctx, key) {
   });
 }
 
+// Atomic numbers: each nominee's place in the order nominees joined. Midgley is No. 1.
+function numbers(noms) {
+  const out = {};
+  [...noms].sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt))).forEach((n, i) => (out[n.id] = i + 1));
+  return out;
+}
+
+// Design lab (staging and local only): the carousel for one nominee, the table and the palette.
+async function labPage(request, env, url, ctx, key) {
+  const st = await siteState(env, url, ctx);
+  const n = st && st.nominees.find((x) => x.slug === key || x.id === key);
+  const data = await asset(env, url, request, `/carousels/${key}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const page = await asset(env, url, request, "/lab");
+  const num = st ? numbers(st.nominees) : {};
+  const used = Object.values(CATEGORY_JEWEL);
+  const swatches = JEWELS.map((j) => {
+    const cat = Object.keys(CATEGORY_JEWEL).find((k) => CATEGORY_JEWEL[k] === j.name);
+    return `<div class="swatch"><div class="bar"><span style="background:${j.deep}"></span><span style="background:${j.base}"></span><span style="background:${j.light}"></span></div>
+      <p><b>${j.name}</b><br>${cat ? esc(DOMAIN_LABELS[cat]) : used.includes(j.name) ? "" : "Free for a new category"}<br>${j.deep} · ${j.base} · ${j.light}</p></div>`;
+  }).join("");
+  const fill = {
+    "#lab-swatches": swatches,
+    "#lab-table": st ? tableHTML(st.nominees, num) : "",
+    "#lab-title": esc(n ? `Carousel: ${n.name}` : "Carousel"),
+    "#lab-note": n && data ? "Square cards at Instagram's 1:1 ratio. Swipe, use the arrows, or the arrow keys." : `No carousel written for “${esc(key)}” yet.`,
+  };
+  if (n && data) fill["#lab-carousel"] = carouselHTML(n, num[n.id], data, flagsOf(env));
+  return decorate(page, env, url, { title: `Lab: ${n ? n.name : key} · The Midgley Awards`, fill });
+}
+
 // Links on a non-production host stay on that host, so staging and previews keep working.
 const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 
@@ -880,6 +897,8 @@ export default {
       return homePage(request, env, url, ctx, key);
     }
     if (p === "/nominee" || p === "/category-page") return Response.redirect(SITE_ORIGIN(url) + "/", 302); // page shells, filled above
+    const lab = p.match(/^\/lab\/carousel\/([a-z0-9-]{1,64})$/);
+    if (lab && url.hostname !== SITE_HOST) return labPage(request, env, url, ctx, lab[1]);
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
     if (p === "/micro") return microRedirect(url) || decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/micro" });
 

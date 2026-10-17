@@ -255,3 +255,126 @@ export function categoryChipsHTML(active, counts = {}) {
     Object.entries(DOMAINS).map(([k, v]) =>
       `<a class="catchip" href="/category/${CATEGORY_SLUGS[k]}" aria-current="${active === k}">${esc(v)}${counts[k] ? ` <span>${counts[k]}</span>` : ""}</a>`).join("");
 }
+
+// ---------------------------------------------------------------- the periodic table of backfires
+
+// Jewel tones, one per category. Each category is a "group" in the table, the way elements are.
+// New categories take the next unused jewel; the list leaves room to grow.
+// deep: card background. base: tiles and accents. light: text and rules on deep.
+export const JEWELS = [
+  { name: "Ruby",       deep: "#3B0A14", base: "#9B1B30", light: "#F4B6C0" },
+  { name: "Sapphire",   deep: "#0A1A3B", base: "#1F4E9C", light: "#B5CBF2" },
+  { name: "Citrine",    deep: "#3A2604", base: "#B8790F", light: "#F6D89A" },
+  { name: "Emerald",    deep: "#06291D", base: "#0F7A55", light: "#A8E3C9" },
+  { name: "Amethyst",   deep: "#241038", base: "#6A3FA0", light: "#D6C2F0" },
+  { name: "Tourmaline", deep: "#062A2C", base: "#127C82", light: "#A6E0E2" },
+  { name: "Garnet",     deep: "#331008", base: "#8C3A1C", light: "#F0C2AE" },
+  { name: "Rhodolite",  deep: "#360A22", base: "#A62C67", light: "#F3B8D3" },
+  { name: "Peridot",    deep: "#1F2A06", base: "#5E7F14", light: "#D6E8A4" },
+  { name: "Lapis",      deep: "#0D1530", base: "#2C3F8C", light: "#C1CBF1" },
+  { name: "Topaz",      deep: "#2E1A06", base: "#A3591A", light: "#F2CFA6" },
+  { name: "Jade",       deep: "#0B2A22", base: "#2E7D64", light: "#B8E2D2" },
+];
+export const CATEGORY_JEWEL = {
+  materials: "Ruby", cities: "Sapphire", energy: "Citrine", food: "Emerald",
+  information: "Amethyst", governance: "Tourmaline", finance: "Garnet", health: "Rhodolite",
+};
+const ONYX = { name: "Onyx", deep: "#111418", base: "#3A424C", light: "#D5DBE1" }; // "Not sure yet"
+export function jewelOf(domain) {
+  const name = CATEGORY_JEWEL[domain];
+  if (name) return JEWELS.find((j) => j.name === name);
+  const keys = Object.keys(DOMAINS);
+  const i = keys.indexOf(domain);
+  return i >= 0 ? JEWELS[i % JEWELS.length] : ONYX;
+}
+const jewelVars = (j) => `--deep:${j.deep};--base:${j.base};--light:${j.light}`;
+
+// A nominee as an element: atomic number (its place in the order nominees joined), symbol,
+// name, years, category, and the Oops Score where an element would show its mass.
+export function elementHTML(n, num, size = "") {
+  const j = jewelOf(n.domain);
+  const surname = String(n.name).replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i, "").split(/\s+/).pop();
+  return `<div class="el ${size}" style="${jewelVars(j)}">
+    <span class="el-num">${num}</span>
+    <span class="el-mass">${n.oops != null ? n.oops : ""}</span>
+    <span class="el-sym">${esc(symbol(n.name))}</span>
+    <span class="el-name">${esc(surname)}</span>
+    <span class="el-group">${esc(DOMAINS[n.domain] || "Not sure yet")}</span>
+  </div>`;
+}
+
+// The carousel: a headline card, the write-up one idea per card, then the payoff and the ask.
+// data comes from /carousels/<slug>.json.
+export function carouselHTML(n, num, data, flags = {}) {
+  const j = jewelOf(n.domain);
+  const cards = [];
+  const total = data.slides.length + 2;
+  const foot = (i) => `<footer class="cc-foot"><span>midgleyawards.com</span><span>${i} / ${total}</span></footer>`;
+  cards.push(`<section class="cc cc-hook" aria-roledescription="slide" aria-label="1 of ${total}">
+    ${data.portrait ? `<figure class="cc-portrait"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="eager"></figure>` : ""}
+    <div class="cc-hook-top">${elementHTML(n, num, "lg")}<p class="cc-kicker">Nominee No. ${num}<br>${esc(n.years || "")}</p></div>
+    <h2 class="cc-headline">${esc(data.headline)}</h2>
+    <p class="cc-dek">${esc(data.dek)}</p>
+    <p class="cc-swipe" aria-hidden="true">Swipe <span>→</span></p>
+    ${foot(1)}
+  </section>`);
+  data.slides.forEach((s, k) => {
+    const i = k + 2;
+    const img = s.image ? `<figure class="cc-img"><img src="${esc(s.image)}" alt="${esc(s.alt || "")}" loading="lazy"><figcaption>${esc(s.credit || "")}</figcaption></figure>` : "";
+    const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
+    const chip = s.kind === "foresight" ? foresightHTML(n.knowable) : "";
+    const also = s.also && s.also.length ? `<ul class="cc-also">${s.also.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : "";
+    cards.push(`<section class="cc cc-${esc(s.kind)} ${img ? "has-img" : "no-img"}" data-sym="${esc(symbol(n.name))}" aria-roledescription="slide" aria-label="${i} of ${total}">
+      ${img}
+      <div class="cc-body">
+        <p class="cc-label"><span>${String(k + 1).padStart(2, "0")}</span> ${esc(s.label)}</p>
+        <h3 class="cc-title">${esc(s.title)}</h3>
+        ${stat}${chip}
+        ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${also}
+      </div>
+      ${foot(i)}
+    </section>`);
+  });
+  const pct = herdPct(n);
+  const band = oopsBand(n.oops);
+  cards.push(`<section class="cc cc-payoff" aria-roledescription="slide" aria-label="${total} of ${total}">
+    <div class="cc-body">
+      <p class="cc-label">The verdict so far</p>
+      <div class="cc-scores">
+        <div><span class="k">Oops Score</span><b>${n.oops != null ? n.oops : "?"}</b><span class="s">${band ? esc(band.label) : "Judges still scoring"}</span></div>
+        <div><span class="k">Herd Score</span><b>${pct != null ? pct + "%" : "?"}</b><span class="s">${pct != null ? n.herdTotal + " votes" : "Not enough votes yet"}</span></div>
+      </div>
+      <h3 class="cc-title">Is ${esc(n.name)} Midgley-worthy?</h3>
+      <p class="cc-cta">Vote and argue at <b>midgleyawards.com${nomineePath(n)}</b></p>
+      <p class="cc-cta2">Know one that worked too well? Nominate it.</p>
+    </div>
+    ${foot(total)}
+  </section>`);
+  return `<div class="carousel" style="${jewelVars(j)}" data-carousel>
+    <div class="cc-track" tabindex="0" aria-label="${esc(n.name)}, ${total} cards">${cards.join("")}</div>
+    <div class="cc-nav">
+      <button type="button" data-cc="prev" aria-label="Previous card">←</button>
+      <span class="cc-dots">${Array.from({ length: total }, (_, i) => `<i data-cc-dot="${i}"></i>`).join("")}</span>
+      <button type="button" data-cc="next" aria-label="Next card">→</button>
+    </div>
+  </div>`;
+}
+
+// Knowable, partly, unforeseeable: a three-step scale with the nominee's place marked.
+function foresightHTML(k) {
+  const steps = [["knowable", "Knowable"], ["mixed", "Partly"], ["unforeseeable", "Unforeseeable"]];
+  if (k === "contested") return `<span class="cc-chip">Still contested</span>`;
+  return `<div class="cc-scale" role="img" aria-label="${esc(KNOW[k] || "Not rated")}">${steps.map(([key, label]) => `<span class="${key === k ? "on" : ""}">${label}</span>`).join("")}</div>`;
+}
+
+// The whole table: categories are columns (groups); each new nominee joins the bottom of its column.
+export function tableHTML(noms, numOf) {
+  const keys = Object.keys(DOMAINS);
+  const cols = keys.map((k) => {
+    const j = jewelOf(k);
+    const items = noms.filter((n) => n.domain === k);
+    return `<div class="pt-col" style="${jewelVars(j)}"><p class="pt-head">${esc(DOMAINS[k])}</p>
+      ${items.map((n) => `<a href="${nomineePath(n)}" title="${esc(n.name)}: ${esc(n.work)}">${elementHTML(n, numOf[n.id], "sm")}</a>`).join("")}</div>`;
+  });
+  return `<div class="ptable">${cols.join("")}</div>`;
+}

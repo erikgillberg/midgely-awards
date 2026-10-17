@@ -1,0 +1,60 @@
+{
+  "slug": "haber",
+  "headline": "Bread from air",
+  "dek": "In 1909 a chemist pulled nitrogen out of the sky and turned it into fertilizer. It worked. Then it kept working.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "What it was meant to do",
+      "title": "Fix a coming food shortage",
+      "text": "Crops need nitrogen. Around 1900 most fertilizer nitrogen came from bird droppings dug off islands near Peru and from saltpeter mined in Chile. Both were running out. In 1898 the chemist William Crookes warned that the world would soon not grow enough wheat.",
+      "image": "/img/n/haber/guano.jpg",
+      "alt": "Workers loading guano into a rail cart at the foot of a huge pale heap, Chincha Islands, Peru, 1865",
+      "credit": "Guano mining, Chincha Islands, Peru, 1865. Henry de Witt Moulton. Public domain."
+    },
+    {
+      "kind": "right",
+      "label": "What went right",
+      "title": "Half the world eats because of it",
+      "text": "Fritz Haber found a way to make ammonia from the nitrogen in air. Carl Bosch scaled it up, and the first plant opened in 1913. Roughly half the people alive today eat food grown with it.",
+      "image": "/img/n/haber/wheat.jpg",
+      "alt": "A combine harvesting a vast golden wheat field on rolling hills",
+      "credit": "Wheat harvest on the Palouse. USDA. Public domain."
+    },
+    {
+      "kind": "oops",
+      "label": "What went oops",
+      "title": "The extra nitrogen goes somewhere",
+      "text": "Crops use only part of the fertilizer. The rest runs into rivers and the sea, feeds algae, and uses up the oxygen. Each summer the Gulf of Mexico grows a dead zone thousands of square miles wide.",
+      "image": "/img/n/haber/gulf.jpg",
+      "alt": "Satellite view of brown and green water spreading from the Louisiana coast into the deep blue Gulf of Mexico",
+      "credit": "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain.",
+      "also": [
+        "Nitrous oxide, a greenhouse gas 270 times stronger than CO2",
+        "Explosives for World War I"
+      ]
+    },
+    {
+      "kind": "gotright",
+      "label": "What they got right",
+      "title": "The chemistry still holds",
+      "text": "More than a century later the world still makes ammonia the way Haber and Bosch did. The fixes being tried now leave the process alone and use less of it: fertilizer applied at the right time, in the right amount, in the right place."
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "The use in explosives was obvious by 1914. The damage to rivers, coasts and the climate was understood much later, once fertilizer use had grown many times over."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Solve a shortage, create a surplus"
+    }
+  ],
+  "portrait": {
+    "image": "/img/n/haber/portrait.jpg",
+    "alt": "Etched profile portrait of Fritz Haber, bald, with round glasses",
+    "credit": "Fritz Haber, etching by Emil Orlik, 1922. Public domain."
+  }
+}
