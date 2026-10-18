@@ -85,6 +85,7 @@ let drag = null;
 panel.addEventListener("touchstart", (e) => { if (e.target.closest(".cs-grab, .cs-head")) { drag = { y: e.touches[0].clientY, dy: 0 }; panel.classList.add("dragging"); } }, { passive: true });
 panel.addEventListener("touchmove", (e) => { if (!drag) return; drag.dy = Math.max(0, e.touches[0].clientY - drag.y); panel.style.transform = `translateY(${drag.dy}px)`; }, { passive: true });
 panel.addEventListener("touchend", () => { if (!drag) return; panel.classList.remove("dragging"); const far = drag.dy > 90; drag = null; if (far) closeSheet(); else panel.style.transform = ""; });
+panel.addEventListener("touchcancel", () => { if (!drag) return; drag = null; panel.classList.remove("dragging"); panel.style.transform = ""; });
 
 // Keep the panel above the phone's keyboard.
 function lift() {
