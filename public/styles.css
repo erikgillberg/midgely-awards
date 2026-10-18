@@ -961,3 +961,18 @@ body[data-bg="cat"] .wrap.home{max-width:600px}
 .pt-cell.pt-empty{display:block;position:relative}
 .pt-bf{position:absolute;inset:0;display:grid;place-items:center;line-height:1}
 .tabbar .nav-nom svg{width:25px;height:25px}
+
+/* ---------- home cards with background art */
+.sq{overflow:clip} /* a card with more text than fits grows taller instead of cutting the text off */
+.wrap.home .sq.has-bg{color:#F3EBDD;border:0;background:linear-gradient(180deg,rgb(10 12 16/.82) 0%,rgb(10 12 16/.62) 48%,rgb(10 12 16/.9) 100%),var(--bg) center/cover no-repeat,#12161C}
+.wrap.home .sq.has-bg.aw-midgley{background:linear-gradient(180deg,rgb(58 15 10/.9) 0%,rgb(58 15 10/.6) 48%,rgb(58 15 10/.94) 100%),var(--bg) center/cover no-repeat,#3A0F0A}
+.wrap.home .sq.has-bg.aw-murphy{background:linear-gradient(180deg,rgb(11 34 48/.9) 0%,rgb(11 34 48/.58) 48%,rgb(11 34 48/.94) 100%),var(--bg) center/cover no-repeat,#0B2230}
+.wrap.home .sq.has-bg h1,.wrap.home .sq.has-bg h2{text-shadow:0 2px 14px rgb(0 0 0/.45)}
+.wrap.home .sq.has-bg .sq-text{opacity:.95;text-shadow:0 1px 8px rgb(0 0 0/.5)}
+.wrap.home .sq.has-bg .sq-label,.wrap.home .sq.has-bg .sq-down{color:#E8C77A;opacity:1}
+.wrap.home .sq.has-bg b,.wrap.home .sq.has-bg .sq-text a{color:inherit}
+.wrap.home .sq-gap .sq-text{font-size:.98em}
+/* /midgley: the award and his story sit on a paper panel under the post */
+.wrap.doc.mg-doc{background:var(--surface);color:var(--ink);border:1.5px solid var(--ink);padding:clamp(20px,5vw,44px);margin-block:8px 0;gap:20px;width:calc(100% - 32px);max-width:600px;box-sizing:border-box}
+body[data-bg="cat"] .wrap.home:has(#mg-post){padding-bottom:16px}
+.wrap.home .sq.has-bg .sq-tag,.wrap.home .sq.has-bg .sq-for,.wrap.home .sq.has-bg .sq-why{text-shadow:0 1px 8px rgb(0 0 0/.6)}

@@ -20,9 +20,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body data-page="nominee">
 <header class="site-head" id="site-head"></header>
-<div class="wrap doc">
+<div class="wrap home">
+  <p class="post-intro"><b>The Midgley</b>, the Backfire Awards' prize for backfires at world scale, is named for Thomas Midgley Jr. He received the first one. <a href="#about">About the award</a></p>
+  <div class="feed" id="mg-post"></div>
+</div>
+<div class="wrap doc mg-doc" id="about">
   <div class="award-head">
     <div class="element aw-midgley" aria-hidden="true"><span class="n">No. 1</span><span class="sym">Mg</span><span class="w">MIDGLEY</span></div>
     <div><p class="label">The Backfire Awards</p><h1>The Midgley</h1><p class="lede">For backfires at world scale.</p></div>
@@ -40,7 +44,7 @@
   </ol>
   <p><a href="/">See the nominees</a> or <a href="/#nominate">nominate one</a>.</p>
   <div class="figure">
-    <div class="element" aria-hidden="true"><span class="n">1889</span><span class="sym">Mg</span><span class="w">MIDGLEY · Jr.</span></div>
+    <div class="element" aria-hidden="true"><span class="n">1889</span><span class="sym">Mi</span><span class="w">MIDGLEY · Jr.</span></div>
     <h2 class="bio-h">Thomas Midgley Jr.</h2>
   </div>
   <div class="citation">
@@ -80,8 +84,13 @@
   <p><a href="/">See this year's nominees</a> or submit your own.</p>
   </div>
 
+</div>
+<div class="wrap home">
+  <section class="feed more-feed" id="more-feed"></section>
   <footer class="site-foot" id="site-foot"></footer>
 </div>
-<script type="module" src="/site.js"></script>
+<div class="toast" id="toast" role="status" hidden></div>
+<script type="module" src="/feed.js"></script>
+<script type="module" src="/carousel.js"></script>
 </body>
 </html>

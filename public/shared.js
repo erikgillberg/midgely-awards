@@ -253,7 +253,7 @@ export function postHTML(n, ctx = {}) {
   return postShell({
     id: n.id, kind: "nominee", path: nomineePath(n), title: n.name, sub: [n.years, DOMAINS[n.domain]].filter(Boolean).join(" · "),
     tile: elementHTML(n, "mini"), carousel: ctx.carousel || "", captionTitle: n.work, caption: n.backfire,
-    more: ctx.more || fullSections(n), worthy: "Midgley-worthy?", herdYes: n.herdYes, herdTotal: n.herdTotal, oops: n.oops, score: n.score,
+    more: ctx.more || fullSections(n), worthy: n.id === HONOREE ? "Deserved it?" : "Midgley-worthy?", herdYes: n.herdYes, herdTotal: n.herdTotal, oops: n.oops, score: n.score,
     vars: jewelVars(jewelOf(n.domain)),
   }, ctx);
 }
@@ -635,7 +635,16 @@ export function carouselHTML(n, data, flags = {}) {
   });
   const pct = herdPct(n);
   const band = oopsBand(n.oops);
-  cards.push(`<section class="cc cc-payoff" aria-roledescription="slide" aria-label="${total} of ${total}">
+  if (n.id === HONOREE) cards.push(`<section class="cc cc-payoff" aria-roledescription="slide" aria-label="${total} of ${total}">
+    <div class="cc-body">
+      <p class="cc-label">The first Midgley · Lifetime Achievement</p>
+      <h3 class="cc-title">Awarded to Thomas Midgley Jr.</h3>
+      <p class="cc-cta">Nominate the next one at <b>${BRAND_DOMAIN}</b></p>
+      <p class="cc-follow">Follow the Backfire Awards for a new backfire every week.</p>
+    </div>
+    ${foot(total)}
+  </section>`);
+  else cards.push(`<section class="cc cc-payoff" aria-roledescription="slide" aria-label="${total} of ${total}">
     <div class="cc-body">
       <p class="cc-label">The verdict so far</p>
       <div class="cc-scores">

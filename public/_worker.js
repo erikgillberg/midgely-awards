@@ -22,7 +22,7 @@ import {
   postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath,
 } from "./shared.js";
 
-const SCHEMA_VERSION = 10;
+const SCHEMA_VERSION = 11;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Other hostnames that send visitors to the home page at SITE.
@@ -187,14 +187,36 @@ const SEED_ELEMENTS = [
 // Tile facts: [id, born or founded, people helped and people harmed, each as a power of ten (9 = a billion or more)].
 const SEED_TILES = [
   ["haber", 1868, 9, 8],
+  // v11: harmed is conservative: about 170 million Americans alone had high childhood lead exposure (McFarland and others, PNAS 2022).
+  ["midgley", 1889, 9, 8],
   // Birth years only; helped and harmed wait for research.
-  ["midgley", 1889, null, null], ["nobel", 1833, null, null], ["franz", 1929, null, null], ["muller", 1899, null, null],
+  ["nobel", 1833, null, null], ["franz", 1929, null, null], ["muller", 1899, null, null],
   ["baekeland", 1863, null, null], ["borlaug", 1914, null, null], ["moses", 1888, null, null],
   ["zuckerberg", 1984, null, null], ["berners-lee", 1955, null, null],
 ];
 
 // Image provenance. Every image on a carousel needs a row here before it goes public.
 const SEED_MEDIA = [
+  { id: "midgley-portrait", nominee: "midgley", role: "portrait", path: "/img/n/midgley/portrait.jpg",
+    alt: "Studio portrait of Thomas Midgley Jr. in round glasses, suit and polka dot tie",
+    title: "Portrait of Thomas Midgley Jr.", creator: "Blank and Stoller, New York", made: "Before 1944",
+    license: "No known copyright (Science History Institute)", sourcePage: "https://commons.wikimedia.org/wiki/File:Portrait_of_Thomas_Midgley_Jr..jpg",
+    credit: "Thomas Midgley Jr. Blank and Stoller, New York. Science History Institute. No known copyright.", edits: "Resized", retrieved: "2026-10-18" },
+  { id: "midgley-traffic", nominee: "midgley", role: "meant", path: "/img/n/midgley/traffic.jpg",
+    alt: "A busy Los Angeles intersection in 1922, with streetcars, early automobiles and a Union Gasoline station",
+    title: "Intersection of North Broadway and Sunset Boulevard showing traffic congestion, Los Angeles, 1922", creator: "Automobile Club of Southern California", made: "1922",
+    license: "Public domain", sourcePage: "https://commons.wikimedia.org/wiki/File:Intersection_of_North_Broadway_and_Sunset_Boulevard_showing_traffic_congestion,_Los_Angeles,_1922_(AAA-EN-122-3).jpg",
+    credit: "North Broadway and Sunset Boulevard, Los Angeles, 1922. Automobile Club of Southern California. Public domain.", edits: "Cropped off the print border; resized", retrieved: "2026-10-18" },
+  { id: "midgley-pump", nominee: "midgley", role: "right", path: "/img/n/midgley/pump.jpg",
+    alt: "A rusted red Atlantic gasoline pump with a yellow and blue Ethyl anti-knock compound emblem",
+    title: "Atlantic Ethyl pump, Rt. 23, Leola, Pennsylvania", creator: "John Margolies", made: "1982",
+    license: "Public domain (Library of Congress, John Margolies Roadside America collection)", sourcePage: "https://commons.wikimedia.org/wiki/File:Atlantic_Ethyl_pump,_Rt._23,_Leola,_Pennsylvania_LCCN2017707812.tif",
+    credit: "Atlantic Ethyl pump, Leola, Pennsylvania. John Margolies, 1982. Library of Congress. Public domain.", edits: "Cropped off the slide mount; resized", retrieved: "2026-10-18" },
+  { id: "midgley-ozone", nominee: "midgley", role: "oops", path: "/img/n/midgley/ozone.jpg",
+    alt: "A NASA satellite map of the globe from below, with a large purple ozone hole covering Antarctica",
+    title: "Hole in the Ozone Layer Over Antarctica", creator: "NASA", made: "1998-10-01",
+    license: "Public domain (NASA)", sourcePage: "https://commons.wikimedia.org/wiki/File:Hole_in_the_Ozone_Layer_Over_Antarctica_-_GPN-2002-000117.jpg",
+    credit: "The ozone hole over Antarctica, October 1, 1998. NASA. Public domain.", edits: "Resized", retrieved: "2026-10-18" },
   { id: "haber-portrait", nominee: "haber", role: "portrait", path: "/img/n/haber/portrait.jpg",
     alt: "Etched profile portrait of Fritz Haber, bald, with round glasses",
     title: "Autographed etching of Fritz Haber", creator: "Emil Orlik (1870 to 1932)", made: "1922",
@@ -219,6 +241,11 @@ const SEED_MEDIA = [
 
 // Further reading: [id, nominee, sort, title, author, year, publisher, url, kind]
 const SEED_READINGS = [
+  ["midgley-r1", "midgley", 1, "Half of US population exposed to adverse lead levels in early childhood", "Michael J. McFarland, Matt E. Hauer and Aaron Reuben", "2022", "PNAS", "https://doi.org/10.1073/pnas.2118631119", "Paper"],
+  ["midgley-r2", "midgley", 2, "Stratospheric sink for chlorofluoromethanes: chlorine atom-catalysed destruction of ozone", "Mario J. Molina and F. S. Rowland", "1974", "Nature", "https://doi.org/10.1038/249810a0", "Paper"],
+  ["midgley-r3", "midgley", 3, "Something New Under the Sun: An Environmental History of the Twentieth-Century World", "J. R. McNeill", "2000", "W. W. Norton", "", "Book"],
+  ["midgley-r4", "midgley", 4, "Thomas Midgley Jr.", "", "", "Wikipedia", "https://en.wikipedia.org/wiki/Thomas_Midgley_Jr.", "Article"],
+  ["midgley-r5", "midgley", 5, "Montreal Protocol", "", "", "Wikipedia", "https://en.wikipedia.org/wiki/Montreal_Protocol", "Article"],
   ["haber-r1", "haber", 1, "How a century of ammonia synthesis changed the world", "Jan Willem Erisman and others", "2008", "Nature Geoscience", "https://doi.org/10.1038/ngeo325", "Paper"],
   ["haber-r2", "haber", 2, "Enriching the Earth: Fritz Haber, Carl Bosch, and the Transformation of World Food Production", "Vaclav Smil", "2001", "MIT Press", "", "Book"],
   ["haber-r3", "haber", 3, "The Alchemy of Air", "Thomas Hager", "2008", "Harmony Books", "https://en.wikipedia.org/wiki/Thomas_Hager", "Book"],
@@ -993,12 +1020,14 @@ function decorate(res, env, url, meta = {}, status = 0) {
   if (env.CF_BEACON_TOKEN) {
     rw = rw.on("body", new Append(`<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='${esc(JSON.stringify({ token: env.CF_BEACON_TOKEN }))}'></script>`));
   }
-  let out = rw.transform(res);
-  if (status) out = new Response(out.body, { status, headers: out.headers });
-  if (url.hostname === SITE_HOST) return out;
-  const r = new Response(out.body, out);
-  r.headers.set("X-Robots-Tag", "noindex, nofollow");
-  return r;
+  const t = rw.transform(res);
+  // Pages are built per request, so the template file's ETag says nothing about them: drop it,
+  // or a browser revalidates, gets "not modified" and keeps showing an old page.
+  const out = new Response(t.body, { status: status || t.status, headers: t.headers });
+  out.headers.delete("etag");
+  out.headers.set("cache-control", "no-cache");
+  if (url.hostname !== SITE_HOST) out.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return out;
 }
 
 // A Tally form inside the page. Tally's embed script passes the page's utm_ tags to the form.
@@ -1007,7 +1036,8 @@ const tallyHTML = (id, title) =>
   `<script async src="https://tally.so/widgets/embed.js" onload="Tally.loadEmbeds()"></script>`;
 const waitlistHTML = () => tallyHTML(LINKS.waitlistForm, "Shop waitlist");
 
-const asset = (env, url, request, path) => env.ASSETS.fetch(new Request(new URL(path, url), request));
+// A plain request for a page template: no conditional headers, so the answer is always the file itself.
+const asset = (env, url, request, path) => env.ASSETS.fetch(new URL(path, url).toString());
 
 async function siteState(env, url, ctx) {
   const db = findD1(env);
@@ -1097,6 +1127,23 @@ async function murphyPage(request, env, url, ctx, key) {
   });
 }
 
+// /midgley: the namesake's post (he holds the first award), then the award and his story.
+async function honoreePage(request, env, url, ctx) {
+  const st = await siteState(env, url, ctx);
+  const n = st && st.nominees.find((x) => x.id === HONOREE);
+  const page = await asset(env, url, request, "/midgley");
+  if (!n) return decorate(page, env, url, { canonical: SITE + "/midgley" });
+  const flags = flagsOf(env);
+  return decorate(page, env, url, {
+    canonical: SITE + "/midgley",
+    fill: {
+      "#mg-post": postHTML(n, { flags, thread: st.comments.filter((c) => c.nomineeId === n.id), open: true, carousel: await carouselFor(request, env, url, n), more: await moreFor(env, n) }),
+      "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, n.id),
+    },
+    attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelOf(n.domain).deep}`]] },
+  });
+}
+
 // Design lab (staging and local only): the carousel for one nominee, the table and the palette.
 async function labPage(request, env, url, ctx, key) {
   const st = await siteState(env, url, ctx);
@@ -1127,7 +1174,7 @@ async function labPage(request, env, url, ctx, key) {
 }
 
 // Hand-written carousels live in /carousels/<slug>.json; every other nominee gets one built from its write-up.
-const HANDWRITTEN = new Set(["haber"]);
+const HANDWRITTEN = new Set(["haber", "midgley"]);
 const carouselCache = new Map();
 async function carouselFor(request, env, url, n) {
   if (!HANDWRITTEN.has(n.slug)) return carouselHTML(n, autoCarousel(n), flagsOf(env));
@@ -1241,11 +1288,14 @@ export default {
         fill: { "#pt-grid": `<div class="pt-gap" style="grid-row:8;grid-column:1"></div>` + categoricTableHTML(st ? st.nominees : []), "#pt-legend": categoricLegendHTML() },
       });
     }
+    if (p === "/midgley") return honoreePage(request, env, url, ctx);
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
     if (p === "/murphy") return decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy", fill: { "#murphy-embed": tallyHTML(LINKS.microFormId, "Share your Murphy") } });
     if (p === "/micro") return Response.redirect(SITE_ORIGIN(url) + "/murphy" + url.search, 301); // old name
 
-    const res = await env.ASSETS.fetch(request);
+    // Pages (no file extension, or .html) are rewritten per request; never let the browser's cached copy stand in.
+    const isPage = !/\.[a-z0-9]+$/i.test(p) || p.endsWith(".html");
+    const res = await env.ASSETS.fetch(isPage ? url.toString() : request);
     const type = res.headers.get("content-type") || "";
     // Scripts import each other as "./shared.js"; version those imports too.
     if (type.includes("javascript") && res.ok) {
