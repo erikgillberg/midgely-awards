@@ -835,10 +835,11 @@ function decorate(res, env, url, meta = {}) {
   return r;
 }
 
-// The shop waitlist form from Tally. Tally's embed script passes the page's utm_ tags to the form.
-const waitlistHTML = () =>
-  `<iframe data-tally-src="https://tally.so/embed/${LINKS.waitlistForm}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="320" frameborder="0" title="Shop waitlist"></iframe>` +
+// A Tally form inside the page. Tally's embed script passes the page's utm_ tags to the form.
+const tallyHTML = (id, title) =>
+  `<iframe data-tally-src="https://tally.so/embed/${id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="420" frameborder="0" title="${esc(title)}"></iframe>` +
   `<script async src="https://tally.so/widgets/embed.js" onload="Tally.loadEmbeds()"></script>`;
+const waitlistHTML = () => tallyHTML(LINKS.waitlistForm, "Shop waitlist");
 
 const asset = (env, url, request, path) => env.ASSETS.fetch(new Request(new URL(path, url), request));
 
@@ -1020,7 +1021,7 @@ export default {
     const lab = p.match(/^\/lab\/carousel\/([a-z0-9-]{1,64})$/);
     if (lab && url.hostname !== SITE_HOST) return labPage(request, env, url, ctx, lab[1]);
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
-    if (p === "/murphy") return microRedirect(url) || decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy" });
+    if (p === "/murphy") return decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy", fill: { "#murphy-embed": tallyHTML(LINKS.microFormId, "Share your Murphy") } });
     if (p === "/micro") return Response.redirect(SITE_ORIGIN(url) + "/murphy" + url.search, 301); // old name
 
     const res = await env.ASSETS.fetch(request);

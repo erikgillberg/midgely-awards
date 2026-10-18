@@ -532,3 +532,38 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .cc-patterns li{font-size:.88em}
 .cc-pattern .cc-title{font-size:2.2em}
 .cc-pattern .cc-body{padding-top:6%;gap:.5em}
+
+/* ---- the two awards ---- */
+.award-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.award-card{display:flex;flex-direction:column;gap:10px;padding:22px;background:var(--tile);color:var(--tile-ink)}
+.award-card .element{width:84px}
+.award-card h2{margin:4px 0 0;font:900 40px/.95 var(--display);text-transform:uppercase}
+.award-card .for{margin:0;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.award-card dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:6px 0 0;font-size:14px}
+.award-card dt{font:500 11px/1.9 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.award-card dd{margin:0;opacity:.92}
+.award-card .go{margin:auto 0 0;padding-top:10px;display:flex;flex-wrap:wrap;gap:8px 16px}
+.award-card .go a{color:inherit;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid currentColor;text-decoration:none}
+.award-card .go a:first-child{background:var(--ethyl);color:#fff;border:0;padding:8px 12px}
+.aw-midgley .element{background:var(--ethyl);color:#fff}
+.aw-murphy .element{background:var(--ozone);color:#fff}
+.award-card.aw-murphy .go a:first-child{background:var(--ozone)}
+.award-head{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:end;margin-bottom:8px}
+.award-head .element{width:104px}
+.award-head h1{margin:0}
+.award-head .lede{margin:6px 0 0;font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ethyl)}
+.doc .bio-h{margin:0}
+.doc ol{padding-left:20px}
+.doc ol li{font-size:16px;color:var(--ink-2);margin-bottom:6px}
+#murphy-embed iframe{display:block;border:0}
+@media (max-width:640px){ .award-cards{grid-template-columns:1fr} }
+
+/* pattern card v2: eyebrow is the pattern number; the list numbers carry the arrow */
+.cc-eyebrow{font-size:.95em}
+.cc-patterns li{display:grid;grid-template-columns:3.2em 1fr;gap:.3em;padding:0;text-indent:0}
+.cc-patterns li::before{content:none}
+.cc-patterns .pn{font:500 .95em var(--mono);color:rgba(255,255,255,.55);white-space:nowrap}
+.cc-patterns li.on .pn{color:#fff;font-weight:600}
+.element.aw-midgley{background:var(--ethyl);color:#fff}
+.element.aw-murphy{background:var(--ozone);color:#fff}
+.cc-patterns li.on::before{content:none;display:none}

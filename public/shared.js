@@ -47,6 +47,7 @@ export const AWARDS = {
 
 // Outside links. Empty means "not set up yet": the site shows a placeholder instead.
 export const LINKS = {
+  microFormId: "KpQa0D",
   microForm: "https://tally.so/r/KpQa0D",    // Tally: Share your Murphy (form id kept from its Micro Midgley days)
   waitlistForm: "kbakOe",                    // Tally: Backfire Awards shop waitlist (form id, embedded on /shop/waitlist)
   beehiivForm: "71cdf4c1-b2c8-4913-bb03-cc836734a7b1", // Beehiiv: The Weekly Oops sign-up form
@@ -214,11 +215,10 @@ export function headerHTML(flags = {}) {
     <a class="brand" href="/"><span class="mini" aria-hidden="true">Bf</span><span>The Backfire Awards</span></a>
     <nav aria-label="Main">
       <a href="/">Nominees</a>
+      <a href="/midgley">The Midgley</a>
+      <a href="/murphy">The Murphy</a>
       ${flags.categories ? `<a href="/category">Categories</a>` : ""}
-      <a href="/midgley">Lifetime Midgley</a>
-      <a href="/goat">Goat</a>
       <a href="/shop">Shop</a>
-      <a class="micro-btn" href="/murphy">Share your Murphy</a>
     </nav>
   </div>`;
 }
@@ -234,7 +234,8 @@ export function footerHTML() {
     </div>
     <nav class="foot" aria-label="Site">
       <a href="/">Nominees</a>
-      <a href="/midgley">Lifetime Midgley</a>
+      <a href="/midgley">The Midgley</a>
+      <a href="/murphy">The Murphy</a>
       <a href="/goat">Goat</a>
       <a href="/shop">Shop</a>
       <a href="/scores">How scores work</a>
@@ -403,11 +404,13 @@ export function carouselHTML(n, data, flags = {}) {
     const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
     const chip = s.kind === "foresight" ? foresightHTML(n.knowable) : "";
     const also = s.also && s.also.length ? `<ul class="cc-also">${s.also.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : "";
-    const patterns = s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p) => `<li class="${p.key === s.patternKey ? "on" : ""}"><b>${esc(p.name)}</b> ${esc(p.text)}</li>`).join("")}</ol>` : "";
+    const patterns = s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p, i) => `<li class="${p.key === s.patternKey ? "on" : ""}"><span class="pn">${p.key === s.patternKey ? "→ " : ""}#${i + 1}</span><span><b>${esc(p.name)}</b> ${esc(p.text)}</span></li>`).join("")}</ol>` : "";
     cards.push(`<section class="cc cc-${esc(s.kind)} ${img ? "has-img" : "no-img"}" data-sym="${esc(symbol(n.name))}" aria-roledescription="slide" aria-label="${i} of ${total}">
       ${img}
       <div class="cc-body">
-        <p class="cc-label"><span>${String(k + 1).padStart(2, "0")}</span> ${esc(s.label)}</p>
+        ${s.kind === "pattern"
+          ? `<p class="cc-label cc-eyebrow">Pattern #${PATTERNS.findIndex((p) => p.key === s.patternKey) + 1}</p>`
+          : `<p class="cc-label"><span>${String(k + 1).padStart(2, "0")}</span> ${esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
         ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${also}${patterns}

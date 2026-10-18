@@ -283,6 +283,9 @@ if ($("#form")) {
   });
 }
 
+// ---------- /#nominate opens the form
+if ($("#form") && location.hash === "#nominate") $("#open-form").click();
+
 // ---------- boot
 api("/api/config").then((c) => (state.config = c)).catch(() => {});
 load();
