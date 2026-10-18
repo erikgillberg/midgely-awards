@@ -976,3 +976,8 @@ body[data-bg="cat"] .wrap.home{max-width:600px}
 .wrap.doc.mg-doc{background:var(--surface);color:var(--ink);border:1.5px solid var(--ink);padding:clamp(20px,5vw,44px);margin-block:8px 0;gap:20px;width:calc(100% - 32px);max-width:600px;box-sizing:border-box}
 body[data-bg="cat"] .wrap.home:has(#mg-post){padding-bottom:16px}
 .wrap.home .sq.has-bg .sq-tag,.wrap.home .sq.has-bg .sq-for,.wrap.home .sq.has-bg .sq-why{text-shadow:0 1px 8px rgb(0 0 0/.6)}
+/* a photographed portrait (not an etching): no negative, darkened, faded into the card behind the text */
+.cc-portrait.photo{opacity:.6;mix-blend-mode:normal}
+.cc-portrait.photo img{filter:grayscale(1) contrast(1.05) brightness(.7);object-position:center top}
+.cc-portrait.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--deep) 0%,transparent 40%),linear-gradient(transparent 35%,var(--deep) 92%)}
+.cc-hook .cc-kicker{padding-right:5.5em}

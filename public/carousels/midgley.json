@@ -38,7 +38,7 @@
       "kind": "gotright",
       "label": "What he got right",
       "title": "Safe at home",
-      "text": "The goal behind Freon still holds. The refrigerants that replaced CFCs keep the same promise of no fire and no poison in the kitchen, and are now also kinder to the ozone layer."
+      "text": "The goal behind Freon still holds: a fridge should be safe to keep in the kitchen. Today's refrigerants are far safer than the ammonia and sulfur dioxide of the 1920s, and gentle on the ozone layer."
     },
     {
       "kind": "foresight",
@@ -55,6 +55,7 @@
   ],
   "portrait": {
     "image": "/img/n/midgley/portrait.jpg",
+    "photo": true,
     "alt": "Studio portrait of Thomas Midgley Jr. in round glasses, suit and polka dot tie",
     "credit": "Thomas Midgley Jr. Blank and Stoller, New York. Science History Institute. No known copyright."
   }

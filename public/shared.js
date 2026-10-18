@@ -601,7 +601,7 @@ export function carouselHTML(n, data, flags = {}) {
   const total = data.slides.length + 3;
   const foot = (i) => `<footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>${i} / ${total}</span></footer>`;
   cards.push(`<section class="cc cc-hook" aria-roledescription="slide" aria-label="1 of ${total}">
-    ${data.portrait ? `<figure class="cc-portrait"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="lazy"></figure>`
+    ${data.portrait ? `<figure class="cc-portrait${data.portrait.photo ? " photo" : ""}"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="lazy"></figure>`
       : `<img class="cc-scene" src="${esc(data.scene || sceneOf(n))}" alt="" loading="lazy">`}
     <div class="cc-hook-top">${elementHTML(n, "lg")}<p class="cc-kicker">${esc(n.name)}<br>${esc(n.years || "")}<br>${esc(DOMAINS[n.domain] || "")}</p></div>
     <h2 class="cc-headline ${data.headline.length > 22 ? "long" : data.headline.length > 13 ? "mid" : ""}">${esc(data.headline)}</h2>
