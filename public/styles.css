@@ -1017,3 +1017,18 @@ html.cs-open,html.cs-open body{overflow:hidden}
 .cc .cc-text{font-size:max(11.5px,1em)}
 .cc .cc-dek{font-size:max(13.5px,1.05em)}
 .cs-panel.dragging{transition:none}
+/* ---------- the Weekly Oops everywhere: rail button and box, More menu, one card in the feed */
+.rail .nav-oops{margin-top:auto}
+.rail .nav-oops + .nav-more{margin-top:0}
+@media (max-width:760px){ .rail .nav-oops{display:none} }
+.oops-box{position:fixed;inset:0;z-index:46;background:rgba(10,12,16,.45);display:flex;align-items:flex-end;justify-content:flex-start}
+.oops-box[hidden]{display:none}
+.oops-box-in{position:relative;margin:0 0 24px 244px;width:min(400px,calc(100vw - 32px));background:var(--surface);color:var(--ink);padding:26px 24px 22px;box-shadow:0 12px 40px rgba(0,0,0,.3);border:1.5px solid var(--ink)}
+@media (max-width:1180px){ .oops-box-in{margin-left:88px} }
+.oops-box-in h2,.feed-oops h2{margin:0 0 8px;font:900 34px/.95 var(--display);text-transform:uppercase}
+.oops-box-in p,.feed-oops p{margin:0 0 14px;font-size:15px;line-height:1.45}
+.ob-label{font:500 11px var(--mono)!important;letter-spacing:.1em;text-transform:uppercase;color:var(--ethyl);margin:0 0 6px!important}
+.menu-oops p{margin:0 0 10px;font-size:14px;line-height:1.45;color:var(--ink-2)}
+@media (min-width:761px){ .menu-oops{display:none} }
+.feed-oops{background:var(--surface);color:var(--ink);border:1.5px solid var(--ink);padding:24px}
+body:has(#oops) .site-foot .oops-mini{display:none}

@@ -16,7 +16,7 @@
 // The schema creates and migrates itself on first request (v1 databases upgrade in place).
 
 import {
-  SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
+  SITE, feedOopsHTML, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML, categoricTableHTML, categoricLegendHTML,
   postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath,
@@ -1249,6 +1249,7 @@ async function feedHTML(request, env, url, st, exclude = "") {
   for (let i = 0; i < noms.length; i++) {
     const n = noms[i];
     out.push(postHTML(n, { flags, thread: thread(n.id), carousel: await carouselFor(request, env, url, n), more: writeupHTML(n) }));
+    if (i === 4) out.push(feedOopsHTML());
     if ((i + 1) % 3 === 0 && mi < murphys.length) { const m = murphys[mi++]; out.push(murphyPostHTML(m, { flags, thread: thread(m.id) })); }
   }
   while (mi < murphys.length) { const m = murphys[mi++]; out.push(murphyPostHTML(m, { flags, thread: thread(m.id) })); }

@@ -199,3 +199,19 @@ if (panel) {
 }
 // Mark the current page in the menu.
 document.querySelectorAll(".nav-i[href]").forEach((a) => { if (a.getAttribute("href") === location.pathname) a.setAttribute("aria-current", "page"); });
+
+// ---------- the Weekly Oops box (left rail button)
+const oopsBox = $("#oops-box");
+if (oopsBox) {
+  let back = null;
+  const setOops = (open) => {
+    oopsBox.hidden = !open;
+    if (open) { back = document.activeElement; const f = oopsBox.querySelector("[data-signup]"); turnstileFor(f); f.querySelector('input[type="email"]').focus(); }
+    else if (back) back.focus();
+  };
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-oops]")) return setOops(true);
+    if (e.target.closest("[data-oops-close]") || e.target === oopsBox) setOops(false);
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !oopsBox.hidden) setOops(false); });
+}

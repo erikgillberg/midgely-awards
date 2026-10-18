@@ -65,6 +65,10 @@ export const signupHTML = (where = "foot") =>
     <span class="msg" role="status"></span>
   </form>`;
 export const weeklyOopsHTML = () => signupHTML("x");
+export const OOPS_LINE = "One short email a week: a new backfire, the best Murphys, and who won.";
+// The sign-up card that sits in the feed, once, after a few posts.
+export const feedOopsHTML = () => `<section class="feed-oops" aria-labelledby="fo-h">
+  <p class="ob-label">The newsletter</p><h2 id="fo-h">Get one backfire a week</h2><p>${OOPS_LINE} Unsubscribe any time.</p>${signupHTML("feed")}</section>`;
 // Scores
 export const MIN_JUDGES = 2;      // an Oops Score is public once this many judges have scored
 export const MIN_HERD_VOTES = 10; // a Herd Score shows once this many readers have voted
@@ -359,6 +363,7 @@ const ICON = {
   table: '<rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="10" width="5" height="5"/><rect x="9.5" y="10" width="5" height="5"/><rect x="16" y="10" width="5" height="5"/><rect x="6" y="17.5" width="12" height="3.5"/>',
   award: '<circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5 5 2.5-1.5-8"/>',
   menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  mail: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/>',
 };
 const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 
@@ -380,7 +385,17 @@ export function headerHTML(flags = {}) {
       ${item("/table", "table", "The Table")}
       ${item("/awards", "award", "The Awards")}
     </nav>
+    <button class="nav-i nav-oops" type="button" data-oops aria-haspopup="dialog">${icon("mail")}<span>Weekly Oops</span></button>
     <button class="nav-i nav-more" type="button" data-menu aria-expanded="false" aria-controls="menu-panel">${icon("menu")}<span>More</span></button>
+  </div>
+  <div class="oops-box" id="oops-box" role="dialog" aria-modal="true" aria-labelledby="ob-h" hidden>
+    <div class="oops-box-in">
+      <button class="menu-x" type="button" data-oops-close aria-label="Close">×</button>
+      <p class="ob-label">The newsletter</p>
+      <h2 id="ob-h">The Weekly Oops</h2>
+      <p>${OOPS_LINE}</p>
+      ${signupHTML("rail")}
+    </div>
   </div>
   <nav class="tabbar" aria-label="Main">
     ${item("/", "home", "Home")}
@@ -392,6 +407,7 @@ export function headerHTML(flags = {}) {
   <div class="menu-panel" id="menu-panel" hidden>
     <div class="menu-in">
       <button class="menu-x" type="button" data-menu-close aria-label="Close menu">×</button>
+      <section class="menu-oops"><h2>The Weekly Oops</h2><p>${OOPS_LINE}</p>${signupHTML("menu")}</section>
       ${MENU.map(([h, links]) => `<section><h2>${h}</h2>${links.map(([href, t]) => `<a href="${href}" data-menu-close>${t}</a>`).join("")}</section>`).join("")}
     </div>
   </div>`;
