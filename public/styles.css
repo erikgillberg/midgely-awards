@@ -498,3 +498,37 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .dg-label b{font-size:5cqi}
 .dg-label span{font-size:2.6cqi}
 .dg-label p{font-size:2.9cqi}
+.awards2{margin:12px 0 0;padding-left:18px;color:var(--ink-2);font-size:15px;display:flex;flex-direction:column;gap:6px}
+.awards2 strong{color:var(--ink)}
+.awards2{margin:12px 0 0;padding-left:18px;color:var(--ink-2);font-size:15px;display:flex;flex-direction:column;gap:6px}
+.awards2 strong{color:var(--ink)}
+/* square card numbers, like the tile's boxes */
+.cc-label span{display:inline-grid;place-items:center;width:1.9em;height:1.9em;padding:0;margin-right:.55em;vertical-align:middle}
+/* pattern card: the nominee's pattern as the heading, all patterns listed under it */
+.cc-pattern .cc-body{justify-content:flex-start;padding-top:7%}
+.cc-pattern .cc-title{font-size:2.6em}
+.cc-patterns{margin:.3em 0 0;padding:0;list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:.32em}
+.cc-patterns li{counter-increment:p;display:grid;grid-template-columns:1.6em 1fr;font-size:.74em;line-height:1.3;color:rgba(255,255,255,.62)}
+.cc-patterns li::before{content:counter(p);font:500 .9em var(--mono);color:rgba(255,255,255,.5)}
+.cc-patterns li b{color:rgba(255,255,255,.8);font-weight:600}
+.cc-patterns li.on{color:#fff}
+.cc-patterns li.on b{color:#fff}
+.cc-patterns li.on::before{content:"→";color:#fff}
+.cc-follow{margin:.4em 0 0;font:500 .85em var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--light)}
+.cc-patterns li{display:block;padding-left:1.6em;text-indent:-1.6em}
+.cc-patterns li::before{display:inline-block;width:1.6em;text-indent:0}
+/* nominee page: further reading and image credits */
+.writeup.more{max-width:68ch}
+.writeup.more:empty{display:none}
+.reading,.credits{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.reading li{display:flex;flex-direction:column;gap:2px}
+.reading cite{font-style:normal;font-weight:600;color:var(--ink)}
+.reading span,.credits span{font-size:13px;color:var(--ink-3)}
+.credits li{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start}
+.credits img{width:64px;height:64px;object-fit:cover;border:1px solid var(--line)}
+.credits div{display:flex;flex-direction:column;gap:2px;font-size:14px}
+.credits a{font-size:13px}
+#nominee-carousel:empty{display:none}
+.cc-patterns li{font-size:.88em}
+.cc-pattern .cc-title{font-size:2.2em}
+.cc-pattern .cc-body{padding-top:6%;gap:.5em}

@@ -3,6 +3,8 @@
 // One copy of each, so the page the server sends matches what the browser redraws.
 
 export const SITE = "https://midgleyawards.com";
+// The name printed on cards and images. Moves to the new domain before launch.
+export const BRAND_DOMAIN = "backfireawards.com";
 
 // Build id, set by the deploy workflow. Added to stylesheet and script URLs so browsers fetch new copies.
 export const BUILD = "__BUILD__";
@@ -45,8 +47,8 @@ export const AWARDS = {
 
 // Outside links. Empty means "not set up yet": the site shows a placeholder instead.
 export const LINKS = {
-  microForm: "https://tally.so/r/KpQa0D",    // Tally: Share your Micro Midgley
-  waitlistForm: "kbakOe",                    // Tally: Midgley Awards shop waitlist (form id, embedded on /shop/waitlist)
+  microForm: "https://tally.so/r/KpQa0D",    // Tally: Share your Murphy (form id kept from its Micro Midgley days)
+  waitlistForm: "kbakOe",                    // Tally: Backfire Awards shop waitlist (form id, embedded on /shop/waitlist)
   beehiivForm: "71cdf4c1-b2c8-4913-bb03-cc836734a7b1", // Beehiiv: The Weekly Oops sign-up form
   socials: [],        // [{ name: "Instagram", url: "https://..." }]
 };
@@ -209,14 +211,14 @@ function fullSections(n) {
 
 export function headerHTML(flags = {}) {
   return `<div class="site-head-in">
-    <a class="brand" href="/"><span class="mini" aria-hidden="true">Mg</span><span>The Midgley Awards</span></a>
+    <a class="brand" href="/"><span class="mini" aria-hidden="true">Bf</span><span>The Backfire Awards</span></a>
     <nav aria-label="Main">
       <a href="/">Nominees</a>
       ${flags.categories ? `<a href="/category">Categories</a>` : ""}
       <a href="/midgley">Lifetime Midgley</a>
       <a href="/goat">Goat</a>
       <a href="/shop">Shop</a>
-      <a class="micro-btn" href="/micro">Share your Micro Midgley</a>
+      <a class="micro-btn" href="/murphy">Share your Murphy</a>
     </nav>
   </div>`;
 }
@@ -244,6 +246,20 @@ export function footerHTML() {
     <p class="runby">Run by Goat Farm. Better to try and fail than never try. Mostly.</p>
   </div>`;
 }
+
+// ---------------------------------------------------------------- patterns
+
+// The patterns behind backfires. Every nominee gets one. Order is fixed; add new ones at the end.
+export const PATTERNS = [
+  { key: "surplus", name: "Solve a shortage, create a surplus", text: "Too little becomes too much, and the extra goes somewhere." },
+  { key: "stable", name: "Too stable to go away", text: "Built to last, so it lasts where it shouldn't." },
+  { key: "moved", name: "The problem moves", text: "Fixed in one place, it lands in another." },
+  { key: "everyone", name: "Great for one, bad for all", text: "Each user wins. When everyone uses it, everyone loses." },
+  { key: "metric", name: "Chasing the wrong number", text: "It hit its target. The target was the wrong one." },
+  { key: "resistance", name: "The cure breeds resistance", text: "Kill most of the problem and the survivors take over." },
+  { key: "gamed", name: "The reward gets gamed", text: "People chase the incentive instead of the goal." },
+  { key: "later", name: "Cheap now, paid later", text: "The bill arrives decades after the benefit." },
+];
 
 // ---------------------------------------------------------------- lists
 
@@ -301,8 +317,12 @@ const jewelVars = (j) => `--deep:${j.deep};--base:${j.base};--light:${j.light}`;
 //   bottom right ▼ people harmed, as a power of ten
 // Color is the category; its group number heads the column in the table.
 // Live numbers (scores, ranks) stay on the website, never on the tile.
-const SUP = { 0: "⁰", 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹" };
-export const powerText = (r) => (r == null ? "?" : "10" + String(r).split("").map((d) => SUP[d]).join(""));
+// 9 -> "1B", 8 -> "100M", 4 -> "10K". Plain shorthand people already read on price tags and follower counts.
+export function powerText(r) {
+  if (r == null) return "?";
+  const unit = r >= 9 ? ["B", 9] : r >= 6 ? ["M", 6] : r >= 3 ? ["K", 3] : ["", 0];
+  return String(10 ** (r - unit[1])) + unit[0];
+}
 // Plain words for a power of ten: 9 -> "a billion or more", 8 -> "100 million or more".
 export function powerWords(r) {
   if (r == null) return "not yet researched";
@@ -364,7 +384,7 @@ export function carouselHTML(n, data, flags = {}) {
   const j = jewelOf(n.domain);
   const cards = [];
   const total = data.slides.length + 3;
-  const foot = (i) => `<footer class="cc-foot"><span>midgleyawards.com</span><span>${i} / ${total}</span></footer>`;
+  const foot = (i) => `<footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>${i} / ${total}</span></footer>`;
   cards.push(`<section class="cc cc-hook" aria-roledescription="slide" aria-label="1 of ${total}">
     ${data.portrait ? `<figure class="cc-portrait"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="eager"></figure>` : ""}
     <div class="cc-hook-top">${elementHTML(n, "lg")}<p class="cc-kicker">${esc(n.name)}<br>${esc(n.years || "")}<br>${esc(DOMAINS[n.domain] || "")}</p></div>
@@ -383,13 +403,14 @@ export function carouselHTML(n, data, flags = {}) {
     const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
     const chip = s.kind === "foresight" ? foresightHTML(n.knowable) : "";
     const also = s.also && s.also.length ? `<ul class="cc-also">${s.also.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : "";
+    const patterns = s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p) => `<li class="${p.key === s.patternKey ? "on" : ""}"><b>${esc(p.name)}</b> ${esc(p.text)}</li>`).join("")}</ol>` : "";
     cards.push(`<section class="cc cc-${esc(s.kind)} ${img ? "has-img" : "no-img"}" data-sym="${esc(symbol(n.name))}" aria-roledescription="slide" aria-label="${i} of ${total}">
       ${img}
       <div class="cc-body">
         <p class="cc-label"><span>${String(k + 1).padStart(2, "0")}</span> ${esc(s.label)}</p>
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
-        ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${also}
+        ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${also}${patterns}
       </div>
       ${foot(i)}
     </section>`);
@@ -404,8 +425,8 @@ export function carouselHTML(n, data, flags = {}) {
         <div><span class="k">Herd Score</span><b>${pct != null ? pct + "%" : "?"}</b><span class="s">${pct != null ? n.herdTotal + " votes" : "Not enough votes yet"}</span></div>
       </div>
       <h3 class="cc-title">Is ${esc(n.name)} Midgley-worthy?</h3>
-      <p class="cc-cta">Vote and argue at <b>midgleyawards.com${nomineePath(n)}</b></p>
-      <p class="cc-cta2">Know one that worked too well? Nominate it.</p>
+      <p class="cc-cta">Vote and argue at <b>${BRAND_DOMAIN}${nomineePath(n)}</b></p>
+      <p class="cc-follow">Follow the Backfire Awards for a new backfire every week.</p>
     </div>
     ${foot(total)}
   </section>`);

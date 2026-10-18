@@ -1,4 +1,4 @@
-// The Midgley Awards: Cloudflare Pages advanced-mode worker.
+// The Backfire Awards: Cloudflare Pages advanced-mode worker.
 //
 // Serves the static site from ./public and a JSON API backed by a D1 database.
 // Bindings / settings (Cloudflare dashboard → Pages project → Settings):
@@ -21,7 +21,7 @@ import {
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD,
 } from "./shared.js";
 
-const SCHEMA_VERSION = 6;
+const SCHEMA_VERSION = 7;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Other hostnames that send visitors to the home page at SITE.
@@ -71,6 +71,10 @@ const TABLES = [
     title TEXT, creator TEXT, made TEXT, license TEXT NOT NULL, license_url TEXT,
     source_page TEXT NOT NULL, source_file TEXT, credit TEXT NOT NULL, width INTEGER, height INTEGER,
     edits TEXT, retrieved_at TEXT NOT NULL, created_at TEXT NOT NULL)`,
+  // v7: further reading for each nominee, shown on its page.
+  `CREATE TABLE IF NOT EXISTS readings (
+    id TEXT PRIMARY KEY, nominee_id TEXT NOT NULL, sort INTEGER DEFAULT 0, title TEXT NOT NULL,
+    author TEXT, year TEXT, publisher TEXT, url TEXT, kind TEXT, created_at TEXT NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS judge_scores (
     nominee_id TEXT NOT NULL, judge TEXT NOT NULL, score INTEGER NOT NULL, created_at TEXT NOT NULL,
     PRIMARY KEY (nominee_id, judge))`,
@@ -190,6 +194,15 @@ const SEED_MEDIA = [
     credit: "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain.", edits: "Resized", retrieved: "2026-10-17" },
 ];
 
+// Further reading: [id, nominee, sort, title, author, year, publisher, url, kind]
+const SEED_READINGS = [
+  ["haber-r1", "haber", 1, "How a century of ammonia synthesis changed the world", "Jan Willem Erisman and others", "2008", "Nature Geoscience", "https://doi.org/10.1038/ngeo325", "Paper"],
+  ["haber-r2", "haber", 2, "Enriching the Earth: Fritz Haber, Carl Bosch, and the Transformation of World Food Production", "Vaclav Smil", "2001", "MIT Press", "", "Book"],
+  ["haber-r3", "haber", 3, "The Alchemy of Air", "Thomas Hager", "2008", "Harmony Books", "https://en.wikipedia.org/wiki/Thomas_Hager", "Book"],
+  ["haber-r4", "haber", 4, "Dead zone (ecology)", "", "", "Wikipedia", "https://en.wikipedia.org/wiki/Dead_zone_(ecology)", "Article"],
+  ["haber-r5", "haber", 5, "Haber process", "", "", "Wikipedia", "https://en.wikipedia.org/wiki/Haber_process", "Article"],
+];
+
 // ---------------------------------------------------------------- setup
 
 function findD1(env) {
@@ -264,6 +277,10 @@ async function migrate(db) {
     stmts.push(db.prepare(`INSERT OR IGNORE INTO media (id,nominee_id,role,path,alt,title,creator,made,license,license_url,source_page,source_file,credit,width,height,edits,retrieved_at,created_at)
       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind(m.id, m.nominee, m.role, m.path, m.alt, m.title, m.creator, m.made, m.license, m.licenseUrl || null,
       m.sourcePage, m.sourceFile || null, m.credit, m.width || null, m.height || null, m.edits || null, m.retrieved, new Date().toISOString()));
+  }
+  for (const [id, nominee, sort, title, author, year, publisher, url, kind] of SEED_READINGS) {
+    stmts.push(db.prepare(`INSERT OR IGNORE INTO readings (id,nominee_id,sort,title,author,year,publisher,url,kind,created_at) VALUES (?,?,?,?,?,?,?,?,?,?)`)
+      .bind(id, nominee, sort, title, author || null, year || null, publisher || null, url || null, kind || null, new Date().toISOString()));
   }
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('seeded','1')"));
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)));
@@ -861,7 +878,7 @@ async function homePage(request, env, url, ctx, category) {
   const path = `/category/${CATEGORY_SLUGS[category]}`;
   fill["#cat-title"] = esc(name);
   return decorate(page, env, url, {
-    canonical: SITE + path, title: `${name} · The Midgley Awards`,
+    canonical: SITE + path, title: `${name} · The Backfire Awards`,
     desc: `Nominees in ${name}: inventions and decisions that solved one problem and caused another.`,
     fill, attrs: { body: ["data-category", category] },
   });
@@ -873,7 +890,7 @@ async function nomineePage(request, env, url, ctx, key) {
   if (!n) {
     const page = await asset(env, url, request, "/nominee");
     return decorate(page, env, url, {
-      title: "Nominee not found · The Midgley Awards",
+      title: "Nominee not found · The Backfire Awards",
       fill: { "#list": `<p class="notice">That nominee isn't on the list. It may still be waiting for review. <a href="/">See all nominees</a>.</p>` },
     });
   }
@@ -884,11 +901,12 @@ async function nomineePage(request, env, url, ctx, key) {
   const page = await asset(env, url, request, "/nominee");
   const pct = herdPct(n);
   const scores = flags.scores ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Herd Score ${pct}%` : ""].filter(Boolean).join(", ") : "";
+  const extra = await nomineeExtras(request, env, url, n);
   return decorate(page, env, url, {
     canonical: SITE + nomineePath(n),
-    title: `${n.name}: ${n.work} · The Midgley Awards`,
+    title: `${n.name}: ${n.work} · The Backfire Awards`,
     desc: `${scores ? scores + ". " : ""}Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
-    fill: { "#list": cardHTML(n, { flags, full: true, open: true, thread }) },
+    fill: { "#list": cardHTML(n, { flags, full: true, open: true, thread }), ...extra },
     attrs: { body: ["data-nominee", n.id] },
   });
 }
@@ -919,7 +937,33 @@ async function labPage(request, env, url, ctx, key) {
     fill["#lab-media"] = media.results.length ? `<table class="prov"><thead><tr><th>Image</th><th>Title and maker</th><th>License</th><th>Source</th></tr></thead><tbody>${media.results.map((m) =>
       `<tr><td><img src="${esc(m.path)}" alt="" width="72"></td><td><b>${esc(m.title)}</b><br>${esc(m.creator || "")}, ${esc(m.made || "")}<br><small>${esc(m.edits || "")}</small></td><td>${esc(m.license)}</td><td><a href="${esc(m.source_page)}" target="_blank" rel="noopener">Wikimedia Commons</a><br><small>Retrieved ${esc(m.retrieved_at)}</small></td></tr>`).join("")}</tbody></table>` : "<p>No image records yet.</p>";
   }
-  return decorate(page, env, url, { title: `Lab: ${n ? n.name : key} · The Midgley Awards`, fill });
+  return decorate(page, env, url, { title: `Lab: ${n ? n.name : key} · The Backfire Awards`, fill });
+}
+
+// A nominee page's carousel (when one is written), image credits and further reading.
+async function nomineeExtras(request, env, url, n) {
+  const out = {};
+  const data = await asset(env, url, request, `/carousels/${n.slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (data) out["#nominee-carousel"] = carouselHTML(n, data, flagsOf(env));
+  const db = findD1(env);
+  if (!db) return out;
+  const [media, reads] = await db.batch([
+    db.prepare("SELECT * FROM media WHERE nominee_id = ? ORDER BY role"),
+    db.prepare("SELECT * FROM readings WHERE nominee_id = ? ORDER BY sort"),
+  ].map((q) => q.bind(n.id))).catch(() => [{ results: [] }, { results: [] }]);
+  const parts = [];
+  if (reads.results.length) {
+    parts.push(`<section><h2>Further reading</h2><ul class="reading">${reads.results.map((x) => {
+      const t = x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : `<cite>${esc(x.title)}</cite>`;
+      return `<li>${t}<span>${esc([x.author, x.publisher, x.year].filter(Boolean).join(", "))}${x.kind ? ` · ${esc(x.kind)}` : ""}</span></li>`;
+    }).join("")}</ul></section>`);
+  }
+  if (media.results.length) {
+    parts.push(`<section><h2>Image credits</h2><ul class="credits">${media.results.map((m) =>
+      `<li><img src="${esc(m.path)}" alt="" width="64" height="64" loading="lazy"><div><b>${esc(m.title)}</b><span>${esc([m.creator, m.made].filter(Boolean).join(", "))}. ${esc(m.license)}.${m.edits ? ` ${esc(m.edits)}.` : ""}</span><a href="${esc(m.source_page)}" target="_blank" rel="noopener">Source</a></div></li>`).join("")}</ul></section>`);
+  }
+  if (parts.length) out["#nominee-more"] = parts.join("");
+  return out;
 }
 
 // Links on a non-production host stay on that host, so staging and previews keep working.
@@ -936,7 +980,7 @@ async function sitemap(env, url, ctx) {
   return new Response(body, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" } });
 }
 
-// /micro sends people to the Micro Midgley form, keeping utm_ tags so the form can record where they came from.
+// /micro sends people to the Murphy form, keeping utm_ tags so the form can record where they came from.
 function microRedirect(url) {
   if (!LINKS.microForm) return null;
   const to = new URL(LINKS.microForm);
@@ -976,7 +1020,8 @@ export default {
     const lab = p.match(/^\/lab\/carousel\/([a-z0-9-]{1,64})$/);
     if (lab && url.hostname !== SITE_HOST) return labPage(request, env, url, ctx, lab[1]);
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
-    if (p === "/micro") return microRedirect(url) || decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/micro" });
+    if (p === "/murphy") return microRedirect(url) || decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy" });
+    if (p === "/micro") return Response.redirect(SITE_ORIGIN(url) + "/murphy" + url.search, 301); // old name
 
     const res = await env.ASSETS.fetch(request);
     const type = res.headers.get("content-type") || "";
