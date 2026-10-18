@@ -36,23 +36,25 @@ if (view && grid) {
     setZoom(pinch.z * dist(e.touches) / pinch.d, cx, cy);
   }, { passive: false });
   view.addEventListener("touchend", () => (pinch = null));
-  // Tapping a small square zooms to it; once it fills most of the frame, the tap opens it.
-  grid.addEventListener("click", (e) => {
-    const cell = e.target.closest(".pt-cell");
-    if (!cell) return;
-    const w = cell.getBoundingClientRect().width;
-    if (w < view.clientWidth * 0.6) {
-      e.preventDefault();
-      const target = maxZoom();
-      const col = parseInt(cell.style.gridColumnStart || cell.style.gridColumn, 10);
-      const row = parseInt(cell.style.gridRowStart || cell.style.gridRow, 10);
-      zoom = target; grid.style.width = base() * zoom + "px";
-      const r = cell.getBoundingClientRect(), g = grid.getBoundingClientRect();
-      view.scrollLeft = r.left - g.left + r.width / 2 - view.clientWidth / 2;
-      view.scrollTop = r.top - g.top + r.height / 2 - view.clientHeight / 2;
-      document.querySelector("[data-z-level]").textContent = Math.round(zoom * 100) + "%";
+  // Hovering a square shows who it is; clicking opens the post (the link does that on its own).
+  const tip = document.getElementById("pt-tip");
+  grid.addEventListener("mousemove", (e) => {
+    const cell = e.target.closest(".pt-cell.filled");
+    if (!cell || matchMedia("(hover: none)").matches) { tip.hidden = true; return; }
+    if (tip.dataset.for !== cell.dataset.name) {
+      tip.dataset.for = cell.dataset.name;
+      tip.innerHTML = "";
+      const b = document.createElement("b"); b.textContent = cell.dataset.name;
+      const w = document.createElement("span"); w.className = "w"; w.textContent = cell.dataset.work;
+      const d = document.createElement("p"); d.textContent = cell.dataset.desc;
+      const c = document.createElement("span"); c.className = "c"; c.textContent = "Click to open →";
+      tip.append(b, w, d, c);
     }
+    tip.hidden = false;
+    const x = Math.min(e.clientX + 16, innerWidth - tip.offsetWidth - 12), y = Math.min(e.clientY + 16, innerHeight - tip.offsetHeight - 12);
+    tip.style.left = x + "px"; tip.style.top = y + "px";
   });
+  grid.addEventListener("mouseleave", () => (tip.hidden = true));
   window.addEventListener("resize", () => setZoom(zoom));
   setZoom(1);
 }

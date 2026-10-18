@@ -33,20 +33,17 @@
     <p class="lede">Every Midgley nominee and winner on one table. It has the periodic table's 118 squares, grouped by category instead of element. Bf marks a square still waiting for its backfire.</p>
   </header>
   <section class="legend" aria-label="Categories" id="pt-legend"></section>
-  <div class="pt-tools" role="group" aria-label="Zoom">
-    <button type="button" data-z="out" aria-label="Zoom out">−</button>
-    <span data-z-level>100%</span>
-    <button type="button" data-z="in" aria-label="Zoom in">+</button>
-    <button type="button" data-z="fit">Fit</button>
-    <span class="pt-hint">Pinch, scroll with ctrl, or tap a square to zoom</span>
+  <div class="pt-wrap">
+    <div class="pt-view"><div class="pt-grid" id="pt-grid"></div></div>
+    <div class="pt-tools" role="group" aria-label="Zoom">
+      <button type="button" data-z="out" aria-label="Zoom out">−</button>
+      <span data-z-level>100%</span>
+      <button type="button" data-z="in" aria-label="Zoom in">+</button>
+      <button type="button" data-z="fit">Fit</button>
+    </div>
   </div>
-  <div class="pt-view"><div class="pt-grid" id="pt-grid"></div></div>
-  <section class="sq sq-gap" aria-labelledby="gap-h">
-    <p class="sq-label">The gender gap</p>
-    <h2 id="gap-h">Most nominees are men</h2>
-    <p class="sq-text">We estimate women make up only 2 to 5 percent of people who qualify for a Midgley. For most of history, women were kept out of the places where these backfires start: industrial labs, scientific academies, and high-level military and economic planning. Women who did hold power, such as queens and empresses, mostly made local political or military mistakes, not world-scale technical ones.</p>
-    <p class="sq-text">We want a future where women have every opportunity to win a Midgley. Some say that future would have fewer backfires. We would like to find out.</p>
-  </section>
+  <p class="pt-hint">Zoom with + and −, pinch on a trackpad or phone, or hold Ctrl (⌘ on a Mac) and scroll. Click a square to open it.</p>
+  <div class="pt-tip" id="pt-tip" hidden></div>
   <footer class="site-foot" id="site-foot"></footer>
 </div>
 <script type="module" src="/site.js"></script>

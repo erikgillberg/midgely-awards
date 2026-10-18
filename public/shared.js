@@ -197,34 +197,93 @@ export function cardHTML(n, ctx = {}) {
 
 // A nominee as a post, under its carousel: who, the scores, the vote, sharing and the comments,
 // in the order people expect from a social feed. The full write-up lives below, behind "Read more".
-export function postHTML(n, ctx = {}) {
+const PICON = {
+  yes: '<path d="M5 12.5 10 17 19 7"/>',
+  no: '<path d="M6 6l12 12M18 6 6 18"/>',
+  comment: '<path d="M20.5 11.5a8.5 8 0 0 1-12.2 7.2L3.5 20l1.4-4.3A8 8 0 1 1 20.5 11.5z"/>',
+  share: '<path d="M21 3 10 14"/><path d="M21 3 14.5 21 10 14 3 9.5z"/>',
+  dots: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>',
+};
+const picon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${PICON[k]}</svg>`;
+
+// A post: the same shape for every kind of item, like a social feed.
+//   header (tile, name, ⋯) / carousel / actions / scores / caption with "more" / comments
+// p: { id, kind, path, title, sub, tile, carousel, captionTitle, caption, more, worthy, herdYes, herdTotal, oops, score }
+export const herdLine = (yes, total) => {
+  const pct = total >= MIN_HERD_VOTES ? Math.round((100 * yes) / total) : null;
+  return `Herd <b>${pct != null ? pct + "%" : "?"}</b>${pct != null ? ` of ${total}` : total ? ` (${total} vote${total === 1 ? "" : "s"} so far)` : ""}`;
+};
+function postShell(p, ctx = {}) {
   const flags = ctx.flags || {};
   const thread = ctx.thread || [];
-  const reported = ctx.reported || {};
-  const j = jewelOf(n.domain);
-  const pct = herdPct(n);
-  const vote = flags.scores ? herdVoteHTML(n, ctx.herd)
-    : `<button class="up post-up" data-act="vote" aria-pressed="${!!ctx.mine}" aria-label="${ctx.mine ? "Withdraw vote for" : "Upvote"} ${esc(n.name)}">${upIcon}<span class="c">${n.score}</span></button>`;
-  return `<article class="post" id="nom-${esc(n.id)}" data-id="${esc(n.id)}" style="${jewelVars(j)}">
-    <header class="post-head">
-      ${elementHTML(n, "mini")}
-      <div><h1>${esc(n.name)}</h1><p>${esc([n.years, DOMAINS[n.domain]].filter(Boolean).join(" · "))}</p></div>
+  const pct = p.herdTotal >= MIN_HERD_VOTES ? Math.round((100 * p.herdYes) / p.herdTotal) : null;
+  const vote = flags.scores || p.kind === "murphy"
+    ? `<div class="pv-vote" role="group" aria-label="${esc(p.worthy)}"><span class="pv-q">${esc(p.worthy)}</span>
+        <button class="pv-btn" data-act="herd" data-vote="yes" aria-pressed="false">${picon("yes")}<span>Yes</span></button>
+        <button class="pv-btn" data-act="herd" data-vote="no" aria-pressed="false">${picon("no")}<span>No</span></button></div>`
+    : `<button class="pv-btn" data-act="vote" aria-pressed="false">${upIcon}<span class="c">${p.score}</span></button>`;
+  const stats = [
+    p.kind !== "murphy" && flags.scores ? `Oops <b>${p.oops ?? "?"}</b>` : "",
+    `<span class="pv-herd">${herdLine(p.herdYes, p.herdTotal)}</span>`,
+  ].filter(Boolean).join(" · ");
+  return `<article class="post" id="post-${esc(p.id)}" data-id="${esc(p.id)}" data-kind="${p.kind}" data-path="${esc(p.path)}" style="${p.vars || ""}">
+    <header class="pv-head">
+      <a class="pv-who" href="${esc(p.path)}">${p.tile}<span><b>${esc(p.title)}</b><small>${esc(p.sub)}</small></span></a>
+      <details class="pv-menu"><summary aria-label="More options">${picon("dots")}</summary>
+        <div><button type="button" data-act="share-link">Copy link</button><button type="button" data-act="share-ig">Save cards for Instagram</button><button type="button" data-act="report">Report</button></div></details>
     </header>
-    <div class="post-actions">
+    ${p.carousel}
+    <div class="pv-bar">
       ${vote}
-      <button class="linkish" data-act="share">Share</button>
-      ${reported["n:" + n.id] ? `<span class="by">Reported</span>` : `<button class="linkish" data-act="report-nom">Report</button>`}
+      <button class="pv-btn" data-act="comments" aria-label="Comments">${picon("comment")}<span class="cc-n">${thread.length}</span></button>
+      <button class="pv-btn" data-act="share" aria-label="Share">${picon("share")}</button>
     </div>
-    ${flags.scores ? `<p class="post-scores"><span>Oops Score <b>${n.oops ?? "?"}</b>${n.oops != null ? ` · ${esc(oopsBand(n.oops).label)}` : ""}</span><span>Herd Score <b>${pct != null ? pct + "%" : "?"}</b>${pct != null ? ` · ${n.herdTotal} votes` : ""}</span> <a href="/scores">How scores work</a></p>` : ""}
-    <p class="post-caption"><b>${esc(n.work)}.</b> ${esc(n.backfire)}</p>
-    <p class="post-by">${n.seeded ? "Founding class" : "Nominated by " + esc(n.author || "Anonymous") + " · " + esc(ago(n.createdAt))}</p>
-    <div class="thread post-thread">
-      <p class="post-ccount">${thread.length} comment${thread.length === 1 ? "" : "s"}</p>
-      ${thread.map((c) => `<div class="cm"><span class="who">${esc(c.author || "Anonymous")} · ${esc(ago(c.createdAt))}</span><p>${esc(c.text)}</p>
-        <div class="tools">${reported["c:" + c.id] ? `<span class="by">Reported</span>` : `<button class="linkish" data-act="report-c" data-cid="${esc(c.id)}">Report</button>`}</div></div>`).join("") || `<span class="by">No comments yet. Argue for or against.</span>`}
-      <div class="reply"><input id="cn-${esc(n.id)}" maxlength="60" placeholder="Your name" value="${esc(ctx.name || "")}" aria-label="Your name"><textarea id="c-${esc(n.id)}" maxlength="1000" placeholder="Make the case, or push back" aria-label="Comment"></textarea><button class="ghost" data-act="comment">Post</button></div>
+    <p class="pv-stats">${stats} · <a href="/scores">scores</a></p>
+    <div class="pv-caption"><p><a href="${esc(p.path)}"><b>${esc(p.captionTitle)}</b></a> ${esc(p.caption)}${p.more ? ` <button class="pv-more" type="button" data-act="more">more</button>` : ""}</p>
+      ${p.more ? `<div class="pv-full" hidden>${p.more}</div>` : ""}</div>
+    <div class="pv-comments" ${ctx.open ? "" : "data-collapsed"}>
+      ${thread.length > 2 && !ctx.open ? `<button class="pv-viewall" type="button" data-act="comments">View all ${thread.length} comments</button>` : ""}
+      <div class="pv-thread">${thread.map((c, i) => `<p class="cm ${!ctx.open && i < thread.length - 2 ? "pv-old" : ""}" data-cid="${esc(c.id)}"><b>${esc(c.author || "Anonymous")}</b> ${esc(c.text)} <small>${esc(ago(c.createdAt))}</small></p>`).join("")}</div>
+      <form class="pv-reply" data-act-form="comment"><input name="author" maxlength="60" placeholder="Name" aria-label="Your name"><input name="text" maxlength="1000" placeholder="Add a comment…" aria-label="Comment" required><button type="submit">Post</button></form>
     </div>
   </article>`;
+}
+
+export function postHTML(n, ctx = {}) {
+  return postShell({
+    id: n.id, kind: "nominee", path: nomineePath(n), title: n.name, sub: [n.years, DOMAINS[n.domain]].filter(Boolean).join(" · "),
+    tile: elementHTML(n, "mini"), carousel: ctx.carousel || "", captionTitle: n.work, caption: n.backfire,
+    more: ctx.more || fullSections(n), worthy: "Midgley-worthy?", herdYes: n.herdYes, herdTotal: n.herdTotal, oops: n.oops, score: n.score,
+    vars: jewelVars(jewelOf(n.domain)),
+  }, ctx);
+}
+
+// ---------------------------------------------------------------- Murphys as posts
+
+export const murphyPath = (m) => "/m/" + m.slug;
+export function murphyTileHTML(m) {
+  return `<div class="el mini mu-tile"><span class="el-num">2</span><span class="el-year"></span><span class="el-sym">Mu</span><span class="el-name">MURPHY</span><span class="el-up"></span><span class="el-down"></span></div>`;
+}
+export function murphyCarouselHTML(m) {
+  const who = m.name ? `From ${m.name}` : "From a reader";
+  const foot = (i) => `<footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>${i} / 3</span></footer>`;
+  return `<div class="carousel mu-carousel" data-carousel style="--deep:#0B2230;--base:#2F6E8F;--light:#BFE0EF">
+    <div class="cc-track" tabindex="0" aria-label="A Murphy, 3 cards">
+      <section class="cc cc-hook mu-hook"><img class="cc-scene" src="/img/scenes/murphy.jpg" alt="" loading="lazy">
+        <div class="cc-hook-top"><div class="el lg mu-el"><span class="el-num">2</span><span class="el-year"></span><span class="el-sym">Mu</span><span class="el-name">MURPHY</span><span class="el-up"></span><span class="el-down"></span></div><p class="cc-kicker">A Murphy<br>${esc(who)}</p></div>
+        <h2 class="cc-headline mid">The fix</h2><p class="cc-dek">${esc(m.fix)}</p><p class="cc-swipe" aria-hidden="true">Swipe <span>→</span></p>${foot(1)}</section>
+      <section class="cc no-img" data-sym="Mu"><div class="cc-body"><p class="cc-label"><span>01</span> What went oops</p><h3 class="cc-title">${esc(m.oops)}</h3></div>${foot(2)}</section>
+      <section class="cc cc-payoff"><div class="cc-body"><p class="cc-label">Murphy's law</p><h3 class="cc-title">Anything that can go wrong will go wrong.</h3><p class="cc-cta">Got one? Share yours at <b>${BRAND_DOMAIN}</b></p><p class="cc-follow">Follow the Backfire Awards for a new backfire every week.</p></div>${foot(3)}</section>
+    </div>
+    <div class="cc-nav"><button type="button" data-cc="prev" aria-label="Previous card">←</button><span class="cc-dots"><i data-cc-dot="0"></i><i data-cc-dot="1"></i><i data-cc-dot="2"></i></span><button type="button" data-cc="next" aria-label="Next card">→</button></div>
+  </div>`;
+}
+export function murphyPostHTML(m, ctx = {}) {
+  return postShell({
+    id: m.id, kind: "murphy", path: murphyPath(m), title: "A Murphy", sub: m.name ? `from ${m.name}` : "from a reader",
+    tile: murphyTileHTML(m), carousel: murphyCarouselHTML(m), captionTitle: "The Murphy.", caption: `${m.fix} ${m.oops}`, more: "",
+    worthy: "Murphy-worthy?", herdYes: m.herdYes, herdTotal: m.herdTotal, vars: "--deep:#0B2230;--base:#2F6E8F;--light:#BFE0EF",
+  }, ctx);
 }
 
 // The full write-up for a nominee's page, behind "Read more". Further reading and image credits are added by the server.
@@ -286,18 +345,49 @@ function fullSections(n) {
 
 // ---------------------------------------------------------------- site header and footer
 
+// Line icons for the menu, drawn on a 24px grid.
+const ICON = {
+  home: '<path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+  plus: '<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/>',
+  table: '<rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="10" width="5" height="5"/><rect x="9.5" y="10" width="5" height="5"/><rect x="16" y="10" width="5" height="5"/><rect x="6" y="17.5" width="12" height="3.5"/>',
+  award: '<circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5 5 2.5-1.5-8"/>',
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+};
+const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
+
+// Every page's navigation: a rail on the left on wide screens, a top bar and a bottom tab bar on phones,
+// and the full menu (every section of the site) behind More.
+export const MENU = [
+  ["The awards", [["/midgley", "The Midgley"], ["/murphy", "The Murphy"], ["/awards", "Awards night"], ["/scores", "How scores work"], ["/table", "The Categoric Table"]]],
+  ["What this is", [["/#intro", "The big picture"], ["/#rules", "What makes a good nominee"], ["/#question", "The serious question"], ["/#gap", "The gender gap"], ["/guidelines", "Community guidelines"]]],
+  ["Goat Farm", [["/goat", "Goat"], ["/shop", "Shop"], ["/#oops", "The Weekly Oops"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
+];
 export function headerHTML(flags = {}) {
-  return `<div class="site-head-in">
-    <a class="brand" href="/"><span class="mini" aria-hidden="true">Bf</span><span>The Backfire Awards</span></a>
-    <nav aria-label="Main">
-      <a href="/">Nominees</a>
-      <a href="/table">The Table</a>
-      <a href="/midgley">The Midgley</a>
-      <a href="/murphy">The Murphy</a>
-      <a href="/awards">The Awards</a>
-      <a href="/shop">Shop</a>
+  const item = (href, k, label, extra = "") => `<a class="nav-i" href="${href}" ${extra}>${icon(k)}<span>${label}</span></a>`;
+  return `<div class="rail">
+    <a class="brand" href="/"><span class="mini" aria-hidden="true">Bf</span><span class="brand-t">The Backfire Awards</span></a>
+    <nav class="rail-nav" aria-label="Main">
+      ${item("/", "home", "Home")}
+      ${item("/search", "search", "Search")}
+      <button class="nav-i nav-nom" type="button" data-open-sheet="">${icon("plus")}<span>Nominate</span></button>
+      ${item("/table", "table", "The Table")}
+      ${item("/awards", "award", "The Awards")}
     </nav>
-    <button class="nom-btn" type="button" data-open-sheet="">Nominate</button>
+    <button class="nav-i nav-more" type="button" data-menu aria-expanded="false" aria-controls="menu-panel">${icon("menu")}<span>More</span></button>
+  </div>
+  <nav class="tabbar" aria-label="Main">
+    ${item("/", "home", "Home")}
+    ${item("/search", "search", "Search")}
+    <button class="nav-i nav-nom" type="button" data-open-sheet="" aria-label="Nominate">${icon("plus")}<span>Nominate</span></button>
+    ${item("/table", "table", "Table")}
+    <button class="nav-i" type="button" data-menu aria-expanded="false" aria-controls="menu-panel">${icon("menu")}<span>More</span></button>
+  </nav>
+  <div class="menu-panel" id="menu-panel" hidden>
+    <div class="menu-in">
+      <button class="menu-x" type="button" data-menu-close aria-label="Close menu">×</button>
+      ${MENU.map(([h, links]) => `<section><h2>${h}</h2>${links.map(([href, t]) => `<a href="${href}" data-menu-close>${t}</a>`).join("")}</section>`).join("")}
+    </div>
   </div>`;
 }
 
@@ -316,6 +406,7 @@ export function sheetHTML() {
       </div>
       <form class="sh-form" data-award-form="midgley" hidden novalidate>
         ${f("s-name", "Nominee", `<input id="s-name" maxlength="80" required placeholder="Person, company or program">`)}
+        <div class="sh-match" id="s-match" hidden></div>
         ${f("s-work", "What they made or decided", `<input id="s-work" maxlength="120" required placeholder="Leaded gasoline">`)}
         ${f("s-solved", "What went right", `<textarea id="s-solved" maxlength="600" required placeholder="The problem it solved, and how well"></textarea>`)}
         ${f("s-backfire", "What went oops", `<textarea id="s-backfire" maxlength="600" required placeholder="Who or what was harmed, and how"></textarea>`)}
@@ -627,7 +718,7 @@ export function categoricTableHTML(noms) {
       const n = items[i];
       const style = `grid-row:${r};grid-column:${c};${jewelVars(j)}`;
       cells.push(n
-        ? `<a class="pt-cell filled" style="${style}" href="${nomineePath(n)}" title="${esc(n.name)}: ${esc(n.work)}">${elementHTML(n, "pt")}<span class="pt-more"><b>${esc(n.name)}</b>${esc(n.work)}</span></a>`
+        ? `<a class="pt-cell filled" style="${style}" href="${nomineePath(n)}" aria-label="${esc(n.name)}: ${esc(n.work)}" data-name="${esc(n.name)}" data-work="${esc(n.work)}" data-desc="${esc((String(n.backfire).match(/^.*?[.!?](\s|$)/) || [n.backfire])[0].trim())}">${elementHTML(n, "pt")}<span class="pt-more"><b>${esc(n.name)}</b>${esc(n.work)}</span></a>`
         : `<div class="pt-cell empty" style="${style}" aria-hidden="true"><span class="pt-bf">Bf</span></div>`);
     });
   }

@@ -27,7 +27,7 @@
 <body data-bg="fair">
 <header class="site-head" id="site-head"></header>
 <div class="wrap home">
-  <section class="sq sq-hero" aria-labelledby="hero-h">
+  <section class="sq sq-hero" id="intro" aria-labelledby="hero-h">
     <div class="element" aria-hidden="true"><span class="n">0</span><span class="sym">Bf</span><span class="w">BACKFIRE</span></div>
     <h1 id="hero-h">The Backfire Awards</h1>
     <p class="sq-tag">For outstanding achievement in unintended consequences.</p>
@@ -35,16 +35,16 @@
     <p class="sq-down" aria-hidden="true">Two awards ↓</p>
   </section>
 
-  <section class="sq sq-award aw-midgley" aria-labelledby="mg-h">
+  <section class="sq sq-award aw-midgley" id="midgley" aria-labelledby="mg-h">
     <div class="element" aria-hidden="true"><span class="n">No. 1</span><span class="sym">Mg</span><span class="w">MIDGLEY</span></div>
     <h2 id="mg-h">The Midgley</h2>
     <p class="sq-why">Thomas Midgley Jr. invented leaded gasoline and Freon. Both solved real problems, and the world spent decades cleaning up after them.</p>
     <p class="sq-for">For backfires at world scale.</p>
     <p class="sq-text">Anyone can nominate one. Judges give it an Oops Score, readers give it a Herd Score, and the winners are named each year.</p>
-    <p class="sq-go"><a href="#list">See the nominees</a> <a href="/midgley">About the Midgley</a></p>
+    <p class="sq-go"><a href="#feed">See the nominees</a> <a href="/midgley">About the Midgley</a></p>
   </section>
 
-  <section class="sq sq-award aw-murphy" aria-labelledby="mu-h">
+  <section class="sq sq-award aw-murphy" id="murphy" aria-labelledby="mu-h">
     <div class="element" aria-hidden="true"><span class="n">No. 2</span><span class="sym">Mu</span><span class="w">MURPHY</span></div>
     <h2 id="mu-h">The Murphy</h2>
     <p class="sq-why">Murphy's law: anything that can go wrong will go wrong. Drop your toast and it lands butter side down.</p>
@@ -53,7 +53,7 @@
     <p class="sq-go"><a href="#nominate" data-open-sheet="murphy">Share your Murphy</a> <a href="/murphy">About the Murphy</a></p>
   </section>
 
-  <div class="carousel sq-carousel" data-carousel>
+  <div class="carousel sq-carousel" id="rules" data-carousel>
     <div class="cc-track" tabindex="0" aria-label="What makes a good nominee, 3 cards">
       <section class="sq sq-rule"><p class="sq-label">What makes a good nominee · 1 of 3</p><h2>It worked</h2><p class="sq-text">The idea was a clever, successful answer to a real problem. A bad product that never worked doesn't count.</p><p class="sq-down" aria-hidden="true">Swipe →</p></section>
       <section class="sq sq-rule"><p class="sq-label">What makes a good nominee · 2 of 3</p><h2>It caused harm somewhere else</h2><p class="sq-text">The damage landed on people or places the inventors weren't thinking about. Leaded gasoline made engines run better, and the lead ended up in children's blood.</p></section>
@@ -66,37 +66,24 @@
     </div>
   </div>
 
-  <section class="sq sq-question" aria-labelledby="q-h">
+  <section class="sq sq-question" id="question" aria-labelledby="q-h">
     <p class="sq-label">The serious question behind the joke</p>
     <h2 id="q-h">What will win a Midgley thirty years from now?</h2>
     <p class="sq-text">Better to try and fail than never try. Mostly. Mark a nominee <b>Prospective</b> to name a decision being made today, in transportation, housing, energy, AI or city-building, before it wins.</p>
     <p class="sq-go"><a href="#nominate" data-open-sheet="midgley">Nominate one</a></p>
   </section>
 
-  <div class="bar">
-    <div class="seg" role="group" aria-label="Sort">
-      <button id="sort-top" data-sort="top" aria-pressed="true">Top</button>
-      <button id="sort-new" data-sort="new" aria-pressed="false">New</button>
-      <button id="sort-debated" data-sort="debated" aria-pressed="false">Debated</button>
-      <button data-sort="oops" aria-pressed="false" data-needs="scores">Top Oops</button>
-      <button data-sort="herd" aria-pressed="false" data-needs="scores">Top Herd</button>
-    </div>
-    <button class="primary" type="button" data-open-sheet="midgley">Nominate</button>
-    <div class="filters">
-      <select id="flt-domain" aria-label="Filter by field"></select>
-      <select id="flt-harm" aria-label="Filter by kind of harm"></select>
-      <select id="flt-status" aria-label="Filter by status"></select>
-      <select id="flt-know" aria-label="Filter by knowability"></select>
-    </div>
-    <span class="count" id="count" aria-live="polite"></span>
-  </div>
+  <section class="sq sq-gap" id="gap" aria-labelledby="gap-h">
+    <p class="sq-label">The gender gap</p>
+    <h2 id="gap-h">Most nominees are men</h2>
+    <p class="sq-text">We estimate women make up only 2 to 5 percent of people who qualify for a Midgley. For most of history, women were kept out of the places where these backfires start: industrial labs, scientific academies, and high-level military and economic planning. Women who did hold power, such as queens and empresses, mostly made local political or military mistakes, not world-scale technical ones.</p>
+    <p class="sq-text">We want a future where women have every opportunity to win a Midgley. Some say that future would have fewer backfires. We would like to find out. <a href="/n/magie">Meet Lizzie Magie</a>.</p>
+  </section>
 
+  <h2 class="feed-h" id="feed">The nominees</h2>
+  <div class="feed" id="feed-posts"></div>
 
-  <p class="notice" id="notice" hidden></p>
-  <nav class="cats" id="cats" aria-label="Categories" data-needs="categories"></nav>
-  <div class="list" id="list" aria-live="polite"><p class="empty">The nominees couldn't load. Refresh to try again.</p></div>
-
-  <section class="sq sq-oops" aria-labelledby="sub-h">
+  <section class="sq sq-oops" id="oops" aria-labelledby="sub-h">
     <p class="sq-label">The newsletter</p>
     <h2 id="sub-h">The Weekly Oops</h2>
     <p class="sq-text">One short email a week: a new backfire, the best Murphys, and who won. Unsubscribe any time.</p>
@@ -106,7 +93,7 @@
   <footer class="site-foot" id="site-foot"></footer>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
-<script type="module" src="/app.js"></script>
+<script type="module" src="/feed.js"></script>
 <script type="module" src="/carousel.js"></script>
 </body>
 </html>

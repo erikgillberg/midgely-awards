@@ -3,7 +3,7 @@
 export async function api(path, opts = {}) {
   const res = await fetch(path, { cache: "no-store", ...opts, headers: { "content-type": "application/json", ...(opts.headers || {}) } });
   const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(body.error || "Request failed (" + res.status + ")");
+  if (!res.ok) { const err = new Error(body.error || "Request failed (" + res.status + ")"); Object.assign(err, body, { status: res.status }); throw err; }
   return body;
 }
 
@@ -35,6 +35,43 @@ async function turnstileFor(form) {
 function resetTurnstile(form) {
   const w = tsWidgets.get(form);
   if (w && window.turnstile) { window.turnstile.reset(w.id); form.dataset.ts = ""; }
+}
+
+// ---------- "already nominated?" while typing a nominee's name
+let matchTimer = null;
+document.addEventListener("input", (e) => {
+  if (e.target.id !== "s-name") return;
+  clearTimeout(matchTimer);
+  const q = e.target.value.trim();
+  const box = $("#s-match");
+  if (q.length < 3) { box.hidden = true; return; }
+  matchTimer = setTimeout(async () => {
+    try {
+      const r = await api("/api/match?q=" + encodeURIComponent(q));
+      box.hidden = !r.matches.length;
+      box.innerHTML = r.matches.length ? `<p>Already nominated:</p>` + r.matches.map((m) => `<a href="${m.path}"><b>${m.name.replace(/</g, "&lt;")}</b> ${m.work.replace(/</g, "&lt;")} <span>Open it →</span></a>`).join("") + `<p class="sh-fine">If it's the same one, add your case in its comments instead.</p>` : "";
+    } catch (err) { box.hidden = true; }
+  }, 250);
+});
+
+// ---------- after a Murphy: offer its cards as images to post
+async function offerMurphyCards(m) {
+  const d = $(".sh-done", sheet);
+  let b = d.querySelector("[data-make-cards]");
+  if (!b) { b = document.createElement("button"); b.type = "button"; b.className = "ghost"; b.dataset.makeCards = ""; b.textContent = "Make my Murphy cards for Instagram"; d.insertBefore(b, d.querySelector("[data-close-sheet]")); }
+  b.hidden = false;
+  b.onclick = async () => {
+    b.disabled = true; b.textContent = "Making the cards…";
+    const { murphyCarouselHTML } = await import("./shared.js");
+    const { shareCards } = await import("./share.js");
+    const holder = document.createElement("div");
+    holder.className = "offstage";
+    holder.innerHTML = murphyCarouselHTML({ fix: m.fix, oops: m.oops, name: m.name });
+    document.body.appendChild(holder);
+    await Promise.all([...holder.querySelectorAll("img")].map((i) => (i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; }))));
+    await shareCards([...holder.querySelectorAll(".cc")], "My Murphy", location.origin + "/murphy");
+    holder.remove(); b.disabled = false; b.textContent = "Make my Murphy cards for Instagram";
+  };
 }
 
 // ---------- the sheet
@@ -104,7 +141,7 @@ if (sheet) {
       if (!body.fix || !body.oops) { msg.textContent = "Tell us what was fixed and what went oops."; return; }
       if (body.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(body.email)) { msg.textContent = "That email address doesn't look right."; return; }
       path = "/api/murphys";
-      thanks = "We read every Murphy. If we feature yours, it'll be in The Weekly Oops or on our social accounts.";
+      thanks = "We read every Murphy. If we feature yours, it'll be in The Weekly Oops or on our social accounts. Want to post it yourself? Make your cards below.";
     }
     await configReady;
     if (config.turnstileSiteKey && !form.dataset.ts) { msg.textContent = "Complete the human check first."; return; }
@@ -115,7 +152,11 @@ if (sheet) {
       await api(path, { method: "POST", body: JSON.stringify(body) });
       form.reset();
       done(thanks);
-    } catch (err) { msg.textContent = "That didn't send: " + err.message; }
+      if (path === "/api/murphys") offerMurphyCards(body);
+    } catch (err) {
+      msg.textContent = "That didn't send: " + err.message;
+      if (err.existing && err.existing.path) msg.innerHTML += ` <a href="${err.existing.path}">See it and add your case in the comments</a>.`;
+    }
     resetTurnstile(form);
     btn.disabled = false;
   });
@@ -141,3 +182,20 @@ document.addEventListener("submit", async (e) => {
   } catch (err) { msg.textContent = err.message; resetTurnstile(form); }
   btn.disabled = false;
 });
+
+// ---------- the More menu
+const panel = $("#menu-panel");
+if (panel) {
+  const setMenu = (open) => {
+    panel.hidden = !open;
+    document.querySelectorAll("[data-menu]").forEach((b) => b.setAttribute("aria-expanded", String(open)));
+    document.documentElement.classList.toggle("menu-open", open);
+  };
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-menu]")) { setMenu(panel.hidden); return; }
+    if (e.target.closest("[data-menu-close]") || e.target === panel) setMenu(false);
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) setMenu(false); });
+}
+// Mark the current page in the menu.
+document.querySelectorAll(".nav-i[href]").forEach((a) => { if (a.getAttribute("href") === location.pathname) a.setAttribute("aria-current", "page"); });

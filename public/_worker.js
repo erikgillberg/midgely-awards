@@ -19,10 +19,10 @@ import {
   SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML, categoricTableHTML, categoricLegendHTML,
-  postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf,
+  postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath,
 } from "./shared.js";
 
-const SCHEMA_VERSION = 9;
+const SCHEMA_VERSION = 10;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Other hostnames that send visitors to the home page at SITE.
@@ -100,6 +100,7 @@ const NEW_COLUMNS = {
     ["born", "INTEGER"], ["helped", "INTEGER"], ["harmed", "INTEGER"],
   ],
   comments: [["hidden", "INTEGER DEFAULT 0"], ["reports", "INTEGER DEFAULT 0"]],
+  murphys: [["slug", "TEXT"], ["featured_at", "TEXT"]], // v10: featured Murphys are public posts at /m/<slug>
 };
 
 // Founding class. Fields: id, name, years, work, solved, backfire, knowable, domain, harms, status, award, fix, fixUrl
@@ -467,6 +468,21 @@ async function loadNominees(db, where, withComments, admin = false) {
   };
 }
 
+// A post anyone can vote on or comment on: an approved nominee or a featured Murphy.
+const postExists = (db, id) => db.prepare(
+  "SELECT 1 FROM nominees WHERE id = ? AND state = 'approved' UNION ALL SELECT 1 FROM murphys WHERE id = ? AND state = 'featured' LIMIT 1"
+).bind(id, id).first();
+
+async function loadMurphys(db) {
+  const [ms, herd] = await db.batch([
+    db.prepare("SELECT id, slug, fix, oops, name, created_at, featured_at FROM murphys WHERE state = 'featured' ORDER BY featured_at DESC LIMIT 200"),
+    db.prepare("SELECT nominee_id, SUM(yes) AS y, COUNT(*) AS t FROM herd_votes WHERE nominee_id IN (SELECT id FROM murphys WHERE state = 'featured') GROUP BY nominee_id"),
+  ]);
+  const h = Object.fromEntries(herd.results.map((x) => [x.nominee_id, x]));
+  return ms.results.map((m) => ({ id: m.id, slug: m.slug, fix: m.fix, oops: m.oops, name: m.name || "", createdAt: m.featured_at || m.created_at,
+    herdYes: h[m.id] ? h[m.id].y : 0, herdTotal: h[m.id] ? h[m.id].t : 0 }));
+}
+
 async function getState(db, url, ctx) {
   const key = stateCacheKey(url);
   try {
@@ -474,8 +490,10 @@ async function getState(db, url, ctx) {
     if (hit) return hit;
   } catch {}
   const { nominees, comments } = await loadNominees(db, "state = 'approved'", true);
+  const murphys = await loadMurphys(db);
   const body = JSON.stringify({
     nominees,
+    murphys,
     comments,
     generatedAt: new Date().toISOString(),
   });
@@ -506,6 +524,22 @@ async function forward(env, kind, data) {
   }
   const results = await Promise.allSettled(jobs);
   results.forEach((x) => { if (x.status === "rejected" || (x.value && !x.value.ok)) console.error("forward failed", kind, x.reason || x.value.status); });
+}
+
+// "Fritz Haber", "haber, fritz" and "Dr. Fritz Haber" all reduce to the same words.
+const normName = (s) => String(s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+  .replace(/\b(dr|sir|mr|mrs|ms|jr|sr|the|inc|co|corp|company)\b\.?/g, " ").replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
+// A match when every word typed so far starts a word of the name, and the surname (last word) is among them.
+function nameMatches(name, q) {
+  const nw = name.split(" "), qw = q.split(" ").filter(Boolean);
+  if (!qw.length) return false;
+  return qw.every((w) => nw.some((x) => x.startsWith(w))) && (qw.length > 1 || nw[nw.length - 1].startsWith(qw[0]) || nw.length === 1);
+}
+async function findDuplicate(db, name) {
+  const q = normName(name);
+  if (!q) return null;
+  const rows = await db.prepare("SELECT name, work, slug, state FROM nominees WHERE state IN ('approved','pending')").all();
+  return rows.results.find((r) => normName(r.name) === q) || null;
 }
 
 async function insertNominee(db, n, state) {
@@ -567,11 +601,23 @@ async function handleApi(request, env, url, ctx) {
     if (n.wikiName === null || n.wikiWork === null) return bad("Wikipedia links have to point to a page on wikipedia.org.");
     if (!n.name || !n.work || !n.solved || !n.backfire) return bad("Fill in the nominee, the achievement, and both sides of the ledger.");
     n.meant = clean(b.meant, 600);
+    const dupe = await findDuplicate(db, n.name);
+    if (dupe) return json({ error: `${dupe.name} is already nominated.`, existing: { name: dupe.name, work: dupe.work, path: dupe.state === "approved" ? "/n/" + dupe.slug : "" } }, 409);
     const state = env.AUTO_APPROVE === "1" ? "approved" : "pending";
     const created = await insertNominee(db, n, state);
     ctx.waitUntil(forward(env, "nomination", { name: n.name, work: n.work, solved: n.solved, backfire: n.backfire, domain: n.domain, author: n.author }));
     if (state === "approved") await bustState(url);
     return json({ status: state, nominee: state === "approved" ? created : null }, 201);
+  }
+
+  // Nominees whose name looks like the query, for the Nominate form's "already nominated" check.
+  if (path === "/api/match" && method === "GET") {
+    const q = normName(url.searchParams.get("q") || "");
+    if (q.length < 3) return json({ matches: [] });
+    const rows = await db.prepare("SELECT name, work, slug FROM nominees WHERE state = 'approved'").all();
+    const matches = rows.results.filter((r) => nameMatches(normName(r.name), q)).slice(0, 5)
+      .map((r) => ({ name: r.name, work: r.work, path: "/n/" + r.slug }));
+    return json({ matches });
   }
 
   if (path === "/api/vote" && method === "POST") {
@@ -580,7 +626,7 @@ async function handleApi(request, env, url, ctx) {
     const voter = b && b.voter;
     if (!ID_RE.test(nomineeId) || !VOTER_RE.test(voter || "")) return bad("Invalid vote.");
     if (await rateLimited(db, request, env, "vote")) return bad("Slow down a little and try again shortly.", 429);
-    const exists = await db.prepare("SELECT 1 FROM nominees WHERE id = ? AND state = 'approved'").bind(nomineeId).first();
+    const exists = await postExists(db, nomineeId);
     if (!exists) return bad("That nominee isn't available.", 404);
     const had = await db.prepare("SELECT 1 FROM votes WHERE nominee_id = ? AND voter = ?").bind(nomineeId, voter).first();
     if (had) await db.prepare("DELETE FROM votes WHERE nominee_id = ? AND voter = ?").bind(nomineeId, voter).run();
@@ -598,7 +644,7 @@ async function handleApi(request, env, url, ctx) {
     const vote = b && b.vote; // "yes", "no", or "" to withdraw
     if (!ID_RE.test(nomineeId) || !VOTER_RE.test(voter || "") || !["yes", "no", ""].includes(vote)) return bad("Invalid vote.");
     if (await rateLimited(db, request, env, "vote")) return bad("Slow down a little and try again shortly.", 429);
-    const exists = await db.prepare("SELECT 1 FROM nominees WHERE id = ? AND state = 'approved'").bind(nomineeId).first();
+    const exists = await postExists(db, nomineeId);
     if (!exists) return bad("That nominee isn't available.", 404);
     if (vote) {
       await db.prepare(`INSERT INTO herd_votes (nominee_id, voter, yes, created_at) VALUES (?,?,?,?)
@@ -650,7 +696,7 @@ async function handleApi(request, env, url, ctx) {
     const author = clean(b.author, 60);
     if (!ID_RE.test(nomineeId) || !text) return bad("Write a comment first.");
     if (await rateLimited(db, request, env, "comment")) return bad("You're commenting faster than we allow. Try again in a few minutes.", 429);
-    const exists = await db.prepare("SELECT 1 FROM nominees WHERE id = ? AND state = 'approved'").bind(nomineeId).first();
+    const exists = await postExists(db, nomineeId);
     if (!exists) return bad("That nominee isn't available.", 404);
     const id = crypto.randomUUID();
     const createdAt = new Date().toISOString();
@@ -786,7 +832,16 @@ async function handleAdmin(request, env, url, db, path, method) {
   if (mm && method === "PATCH") {
     const b = (await readBody(request)) || {};
     if (!["new", "featured", "archived"].includes(b.state)) return bad("State must be new, featured or archived.");
+    if (b.state === "featured") {
+      const m = await db.prepare("SELECT slug, fix FROM murphys WHERE id = ?").bind(mm[1]).first();
+      if (m && !m.slug) {
+        let slug = slugify(m.fix.split(/\s+/).slice(0, 6).join(" "));
+        for (let i = 2; await db.prepare("SELECT 1 FROM murphys WHERE slug = ?").bind(slug).first(); i++) slug = slugify(m.fix.split(/\s+/).slice(0, 6).join(" ")) + "-" + i;
+        await db.prepare("UPDATE murphys SET slug = ?, featured_at = COALESCE(featured_at, ?) WHERE id = ?").bind(slug, new Date().toISOString(), mm[1]).run();
+      }
+    }
     await db.prepare("UPDATE murphys SET state = ? WHERE id = ?").bind(b.state, mm[1]).run();
+    await bustState(url);
     return json({ ok: true });
   }
 
@@ -977,7 +1032,7 @@ async function homePage(request, env, url, ctx, category) {
   all.forEach((n) => n.domain && (counts[n.domain] = (counts[n.domain] || 0) + 1));
   const noms = category ? all.filter((n) => n.domain === category) : all;
   const fill = {};
-  if (st) fill["#list"] = listHTML(noms, st.comments, flags);
+  if (st) fill[category ? "#list" : "#feed-posts"] = category ? listHTML(noms, st.comments, flags) : await feedHTML(request, env, url, st);
   if (flags.categories) fill["#cats"] = categoryChipsHTML(category, counts);
   const page = await asset(env, url, request, category ? "/category-page" : "/");
   if (!category) return decorate(page, env, url, { canonical: SITE + "/", fill });
@@ -1008,16 +1063,32 @@ async function nomineePage(request, env, url, ctx, key) {
   const page = await asset(env, url, request, "/nominee");
   const pct = herdPct(n);
   const scores = flags.scores ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Herd Score ${pct}%` : ""].filter(Boolean).join(", ") : "";
-  const extra = await nomineeExtras(request, env, url, n);
   return decorate(page, env, url, {
     canonical: SITE + nomineePath(n),
     title: `${n.name}: ${n.work} · The Backfire Awards`,
     desc: `${scores ? scores + ". " : ""}Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
     fill: {
-      "#list": postHTML(n, { flags, thread }), ...extra,
-      "#more-feed": `<h2 class="feed-h">More nominees</h2><div class="list">${st.nominees.filter((x) => x.id !== n.id && x.id !== HONOREE).sort(byTop(flags)).map((x) => nomCardHTML(x, flags)).join("")}</div>`,
+      "#list": postHTML(n, { flags, thread, open: true, carousel: await carouselFor(request, env, url, n), more: await moreFor(env, n) }),
+      "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, n.id),
     },
     attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelOf(n.domain).deep}`]] },
+  });
+}
+
+async function murphyPage(request, env, url, ctx, key) {
+  const st = await siteState(env, url, ctx);
+  const m = st && (st.murphys || []).find((x) => x.slug === key);
+  const page = await asset(env, url, request, "/nominee");
+  if (!m) return decorate(page, env, url, { title: "Not found · The Backfire Awards", fill: { "#list": `<p class="notice">That Murphy isn't here. <a href="/">See the feed</a>.</p>` } });
+  return decorate(page, env, url, {
+    canonical: SITE + murphyPath(m),
+    title: `A Murphy: ${m.fix.slice(0, 60)} · The Backfire Awards`,
+    desc: `${m.fix} ${m.oops}`.slice(0, 280),
+    fill: {
+      "#list": murphyPostHTML(m, { flags: flagsOf(env), thread: st.comments.filter((c) => c.nomineeId === m.id), open: true }),
+      "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, m.id),
+    },
+    attrs: { body: [["data-nominee", m.id], ["data-bg", "cat"], ["style", "--scene:url(/img/scenes/murphy.jpg);--cat:#0B2230"]] },
   });
 }
 
@@ -1050,31 +1121,58 @@ async function labPage(request, env, url, ctx, key) {
   return decorate(page, env, url, { title: `Lab: ${n ? n.name : key} · The Backfire Awards`, fill });
 }
 
-// A nominee page's carousel (when one is written), image credits and further reading.
-async function nomineeExtras(request, env, url, n) {
-  const out = {};
-  const data = (await asset(env, url, request, `/carousels/${n.slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)) || autoCarousel(n);
-  out["#nominee-carousel"] = carouselHTML(n, data, flagsOf(env));
+// Hand-written carousels live in /carousels/<slug>.json; every other nominee gets one built from its write-up.
+const HANDWRITTEN = new Set(["haber"]);
+const carouselCache = new Map();
+async function carouselFor(request, env, url, n) {
+  if (!HANDWRITTEN.has(n.slug)) return carouselHTML(n, autoCarousel(n), flagsOf(env));
+  if (!carouselCache.has(n.slug)) {
+    // A plain request (no browser cache headers), so the answer is the file itself, never "not modified".
+    const data = await env.ASSETS.fetch(new URL(`/carousels/${n.slug}.json`, url).toString()).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    if (data) carouselCache.set(n.slug, data);
+    else return carouselHTML(n, autoCarousel(n), flagsOf(env));
+  }
+  return carouselHTML(n, carouselCache.get(n.slug) || autoCarousel(n), flagsOf(env));
+}
+
+// The full write-up behind "more": the seven sections, further reading and image credits.
+async function moreFor(env, n) {
+  const parts = [writeupHTML(n)];
   const db = findD1(env);
-  if (!db) return out;
-  const [media, reads] = await db.batch([
-    db.prepare("SELECT * FROM media WHERE nominee_id = ? ORDER BY role"),
-    db.prepare("SELECT * FROM readings WHERE nominee_id = ? ORDER BY sort"),
-  ].map((q) => q.bind(n.id))).catch(() => [{ results: [] }, { results: [] }]);
-  const parts = [];
-  if (!db) return out;
-  if (reads.results.length) {
-    parts.push(`<section><h2>Further reading</h2><ul class="reading">${reads.results.map((x) => {
-      const t = x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : `<cite>${esc(x.title)}</cite>`;
-      return `<li>${t}<span>${esc([x.author, x.publisher, x.year].filter(Boolean).join(", "))}${x.kind ? ` · ${esc(x.kind)}` : ""}</span></li>`;
-    }).join("")}</ul></section>`);
+  if (db) {
+    const [media, reads] = await db.batch([
+      db.prepare("SELECT * FROM media WHERE nominee_id = ? ORDER BY role"),
+      db.prepare("SELECT * FROM readings WHERE nominee_id = ? ORDER BY sort"),
+    ].map((q) => q.bind(n.id))).catch(() => [{ results: [] }, { results: [] }]);
+    if (reads.results.length) {
+      parts.push(`<section><h2>Further reading</h2><ul class="reading">${reads.results.map((x) => {
+        const t = x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : `<cite>${esc(x.title)}</cite>`;
+        return `<li>${t}<span>${esc([x.author, x.publisher, x.year].filter(Boolean).join(", "))}${x.kind ? ` · ${esc(x.kind)}` : ""}</span></li>`;
+      }).join("")}</ul></section>`);
+    }
+    if (media.results.length) {
+      parts.push(`<section><h2>Image credits</h2><ul class="credits">${media.results.map((m) =>
+        `<li><img src="${esc(m.path)}" alt="" width="64" height="64" loading="lazy"><div><b>${esc(m.title)}</b><span>${esc([m.creator, m.made].filter(Boolean).join(", "))}. ${esc(m.license)}.${m.edits ? ` ${esc(m.edits)}.` : ""}</span><a href="${esc(m.source_page)}" target="_blank" rel="noopener">Source</a></div></li>`).join("")}</ul></section>`);
+    }
   }
-  if (media.results.length) {
-    parts.push(`<section><h2>Image credits</h2><ul class="credits">${media.results.map((m) =>
-      `<li><img src="${esc(m.path)}" alt="" width="64" height="64" loading="lazy"><div><b>${esc(m.title)}</b><span>${esc([m.creator, m.made].filter(Boolean).join(", "))}. ${esc(m.license)}.${m.edits ? ` ${esc(m.edits)}.` : ""}</span><a href="${esc(m.source_page)}" target="_blank" rel="noopener">Source</a></div></li>`).join("")}</ul></section>`);
+  return parts.join("");
+}
+
+// The feed: nominees by the top sort, with a featured Murphy after every third.
+async function feedHTML(request, env, url, st, exclude = "") {
+  const flags = flagsOf(env);
+  const noms = st.nominees.filter((x) => x.id !== HONOREE && x.id !== exclude).sort(byTop(flags));
+  const murphys = (st.murphys || []).filter((m) => m.id !== exclude);
+  const thread = (id) => st.comments.filter((c) => c.nomineeId === id);
+  const out = [];
+  let mi = 0;
+  for (let i = 0; i < noms.length; i++) {
+    const n = noms[i];
+    out.push(postHTML(n, { flags, thread: thread(n.id), carousel: await carouselFor(request, env, url, n), more: writeupHTML(n) }));
+    if ((i + 1) % 3 === 0 && mi < murphys.length) { const m = murphys[mi++]; out.push(murphyPostHTML(m, { flags, thread: thread(m.id) })); }
   }
-  out["#nominee-more"] = `<details class="post-details"><summary>Read more: the full write-up, sources and image credits</summary>${writeupHTML(n)}${parts.join("")}</details>`;
-  return out;
+  while (mi < murphys.length) { const m = murphys[mi++]; out.push(murphyPostHTML(m, { flags, thread: thread(m.id) })); }
+  return out.join("");
 }
 
 // Links on a non-production host stay on that host, so staging and previews keep working.
@@ -1083,7 +1181,7 @@ const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
-  const paths = ["/", "/table", "/midgley", "/murphy", "/awards", "/goat", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
+  const paths = ["/", "/search", "/table", "/midgley", "/murphy", "/awards", "/goat", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
   if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -1120,12 +1218,13 @@ export default {
     if (p === "/" || p === "/index.html") return homePage(request, env, url, ctx, "");
     const n = p.match(/^\/n\/([A-Za-z0-9-]{1,64})$/);
     if (n) return nomineePage(request, env, url, ctx, n[1]);
+    const mu = p.match(/^\/m\/([a-z0-9-]{1,80})$/);
+    if (mu) return murphyPage(request, env, url, ctx, mu[1]);
     if (p === "/category") return flags.categories ? Response.redirect(SITE_ORIGIN(url) + "/#cats", 302) : Response.redirect(SITE_ORIGIN(url) + "/", 302);
     const c = p.match(/^\/category\/([a-z0-9-]{1,60})$/);
     if (c) {
       const key = Object.keys(CATEGORY_SLUGS).find((k) => CATEGORY_SLUGS[k] === c[1]);
-      if (!flags.categories || !key) return Response.redirect(SITE_ORIGIN(url) + "/", 302);
-      return homePage(request, env, url, ctx, key);
+      return Response.redirect(SITE_ORIGIN(url) + "/search" + (key ? "?cat=" + key : ""), 302);
     }
     if (p === "/nominee" || p === "/category-page") return Response.redirect(SITE_ORIGIN(url) + "/", 302); // page shells, filled above
     const lab = p.match(/^\/lab\/carousel\/([a-z0-9-]{1,64})$/);
@@ -1145,7 +1244,7 @@ export default {
     const type = res.headers.get("content-type") || "";
     // Scripts import each other as "./shared.js"; version those imports too.
     if (type.includes("javascript") && res.ok) {
-      const js = (await res.text()).replace(/from "\.\/([a-z-]+\.js)"/g, `from "./$1?v=${ver()}"`);
+      const js = (await res.text()).replace(/(from |import\()"\.\/([a-z-]+\.js)"/g, (m, how, file) => `${how}"./${file}?v=${ver()}"`);
       const out = new Response(js, res);
       if (url.searchParams.get("v")) out.headers.set("cache-control", "public, max-age=31536000, immutable");
       if (url.hostname !== SITE_HOST) out.headers.set("X-Robots-Tag", "noindex, nofollow");

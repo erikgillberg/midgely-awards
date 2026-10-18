@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Search · The Backfire Awards</title>
+<meta name="description" content="Search every nominee and Murphy by name, category, award and status.">
+<link rel="canonical" href="https://midgleyawards.com/search">
+<meta property="og:title" content="Search · The Backfire Awards">
+<meta property="og:description" content="Meet Goat, chief judge of the Backfire Awards.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://midgleyawards.com/search">
+<meta property="og:image" content="https://midgleyawards.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Search · The Backfire Awards">
+<meta name="twitter:description" content="Meet Goat, chief judge of the Backfire Awards.">
+<meta name="twitter:image" content="https://midgleyawards.com/og.png">
+<meta name="theme-color" content="#12161C">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body data-bg="orbit">
+<header class="site-head" id="site-head"></header>
+<div class="wrap search-page">
+  <form class="search-box" role="search" onsubmit="return false">
+    <label class="hp" for="q">Search</label>
+    <input id="q" type="search" placeholder="Search nominees and Murphys" autocomplete="off" autofocus>
+  </form>
+  <div class="chips" role="group" aria-label="Award" data-filter="award">
+    <button type="button" data-v="" aria-pressed="true">All</button><button type="button" data-v="midgley" aria-pressed="false">The Midgley</button><button type="button" data-v="murphy" aria-pressed="false">The Murphy</button>
+  </div>
+  <div class="chips" role="group" aria-label="Category" data-filter="cat" id="cat-chips"></div>
+  <div class="chips" role="group" aria-label="Status" data-filter="status">
+    <button type="button" data-v="" aria-pressed="true">Any time</button><button type="button" data-v="historic" aria-pressed="false">Historic</button><button type="button" data-v="unfolding" aria-pressed="false">Still unfolding</button><button type="button" data-v="prospective" aria-pressed="false">Prospective</button>
+  </div>
+  <div class="search-bar">
+    <span id="count" aria-live="polite"></span>
+    <label>Sort <select id="sort"><option value="top">Top</option><option value="new">New</option><option value="debated">Most discussed</option><option value="oops">Top Oops</option><option value="herd">Top Herd</option></select></label>
+  </div>
+  <div class="list results" id="results"><p class="empty">Loading…</p></div>
+  <footer class="site-foot" id="site-foot"></footer>
+</div>
+<script type="module" src="/search.js"></script>
+</body>
+</html>
