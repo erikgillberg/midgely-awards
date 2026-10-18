@@ -54,10 +54,17 @@ export const LINKS = {
   socials: [],        // [{ name: "Instagram", url: "https://..." }]
 };
 
-// The Weekly Oops sign-up form from Beehiiv. The loader script draws the form where it sits.
-export const weeklyOopsHTML = () =>
-  `<div class="beehiiv-embed"><script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="${LINKS.beehiivForm}"></script></div>`;
-
+// The Weekly Oops sign-up: our own form. The server keeps the address and passes it on to the newsletter service.
+export const signupHTML = (where = "foot") =>
+  `<form class="signup" data-signup novalidate>
+    <label class="hp" for="su-${where}">Email</label>
+    <input id="su-${where}" type="email" required placeholder="you@example.com" autocomplete="email" aria-label="Email address">
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="primary" type="submit">Subscribe</button>
+    <div class="ts" data-ts></div>
+    <span class="msg" role="status"></span>
+  </form>`;
+export const weeklyOopsHTML = () => signupHTML("x");
 // Scores
 export const MIN_JUDGES = 2;      // an Oops Score is public once this many judges have scored
 export const MIN_HERD_VOTES = 10; // a Herd Score shows once this many readers have voted
@@ -188,6 +195,58 @@ export function cardHTML(n, ctx = {}) {
   </article>`;
 }
 
+// A nominee as a post, under its carousel: who, the scores, the vote, sharing and the comments,
+// in the order people expect from a social feed. The full write-up lives below, behind "Read more".
+export function postHTML(n, ctx = {}) {
+  const flags = ctx.flags || {};
+  const thread = ctx.thread || [];
+  const reported = ctx.reported || {};
+  const j = jewelOf(n.domain);
+  const pct = herdPct(n);
+  const vote = flags.scores ? herdVoteHTML(n, ctx.herd)
+    : `<button class="up post-up" data-act="vote" aria-pressed="${!!ctx.mine}" aria-label="${ctx.mine ? "Withdraw vote for" : "Upvote"} ${esc(n.name)}">${upIcon}<span class="c">${n.score}</span></button>`;
+  return `<article class="post" id="nom-${esc(n.id)}" data-id="${esc(n.id)}" style="${jewelVars(j)}">
+    <header class="post-head">
+      ${elementHTML(n, "mini")}
+      <div><h1>${esc(n.name)}</h1><p>${esc([n.years, DOMAINS[n.domain]].filter(Boolean).join(" · "))}</p></div>
+    </header>
+    <div class="post-actions">
+      ${vote}
+      <button class="linkish" data-act="share">Share</button>
+      ${reported["n:" + n.id] ? `<span class="by">Reported</span>` : `<button class="linkish" data-act="report-nom">Report</button>`}
+    </div>
+    ${flags.scores ? `<p class="post-scores"><span>Oops Score <b>${n.oops ?? "?"}</b>${n.oops != null ? ` · ${esc(oopsBand(n.oops).label)}` : ""}</span><span>Herd Score <b>${pct != null ? pct + "%" : "?"}</b>${pct != null ? ` · ${n.herdTotal} votes` : ""}</span> <a href="/scores">How scores work</a></p>` : ""}
+    <p class="post-caption"><b>${esc(n.work)}.</b> ${esc(n.backfire)}</p>
+    <p class="post-by">${n.seeded ? "Founding class" : "Nominated by " + esc(n.author || "Anonymous") + " · " + esc(ago(n.createdAt))}</p>
+    <div class="thread post-thread">
+      <p class="post-ccount">${thread.length} comment${thread.length === 1 ? "" : "s"}</p>
+      ${thread.map((c) => `<div class="cm"><span class="who">${esc(c.author || "Anonymous")} · ${esc(ago(c.createdAt))}</span><p>${esc(c.text)}</p>
+        <div class="tools">${reported["c:" + c.id] ? `<span class="by">Reported</span>` : `<button class="linkish" data-act="report-c" data-cid="${esc(c.id)}">Report</button>`}</div></div>`).join("") || `<span class="by">No comments yet. Argue for or against.</span>`}
+      <div class="reply"><input id="cn-${esc(n.id)}" maxlength="60" placeholder="Your name" value="${esc(ctx.name || "")}" aria-label="Your name"><textarea id="c-${esc(n.id)}" maxlength="1000" placeholder="Make the case, or push back" aria-label="Comment"></textarea><button class="ghost" data-act="comment">Post</button></div>
+    </div>
+  </article>`;
+}
+
+// The full write-up for a nominee's page, behind "Read more". Further reading and image credits are added by the server.
+export const writeupHTML = (n) => fullSections(n);
+
+// A carousel for any nominee, built from its write-up, for nominees without a hand-written one.
+export function autoCarousel(n) {
+  const first = (t) => (String(t || "").match(/^.*?[.!?](\s|$)/) || [t || ""])[0].trim();
+  const slides = [];
+  if (n.meant) slides.push({ kind: "meant", label: "What it was meant to do", title: first(n.meant), text: n.meant });
+  slides.push({ kind: "right", label: "What went right", title: first(n.solved), text: n.solved });
+  slides.push({ kind: "oops", label: "What went oops", title: first(n.backfire), text: n.backfire });
+  if (n.gotRight) slides.push({ kind: "gotright", label: "What they got right", title: first(n.gotRight), text: n.gotRight });
+  slides.push({ kind: "foresight", label: "Could anyone have seen it coming?", title: KNOW[n.knowable] || "Not yet rated", text: n.foresight || "" });
+  const pk = PATTERNS.find((p) => p.name.toLowerCase() === String(n.pattern || "").toLowerCase());
+  if (pk) slides.push({ kind: "pattern", label: "Pattern", title: pk.name, patternKey: pk.key });
+  // Long texts make long titles; trim the repeat between title and text.
+  slides.forEach((s) => { if (s.text && s.title && s.text.startsWith(s.title)) s.text = s.text.slice(s.title.length).trim(); if (s.title.length > 70) { s.text = s.title + " " + (s.text || ""); s.title = s.label; } });
+  return { slug: n.slug, headline: String(n.work).split(" (")[0], dek: first(n.solved), scene: sceneOf(n), slides, auto: true };
+}
+export const sceneOf = (n) => `/img/scenes/${n.status === "prospective" || !DOMAINS[n.domain] ? "unsure" : n.domain}.jpg`;
+
 // A nominee in the list: a square card in its category's jewel, with its element tile.
 export function nomCardHTML(n, flags = {}) {
   const j = jewelOf(n.domain);
@@ -232,10 +291,10 @@ export function headerHTML(flags = {}) {
     <a class="brand" href="/"><span class="mini" aria-hidden="true">Bf</span><span>The Backfire Awards</span></a>
     <nav aria-label="Main">
       <a href="/">Nominees</a>
+      <a href="/table">The Table</a>
       <a href="/midgley">The Midgley</a>
       <a href="/murphy">The Murphy</a>
       <a href="/awards">The Awards</a>
-      ${flags.categories ? `<a href="/category">Categories</a>` : ""}
       <a href="/shop">Shop</a>
     </nav>
     <button class="nom-btn" type="button" data-open-sheet="">Nominate</button>
@@ -290,7 +349,7 @@ export function footerHTML() {
   return `<div class="site-foot-in">
     <div class="oops-mini">
       <p><b>The Weekly Oops</b> One short email a week about things that worked too well.</p>
-      ${weeklyOopsHTML()}
+      ${signupHTML("foot")}
     </div>
     <nav class="foot" aria-label="Site">
       <a href="/">Nominees</a>
@@ -321,6 +380,7 @@ export const PATTERNS = [
   { key: "resistance", name: "The cure breeds resistance", text: "Kill most of the problem and the survivors take over." },
   { key: "gamed", name: "The reward gets gamed", text: "People chase the incentive instead of the goal." },
   { key: "later", name: "Cheap now, paid later", text: "The bill arrives decades after the benefit." },
+  { key: "flipped", name: "The lesson flipped", text: "Built to teach one lesson, it taught the opposite." },
 ];
 
 // ---------------------------------------------------------------- lists
@@ -448,9 +508,10 @@ export function carouselHTML(n, data, flags = {}) {
   const total = data.slides.length + 3;
   const foot = (i) => `<footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>${i} / ${total}</span></footer>`;
   cards.push(`<section class="cc cc-hook" aria-roledescription="slide" aria-label="1 of ${total}">
-    ${data.portrait ? `<figure class="cc-portrait"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="eager"></figure>` : ""}
+    ${data.portrait ? `<figure class="cc-portrait"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="eager"></figure>`
+      : `<img class="cc-scene" src="${esc(data.scene || sceneOf(n))}" alt="" loading="eager">`}
     <div class="cc-hook-top">${elementHTML(n, "lg")}<p class="cc-kicker">${esc(n.name)}<br>${esc(n.years || "")}<br>${esc(DOMAINS[n.domain] || "")}</p></div>
-    <h2 class="cc-headline">${esc(data.headline)}</h2>
+    <h2 class="cc-headline ${data.headline.length > 22 ? "long" : data.headline.length > 13 ? "mid" : ""}">${esc(data.headline)}</h2>
     <p class="cc-dek">${esc(data.dek)}</p>
     <p class="cc-swipe" aria-hidden="true">Swipe <span>→</span></p>
     ${foot(1)}
@@ -471,7 +532,7 @@ export function carouselHTML(n, data, flags = {}) {
       <div class="cc-body">
         ${s.kind === "pattern"
           ? `<p class="cc-label cc-eyebrow">Pattern #${PATTERNS.findIndex((p) => p.key === s.patternKey) + 1}</p>`
-          : `<p class="cc-label"><span>${String(k + 1).padStart(2, "0")}</span> ${esc(s.label)}</p>`}
+          : `<p class="cc-label"><span>${String(k + 1).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
         ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${also}${patterns}
@@ -521,4 +582,69 @@ export function tableHTML(noms) {
       ${items.sort((a, b) => (a.catalogNo || 0) - (b.catalogNo || 0)).map((n) => `<a href="${nomineePath(n)}" title="${esc(n.name)}: ${esc(n.work)}">${elementHTML(n, "sm")}</a>`).join("")}</div>`;
   });
   return `<div class="ptable">${cols.join("")}</div>`;
+}
+
+// ---------------------------------------------------------------- the Categoric Table
+
+// What each category covers, with a few well-known backfires, for the table's legend.
+export const CATEGORY_INFO = {
+  health: { text: "Treatments, drugs and public health.", examples: ["Antibiotics in animal feed and the rise of resistant bacteria", "Thalidomide", "Radium tonics"] },
+  governance: { text: "Laws, rules and rewards that changed what people do.", examples: ["England's window tax, and the bricked-up windows", "Prohibition", "Bounties that bred the pests they paid for"] },
+  energy: { text: "How we power homes, factories and cars.", examples: ["Corn ethanol", "Coal smoke stacks built tall to clear the air nearby", "Biomass burning"] },
+  information: { text: "Computers, networks and software.", examples: ["Engagement-ranked social feeds", "Email, and spam", "Infinite scroll"] },
+  materials: { text: "Substances made to be useful and durable.", examples: ["CFCs and the ozone hole", "PFAS, the forever chemicals", "Asbestos"] },
+  food: { text: "Growing food and managing nature.", examples: ["Cane toads released in Australia", "DDT", "Kudzu planted to stop erosion"] },
+  finance: { text: "Products, prices and promotions.", examples: ["Planned obsolescence", "Bottled water", "The Landlord's Game, which became Monopoly"] },
+  cities: { text: "How we build places and move through them.", examples: ["Urban freeways through city neighborhoods", "Parking minimums", "Wider roads and the traffic they bring"] },
+  prospective: { text: "Decisions being made today that could win a Midgley in thirty years. Like the two rows under the periodic table, they sit apart.", examples: ["Nominate one"] },
+};
+
+// Where each category sits. Positions copy the periodic table: [row, column], rows 1 to 7 plus
+// rows 9 and 10 for the two separate rows. 118 squares in all.
+const PT_BLOCKS = [
+  ["health", [[1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]],
+  ["governance", [[2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2]]],
+  ["energy", [4, 5, 6, 7].flatMap((r) => [3, 4, 5, 6, 7].filter((c) => !(c === 3 && r >= 6)).map((c) => [r, c]))],
+  ["information", [4, 5, 6, 7].flatMap((r) => [8, 9, 10, 11, 12].map((c) => [r, c]))],
+  ["materials", [2, 3, 4, 5, 6, 7].flatMap((r) => [13, 14].map((c) => [r, c]))],
+  ["food", [2, 3, 4, 5, 6, 7].flatMap((r) => [15, 16].map((c) => [r, c]))],
+  ["finance", [[2, 17], [3, 17], [4, 17], [5, 17], [6, 17], [7, 17]]],
+  ["cities", [[1, 18], [2, 18], [3, 18], [4, 18], [5, 18], [6, 18], [7, 18]]],
+  ["prospective", [9, 10].flatMap((r) => Array.from({ length: 15 }, (_, i) => [r, i + 3]))],
+];
+
+export function categoricTableHTML(noms) {
+  const byCat = {};
+  [...noms].sort((a, b) => (a.catalogNo || 0) - (b.catalogNo || 0)).forEach((n) => {
+    const k = n.status === "prospective" ? "prospective" : DOMAINS[n.domain] ? n.domain : null;
+    if (k) (byCat[k] = byCat[k] || []).push(n);
+  });
+  const cells = [];
+  for (const [k, spots] of PT_BLOCKS) {
+    const j = k === "prospective" ? { deep: "#14181C", base: "#4A5560", light: "#D5DBE1" } : jewelOf(k);
+    const items = byCat[k] || [];
+    spots.forEach(([r, c], i) => {
+      const n = items[i];
+      const style = `grid-row:${r};grid-column:${c};${jewelVars(j)}`;
+      cells.push(n
+        ? `<a class="pt-cell filled" style="${style}" href="${nomineePath(n)}" title="${esc(n.name)}: ${esc(n.work)}">${elementHTML(n, "pt")}<span class="pt-more"><b>${esc(n.name)}</b>${esc(n.work)}</span></a>`
+        : `<div class="pt-cell empty" style="${style}" aria-hidden="true"><span class="pt-bf">Bf</span></div>`);
+    });
+  }
+  cells.push(`<div class="pt-mark" style="grid-row:6;grid-column:3">↓</div><div class="pt-mark" style="grid-row:7;grid-column:3">↓</div>`);
+  return cells.join("");
+}
+
+export function categoricLegendHTML() {
+  const keys = [...Object.keys(DOMAINS), "prospective"];
+  return keys.map((k) => {
+    const j = k === "prospective" ? { deep: "#14181C", base: "#4A5560", light: "#D5DBE1" } : jewelOf(k);
+    const g = k === "prospective" ? "" : groupOf(k);
+    const info = CATEGORY_INFO[k];
+    return `<details class="lg-item" style="${jewelVars(j)}">
+      <summary><span class="lg-box">${g}</span><span class="lg-name">${esc(k === "prospective" ? "Prospective" : DOMAINS[k])}</span><span class="lg-more">more</span></summary>
+      <p>${esc(info.text)}</p>
+      <ul>${info.examples.map((e) => `<li>${esc(e)}</li>`).join("")}</ul>
+    </details>`;
+  }).join("");
 }

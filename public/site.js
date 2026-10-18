@@ -120,3 +120,24 @@ if (sheet) {
     btn.disabled = false;
   });
 }
+
+// ---------- The Weekly Oops sign-up forms
+document.addEventListener("focusin", (e) => { const f = e.target.closest && e.target.closest("[data-signup]"); if (f) turnstileFor(f); });
+document.addEventListener("submit", async (e) => {
+  const form = e.target.closest("[data-signup]");
+  if (!form) return;
+  e.preventDefault();
+  const email = form.querySelector('input[type="email"]').value.trim();
+  const msg = form.querySelector(".msg");
+  const btn = form.querySelector('button[type="submit"]');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { msg.textContent = "That email address doesn't look right."; return; }
+  await configReady;
+  if (config.turnstileSiteKey && !form.dataset.ts) { msg.textContent = "Complete the human check first."; return; }
+  btn.disabled = true; msg.textContent = "";
+  try {
+    await api("/api/subscribe", { method: "POST", body: JSON.stringify({ email, website: form.querySelector('[name="website"]').value, turnstile: form.dataset.ts || "", utm: new URLSearchParams(location.search).get("utm_source") || "" }) });
+    form.querySelectorAll("input, button, [data-ts]").forEach((x) => (x.hidden = true));
+    msg.classList.add("ok"); msg.textContent = "You're on the list for The Weekly Oops.";
+  } catch (err) { msg.textContent = err.message; resetTurnstile(form); }
+  btn.disabled = false;
+});

@@ -1,0 +1,58 @@
+// Zoom and pan for the Categoric Table: buttons, ctrl/trackpad pinch, two-finger pinch,
+// and tapping a square zooms to it. At full zoom one square fills the frame.
+const view = document.querySelector(".pt-view");
+const grid = document.querySelector(".pt-grid");
+if (view && grid) {
+  let zoom = 1;
+  const base = () => view.clientWidth;               // the whole table fits the frame at zoom 1
+  // At full zoom one square fills the frame's shorter side.
+  const maxZoom = () => (18 * Math.min(view.clientWidth, view.clientHeight)) / view.clientWidth / 1.1;
+  function setZoom(z, cx = view.clientWidth / 2, cy = view.clientHeight / 2) {
+    z = Math.max(1, Math.min(maxZoom(), z));
+    const fx = (view.scrollLeft + cx) / grid.offsetWidth, fy = (view.scrollTop + cy) / grid.offsetHeight;
+    zoom = z;
+    grid.style.width = base() * zoom + "px";
+    view.scrollLeft = fx * grid.offsetWidth - cx;
+    view.scrollTop = fy * grid.offsetHeight - cy;
+    document.querySelector("[data-z-level]").textContent = Math.round(zoom * 100) + "%";
+  }
+  document.querySelector("[data-z='in']").onclick = () => setZoom(zoom * 1.6);
+  document.querySelector("[data-z='out']").onclick = () => setZoom(zoom / 1.6);
+  document.querySelector("[data-z='fit']").onclick = () => setZoom(1);
+  view.addEventListener("wheel", (e) => {
+    if (!e.ctrlKey && !e.metaKey) return;              // trackpad pinch arrives as ctrl+wheel
+    e.preventDefault();
+    const r = view.getBoundingClientRect();
+    setZoom(zoom * Math.exp(-e.deltaY / 200), e.clientX - r.left, e.clientY - r.top);
+  }, { passive: false });
+  let pinch = null;
+  const dist = (t) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  view.addEventListener("touchstart", (e) => { if (e.touches.length === 2) pinch = { d: dist(e.touches), z: zoom }; }, { passive: true });
+  view.addEventListener("touchmove", (e) => {
+    if (!pinch || e.touches.length !== 2) return;
+    e.preventDefault();
+    const r = view.getBoundingClientRect();
+    const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - r.left, cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - r.top;
+    setZoom(pinch.z * dist(e.touches) / pinch.d, cx, cy);
+  }, { passive: false });
+  view.addEventListener("touchend", () => (pinch = null));
+  // Tapping a small square zooms to it; once it fills most of the frame, the tap opens it.
+  grid.addEventListener("click", (e) => {
+    const cell = e.target.closest(".pt-cell");
+    if (!cell) return;
+    const w = cell.getBoundingClientRect().width;
+    if (w < view.clientWidth * 0.6) {
+      e.preventDefault();
+      const target = maxZoom();
+      const col = parseInt(cell.style.gridColumnStart || cell.style.gridColumn, 10);
+      const row = parseInt(cell.style.gridRowStart || cell.style.gridRow, 10);
+      zoom = target; grid.style.width = base() * zoom + "px";
+      const r = cell.getBoundingClientRect(), g = grid.getBoundingClientRect();
+      view.scrollLeft = r.left - g.left + r.width / 2 - view.clientWidth / 2;
+      view.scrollTop = r.top - g.top + r.height / 2 - view.clientHeight / 2;
+      document.querySelector("[data-z-level]").textContent = Math.round(zoom * 100) + "%";
+    }
+  });
+  window.addEventListener("resize", () => setZoom(zoom));
+  setZoom(1);
+}

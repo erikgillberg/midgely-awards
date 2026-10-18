@@ -16,12 +16,13 @@
 // The schema creates and migrates itself on first request (v1 databases upgrade in place).
 
 import {
-  SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, weeklyOopsHTML,
+  SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
-  carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML,
+  carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML, categoricTableHTML, categoricLegendHTML,
+  postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf,
 } from "./shared.js";
 
-const SCHEMA_VERSION = 8;
+const SCHEMA_VERSION = 9;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Other hostnames that send visitors to the home page at SITE.
@@ -165,6 +166,19 @@ const SEED_WIKI = {
   "berners-lee": ["https://en.wikipedia.org/wiki/Tim_Berners-Lee", "https://en.wikipedia.org/wiki/World_Wide_Web"],
 };
 
+// v9: nominees added after launch of the founding class. Full rows; inserted once.
+const SEED_ADDED = [
+  { id: "magie", name: "Lizzie Magie", years: "1866 to 1948", work: "The Landlord's Game (which became Monopoly)",
+    meant: "Teach people the economist Henry George's argument: when a few own the land and collect the rent, they get rich and everyone else gets poorer.",
+    solved: "It worked as a game. She patented it in 1904, and people copied it by hand for decades, playing it in colleges and in homes from Atlantic City to Pennsylvania.",
+    backfire: "In 1935 Parker Brothers sold a version as Monopoly, where you win by bankrupting everyone else. It became one of the best-selling board games of all time, and it taught the opposite lesson.",
+    gotRight: "Her board, with properties around the edge and a jail in the corner, is still the one people play.",
+    foresight: "She could not have seen a game built to criticize monopoly becoming the way millions learn to enjoy one.",
+    pattern: "The lesson flipped", knowable: "unforeseeable", domain: "finance", harms: "social", status: "historic",
+    wikiName: "https://en.wikipedia.org/wiki/Lizzie_Magie", wikiWork: "https://en.wikipedia.org/wiki/The_Landlord%27s_Game",
+    born: 1866, helped: 9, harmed: null, created: "2026-10-18T00:00:00.000Z" },
+];
+
 // Element facts: [id, year it began, year the main backfire was documented, reach as a power of ten (9 = billions)].
 const SEED_ELEMENTS = [
   ["haber", 1913, 1972, 9],
@@ -289,6 +303,12 @@ async function migrate(db) {
   for (const [id, nominee, sort, title, author, year, publisher, url, kind] of SEED_READINGS) {
     stmts.push(db.prepare(`INSERT OR IGNORE INTO readings (id,nominee_id,sort,title,author,year,publisher,url,kind,created_at) VALUES (?,?,?,?,?,?,?,?,?,?)`)
       .bind(id, nominee, sort, title, author || null, year || null, publisher || null, url || null, kind || null, new Date().toISOString()));
+  }
+  for (const n of SEED_ADDED) {
+    stmts.push(db.prepare(`INSERT OR IGNORE INTO nominees (id,slug,name,years,work,meant,solved,backfire,got_right,foresight,pattern,knowable,domain,harms,status,
+        wiki_name,wiki_work,born,helped,harmed,author,seeded,state,created_at,category)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NULL,1,'approved',?,'')`).bind(n.id, n.id, n.name, n.years, n.work, n.meant, n.solved, n.backfire,
+      n.gotRight, n.foresight, n.pattern, n.knowable, n.domain, n.harms, n.status, n.wikiName, n.wikiWork, n.born, n.helped, n.harmed, n.created));
   }
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('seeded','1')"));
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)));
@@ -466,6 +486,28 @@ async function getState(db, url, ctx) {
   return res;
 }
 
+// Copies of each submission go to outside services when their settings exist. The site's database stays the record.
+//   FORMSPREE_SUBSCRIBE, FORMSPREE_MURPHY, FORMSPREE_NOMINATION: a Formspree form id (the part after /f/)
+//   BEEHIIV_API_KEY + BEEHIIV_PUBLICATION_ID: adds newsletter sign-ups to Beehiiv
+async function forward(env, kind, data) {
+  const jobs = [];
+  const fs = { subscribe: env.FORMSPREE_SUBSCRIBE, murphy: env.FORMSPREE_MURPHY, nomination: env.FORMSPREE_NOMINATION }[kind];
+  if (fs) {
+    jobs.push(fetch(`https://formspree.io/f/${fs}`, {
+      method: "POST", headers: { "content-type": "application/json", accept: "application/json" },
+      body: JSON.stringify({ ...data, _subject: `Backfire Awards: new ${kind}` }),
+    }));
+  }
+  if (kind === "subscribe" && env.BEEHIIV_API_KEY && env.BEEHIIV_PUBLICATION_ID) {
+    jobs.push(fetch(`https://api.beehiiv.com/v2/publications/${env.BEEHIIV_PUBLICATION_ID}/subscriptions`, {
+      method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${env.BEEHIIV_API_KEY}` },
+      body: JSON.stringify({ email: data.email, utm_source: data.utm_source || "site", send_welcome_email: true, reactivate_existing: false }),
+    }));
+  }
+  const results = await Promise.allSettled(jobs);
+  results.forEach((x) => { if (x.status === "rejected" || (x.value && !x.value.ok)) console.error("forward failed", kind, x.reason || x.value.status); });
+}
+
 async function insertNominee(db, n, state) {
   const id = crypto.randomUUID();
   const createdAt = new Date().toISOString();
@@ -527,6 +569,7 @@ async function handleApi(request, env, url, ctx) {
     n.meant = clean(b.meant, 600);
     const state = env.AUTO_APPROVE === "1" ? "approved" : "pending";
     const created = await insertNominee(db, n, state);
+    ctx.waitUntil(forward(env, "nomination", { name: n.name, work: n.work, solved: n.solved, backfire: n.backfire, domain: n.domain, author: n.author }));
     if (state === "approved") await bustState(url);
     return json({ status: state, nominee: state === "approved" ? created : null }, 201);
   }
@@ -569,6 +612,19 @@ async function handleApi(request, env, url, ctx) {
     return json({ vote, herdYes: t.y, herdTotal: t.t });
   }
 
+  if (path === "/api/subscribe" && method === "POST") {
+    const b = await readBody(request);
+    if (!b) return bad("Couldn't read that.");
+    if (b.website) return json({ ok: true });
+    const email = clean(b.email, 254).toLowerCase();
+    if (!EMAIL_RE.test(email)) return bad("That email address doesn't look right.");
+    if (!(await turnstileOk(request, env, b.turnstile))) return bad("Please complete the human check and try again.", 403);
+    if (await rateLimited(db, request, env, "subscribe")) return bad("Try again in a few minutes.", 429);
+    await db.prepare("INSERT OR IGNORE INTO subscribers (email, created_at) VALUES (?, ?)").bind(email, new Date().toISOString()).run();
+    ctx.waitUntil(forward(env, "subscribe", { email, utm_source: clean(b.utm, 60) }));
+    return json({ ok: true });
+  }
+
   if (path === "/api/murphys" && method === "POST") {
     const b = await readBody(request);
     if (!b) return bad("Couldn't read that.");
@@ -581,6 +637,7 @@ async function handleApi(request, env, url, ctx) {
     if (email && !EMAIL_RE.test(email)) return bad("That email address doesn't look right.");
     await db.prepare("INSERT INTO murphys (id,fix,oops,name,email,utm_source,state,created_at) VALUES (?,?,?,?,?,?,'new',?)")
       .bind(crypto.randomUUID(), fix, oops, name || null, email || null, utm || null, new Date().toISOString()).run();
+    ctx.waitUntil(forward(env, "murphy", { fix, oops, name, email, utm_source: utm }));
     return json({ ok: true }, 201);
   }
 
@@ -851,7 +908,7 @@ function decorate(res, env, url, meta = {}) {
     .on("#site-head", new SetHTML(headerHTML(flags)))
     .on("#site-foot", new SetHTML(footerHTML()))
     .on("body", new Append(sheetHTML()))
-    .on("#weekly-oops", new SetHTML(weeklyOopsHTML()))
+    .on("#weekly-oops", new SetHTML(signupHTML("home")))
     .on("#waitlist-embed", new SetHTML(waitlistHTML()))
     .on('meta[property="og:image"]', new SetAttr("content", SITE + "/og.png"))
     .on('meta[name="twitter:image"]', new SetAttr("content", SITE + "/og.png"))
@@ -871,7 +928,9 @@ function decorate(res, env, url, meta = {}) {
       .on('meta[name="twitter:description"]', new SetAttr("content", meta.desc));
   }
   for (const [sel, html] of Object.entries(meta.fill || {})) rw = rw.on(sel, new SetHTML(html));
-  for (const [sel, [attr, value]] of Object.entries(meta.attrs || {})) rw = rw.on(sel, new SetAttr(attr, value));
+  for (const [sel, spec] of Object.entries(meta.attrs || {})) {
+    for (const [attr, value] of Array.isArray(spec[0]) ? spec : [spec]) rw = rw.on(sel, new SetAttr(attr, value));
+  }
   if (env.CF_BEACON_TOKEN) {
     rw = rw.on("body", new Append(`<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='${esc(JSON.stringify({ token: env.CF_BEACON_TOKEN }))}'></script>`));
   }
@@ -954,8 +1013,11 @@ async function nomineePage(request, env, url, ctx, key) {
     canonical: SITE + nomineePath(n),
     title: `${n.name}: ${n.work} · The Backfire Awards`,
     desc: `${scores ? scores + ". " : ""}Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
-    fill: { "#list": cardHTML(n, { flags, full: true, open: true, thread }), ...extra },
-    attrs: { body: ["data-nominee", n.id] },
+    fill: {
+      "#list": postHTML(n, { flags, thread }), ...extra,
+      "#more-feed": `<h2 class="feed-h">More nominees</h2><div class="list">${st.nominees.filter((x) => x.id !== n.id && x.id !== HONOREE).sort(byTop(flags)).map((x) => nomCardHTML(x, flags)).join("")}</div>`,
+    },
+    attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelOf(n.domain).deep}`]] },
   });
 }
 
@@ -991,8 +1053,8 @@ async function labPage(request, env, url, ctx, key) {
 // A nominee page's carousel (when one is written), image credits and further reading.
 async function nomineeExtras(request, env, url, n) {
   const out = {};
-  const data = await asset(env, url, request, `/carousels/${n.slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  if (data) out["#nominee-carousel"] = carouselHTML(n, data, flagsOf(env));
+  const data = (await asset(env, url, request, `/carousels/${n.slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)) || autoCarousel(n);
+  out["#nominee-carousel"] = carouselHTML(n, data, flagsOf(env));
   const db = findD1(env);
   if (!db) return out;
   const [media, reads] = await db.batch([
@@ -1000,6 +1062,7 @@ async function nomineeExtras(request, env, url, n) {
     db.prepare("SELECT * FROM readings WHERE nominee_id = ? ORDER BY sort"),
   ].map((q) => q.bind(n.id))).catch(() => [{ results: [] }, { results: [] }]);
   const parts = [];
+  if (!db) return out;
   if (reads.results.length) {
     parts.push(`<section><h2>Further reading</h2><ul class="reading">${reads.results.map((x) => {
       const t = x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : `<cite>${esc(x.title)}</cite>`;
@@ -1010,7 +1073,7 @@ async function nomineeExtras(request, env, url, n) {
     parts.push(`<section><h2>Image credits</h2><ul class="credits">${media.results.map((m) =>
       `<li><img src="${esc(m.path)}" alt="" width="64" height="64" loading="lazy"><div><b>${esc(m.title)}</b><span>${esc([m.creator, m.made].filter(Boolean).join(", "))}. ${esc(m.license)}.${m.edits ? ` ${esc(m.edits)}.` : ""}</span><a href="${esc(m.source_page)}" target="_blank" rel="noopener">Source</a></div></li>`).join("")}</ul></section>`);
   }
-  if (parts.length) out["#nominee-more"] = parts.join("");
+  out["#nominee-more"] = `<details class="post-details"><summary>Read more: the full write-up, sources and image credits</summary>${writeupHTML(n)}${parts.join("")}</details>`;
   return out;
 }
 
@@ -1020,7 +1083,7 @@ const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
-  const paths = ["/", "/midgley", "/murphy", "/awards", "/goat", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
+  const paths = ["/", "/table", "/midgley", "/murphy", "/awards", "/goat", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
   if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -1067,6 +1130,13 @@ export default {
     if (p === "/nominee" || p === "/category-page") return Response.redirect(SITE_ORIGIN(url) + "/", 302); // page shells, filled above
     const lab = p.match(/^\/lab\/carousel\/([a-z0-9-]{1,64})$/);
     if (lab && url.hostname !== SITE_HOST) return labPage(request, env, url, ctx, lab[1]);
+    if (p === "/table") {
+      const st = await siteState(env, url, ctx);
+      return decorate(await asset(env, url, request, "/table"), env, url, {
+        canonical: SITE + "/table",
+        fill: { "#pt-grid": `<div class="pt-gap" style="grid-row:8;grid-column:1"></div>` + categoricTableHTML(st ? st.nominees : []), "#pt-legend": categoricLegendHTML() },
+      });
+    }
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
     if (p === "/murphy") return decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy", fill: { "#murphy-embed": tallyHTML(LINKS.microFormId, "Share your Murphy") } });
     if (p === "/micro") return Response.redirect(SITE_ORIGIN(url) + "/murphy" + url.search, 301); // old name

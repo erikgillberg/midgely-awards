@@ -1,6 +1,6 @@
 // The nominee list (home and category pages) and a nominee's own page.
 // The server sends the first render in the HTML; this script redraws it with your votes and keeps it fresh.
-import { DOMAINS, HARMS, STATUSES, KNOW, HONOREE, cardHTML, nomCardHTML, byTop, nomineePath } from "./shared.js";
+import { DOMAINS, HARMS, STATUSES, KNOW, HONOREE, postHTML, nomCardHTML, byTop, nomineePath } from "./shared.js";
 import { api } from "./site.js";
 
 const $ = (s) => document.querySelector(s);
@@ -116,14 +116,9 @@ function render() {
     return;
   }
   if (PAGE !== "nominee") { list.innerHTML = noms.map((n) => nomCardHTML(n, flags)).join(""); return; }
-  const top = ranked[0];
-  list.innerHTML = noms.map((n) => cardHTML(n, {
-    flags, full: PAGE === "nominee",
-    rank: PAGE === "nominee" ? 0 : rankOf[n.id], total: ranked.length,
-    top: PAGE !== "nominee" && top && top.id === n.id && (flags.scores ? n.herdYes : n.score) > 0,
-    mine: state.myVotes.has(n.id), herd: state.myHerd[n.id],
-    open: state.open.has(n.id), thread: comments.filter((c) => c.nomineeId === n.id), ccount: n.ccount,
-    reported, name: store.get("midgley.name") || "",
+  list.innerHTML = noms.map((n) => postHTML(n, {
+    flags, mine: state.myVotes.has(n.id), herd: state.myHerd[n.id],
+    thread: comments.filter((c) => c.nomineeId === n.id), reported, name: store.get("midgley.name") || "",
   })).join("");
   Object.entries(drafts).forEach(([id, v]) => { const t = document.getElementById(id); if (t) t.value = v; });
   if (focused) { const el = document.getElementById(focused); if (el) el.focus(); }
@@ -151,7 +146,7 @@ async function share(n) {
 
 $("#list").addEventListener("click", async (e) => {
   const btn = e.target.closest("[data-act]"); if (!btn) return;
-  const id = btn.closest(".nom").dataset.id;
+  const id = btn.closest("[data-id]").dataset.id;
   const n = state.noms.find((x) => x.id === id);
   const act = btn.dataset.act;
   if (act === "toggle") {
