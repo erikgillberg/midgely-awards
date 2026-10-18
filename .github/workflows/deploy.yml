@@ -1,7 +1,7 @@
 name: Deploy to Cloudflare Pages
 
-# main is production (midgleyawards.com). staging deploys as a preview at
-# staging.midgley-awards.pages.dev, which staging.midgleyawards.com points to.
+# main is production (backfireawards.com). staging deploys as a preview at
+# staging.midgley-awards.pages.dev, which staging.backfireawards.com points to.
 on:
   push:
     branches: [main, staging]

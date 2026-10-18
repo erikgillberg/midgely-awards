@@ -27,11 +27,11 @@ Every push to `main` deploys to the `midgley-awards` Pages project through GitHu
 
 - `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with the **Cloudflare Pages: Edit** permission for this account.
 
-The site lives at https://midgleyawards.com. The misspelled midgelyawards.com and both www hosts are attached to the same Pages project and forward to the home page (see `SITE` and `FORWARD_HOSTS` in `_worker.js`).
+The site lives at https://backfireawards.com. The old midgleyawards.com, the misspelled midgelyawards.com, backfires.org and the www hosts forward to the same page on backfireawards.com (see `SITE` and `FORWARD_HOSTS` in `_worker.js`). Only domains attached to the Pages project reach the worker; backfires.org forwards at its registrar until it moves to Cloudflare.
 
 ## Staging
 
-Work goes to the `staging` branch first. It deploys as a preview at `staging.midgley-awards.pages.dev` and `staging.midgleyawards.com`, uses the Preview settings and database, and sends `X-Robots-Tag: noindex`. When Erik approves, merge `staging` into `main`. Database changes only add tables and columns, so the code on `main` keeps working with a database that has already been upgraded.
+Work goes to the `staging` branch first. It deploys as a preview at `staging.midgley-awards.pages.dev` and `staging.backfireawards.com`, uses the Preview settings and database, and sends `X-Robots-Tag: noindex`. When Erik approves, merge `staging` into `main`. Database changes only add tables and columns, so the code on `main` keeps working with a database that has already been upgraded.
 
 ## Settings in Cloudflare
 
