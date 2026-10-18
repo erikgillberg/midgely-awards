@@ -25,10 +25,11 @@ import {
 const SCHEMA_VERSION = 11;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
-// Other hostnames that send visitors to the home page at SITE.
 // Old and spare domains: each forwards to the same page on backfireawards.com, so shared links keep working.
 const FORWARD_HOSTS = ["www.backfireawards.com", "midgleyawards.com", "www.midgleyawards.com", "midgelyawards.com", "www.midgelyawards.com",
-  "backfires.org", "www.backfires.org"];
+  "backfires.org", "www.backfires.org", "midgley-awards.pages.dev"];
+// The old staging address forwards to the new one.
+const STAGING_FORWARD = { "staging.midgleyawards.com": "https://staging.backfireawards.com" };
 
 const DOMAINS = ["energy", "materials", "food", "cities", "information", "health", "finance", "governance"];
 const HARMS = ["environmental", "health", "social", "economic"];
@@ -1268,8 +1269,10 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (FORWARD_HOSTS.includes(url.hostname)) return Response.redirect(SITE + url.pathname + url.search, 301);
-    // Staging and previews live behind Cloudflare Access. A host that reaches us without passing Access
-    // (for example a new staging domain not yet added to the Access app) gets nothing.
+    if (STAGING_FORWARD[url.hostname]) return Response.redirect(STAGING_FORWARD[url.hostname] + url.pathname + url.search, 301);
+    // Staging and previews live behind Cloudflare Access. This is a stopgap for a host that was never added
+    // to the Access app: it only checks that Access's header is present, which a determined visitor could fake.
+    // Access itself is the real lock.
     if (url.hostname !== SITE_HOST && !/^(localhost|127\.0\.0\.1)$/.test(url.hostname) && !request.headers.get("cf-access-jwt-assertion"))
       return new Response("This address is private.", { status: 403, headers: { "content-type": "text/plain", "X-Robots-Tag": "noindex" } });
     if (url.pathname.startsWith("/api/")) {

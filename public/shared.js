@@ -3,7 +3,7 @@
 // One copy of each, so the page the server sends matches what the browser redraws.
 
 export const SITE = "https://backfireawards.com";
-// The name printed on cards and images. Moves to the new domain before launch.
+// The name printed on cards and images.
 export const BRAND_DOMAIN = "backfireawards.com";
 
 // Build id, set by the deploy workflow. Added to stylesheet and script URLs so browsers fetch new copies.
