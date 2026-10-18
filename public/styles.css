@@ -951,3 +951,5 @@ body[data-bg="cat"] .wrap.home{max-width:600px}
 .pv-q{white-space:nowrap}
 @media (max-width:420px){ .pv-btn[data-act="herd"] span{display:none} .pv-bar{gap:2px} }
 @container (max-width:30px){ .pt-bf{display:none} }
+.el > span:empty{visibility:hidden}
+@media (min-width:761px){ .pt-wrap .pt-tools{right:auto;left:50%;transform:translateX(-50%)} }

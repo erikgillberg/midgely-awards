@@ -175,7 +175,7 @@
         <div class="top"><span class="chip ${m.state === "new" ? "st-pending" : ""}">${esc(m.state)}</span>
           <span style="font:12px var(--mono);color:var(--ink-3)">${esc(m.name || "No name")}${m.email ? " · " + esc(m.email) : ""}${m.utm_source ? " · from " + esc(m.utm_source) : ""} · ${new Date(m.created_at).toLocaleString()}</span></div>
         <p><b>Fix:</b> ${esc(m.fix)}</p><p><b style="color:var(--ethyl)">Oops:</b> ${esc(m.oops)}</p>
-        <div class="btns"><button class="ok" data-murphy="${esc(m.id)}" data-state="featured">Feature</button><button data-murphy="${esc(m.id)}" data-state="archived">Archive</button>${m.state !== "new" ? `<button data-murphy="${esc(m.id)}" data-state="new">Back to new</button>` : ""}</div>
+        <div class="btns"><button class="ok" data-murphy="${esc(m.id)}" data-state="featured">Feature (publish as a post)</button><button data-murphy="${esc(m.id)}" data-state="archived">Archive</button>${m.state !== "new" ? `<button data-murphy="${esc(m.id)}" data-state="new">Back to new</button>` : ""}</div>
       </div>`).join("") || `<p class="empty-row">No Murphys yet.</p>`;
     } catch (e) { $("#murphys").innerHTML = `<p class="empty-row">${esc(e.message)}</p>`; }
   }

@@ -49,6 +49,31 @@ Set these under the Pages project's **Settings**, for **Production**:
 
 Changes to settings take effect on the next deployment.
 
+## Pages and addresses
+
+| Address | What it is |
+| --- | --- |
+| `/` | Intro cards, then the feed of posts |
+| `/n/<slug>` | A Midgley nominee as a post (carousel, votes, comments, full write-up), then the feed |
+| `/m/<slug>` | A featured Murphy as a post, then the feed |
+| `/search` | Search and filters (`?q=`, `award=`, `cat=`, `status=`, `sort=`) |
+| `/table` | The Categoric Table |
+| `/midgley`, `/murphy`, `/awards`, `/scores`, `/goat`, `/shop`, `/guidelines`, `/privacy`, `/terms` | The other pages |
+| `/lab/carousel/<slug>` | Design lab, staging and local only |
+
+Hand-written carousels live in `public/carousels/<slug>.json` (add the slug to `HANDWRITTEN` in `_worker.js`). Every other nominee gets a carousel built from its write-up over its category's scene in `public/img/scenes/`.
+
+## Forms and email
+
+Every form posts to the site's own API, and the database is the record. Copies go to outside services when these settings exist (Pages project, Production and Preview):
+
+| Setting | Type | Purpose |
+| --- | --- | --- |
+| `FORMSPREE_SUBSCRIBE` | Variable | Formspree form id for The Weekly Oops sign-ups (connect that form to Mailchimp in Formspree) |
+| `FORMSPREE_MURPHY` | Variable | Formspree form id for Murphys |
+| `FORMSPREE_NOMINATION` | Variable | Formspree form id for Midgley nominations |
+| `BEEHIIV_API_KEY`, `BEEHIIV_PUBLICATION_ID` | Secret, variable | Optional: add sign-ups to Beehiiv instead |
+
 ## Moderation
 
 - New nominations wait in the review queue at `/admin`.
