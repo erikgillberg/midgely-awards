@@ -395,9 +395,10 @@ async function rateLimited(db, request, env, action) {
   return false;
 }
 
-async function turnstileOk(request, env, token) {
-  if (!env.TURNSTILE_SECRET) return true;
-  if (!token) return false;
+// Returns "" when the check passes, otherwise Cloudflare's reason code (safe to show; no secrets in it).
+async function turnstileFail(request, env, token) {
+  if (!env.TURNSTILE_SECRET) return "";
+  if (!token) return "missing-token";
   const form = new FormData();
   form.append("secret", env.TURNSTILE_SECRET);
   form.append("response", token);
@@ -406,8 +407,11 @@ async function turnstileOk(request, env, token) {
   try {
     const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form });
     const d = await r.json();
-    return !!d.success;
-  } catch { return false; }
+    if (d.success) return "";
+    const code = (d["error-codes"] || []).join(",") || "unknown";
+    console.log("turnstile failed", code, d.hostname || "");
+    return code;
+  } catch { return "unreachable"; }
 }
 
 function nomineeOut(r, admin = false) {
@@ -588,7 +592,7 @@ async function handleApi(request, env, url, ctx) {
     const b = await readBody(request);
     if (!b) return bad("Couldn't read the submission.");
     if (b.website) return json({ status: "pending" }); // honeypot
-    if (!(await turnstileOk(request, env, b.turnstile))) return bad("Please complete the human check and try again.", 403);
+    { const tf = await turnstileFail(request, env, b.turnstile); if (tf) return bad(`The human check didn't go through (${tf}). Try again.`, 403); }
     if (await rateLimited(db, request, env, "nominee")) return bad("That's a lot of nominations at once. Try again in a few minutes.", 429);
     const n = {
       name: clean(b.name, 80), years: clean(b.years, 30), work: clean(b.work, 120),
@@ -664,7 +668,7 @@ async function handleApi(request, env, url, ctx) {
     if (b.website) return json({ ok: true });
     const email = clean(b.email, 254).toLowerCase();
     if (!EMAIL_RE.test(email)) return bad("That email address doesn't look right.");
-    if (!(await turnstileOk(request, env, b.turnstile))) return bad("Please complete the human check and try again.", 403);
+    { const tf = await turnstileFail(request, env, b.turnstile); if (tf) return bad(`The human check didn't go through (${tf}). Try again.`, 403); }
     if (await rateLimited(db, request, env, "subscribe")) return bad("Try again in a few minutes.", 429);
     await db.prepare("INSERT OR IGNORE INTO subscribers (email, created_at) VALUES (?, ?)").bind(email, new Date().toISOString()).run();
     ctx.waitUntil(forward(env, "subscribe", { email, utm_source: clean(b.utm, 60) }));
@@ -675,7 +679,7 @@ async function handleApi(request, env, url, ctx) {
     const b = await readBody(request);
     if (!b) return bad("Couldn't read that.");
     if (b.website) return json({ ok: true }, 201); // honeypot
-    if (!(await turnstileOk(request, env, b.turnstile))) return bad("Please complete the human check and try again.", 403);
+    { const tf = await turnstileFail(request, env, b.turnstile); if (tf) return bad(`The human check didn't go through (${tf}). Try again.`, 403); }
     if (await rateLimited(db, request, env, "murphy")) return bad("That's a lot of Murphys at once. Try again in a few minutes.", 429);
     const fix = clean(b.fix, 600), oops = clean(b.oops, 600), name = clean(b.name, 40), utm = clean(b.utm, 60);
     const email = clean(b.email, 254).toLowerCase();
