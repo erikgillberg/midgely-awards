@@ -559,7 +559,11 @@ async function forward(env, kind, data) {
       method: "POST",
       headers: { "content-type": "application/json", authorization: "Basic " + btoa("site:" + env.MAILCHIMP_API_KEY) },
       body: JSON.stringify({ email_address: data.email, status: "pending", tags: ["Backfire Awards"], merge_fields: {} }),
-    }).then(async (r) => { if (!r.ok && r.status !== 400) console.log("mailchimp", r.status, (await r.text()).slice(0, 200)); }));
+    }).then(async (r) => {
+      // 400 "Member Exists" is normal for a repeat sign-up; anything else is worth seeing in the logs.
+      const body = r.ok ? "" : (await r.text()).slice(0, 300);
+      console.log("mailchimp", r.status, body);
+    }).catch((e) => console.log("mailchimp failed", String(e))));
   }
   if (kind === "subscribe" && env.BEEHIIV_API_KEY && env.BEEHIIV_PUBLICATION_ID) {
     jobs.push(fetch(`https://api.beehiiv.com/v2/publications/${env.BEEHIIV_PUBLICATION_ID}/subscriptions`, {
