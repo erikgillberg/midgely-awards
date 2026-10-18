@@ -68,9 +68,9 @@ async function offerMurphyCards(m) {
     holder.className = "offstage";
     holder.innerHTML = murphyCarouselHTML({ fix: m.fix, oops: m.oops, name: m.name });
     document.body.appendChild(holder);
-    await Promise.all([...holder.querySelectorAll("img")].map((i) => (i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; }))));
-    await shareCards([...holder.querySelectorAll(".cc")], "My Murphy", location.origin + "/murphy");
-    holder.remove(); b.disabled = false; b.textContent = "Make my Murphy cards for Instagram";
+    // Off-screen images never load lazily; shareCards loads them all first (with a time limit).
+    try { await shareCards([...holder.querySelectorAll(".cc")], "My Murphy", location.origin + "/murphy"); }
+    finally { holder.remove(); b.disabled = false; b.textContent = "Make my Murphy cards for Instagram"; }
   };
 }
 

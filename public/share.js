@@ -9,7 +9,8 @@ export async function cardImages(cards, prefix = "backfire") {
   // Images below the fold load lazily; load them all before drawing.
   const imgs = cards.flatMap((c) => [...c.querySelectorAll("img")]);
   imgs.forEach((i) => (i.loading = "eager"));
-  await Promise.all(imgs.map((i) => (i.complete && i.naturalWidth ? i.decode().catch(() => {}) : new Promise((r) => { i.onload = i.onerror = r; }))));
+  const loaded = Promise.all(imgs.map((i) => (i.complete && i.naturalWidth ? i.decode().catch(() => {}) : new Promise((r) => { i.onload = i.onerror = r; }))));
+  await Promise.race([loaded, new Promise((r) => setTimeout(r, 8000))]); // never wait forever on one image
   const files = [];
   for (const [i, card] of cards.entries()) {
     const w = card.getBoundingClientRect().width || card.offsetWidth;
