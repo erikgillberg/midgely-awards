@@ -1,6 +1,6 @@
 // The nominee list (home and category pages) and a nominee's own page.
 // The server sends the first render in the HTML; this script redraws it with your votes and keeps it fresh.
-import { DOMAINS, HARMS, STATUSES, KNOW, HONOREE, cardHTML, byTop, nomineePath } from "./shared.js";
+import { DOMAINS, HARMS, STATUSES, KNOW, HONOREE, cardHTML, nomCardHTML, byTop, nomineePath } from "./shared.js";
 import { api } from "./site.js";
 
 const $ = (s) => document.querySelector(s);
@@ -41,13 +41,6 @@ if ($("#flt-domain")) {
   $("#flt-harm").innerHTML = opts(HARMS, "Any kind of harm");
   $("#flt-status").innerHTML = opts(STATUSES, "Any status");
   $("#flt-know").innerHTML = opts(KNOW, "Knowable or not");
-}
-if ($("#form")) {
-  $("#f-domain").innerHTML = opts(DOMAINS, "Not sure");
-  $("#f-status").innerHTML = Object.entries(STATUSES).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join("");
-  $("#f-know").innerHTML = Object.entries(KNOW).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join("");
-  $("#f-harms").innerHTML = Object.entries(HARMS).map(([k, v]) => `<label><input type="checkbox" value="${k}" id="f-harm-${k}">${esc(v)}</label>`).join("");
-  $("#f-author").value = store.get("midgley.name") || "";
 }
 
 let toastTimer = null;
@@ -122,6 +115,7 @@ function render() {
       : `<p class="empty">${total ? "Nothing matches these filters yet. Submit the first." : "No nominees here yet. Submit the first."}</p>`;
     return;
   }
+  if (PAGE !== "nominee") { list.innerHTML = noms.map((n) => nomCardHTML(n, flags)).join(""); return; }
   const top = ranked[0];
   list.innerHTML = noms.map((n) => cardHTML(n, {
     flags, full: PAGE === "nominee",
@@ -216,75 +210,6 @@ document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("clic
 [["#flt-domain", "domain"], ["#flt-harm", "harm"], ["#flt-status", "status"], ["#flt-know", "know"]].forEach(([sel, key]) => {
   if ($(sel)) $(sel).addEventListener("change", (e) => { state.f[key] = e.target.value; render(); });
 });
-
-// ---------- Turnstile (only when the server has keys configured)
-let tsLoading = null;
-const tsTokens = {};
-function loadTurnstile() {
-  if (!state.config.turnstileSiteKey) return Promise.resolve(null);
-  if (!tsLoading) tsLoading = new Promise((resolve) => {
-    const s = document.createElement("script");
-    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-    s.async = true; s.onload = () => resolve(window.turnstile); s.onerror = () => resolve(null);
-    document.head.appendChild(s);
-  });
-  return tsLoading;
-}
-const tsWidgets = {};
-async function mountTurnstile(slot) {
-  const ts = await loadTurnstile();
-  if (!ts || tsWidgets[slot]) return;
-  tsWidgets[slot] = ts.render("#" + slot, {
-    sitekey: state.config.turnstileSiteKey,
-    callback: (t) => (tsTokens[slot] = t),
-    "expired-callback": () => (tsTokens[slot] = "")
-  });
-}
-function resetTurnstile(slot) { if (window.turnstile && tsWidgets[slot]) { window.turnstile.reset(tsWidgets[slot]); tsTokens[slot] = ""; } }
-
-// ---------- submit form (home page)
-const isWiki = (u) => { try { return /(^|\.)wikipedia\.org$/i.test(new URL(u).hostname); } catch (e) { return false; } };
-if ($("#form")) {
-  $("#open-form").onclick = () => { $("#form").hidden = false; $("#open-form").hidden = true; $("#thanks").hidden = true; mountTurnstile("f-ts"); $("#f-name").focus(); };
-  $("#f-cancel").onclick = () => { $("#form").hidden = true; $("#open-form").hidden = false; $("#f-msg").textContent = ""; };
-
-  $("#form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const v = (id) => $(id).value.trim();
-    const nom = {
-      name: v("#f-name"), years: v("#f-years"), work: v("#f-work"), meant: v("#f-meant"), solved: v("#f-solved"), backfire: v("#f-backfire"),
-      domain: $("#f-domain").value, status: $("#f-status").value, knowable: $("#f-know").value,
-      harms: [...document.querySelectorAll("#f-harms input:checked")].map((x) => x.value),
-      fix: v("#f-fix"), fixUrl: v("#f-fixurl"), wikiName: v("#f-wikiname"), wikiWork: v("#f-wikiwork"), author: v("#f-author"), website: v("#f-website"),
-      turnstile: tsTokens["f-ts"] || ""
-    };
-    if (!nom.name || !nom.work || !nom.solved || !nom.backfire) { $("#f-msg").textContent = "Fill in the nominee, the achievement, what went right and what went oops."; return; }
-    if ((nom.wikiName && !isWiki(nom.wikiName)) || (nom.wikiWork && !isWiki(nom.wikiWork))) { $("#f-msg").textContent = "Wikipedia links have to point to a page on wikipedia.org."; return; }
-    if (state.config.turnstileSiteKey && !nom.turnstile) { $("#f-msg").textContent = "Complete the human check first."; return; }
-    if (nom.author) store.set("midgley.name", nom.author);
-    $("#f-submit").disabled = true; $("#f-msg").textContent = "";
-    try {
-      const r = await api("/api/nominees", { method: "POST", body: JSON.stringify(nom) });
-      ["#f-name", "#f-years", "#f-work", "#f-meant", "#f-solved", "#f-backfire", "#f-fix", "#f-fixurl", "#f-wikiname", "#f-wikiwork"].forEach((id) => ($(id).value = ""));
-      document.querySelectorAll("#f-harms input").forEach((x) => (x.checked = false));
-      $("#form").hidden = true; $("#open-form").hidden = false;
-      if (r.status === "approved" && r.nominee) {
-        state.noms.push(r.nominee);
-        document.querySelector('.seg button[data-sort="new"]').click();
-        toast("Nominee added");
-      } else {
-        const t = $("#thanks");
-        t.textContent = `Thanks. ${nom.name} is in the review queue and will appear once a moderator approves it.`;
-        t.hidden = false;
-      }
-    } catch (err) { $("#f-msg").textContent = "That didn't save: " + err.message; }
-    resetTurnstile("f-ts");
-    $("#f-submit").disabled = false;
-  });
-}
-
-// ---------- /#nominate opens the form
-if ($("#form") && location.hash === "#nominate") $("#open-form").click();
 
 // ---------- boot
 api("/api/config").then((c) => (state.config = c)).catch(() => {});

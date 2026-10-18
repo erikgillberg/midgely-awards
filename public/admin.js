@@ -32,6 +32,7 @@
       data = await api("/api/admin/overview");
       notice(""); $("#panels").hidden = false; setLocked(false);
       render();
+      loadMurphys();
     } catch (e) {
       $("#panels").hidden = true; setLocked(true);
       notice(e.message);
@@ -164,6 +165,30 @@
     }
     $("#c-subs").textContent = data.subscriberCount + (data.subscriberCount === 1 ? " address" : " addresses");
   }
+
+  async function loadMurphys() {
+    try {
+      const r = await api("/api/admin/murphys");
+      const fresh = r.murphys.filter((m) => m.state === "new").length;
+      $("#c-murphys").textContent = `${r.murphys.length} total, ${fresh} new`;
+      $("#murphys").innerHTML = r.murphys.slice(0, 100).map((m) => `<div class="row">
+        <div class="top"><span class="chip ${m.state === "new" ? "st-pending" : ""}">${esc(m.state)}</span>
+          <span style="font:12px var(--mono);color:var(--ink-3)">${esc(m.name || "No name")}${m.email ? " · " + esc(m.email) : ""}${m.utm_source ? " · from " + esc(m.utm_source) : ""} · ${new Date(m.created_at).toLocaleString()}</span></div>
+        <p><b>Fix:</b> ${esc(m.fix)}</p><p><b style="color:var(--ethyl)">Oops:</b> ${esc(m.oops)}</p>
+        <div class="btns"><button class="ok" data-murphy="${esc(m.id)}" data-state="featured">Feature</button><button data-murphy="${esc(m.id)}" data-state="archived">Archive</button>${m.state !== "new" ? `<button data-murphy="${esc(m.id)}" data-state="new">Back to new</button>` : ""}</div>
+      </div>`).join("") || `<p class="empty-row">No Murphys yet.</p>`;
+    } catch (e) { $("#murphys").innerHTML = `<p class="empty-row">${esc(e.message)}</p>`; }
+  }
+  document.addEventListener("click", async (e) => {
+    const b = e.target.closest("[data-murphy]");
+    if (b) {
+      try { await api("/api/admin/murphys/" + b.dataset.murphy, { method: "PATCH", body: JSON.stringify({ state: b.dataset.state }) }); toast("Saved"); loadMurphys(); } catch (err) { toast(err.message); }
+    }
+    if (e.target.id === "murphy-csv") {
+      const res = await fetch("/api/admin/murphys?format=csv", { headers: { authorization: "Bearer " + token } });
+      const a = document.createElement("a"); a.href = URL.createObjectURL(await res.blob()); a.download = "murphys.csv"; a.click();
+    }
+  });
 
   async function patchNominee(id, body, msg) {
     try { await api("/api/admin/nominees/" + id, { method: "PATCH", body: JSON.stringify(body) }); toast(msg); await load(); }

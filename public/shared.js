@@ -188,6 +188,23 @@ export function cardHTML(n, ctx = {}) {
   </article>`;
 }
 
+// A nominee in the list: a square card in its category's jewel, with its element tile.
+export function nomCardHTML(n, flags = {}) {
+  const j = jewelOf(n.domain);
+  const pct = herdPct(n);
+  const scores = flags.scores
+    ? `<p class="nc-scores"><span>Oops <b>${n.oops ?? "?"}</b></span><span>Herd <b>${pct != null ? pct + "%" : "?"}</b></span></p>`
+    : `<p class="nc-scores"><span>${n.score} upvote${n.score === 1 ? "" : "s"}</span></p>`;
+  return `<article class="nom-card" id="nom-${esc(n.id)}" data-id="${esc(n.id)}" style="${jewelVars(j)}">
+    <a href="${nomineePath(n)}">
+      ${elementHTML(n, "nc")}
+      <h3>${esc(n.name)}</h3>
+      <p class="nc-work">${esc(n.work)}</p>
+      ${scores}
+    </a>
+  </article>`;
+}
+
 // The seven-part write-up on a nominee's own page. Sections without text are left out.
 function fullSections(n) {
   const sec = (h, body) => (body ? `<section><h2>${h}</h2>${body}</section>` : "");
@@ -217,9 +234,52 @@ export function headerHTML(flags = {}) {
       <a href="/">Nominees</a>
       <a href="/midgley">The Midgley</a>
       <a href="/murphy">The Murphy</a>
+      <a href="/awards">The Awards</a>
       ${flags.categories ? `<a href="/category">Categories</a>` : ""}
       <a href="/shop">Shop</a>
     </nav>
+    <button class="nom-btn" type="button" data-open-sheet="">Nominate</button>
+  </div>`;
+}
+
+// One form for both awards. Pick the award, then fill in what that award needs.
+export function sheetHTML() {
+  const cats = `<option value="">Not sure</option>` + Object.entries(DOMAINS).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join("");
+  const f = (id, label, el, hint = "") => `<label class="sh-field" for="${id}"><span>${label}</span>${el}${hint ? `<small>${hint}</small>` : ""}</label>`;
+  return `<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" hidden>
+    <div class="sheet-in">
+      <button class="sheet-x" type="button" data-close-sheet aria-label="Close">×</button>
+      <p class="sh-step">Nominate</p>
+      <h2 id="sheet-h">Which award?</h2>
+      <div class="sh-pick" role="radiogroup" aria-label="Award">
+        <button type="button" role="radio" aria-checked="false" data-award="midgley"><span class="element aw-midgley"><span class="n">No. 1</span><span class="sym">Mg</span><span class="w">MIDGLEY</span></span><b>The Midgley</b><small>A backfire at world scale: an invention, product or decision.</small></button>
+        <button type="button" role="radio" aria-checked="false" data-award="murphy"><span class="element aw-murphy"><span class="n">No. 2</span><span class="sym">Mu</span><span class="w">MURPHY</span></span><b>The Murphy</b><small>An everyday backfire: the small fix that made things worse.</small></button>
+      </div>
+      <form class="sh-form" data-award-form="midgley" hidden novalidate>
+        ${f("s-name", "Nominee", `<input id="s-name" maxlength="80" required placeholder="Person, company or program">`)}
+        ${f("s-work", "What they made or decided", `<input id="s-work" maxlength="120" required placeholder="Leaded gasoline">`)}
+        ${f("s-solved", "What went right", `<textarea id="s-solved" maxlength="600" required placeholder="The problem it solved, and how well"></textarea>`)}
+        ${f("s-backfire", "What went oops", `<textarea id="s-backfire" maxlength="600" required placeholder="Who or what was harmed, and how"></textarea>`)}
+        ${f("s-domain", "Category", `<select id="s-domain">${cats}</select>`)}
+        ${f("s-wiki", "A Wikipedia page about it (optional)", `<input id="s-wiki" type="url" maxlength="500" placeholder="https://en.wikipedia.org/wiki/...">`)}
+        ${f("s-author", "Your name (optional)", `<input id="s-author" maxlength="60" autocomplete="name" placeholder="Shown as the nominator">`)}
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="ts" data-ts></div>
+        <div class="sh-actions"><button class="primary" type="submit">Send nomination</button><span class="msg" role="status"></span></div>
+        <p class="sh-fine">Nominations appear after a quick review against the <a href="/guidelines">guidelines</a>.</p>
+      </form>
+      <form class="sh-form" data-award-form="murphy" hidden novalidate>
+        ${f("m-fix", "What did you (or someone) try to fix?", `<textarea id="m-fix" maxlength="600" required placeholder="The office added a rule that every meeting needs an agenda"></textarea>`)}
+        ${f("m-oops", "What went oops?", `<textarea id="m-oops" maxlength="600" required placeholder="Now there are meetings to write the agendas"></textarea>`)}
+        ${f("m-name", "Your first name (optional)", `<input id="m-name" maxlength="40" autocomplete="given-name">`, "Used if we feature it.")}
+        ${f("m-email", "Email (optional)", `<input id="m-email" type="email" maxlength="254" autocomplete="email">`, "Only to tell you if it's featured.")}
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="ts" data-ts></div>
+        <div class="sh-actions"><button class="primary" type="submit">Send my Murphy</button><span class="msg" role="status"></span></div>
+        <p class="sh-fine">Keep it about the decision, not a person someone could identify.</p>
+      </form>
+      <div class="sh-done" hidden><h2>Thanks.</h2><p></p><button class="primary" type="button" data-close-sheet>Done</button></div>
+    </div>
   </div>`;
 }
 
@@ -236,6 +296,7 @@ export function footerHTML() {
       <a href="/">Nominees</a>
       <a href="/midgley">The Midgley</a>
       <a href="/murphy">The Murphy</a>
+      <a href="/awards">The Awards</a>
       <a href="/goat">Goat</a>
       <a href="/shop">Shop</a>
       <a href="/scores">How scores work</a>

@@ -18,10 +18,10 @@
 import {
   SITE, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, weeklyOopsHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
-  carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD,
+  carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML,
 } from "./shared.js";
 
-const SCHEMA_VERSION = 7;
+const SCHEMA_VERSION = 8;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Other hostnames that send visitors to the home page at SITE.
@@ -38,7 +38,7 @@ const ID_RE = /^[A-Za-z0-9-]{1,64}$/;
 const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,24}$/;
 
 // Per-visitor limits over a rolling 10 minutes.
-const LIMITS = { nominee: 3, comment: 12, vote: 120, report: 20, subscribe: 3 };
+const LIMITS = { nominee: 3, comment: 12, vote: 120, report: 20, subscribe: 3, murphy: 5 };
 
 const flagsOf = (env) => ({ scores: env.FEATURE_SCORES === "1", categories: env.FEATURE_CATEGORIES === "1" });
 
@@ -75,6 +75,10 @@ const TABLES = [
   `CREATE TABLE IF NOT EXISTS readings (
     id TEXT PRIMARY KEY, nominee_id TEXT NOT NULL, sort INTEGER DEFAULT 0, title TEXT NOT NULL,
     author TEXT, year TEXT, publisher TEXT, url TEXT, kind TEXT, created_at TEXT NOT NULL)`,
+  // v8: Murphy stories from the Nominate form.
+  `CREATE TABLE IF NOT EXISTS murphys (
+    id TEXT PRIMARY KEY, fix TEXT NOT NULL, oops TEXT NOT NULL, name TEXT, email TEXT, utm_source TEXT,
+    state TEXT DEFAULT 'new', created_at TEXT NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS judge_scores (
     nominee_id TEXT NOT NULL, judge TEXT NOT NULL, score INTEGER NOT NULL, created_at TEXT NOT NULL,
     PRIMARY KEY (nominee_id, judge))`,
@@ -168,6 +172,10 @@ const SEED_ELEMENTS = [
 // Tile facts: [id, born or founded, people helped and people harmed, each as a power of ten (9 = a billion or more)].
 const SEED_TILES = [
   ["haber", 1868, 9, 8],
+  // Birth years only; helped and harmed wait for research.
+  ["midgley", 1889, null, null], ["nobel", 1833, null, null], ["franz", 1929, null, null], ["muller", 1899, null, null],
+  ["baekeland", 1863, null, null], ["borlaug", 1914, null, null], ["moses", 1888, null, null],
+  ["zuckerberg", 1984, null, null], ["berners-lee", 1955, null, null],
 ];
 
 // Image provenance. Every image on a carousel needs a row here before it goes public.
@@ -561,6 +569,21 @@ async function handleApi(request, env, url, ctx) {
     return json({ vote, herdYes: t.y, herdTotal: t.t });
   }
 
+  if (path === "/api/murphys" && method === "POST") {
+    const b = await readBody(request);
+    if (!b) return bad("Couldn't read that.");
+    if (b.website) return json({ ok: true }, 201); // honeypot
+    if (!(await turnstileOk(request, env, b.turnstile))) return bad("Please complete the human check and try again.", 403);
+    if (await rateLimited(db, request, env, "murphy")) return bad("That's a lot of Murphys at once. Try again in a few minutes.", 429);
+    const fix = clean(b.fix, 600), oops = clean(b.oops, 600), name = clean(b.name, 40), utm = clean(b.utm, 60);
+    const email = clean(b.email, 254).toLowerCase();
+    if (!fix || !oops) return bad("Tell us what was fixed and what went oops.");
+    if (email && !EMAIL_RE.test(email)) return bad("That email address doesn't look right.");
+    await db.prepare("INSERT INTO murphys (id,fix,oops,name,email,utm_source,state,created_at) VALUES (?,?,?,?,?,?,'new',?)")
+      .bind(crypto.randomUUID(), fix, oops, name || null, email || null, utm || null, new Date().toISOString()).run();
+    return json({ ok: true }, 201);
+  }
+
   if (path === "/api/comments" && method === "POST") {
     const b = await readBody(request);
     if (!b) return bad("Couldn't read the comment.");
@@ -691,6 +714,25 @@ async function handleAdmin(request, env, url, db, path, method) {
     return json({ ok: true });
   }
 
+  if (path === "/api/admin/murphys" && method === "GET") {
+    const r = await db.prepare("SELECT * FROM murphys ORDER BY created_at DESC LIMIT 1000").all();
+    if (url.searchParams.get("format") === "csv") {
+      const cell = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+      const rows = [["created_at", "state", "name", "email", "utm_source", "fix", "oops"], ...r.results.map((m) => [m.created_at, m.state, m.name, m.email, m.utm_source, m.fix, m.oops])];
+      return new Response(rows.map((row) => row.map(cell).join(",")).join("\n"), {
+        headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": 'attachment; filename="murphys.csv"', "cache-control": "no-store" },
+      });
+    }
+    return json({ murphys: r.results });
+  }
+  const mm = path.match(/^\/api\/admin\/murphys\/([A-Za-z0-9-]{1,64})$/);
+  if (mm && method === "PATCH") {
+    const b = (await readBody(request)) || {};
+    if (!["new", "featured", "archived"].includes(b.state)) return bad("State must be new, featured or archived.");
+    await db.prepare("UPDATE murphys SET state = ? WHERE id = ?").bind(b.state, mm[1]).run();
+    return json({ ok: true });
+  }
+
   if (path === "/api/admin/subscribers" && method === "GET") {
     const r = await db.prepare("SELECT email, created_at FROM subscribers ORDER BY created_at").all();
     return json({ subscribers: r.results });
@@ -786,10 +828,14 @@ class SetHTML {
   constructor(value) { this.value = value; }
   element(el) { el.setInnerContent(this.value, { html: true }); }
 }
+// Local runs have no build id; use the time the server started instead.
+// (Workers report the time as 0 outside a request, so this is worked out on the first request.)
+let devVer = "";
+const ver = () => (BUILD !== "__BUILD__" ? BUILD : (devVer ||= "dev" + Date.now().toString(36)));
 // "/styles.css" -> "/styles.css?v=<build>", so a new deploy is never hidden by a cached copy.
 class Versioned {
   constructor(attr) { this.attr = attr; }
-  element(el) { const v = el.getAttribute(this.attr); if (v && !v.includes("?")) el.setAttribute(this.attr, `${v}?v=${BUILD}`); }
+  element(el) { const v = el.getAttribute(this.attr); if (v && !v.includes("?")) el.setAttribute(this.attr, `${v}?v=${ver()}`); }
 }
 class Append {
   constructor(value) { this.value = value; }
@@ -804,6 +850,7 @@ function decorate(res, env, url, meta = {}) {
     .on('script[src^="/"]', new Versioned("src"))
     .on("#site-head", new SetHTML(headerHTML(flags)))
     .on("#site-foot", new SetHTML(footerHTML()))
+    .on("body", new Append(sheetHTML()))
     .on("#weekly-oops", new SetHTML(weeklyOopsHTML()))
     .on("#waitlist-embed", new SetHTML(waitlistHTML()))
     .on('meta[property="og:image"]', new SetAttr("content", SITE + "/og.png"))
@@ -860,7 +907,7 @@ function listHTML(noms, comments, flags) {
   const ranked = [...noms].sort(byTop(flags));
   const ccount = {};
   comments.forEach((c) => (ccount[c.nomineeId] = (ccount[c.nomineeId] || 0) + 1));
-  return ranked.map((n, i) => cardHTML(n, { flags, rank: i + 1, total: ranked.length, top: i === 0 && topValue(n, flags) > 0, ccount: ccount[n.id] || 0 })).join("");
+  return ranked.map((n) => nomCardHTML(n, flags)).join("");
 }
 
 async function homePage(request, env, url, ctx, category) {
@@ -973,7 +1020,7 @@ const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
-  const paths = ["/", "/midgley", "/goat", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
+  const paths = ["/", "/midgley", "/murphy", "/awards", "/goat", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
   if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -1028,7 +1075,7 @@ export default {
     const type = res.headers.get("content-type") || "";
     // Scripts import each other as "./shared.js"; version those imports too.
     if (type.includes("javascript") && res.ok) {
-      const js = (await res.text()).replace(/from "\.\/([a-z-]+\.js)"/g, `from "./$1?v=${BUILD}"`);
+      const js = (await res.text()).replace(/from "\.\/([a-z-]+\.js)"/g, `from "./$1?v=${ver()}"`);
       const out = new Response(js, res);
       if (url.searchParams.get("v")) out.headers.set("cache-control", "public, max-age=31536000, immutable");
       if (url.hostname !== SITE_HOST) out.headers.set("X-Robots-Tag", "noindex, nofollow");

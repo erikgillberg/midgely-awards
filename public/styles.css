@@ -607,3 +607,86 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .wrap.home{container-type:inline-size}
 .sq-hero h1{font-size:4em}
 .sq-hero .element{background:#EDF0F2;color:#12161C}
+
+/* ---- sticky menu with the Nominate button ---- */
+.site-head{position:sticky;top:0;z-index:30;box-shadow:0 1px 0 var(--line)}
+.site-head-in{flex-wrap:nowrap}
+.site-head nav{flex:1;justify-content:flex-end}
+.nom-btn{flex:none;background:var(--ethyl);color:#fff;border:0;padding:8px 14px;font:600 13px var(--sans);cursor:pointer}
+.nom-btn:hover{opacity:.92}
+@media (max-width:760px){
+  .site-head-in{flex-wrap:wrap}
+  .site-head nav{order:3;width:100%;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;scrollbar-width:none;padding-bottom:2px}
+  .site-head nav::-webkit-scrollbar{display:none}
+  .nom-btn{margin-left:auto}
+}
+
+/* ---- the Nominate sheet ---- */
+html.sheet-open{overflow:hidden}
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(10,12,16,.6);display:grid;place-items:center;padding:16px}
+.sheet-in{position:relative;width:min(560px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:var(--surface);color:var(--ink);padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.sheet-x{position:absolute;right:10px;top:8px;border:0;background:none;font-size:28px;line-height:1;cursor:pointer;color:var(--ink-2)}
+.sh-step{margin:0;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.sheet h2{margin:0;font:900 34px/.95 var(--display);text-transform:uppercase}
+.sh-pick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sh-pick button{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:4px 12px;align-items:start;text-align:left;border:1.5px solid var(--line);background:var(--ground);padding:12px;cursor:pointer;color:var(--ink)}
+.sh-pick button[aria-checked="true"]{border-color:var(--ink);background:var(--surface);box-shadow:inset 0 0 0 1px var(--ink)}
+.sh-pick .element{grid-row:1/3;width:52px;padding:4px 5px}
+.sh-pick .element .n,.sh-pick .element .w{font-size:7px}
+.sh-pick .element .sym{font-size:22px}
+.sh-pick b{font:800 18px/1 var(--display);text-transform:uppercase}
+.sh-pick small{font-size:12px;color:var(--ink-2);line-height:1.3}
+.sh-form{display:flex;flex-direction:column;gap:12px}
+.sh-field{display:flex;flex-direction:column;gap:5px}
+.sh-field span{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.sh-field input,.sh-field textarea,.sh-field select{border:1px solid var(--line);background:var(--ground);padding:9px 11px;font:15px var(--sans);color:var(--ink);width:100%}
+.sh-field textarea{min-height:70px;resize:vertical}
+.sh-field small{font-size:12px;color:var(--ink-3)}
+.sh-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.sh-fine{margin:0;font-size:12px;color:var(--ink-3)}
+.sh-done{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.sh-done p{margin:0;color:var(--ink-2)}
+@media (max-width:480px){ .sh-pick{grid-template-columns:1fr} }
+
+/* ---- nominees as cards ---- */
+.list:not(.single){display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:0}
+.nom-card{aspect-ratio:1;container-type:inline-size;background:var(--deep);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.nom-card a{display:flex;flex-direction:column;gap:2.5cqi;height:100%;padding:7cqi;color:inherit;text-decoration:none}
+.nom-card a:hover{background:linear-gradient(transparent,rgba(255,255,255,.04))}
+.el.nc{width:40cqi;padding:2.4cqi}
+.el.nc .el-num,.el.nc .el-year,.el.nc .el-up,.el.nc .el-down{font-size:3.4cqi}
+.el.nc .el-sym{font-size:15cqi}
+.el.nc .el-name{font-size:3cqi;margin-bottom:.6cqi}
+.nom-card h3{margin:auto 0 0;font:900 9cqi/.95 var(--display);text-transform:uppercase}
+.nom-card .nc-work{margin:0;font-size:5cqi;line-height:1.25;color:rgba(255,255,255,.82)}
+.nc-scores{margin:0;display:flex;gap:4cqi;font:500 3.6cqi var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--light)}
+.nc-scores b{color:#fff;font-weight:600}
+
+/* ---- retro-futurist backdrops behind the card column ---- */
+body[data-bg]{background:#0E1216}
+body[data-bg="fair"]{background:linear-gradient(rgba(10,14,16,.55),rgba(10,14,16,.82)),url(/img/brand/bg-worlds-fair.webp) center/cover fixed #0E1216}
+body[data-bg="carpet"]{background:linear-gradient(rgba(10,14,16,.6),rgba(10,14,16,.85)),url(/img/brand/bg-orbital-night.webp) center/cover fixed #0E1216}
+body[data-bg] .bar,body[data-bg] .cats,body[data-bg] .notice,body[data-bg] .site-foot{background:var(--surface);padding:12px 14px}
+body[data-bg] .site-foot{margin-top:8px}
+@media (max-width:760px){ body[data-bg]{background-attachment:scroll} }
+
+/* ---- the Awards page ---- */
+.sq-carpet{background:#111;justify-content:flex-start}
+.sq-bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.sq-carpet > *:not(.sq-bgimg){position:relative}
+.sq-carpet h1{font-size:5em;max-width:8ch;color:#F3EBDD}
+.sq-carpet .sq-label{color:#E8C77A;opacity:1}
+.countdown{margin-top:auto;display:flex;align-items:baseline;gap:.5em;color:#F3EBDD}
+.countdown b{font:900 5em/1 var(--display)}
+.countdown span{font:500 .9em var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.sq-plain{background:#16231D;color:#F3EBDD}
+.sq-plain .sq-label{color:#E8C77A;opacity:1}
+.sq-trophy{background:#F6F2EA;color:#1B1B1B;align-items:center;text-align:center}
+.sq-trophy img{width:62%;height:auto;mix-blend-mode:multiply;margin:-2% 0}
+.sq-trophy h2{font-size:3.2em}
+.sq-trophy .sq-down{margin:0}
+.sq-lifetime{background:#141414;color:#F3EBDD;display:grid;grid-template-columns:44% 1fr;gap:6%;align-items:center}
+.sq-lifetime .sq-side{width:100%;height:100%;object-fit:cover}
+.sq-lifetime > div{display:flex;flex-direction:column;gap:.7em}
+.sq-lifetime .sq-label{color:#E8C77A;opacity:1}
+.sq-carpet h1{font-size:3.6em;max-width:9ch}

@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body data-bg="fair">
 <header class="site-head" id="site-head"></header>
 <div class="wrap home">
   <section class="sq sq-hero" aria-labelledby="hero-h">
@@ -50,7 +50,7 @@
     <p class="sq-why">Murphy's law: anything that can go wrong will go wrong. Drop your toast and it lands butter side down.</p>
     <p class="sq-for">For everyday backfires.</p>
     <p class="sq-text">The small fix at home, at work or online that made things worse. Tell us yours. The best get featured.</p>
-    <p class="sq-go"><a href="/murphy#share">Share your Murphy</a> <a href="/murphy">About the Murphy</a></p>
+    <p class="sq-go"><a href="#nominate" data-open-sheet="murphy">Share your Murphy</a> <a href="/murphy">About the Murphy</a></p>
   </section>
 
   <div class="carousel sq-carousel" data-carousel>
@@ -70,7 +70,7 @@
     <p class="sq-label">The serious question behind the joke</p>
     <h2 id="q-h">What will win a Midgley thirty years from now?</h2>
     <p class="sq-text">Better to try and fail than never try. Mostly. Mark a nominee <b>Prospective</b> to name a decision being made today, in transportation, housing, energy, AI or city-building, before it wins.</p>
-    <p class="sq-go"><a href="#nominate" onclick="document.getElementById('open-form').click()">Nominate one</a></p>
+    <p class="sq-go"><a href="#nominate" data-open-sheet="midgley">Nominate one</a></p>
   </section>
 
   <div class="bar">
@@ -81,7 +81,7 @@
       <button data-sort="oops" aria-pressed="false" data-needs="scores">Top Oops</button>
       <button data-sort="herd" aria-pressed="false" data-needs="scores">Top Herd</button>
     </div>
-    <button class="primary" id="open-form">Submit a nominee</button>
+    <button class="primary" type="button" data-open-sheet="midgley">Nominate</button>
     <div class="filters">
       <select id="flt-domain" aria-label="Filter by field"></select>
       <select id="flt-harm" aria-label="Filter by kind of harm"></select>
@@ -91,30 +91,6 @@
     <span class="count" id="count" aria-live="polite"></span>
   </div>
 
-  <p class="thanks" id="thanks" hidden></p>
-
-  <form class="nominate" id="form" hidden novalidate>
-    <h3>Submit a nominee</h3>
-    <p class="hint">Make the case on both sides of the ledger: what it solved, then what it caused. New nominees appear after a quick review against the <a href="/guidelines">guidelines</a>.</p>
-    <div class="field"><label class="label" for="f-name">Nominee</label><input id="f-name" maxlength="80" required placeholder="Person, agency or program"></div>
-    <div class="field"><label class="label" for="f-years">Years</label><input id="f-years" maxlength="30" placeholder="e.g. 1889 to 1944, or 2026"></div>
-    <div class="field full"><label class="label" for="f-work">The achievement</label><input id="f-work" maxlength="120" required placeholder="What they made or decided"></div>
-    <div class="field"><label class="label" for="f-wikiname">Wikipedia page for the nominee <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="f-wikiname" type="url" maxlength="500" placeholder="https://en.wikipedia.org/wiki/..."></div>
-    <div class="field"><label class="label" for="f-wikiwork">Wikipedia page for the achievement <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="f-wikiwork" type="url" maxlength="500" placeholder="https://en.wikipedia.org/wiki/..."></div>
-    <div class="field full"><label class="label" for="f-meant">What it was meant to do <span style="text-transform:none;letter-spacing:0">(optional)</span></label><textarea id="f-meant" maxlength="600" placeholder="The problem it was built to solve"></textarea></div>
-    <div class="field full"><label class="label" for="f-solved">What went right</label><textarea id="f-solved" maxlength="600" required placeholder="How well it worked"></textarea></div>
-    <div class="field full"><label class="label" for="f-backfire">What went oops</label><textarea id="f-backfire" maxlength="600" required placeholder="Who or what was harmed, and how"></textarea></div>
-    <div class="field"><label class="label" for="f-domain">Category</label><select id="f-domain"></select></div>
-    <div class="field"><label class="label" for="f-status">Status</label><select id="f-status"></select></div>
-    <fieldset class="field full"><legend class="label">Kind of harm (pick any)</legend><div class="checks" id="f-harms"></div></fieldset>
-    <div class="field full"><label class="label" for="f-know">Was the backfire knowable?</label><select id="f-know"></select><small>Keep documented effects apart from contested claims.</small></div>
-    <div class="field full"><label class="label" for="f-fix">The fix <span style="text-transform:none;letter-spacing:0">(optional)</span></label><textarea id="f-fix" maxlength="400" placeholder="Who or what is cleaning it up? A treaty, a reform, an organization."></textarea></div>
-    <div class="field full"><label class="label" for="f-fixurl">Link for the fix <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="f-fixurl" type="url" maxlength="500" placeholder="https://"></div>
-    <div class="field full"><label class="label" for="f-author">Your name <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="f-author" maxlength="60" autocomplete="name" placeholder="Shown as the submitter"></div>
-    <div class="hp" aria-hidden="true"><label for="f-website">Leave empty</label><input id="f-website" tabindex="-1" autocomplete="off"></div>
-    <div class="field full ts" id="f-ts"></div>
-    <div class="actions"><button class="primary" type="submit" id="f-submit">Submit nominee</button><button class="ghost" type="button" id="f-cancel">Cancel</button><span class="msg" id="f-msg" role="status"></span></div>
-  </form>
 
   <p class="notice" id="notice" hidden></p>
   <nav class="cats" id="cats" aria-label="Categories" data-needs="categories"></nav>
