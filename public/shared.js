@@ -243,7 +243,7 @@ function postShell(p, ctx = {}) {
       ${p.more ? `<div class="pv-full" hidden>${p.more}</div>` : ""}</div>
     <div class="pv-comments" ${ctx.open ? "" : "data-collapsed"}>
       ${thread.length > 2 && !ctx.open ? `<button class="pv-viewall" type="button" data-act="comments">View all ${thread.length} comments</button>` : ""}
-      <div class="pv-thread">${thread.map((c, i) => `<p class="cm ${!ctx.open && i < thread.length - 2 ? "pv-old" : ""}" data-cid="${esc(c.id)}"><b>${esc(c.author || "Anonymous")}</b> ${esc(c.text)} <small>${esc(ago(c.createdAt))}</small></p>`).join("")}</div>
+      <div class="pv-thread">${thread.map((c, i) => `<p class="cm ${!ctx.open && i < thread.length - 2 ? "pv-old" : ""}" data-cid="${esc(c.id)}"><b>${esc(c.author || "Anonymous")}</b> ${esc(c.text)} <small>${esc(ago(c.createdAt))} · <button type="button" class="pv-rep" data-act="report-c">Report</button></small></p>`).join("")}</div>
       <form class="pv-reply" data-act-form="comment"><input name="author" maxlength="60" placeholder="Name" aria-label="Your name"><input name="text" maxlength="1000" placeholder="Add a comment…" aria-label="Comment" required><button type="submit">Post</button></form>
     </div>
   </article>`;
@@ -261,6 +261,8 @@ export function postHTML(n, ctx = {}) {
 // ---------------------------------------------------------------- Murphys as posts
 
 export const murphyPath = (m) => "/m/" + m.slug;
+// End a reader's sentence with a period if it has no closing punctuation.
+const sentence = (t) => { const s = String(t || "").trim(); return /[.!?]["')]?$/.test(s) ? s : s + "."; };
 export function murphyTileHTML(m) {
   return `<div class="el mini mu-tile"><span class="el-num">2</span><span class="el-year"></span><span class="el-sym">Mu</span><span class="el-name">MURPHY</span><span class="el-up"></span><span class="el-down"></span></div>`;
 }
@@ -281,7 +283,7 @@ export function murphyCarouselHTML(m) {
 export function murphyPostHTML(m, ctx = {}) {
   return postShell({
     id: m.id, kind: "murphy", path: murphyPath(m), title: "A Murphy", sub: m.name ? `from ${m.name}` : "from a reader",
-    tile: murphyTileHTML(m), carousel: murphyCarouselHTML(m), captionTitle: "The Murphy.", caption: `${m.fix} ${m.oops}`, more: "",
+    tile: murphyTileHTML(m), carousel: murphyCarouselHTML(m), captionTitle: "The Murphy.", caption: `${sentence(m.fix)} ${sentence(m.oops)}`, more: "",
     worthy: "Murphy-worthy?", herdYes: m.herdYes, herdTotal: m.herdTotal, vars: "--deep:#0B2230;--base:#2F6E8F;--light:#BFE0EF",
   }, ctx);
 }
@@ -361,7 +363,7 @@ const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg
 export const MENU = [
   ["The awards", [["/midgley", "The Midgley"], ["/murphy", "The Murphy"], ["/awards", "Awards night"], ["/scores", "How scores work"], ["/table", "The Categoric Table"]]],
   ["What this is", [["/#intro", "The big picture"], ["/#rules", "What makes a good nominee"], ["/#question", "The serious question"], ["/#gap", "The gender gap"], ["/guidelines", "Community guidelines"]]],
-  ["Goat Farm", [["/goat", "Goat"], ["/shop", "Shop"], ["/#oops", "The Weekly Oops"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
+  ["More from us", [["/goat", "Goat, our chief judge"], ["/shop", "Shop"], ["/#oops", "The Weekly Oops"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
 ];
 export function headerHTML(flags = {}) {
   const item = (href, k, label, extra = "") => `<a class="nav-i" href="${href}" ${extra}>${icon(k)}<span>${label}</span></a>`;
@@ -719,7 +721,7 @@ export function categoricTableHTML(noms) {
       const style = `grid-row:${r};grid-column:${c};${jewelVars(j)}`;
       cells.push(n
         ? `<a class="pt-cell filled" style="${style}" href="${nomineePath(n)}" aria-label="${esc(n.name)}: ${esc(n.work)}" data-name="${esc(n.name)}" data-work="${esc(n.work)}" data-desc="${esc((String(n.backfire).match(/^.*?[.!?](\s|$)/) || [n.backfire])[0].trim())}">${elementHTML(n, "pt")}<span class="pt-more"><b>${esc(n.name)}</b>${esc(n.work)}</span></a>`
-        : `<div class="pt-cell empty" style="${style}" aria-hidden="true"><span class="pt-bf">Bf</span></div>`);
+        : `<div class="pt-cell pt-empty" style="${style}" aria-hidden="true"><span class="pt-bf">Bf</span></div>`);
     });
   }
   cells.push(`<div class="pt-mark" style="grid-row:6;grid-column:3">↓</div><div class="pt-mark" style="grid-row:7;grid-column:3">↓</div>`);

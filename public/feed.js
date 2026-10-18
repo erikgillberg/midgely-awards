@@ -73,7 +73,13 @@ document.addEventListener("click", async (e) => {
   }
   if (act === "report") {
     btn.closest("details")?.removeAttribute("open");
-    try { await api("/api/report", { method: "POST", body: JSON.stringify({ kind: "nominee", id, voter }) }); toast("Reported. A moderator will take a look."); }
+    try { await api("/api/report", { method: "POST", body: JSON.stringify({ kind: post.dataset.kind === "murphy" ? "murphy" : "nominee", id, voter }) }); toast("Reported. A moderator will take a look."); }
+    catch (err) { toast("Couldn't send the report: " + err.message); }
+    return;
+  }
+  if (act === "report-c") {
+    const cid = btn.closest("[data-cid]").dataset.cid;
+    try { await api("/api/report", { method: "POST", body: JSON.stringify({ kind: "comment", id: cid, voter }) }); btn.replaceWith(document.createTextNode("Reported")); }
     catch (err) { toast("Couldn't send the report: " + err.message); }
     return;
   }

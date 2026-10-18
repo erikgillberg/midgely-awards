@@ -708,16 +708,16 @@ async function handleApi(request, env, url, ctx) {
 
   if (path === "/api/report" && method === "POST") {
     const b = await readBody(request);
-    const kind = b && (b.kind === "comment" || b.kind === "nominee") ? b.kind : "";
+    const kind = b && ["comment", "nominee", "murphy"].includes(b.kind) ? b.kind : "";
     const id = clean(b && b.id, 64);
     const voter = b && b.voter;
     if (!kind || !ID_RE.test(id) || !VOTER_RE.test(voter || "")) return bad("Invalid report.");
     if (await rateLimited(db, request, env, "report")) return bad("Too many reports at once. Try again later.", 429);
-    const table = kind === "comment" ? "comments" : "nominees";
+    const table = { comment: "comments", nominee: "nominees", murphy: "" }[kind]; // Murphy reports are kept in reports only
     const ins = await db.prepare("INSERT OR IGNORE INTO reports (kind, target_id, reporter, reason, created_at) VALUES (?,?,?,?,?)")
       .bind(kind, id, voter, clean(b.reason, 200), new Date().toISOString()).run();
     if (ins.meta && ins.meta.changes) {
-      await db.prepare(`UPDATE ${table} SET reports = COALESCE(reports,0) + 1 WHERE id = ?`).bind(id).run();
+      if (table) await db.prepare(`UPDATE ${table} SET reports = COALESCE(reports,0) + 1 WHERE id = ?`).bind(id).run();
       if (kind === "comment") {
         const r = await db.prepare("UPDATE comments SET hidden = 1 WHERE id = ? AND reports >= ? AND hidden = 0").bind(id, REPORTS_TO_HIDE).run();
         if (r.meta && r.meta.changes) await bustState(url);
@@ -955,7 +955,7 @@ class Append {
 }
 
 // Every HTML page: shared header and footer, link-preview tags, analytics, and noindex off production.
-function decorate(res, env, url, meta = {}) {
+function decorate(res, env, url, meta = {}, status = 0) {
   const flags = flagsOf(env);
   let rw = new HTMLRewriter()
     .on('link[rel="stylesheet"][href^="/"]', new Versioned("href"))
@@ -989,7 +989,8 @@ function decorate(res, env, url, meta = {}) {
   if (env.CF_BEACON_TOKEN) {
     rw = rw.on("body", new Append(`<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='${esc(JSON.stringify({ token: env.CF_BEACON_TOKEN }))}'></script>`));
   }
-  const out = rw.transform(res);
+  let out = rw.transform(res);
+  if (status) out = new Response(out.body, { status, headers: out.headers });
   if (url.hostname === SITE_HOST) return out;
   const r = new Response(out.body, out);
   r.headers.set("X-Robots-Tag", "noindex, nofollow");
@@ -1054,7 +1055,7 @@ async function nomineePage(request, env, url, ctx, key) {
     return decorate(page, env, url, {
       title: "Nominee not found · The Backfire Awards",
       fill: { "#list": `<p class="notice">That nominee isn't on the list. It may still be waiting for review. <a href="/">See all nominees</a>.</p>` },
-    });
+    }, 404);
   }
   if (n.id === HONOREE) return Response.redirect(SITE_ORIGIN(url) + "/midgley", 301);
   if (key !== n.slug) return Response.redirect(SITE_ORIGIN(url) + nomineePath(n), 301);
@@ -1079,11 +1080,11 @@ async function murphyPage(request, env, url, ctx, key) {
   const st = await siteState(env, url, ctx);
   const m = st && (st.murphys || []).find((x) => x.slug === key);
   const page = await asset(env, url, request, "/nominee");
-  if (!m) return decorate(page, env, url, { title: "Not found · The Backfire Awards", fill: { "#list": `<p class="notice">That Murphy isn't here. <a href="/">See the feed</a>.</p>` } });
+  if (!m) return decorate(page, env, url, { title: "Not found · The Backfire Awards", fill: { "#list": `<p class="notice">That Murphy isn't here. <a href="/">See the feed</a>.</p>` } }, 404);
   return decorate(page, env, url, {
     canonical: SITE + murphyPath(m),
     title: `A Murphy: ${m.fix.slice(0, 60)} · The Backfire Awards`,
-    desc: `${m.fix} ${m.oops}`.slice(0, 280),
+    desc: `A Murphy: an everyday backfire. ${m.fix.replace(/[.!?]?$/, ".")} ${m.oops}`.slice(0, 280),
     fill: {
       "#list": murphyPostHTML(m, { flags: flagsOf(env), thread: st.comments.filter((c) => c.nomineeId === m.id), open: true }),
       "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, m.id),
