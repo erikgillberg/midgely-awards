@@ -546,11 +546,11 @@ function powerNum(r) {
   const unit = r >= 9 ? ["B", 9] : r >= 6 ? ["M", 6] : r >= 3 ? ["K", 3] : ["", 0];
   return String(10 ** (r - unit[1])) + unit[0];
 }
-// Plain words for a power of ten: 9 -> "about a billion, our estimate".
+// Plain words for a power of ten: 9 -> "About a billion people (estimate)".
 export function powerWords(r) {
-  if (r == null) return "not yet researched";
+  if (r == null) return "Not yet researched";
   const names = { 3: "a thousand", 4: "10,000", 5: "100,000", 6: "a million", 7: "10 million", 8: "100 million", 9: "a billion" };
-  return (names[r] ? `about ${names[r]}` : r < 3 ? "fewer than a thousand" : "more than a billion") + ", our estimate";
+  return (names[r] ? `About ${names[r]}` : r < 3 ? "Fewer than a thousand" : "More than a billion") + " people (estimate)";
 }
 export const surnameOf = (name) => String(name).replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i, "").split(/\s+/).pop();
 export const groupOf = (domain) => { const i = Object.keys(DOMAINS).indexOf(domain); return i >= 0 ? i + 1 : null; };
@@ -566,8 +566,8 @@ export function elementHTML(n, size = "") {
     <span class="el-year" title="Born">${n.born ?? "?"}</span>
     <span class="el-sym">${esc(symbol(n.name))}</span>
     <span class="el-name">${esc(surnameOf(n.name))}</span>
-    <span class="el-up" title="People helped"><i>▲</i>${powerText(n.helped)}</span>
-    <span class="el-down" title="People harmed"><i>▼</i>${powerText(n.harmed)}</span>
+    <span class="el-up" title="People helped, estimated"><i>▲</i>${powerText(n.helped)}</span>
+    <span class="el-down" title="People harmed, estimated"><i>▼</i>${powerText(n.harmed)}</span>
   </div>`;
 }
 
@@ -590,8 +590,8 @@ export function keyHTML(n) {
     "k-born": [n.born ?? "?", "Born", n.born ? `${who} was born in ${n.born}.` : "Year born, or founded."],
     "k-sym": [symbol(n.name), "Symbol", "The first two letters of the name."],
     "k-name": [who, "Name", "The surname, or the short name of a program."],
-    "k-up": ["▲" + powerText(n.helped), "Helped", `People it helped: ${powerWords(n.helped)}.`],
-    "k-down": ["▼" + powerText(n.harmed), "Harmed", `People it harmed: ${powerWords(n.harmed)}.`],
+    "k-up": ["▲" + powerText(n.helped), "Helped", `${powerWords(n.helped)}.`],
+    "k-down": ["▼" + powerText(n.harmed), "Harmed", `${powerWords(n.harmed)}.`],
   };
   const lines = KEY_SPOTS.map(([, a, b]) => `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/><circle cx="${b[0]}" cy="${b[1]}" r="0.8"/>`).join("");
   return `<div class="el-diagram" style="${jewelVars(jewelOf(n.domain))}">

@@ -987,7 +987,7 @@ body[data-bg="cat"] .wrap.home:has(#mg-post){padding-bottom:16px}
 .pv-add{align-self:stretch;text-align:left;border:0;border-top:1px solid var(--line);background:none;margin-top:4px;padding:10px 0 2px;color:var(--ink-3);font:15px var(--sans);cursor:text}
 .cs{position:fixed;inset:0;z-index:80;background:rgb(0 0 0/.45);display:flex;align-items:flex-end;justify-content:center;--kb:0px}
 .cs[hidden]{display:none}
-.cs-panel{position:relative;width:100%;max-width:560px;height:min(78dvh,680px);margin-bottom:var(--kb);background:var(--surface);color:var(--ink);border-radius:18px 18px 0 0;display:flex;flex-direction:column;box-shadow:0 -10px 40px rgb(0 0 0/.25);transition:transform .18s ease-out;animation:cs-up .22s ease-out}
+.cs-panel{position:relative;width:100%;max-width:560px;height:min(78dvh,680px);max-height:calc(100dvh - var(--kb) - 12px);margin-bottom:var(--kb);background:var(--surface);color:var(--ink);border-radius:18px 18px 0 0;display:flex;flex-direction:column;box-shadow:0 -10px 40px rgb(0 0 0/.25);transition:transform .18s ease-out;animation:cs-up .22s ease-out}
 @keyframes cs-up{from{transform:translateY(40%);opacity:.4}}
 @media (prefers-reduced-motion:reduce){.cs-panel{animation:none;transition:none}}
 .cs-grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:10px auto 0;flex:none}
@@ -1014,5 +1014,6 @@ html.cs-open,html.cs-open body{overflow:hidden}
 /* ---------- easier reading: body text on the cards */
 .wrap.home .sq .sq-text{font-size:max(14px,1.05em)}
 .wrap.home .sq .sq-why{font-size:max(15px,1.25em)}
-.cc .cc-text{font-size:max(13px,1em)}
+.cc .cc-text{font-size:max(11.5px,1em)}
 .cc .cc-dek{font-size:max(13.5px,1.05em)}
+.cs-panel.dragging{transition:none}

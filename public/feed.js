@@ -52,7 +52,9 @@ function fillList() {
   list.innerHTML = items.length ? "" : `<p class="cs-empty">No comments yet. Start the conversation.</p>`;
   items.forEach((c) => { const x = c.cloneNode(true); x.classList.remove("pv-old"); list.appendChild(x); });
 }
+let draftFor = null;
 function openSheet(post, typing) {
+  if (draftFor !== post) { form.text.value = ""; draftFor = post; } // a draft belongs to one post
   sheetPost = post; lastFocus = document.activeElement;
   $("#cs-h", sheet).textContent = "Comments · " + $(".pv-who b", post).textContent;
   fillList();
@@ -60,6 +62,7 @@ function openSheet(post, typing) {
   sheet.hidden = false; panel.style.transform = "";
   document.documentElement.classList.add("cs-open");
   list.scrollTop = 0;
+  lift();
   if (typing) form.text.focus(); // inside the tap, so a phone shows its keyboard
   else $(".cs-x", sheet).focus({ preventScroll: true });
 }
@@ -79,15 +82,26 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheet
 
 // Swipe the panel down to close it (from the grab bar or the header).
 let drag = null;
-panel.addEventListener("touchstart", (e) => { if (e.target.closest(".cs-grab, .cs-head")) drag = { y: e.touches[0].clientY, dy: 0 }; }, { passive: true });
+panel.addEventListener("touchstart", (e) => { if (e.target.closest(".cs-grab, .cs-head")) { drag = { y: e.touches[0].clientY, dy: 0 }; panel.classList.add("dragging"); } }, { passive: true });
 panel.addEventListener("touchmove", (e) => { if (!drag) return; drag.dy = Math.max(0, e.touches[0].clientY - drag.y); panel.style.transform = `translateY(${drag.dy}px)`; }, { passive: true });
-panel.addEventListener("touchend", () => { if (!drag) return; const far = drag.dy > 90; drag = null; if (far) closeSheet(); else panel.style.transform = ""; });
+panel.addEventListener("touchend", () => { if (!drag) return; panel.classList.remove("dragging"); const far = drag.dy > 90; drag = null; if (far) closeSheet(); else panel.style.transform = ""; });
 
 // Keep the panel above the phone's keyboard.
-if (window.visualViewport) {
-  const lift = () => { const vv = window.visualViewport; sheet.style.setProperty("--kb", Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + "px"); };
-  visualViewport.addEventListener("resize", lift); visualViewport.addEventListener("scroll", lift);
+function lift() {
+  const vv = window.visualViewport;
+  if (vv) sheet.style.setProperty("--kb", Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + "px");
 }
+if (window.visualViewport) { visualViewport.addEventListener("resize", lift); visualViewport.addEventListener("scroll", lift); }
+
+// Keep Tab inside the open panel.
+sheet.addEventListener("keydown", (e) => {
+  if (e.key !== "Tab") return;
+  const f = [...panel.querySelectorAll("button:not([disabled]), input, [href]")].filter((x) => x.offsetParent !== null);
+  if (!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
 
 async function reportComment(btn) {
   const cid = btn.closest("[data-cid]").dataset.cid;
@@ -120,9 +134,11 @@ form.addEventListener("submit", async (e) => {
       if (!vb) { vb = document.createElement("button"); vb.type = "button"; vb.className = "pv-viewall"; vb.dataset.act = "comments"; thread.before(vb); }
       vb.textContent = `View all ${all.length} comments`;
     }
-    $(".cs-empty", list)?.remove();
-    const copy = cm.cloneNode(true); copy.classList.remove("pv-old"); list.prepend(copy); list.scrollTop = 0;
-    form.text.value = "";
+    if (sheetPost === post) { // the panel may have moved on to another post while this one was sending
+      $(".cs-empty", list)?.remove();
+      const copy = cm.cloneNode(true); copy.classList.remove("pv-old"); list.prepend(copy); list.scrollTop = 0;
+    }
+    if (draftFor === post) form.text.value = "";
   } catch (err) { toast("Your comment didn't post: " + err.message); }
   btn.disabled = false;
 });
