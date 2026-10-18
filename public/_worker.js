@@ -537,6 +537,7 @@ async function getState(db, url, ctx) {
 
 // Copies of each submission go to outside services when their settings exist. The site's database stays the record.
 //   FORMSPREE_SUBSCRIBE, FORMSPREE_MURPHY, FORMSPREE_NOMINATION: a Formspree form id (the part after /f/)
+//   MAILCHIMP_API_KEY (secret) + MAILCHIMP_AUDIENCE_ID: adds Weekly Oops sign-ups to the Mailchimp audience
 //   BEEHIIV_API_KEY + BEEHIIV_PUBLICATION_ID: adds newsletter sign-ups to Beehiiv
 async function forward(env, kind, data) {
   const jobs = [];
@@ -546,6 +547,16 @@ async function forward(env, kind, data) {
       method: "POST", headers: { "content-type": "application/json", accept: "application/json" },
       body: JSON.stringify({ ...data, _subject: `Backfire Awards: new ${kind}` }),
     }));
+  }
+  // Mailchimp, directly (Formspree only connects to it on a paid plan). "pending" sends Mailchimp's
+  // confirm-your-email message, so only real addresses reach the list.
+  if (kind === "subscribe" && env.MAILCHIMP_API_KEY && env.MAILCHIMP_AUDIENCE_ID) {
+    const dc = env.MAILCHIMP_API_KEY.split("-").pop();
+    jobs.push(fetch(`https://${dc}.api.mailchimp.com/3.0/lists/${env.MAILCHIMP_AUDIENCE_ID}/members`, {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: "Basic " + btoa("site:" + env.MAILCHIMP_API_KEY) },
+      body: JSON.stringify({ email_address: data.email, status: "pending", tags: ["Backfire Awards"], merge_fields: {} }),
+    }).then(async (r) => { if (!r.ok && r.status !== 400) console.log("mailchimp", r.status, (await r.text()).slice(0, 200)); }));
   }
   if (kind === "subscribe" && env.BEEHIIV_API_KEY && env.BEEHIIV_PUBLICATION_ID) {
     jobs.push(fetch(`https://api.beehiiv.com/v2/publications/${env.BEEHIIV_PUBLICATION_ID}/subscriptions`, {
