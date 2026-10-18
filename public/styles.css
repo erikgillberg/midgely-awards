@@ -981,3 +981,5 @@ body[data-bg="cat"] .wrap.home:has(#mg-post){padding-bottom:16px}
 .cc-portrait.photo img{filter:grayscale(1) contrast(1.05) brightness(.7);object-position:center top}
 .cc-portrait.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--deep) 0%,transparent 40%),linear-gradient(transparent 35%,var(--deep) 92%)}
 .cc-hook .cc-kicker{padding-right:5.5em}
+/* iPhone Safari zooms into any field under 16px and stays zoomed. Every field is at least 16px on touch screens. */
+@media (pointer:coarse){ input,textarea,select{font-size:max(16px,1em) !important} }
