@@ -560,9 +560,19 @@ async function forward(env, kind, data) {
       headers: { "content-type": "application/json", authorization: "Basic " + btoa("site:" + env.MAILCHIMP_API_KEY) },
       body: JSON.stringify({ email_address: data.email, status: "pending", tags: ["Backfire Awards"], merge_fields: {} }),
     }).then(async (r) => {
-      // 400 "Member Exists" is normal for a repeat sign-up; anything else is worth seeing in the logs.
       const body = r.ok ? "" : (await r.text()).slice(0, 300);
       console.log("mailchimp", r.status, body);
+      // Already on the list (from another signup source): just add the Backfire Awards tag.
+      if (r.status === 400 && body.includes("Member Exists")) {
+        const hash = [...new Uint8Array(await crypto.subtle.digest("MD5", new TextEncoder().encode(data.email.toLowerCase())))]
+          .map((b) => b.toString(16).padStart(2, "0")).join("");
+        const t = await fetch(`https://${dc}.api.mailchimp.com/3.0/lists/${env.MAILCHIMP_AUDIENCE_ID}/members/${hash}/tags`, {
+          method: "POST",
+          headers: { "content-type": "application/json", authorization: "Basic " + btoa("site:" + env.MAILCHIMP_API_KEY) },
+          body: JSON.stringify({ tags: [{ name: "Backfire Awards", status: "active" }] }),
+        });
+        console.log("mailchimp tag existing member", t.status);
+      }
     }).catch((e) => console.log("mailchimp failed", String(e))));
   }
   if (kind === "subscribe" && env.BEEHIIV_API_KEY && env.BEEHIIV_PUBLICATION_ID) {
