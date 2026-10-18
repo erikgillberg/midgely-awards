@@ -241,13 +241,17 @@ function postShell(p, ctx = {}) {
     <p class="pv-stats">${stats} · <a href="/scores">scores</a></p>
     <div class="pv-caption"><p><a href="${esc(p.path)}"><b>${esc(p.captionTitle)}</b></a> ${esc(p.caption)}${p.more ? ` <button class="pv-more" type="button" data-act="more">more</button>` : ""}</p>
       ${p.more ? `<div class="pv-full" hidden>${p.more}</div>` : ""}</div>
-    <div class="pv-comments" ${ctx.open ? "" : "data-collapsed"}>
-      ${thread.length > 2 && !ctx.open ? `<button class="pv-viewall" type="button" data-act="comments">View all ${thread.length} comments</button>` : ""}
-      <div class="pv-thread">${thread.map((c, i) => `<p class="cm ${!ctx.open && i < thread.length - 2 ? "pv-old" : ""}" data-cid="${esc(c.id)}"><b>${esc(c.author || "Anonymous")}</b> ${esc(c.text)} <small>${esc(ago(c.createdAt))} · <button type="button" class="pv-rep" data-act="report-c">Report</button></small></p>`).join("")}</div>
-      <form class="pv-reply" data-act-form="comment"><input name="author" maxlength="60" placeholder="Name" aria-label="Your name"><input name="text" maxlength="1000" placeholder="Add a comment…" aria-label="Comment" required><button type="submit">Post</button></form>
+    <div class="pv-comments" data-collapsed>
+      ${thread.length > 2 ? `<button class="pv-viewall" type="button" data-act="comments">View all ${thread.length} comments</button>` : ""}
+      <div class="pv-thread">${thread.map((c, i) => commentHTML(c, i < thread.length - 2)).join("")}</div>
+      <button class="pv-add" type="button" data-act="comment-new">Add a comment…</button>
     </div>
   </article>`;
 }
+
+// One comment. The full thread is in every post; the comments panel shows all of it, the post the latest two.
+export const commentHTML = (c, old = false) =>
+  `<p class="cm${old ? " pv-old" : ""}" data-cid="${esc(c.id)}"><b>${esc(c.author || "Anonymous")}</b> <span class="cm-t">${esc(c.text)}</span> <small>${esc(ago(c.createdAt))} · <button type="button" class="pv-rep" data-act="report-c">Report</button></small></p>`;
 
 export function postHTML(n, ctx = {}) {
   return postShell({
@@ -533,16 +537,20 @@ const jewelVars = (j) => `--deep:${j.deep};--base:${j.base};--light:${j.light}`;
 // Color is the category; its group number heads the column in the table.
 // Live numbers (scores, ranks) stay on the website, never on the tile.
 // 9 -> "1B", 8 -> "100M", 4 -> "10K". Plain shorthand people already read on price tags and follower counts.
+// Researched figures are estimates, so they carry "~" (about).
 export function powerText(r) {
   if (r == null) return "?";
+  return "~" + powerNum(r);
+}
+function powerNum(r) {
   const unit = r >= 9 ? ["B", 9] : r >= 6 ? ["M", 6] : r >= 3 ? ["K", 3] : ["", 0];
   return String(10 ** (r - unit[1])) + unit[0];
 }
-// Plain words for a power of ten: 9 -> "a billion or more", 8 -> "100 million or more".
+// Plain words for a power of ten: 9 -> "about a billion, our estimate".
 export function powerWords(r) {
   if (r == null) return "not yet researched";
   const names = { 3: "a thousand", 4: "10,000", 5: "100,000", 6: "a million", 7: "10 million", 8: "100 million", 9: "a billion" };
-  return names[r] ? `${names[r]} or more` : r < 3 ? "fewer than a thousand" : "more than a billion";
+  return (names[r] ? `about ${names[r]}` : r < 3 ? "fewer than a thousand" : "more than a billion") + ", our estimate";
 }
 export const surnameOf = (name) => String(name).replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i, "").split(/\s+/).pop();
 export const groupOf = (domain) => { const i = Object.keys(DOMAINS).indexOf(domain); return i >= 0 ? i + 1 : null; };

@@ -983,3 +983,36 @@ body[data-bg="cat"] .wrap.home:has(#mg-post){padding-bottom:16px}
 .cc-hook .cc-kicker{padding-right:5.5em}
 /* iPhone Safari zooms into any field under 16px and stays zoomed. Every field is at least 16px on touch screens. */
 @media (pointer:coarse){ input,textarea,select{font-size:max(16px,1em) !important} }
+/* ---------- comments: the latest two under the post, everything in a panel */
+.pv-add{align-self:stretch;text-align:left;border:0;border-top:1px solid var(--line);background:none;margin-top:4px;padding:10px 0 2px;color:var(--ink-3);font:15px var(--sans);cursor:text}
+.cs{position:fixed;inset:0;z-index:80;background:rgb(0 0 0/.45);display:flex;align-items:flex-end;justify-content:center;--kb:0px}
+.cs[hidden]{display:none}
+.cs-panel{position:relative;width:100%;max-width:560px;height:min(78dvh,680px);margin-bottom:var(--kb);background:var(--surface);color:var(--ink);border-radius:18px 18px 0 0;display:flex;flex-direction:column;box-shadow:0 -10px 40px rgb(0 0 0/.25);transition:transform .18s ease-out;animation:cs-up .22s ease-out}
+@keyframes cs-up{from{transform:translateY(40%);opacity:.4}}
+@media (prefers-reduced-motion:reduce){.cs-panel{animation:none;transition:none}}
+.cs-grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:10px auto 0;flex:none}
+.cs-head{display:flex;align-items:center;justify-content:center;position:relative;padding:8px 48px 12px;border-bottom:1px solid var(--line);touch-action:none}
+.cs-head h2{margin:0;font:600 16px var(--sans);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-x{position:absolute;right:8px;top:2px;width:40px;height:40px;border:0;background:none;color:var(--ink);font:28px/1 var(--sans);cursor:pointer}
+.cs-list{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:12px 18px;display:flex;flex-direction:column;gap:14px}
+.cs-list .cm{margin:0;font-size:15px;line-height:1.4;overflow-wrap:anywhere}
+.cs-list .cm small{display:block;margin-top:2px;color:var(--ink-3);font-size:12px}
+.cs-list .pv-rep{border:0;background:none;padding:0;color:var(--ink-3);font:inherit;cursor:pointer;text-decoration:underline}
+.cs-empty{margin:auto;color:var(--ink-3);font-size:15px}
+.cs-form{display:flex;gap:8px;align-items:center;padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--surface)}
+.cs-form input{min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--ground);color:var(--ink);font:16px var(--sans);padding:9px 14px}
+.cs-form input[name=author]{flex:0 0 92px}
+.cs-form input[name=text]{flex:1}
+.cs-form button{border:0;background:none;color:var(--ozone);font:600 15px var(--sans);cursor:pointer;padding:8px 4px}
+.cs-form button:disabled{opacity:.5}
+html.cs-open,html.cs-open body{overflow:hidden}
+@media (min-width:761px){
+  .cs{align-items:center}
+  .cs-panel{border-radius:14px;height:min(80vh,720px);margin-bottom:0}
+  .cs-grab{display:none}
+}
+/* ---------- easier reading: body text on the cards */
+.wrap.home .sq .sq-text{font-size:max(14px,1.05em)}
+.wrap.home .sq .sq-why{font-size:max(15px,1.25em)}
+.cc .cc-text{font-size:max(13px,1em)}
+.cc .cc-dek{font-size:max(13.5px,1.05em)}

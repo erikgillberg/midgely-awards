@@ -1,7 +1,7 @@
 // Posts in a feed or on their own page: votes, comments, sharing, "more", and reporting.
 // The server sends the posts ready to read; this script makes them interactive.
 import { api } from "./site.js";
-import { herdLine } from "./shared.js";
+import { herdLine, commentHTML } from "./shared.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const store = {
@@ -33,7 +33,99 @@ api("/api/my-votes?voter=" + encodeURIComponent(voter)).then((r) => {
 }).catch(() => {});
 
 const name = () => store.get("midgley.name") || "";
-document.querySelectorAll(".pv-reply [name=author]").forEach((i) => (i.value = name()));
+
+// ---------- the comments panel: slides up from the bottom on a phone, a centered panel on a computer
+const sheet = document.createElement("div");
+sheet.className = "cs"; sheet.hidden = true;
+sheet.innerHTML = `<div class="cs-panel" role="dialog" aria-modal="true" aria-labelledby="cs-h">
+  <div class="cs-grab" aria-hidden="true"></div>
+  <header class="cs-head"><h2 id="cs-h">Comments</h2><button type="button" class="cs-x" aria-label="Close comments">×</button></header>
+  <div class="cs-list"></div>
+  <form class="cs-form"><input name="author" maxlength="60" placeholder="Name" aria-label="Your name" autocomplete="nickname"><input name="text" maxlength="1000" placeholder="Add a comment…" aria-label="Comment" required enterkeyhint="send"><button type="submit">Post</button></form>
+</div>`;
+document.body.appendChild(sheet);
+const panel = $(".cs-panel", sheet), list = $(".cs-list", sheet), form = $(".cs-form", sheet);
+let sheetPost = null, lastFocus = null;
+
+function fillList() {
+  const items = [...sheetPost.querySelectorAll(".pv-thread .cm")].reverse(); // newest first
+  list.innerHTML = items.length ? "" : `<p class="cs-empty">No comments yet. Start the conversation.</p>`;
+  items.forEach((c) => { const x = c.cloneNode(true); x.classList.remove("pv-old"); list.appendChild(x); });
+}
+function openSheet(post, typing) {
+  sheetPost = post; lastFocus = document.activeElement;
+  $("#cs-h", sheet).textContent = "Comments · " + $(".pv-who b", post).textContent;
+  fillList();
+  form.author.value = name();
+  sheet.hidden = false; panel.style.transform = "";
+  document.documentElement.classList.add("cs-open");
+  list.scrollTop = 0;
+  if (typing) form.text.focus(); // inside the tap, so a phone shows its keyboard
+  else $(".cs-x", sheet).focus({ preventScroll: true });
+}
+function closeSheet() {
+  if (sheet.hidden) return;
+  form.text.blur();
+  sheet.hidden = true; sheetPost = null;
+  document.documentElement.classList.remove("cs-open");
+  if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+}
+sheet.addEventListener("click", (e) => {
+  if (e.target === sheet || e.target.closest(".cs-x")) return closeSheet();
+  const rep = e.target.closest("[data-act=report-c]");
+  if (rep) reportComment(rep);
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheet(); });
+
+// Swipe the panel down to close it (from the grab bar or the header).
+let drag = null;
+panel.addEventListener("touchstart", (e) => { if (e.target.closest(".cs-grab, .cs-head")) drag = { y: e.touches[0].clientY, dy: 0 }; }, { passive: true });
+panel.addEventListener("touchmove", (e) => { if (!drag) return; drag.dy = Math.max(0, e.touches[0].clientY - drag.y); panel.style.transform = `translateY(${drag.dy}px)`; }, { passive: true });
+panel.addEventListener("touchend", () => { if (!drag) return; const far = drag.dy > 90; drag = null; if (far) closeSheet(); else panel.style.transform = ""; });
+
+// Keep the panel above the phone's keyboard.
+if (window.visualViewport) {
+  const lift = () => { const vv = window.visualViewport; sheet.style.setProperty("--kb", Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + "px"); };
+  visualViewport.addEventListener("resize", lift); visualViewport.addEventListener("scroll", lift);
+}
+
+async function reportComment(btn) {
+  const cid = btn.closest("[data-cid]").dataset.cid;
+  try {
+    await api("/api/report", { method: "POST", body: JSON.stringify({ kind: "comment", id: cid, voter }) });
+    document.querySelectorAll(`[data-cid="${CSS.escape(cid)}"] [data-act=report-c]`).forEach((b) => b.replaceWith(document.createTextNode("Reported")));
+  } catch (err) { toast("Couldn't send the report: " + err.message); }
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const post = sheetPost;
+  const text = form.text.value.trim(), author = form.author.value.trim();
+  if (!text || !post) return;
+  if (author) store.set("midgley.name", author);
+  const btn = form.querySelector("button"); btn.disabled = true;
+  try {
+    const c = await api("/api/comments", { method: "POST", body: JSON.stringify({ nomineeId: post.dataset.id, text, author }) });
+    const tmp = document.createElement("div");
+    tmp.innerHTML = commentHTML({ id: c.id, author: c.author, text: c.text, createdAt: new Date().toISOString() });
+    const cm = tmp.firstElementChild;
+    // The post shows the latest two; older ones fold away behind "View all".
+    const thread = $(".pv-thread", post);
+    thread.appendChild(cm);
+    const all = thread.querySelectorAll(".cm");
+    all.forEach((x, i) => x.classList.toggle("pv-old", i < all.length - 2));
+    const n = $(".cc-n", post); n.textContent = all.length;
+    let vb = $(".pv-viewall", post);
+    if (all.length > 2) {
+      if (!vb) { vb = document.createElement("button"); vb.type = "button"; vb.className = "pv-viewall"; vb.dataset.act = "comments"; thread.before(vb); }
+      vb.textContent = `View all ${all.length} comments`;
+    }
+    $(".cs-empty", list)?.remove();
+    const copy = cm.cloneNode(true); copy.classList.remove("pv-old"); list.prepend(copy); list.scrollTop = 0;
+    form.text.value = "";
+  } catch (err) { toast("Your comment didn't post: " + err.message); }
+  btn.disabled = false;
+});
 
 async function shareLink(post) {
   const url = location.origin + post.dataset.path;
@@ -56,12 +148,7 @@ document.addEventListener("click", async (e) => {
     btn.textContent = full.hidden ? "more" : "less";
     return;
   }
-  if (act === "comments") {
-    const box = $(".pv-comments", post); box.removeAttribute("data-collapsed");
-    const vb = $(".pv-viewall", post); if (vb) vb.remove();
-    $(".pv-reply [name=text]", post).focus();
-    return;
-  }
+  if (act === "comments" || act === "comment-new") return openSheet(post, act === "comment-new");
   if (act === "share" || act === "share-link") { btn.closest("details")?.removeAttribute("open"); return shareLink(post); }
   if (act === "share-ig") {
     btn.closest("details")?.removeAttribute("open");
@@ -77,12 +164,7 @@ document.addEventListener("click", async (e) => {
     catch (err) { toast("Couldn't send the report: " + err.message); }
     return;
   }
-  if (act === "report-c") {
-    const cid = btn.closest("[data-cid]").dataset.cid;
-    try { await api("/api/report", { method: "POST", body: JSON.stringify({ kind: "comment", id: cid, voter }) }); btn.replaceWith(document.createTextNode("Reported")); }
-    catch (err) { toast("Couldn't send the report: " + err.message); }
-    return;
-  }
+  if (act === "report-c") return reportComment(btn);
   if (act === "vote") {
     const on = btn.getAttribute("aria-pressed") === "true";
     btn.setAttribute("aria-pressed", String(!on));
@@ -105,27 +187,6 @@ document.addEventListener("click", async (e) => {
       toast("Your vote didn't save: " + err.message);
     }
   }
-});
-
-document.addEventListener("submit", async (e) => {
-  const form = e.target.closest(".pv-reply");
-  if (!form) return;
-  e.preventDefault();
-  const post = form.closest(".post");
-  const text = form.text.value.trim(), author = form.author.value.trim();
-  if (!text) return;
-  if (author) store.set("midgley.name", author);
-  const btn = form.querySelector("button"); btn.disabled = true;
-  try {
-    const c = await api("/api/comments", { method: "POST", body: JSON.stringify({ nomineeId: post.dataset.id, text, author }) });
-    const p = document.createElement("p"); p.className = "cm";
-    p.innerHTML = "<b></b> <span></span> <small>just now</small>";
-    p.querySelector("b").textContent = c.author || "Anonymous"; p.querySelector("span").textContent = c.text;
-    $(".pv-thread", post).appendChild(p);
-    const n = $(".cc-n", post); n.textContent = Number(n.textContent) + 1;
-    form.text.value = "";
-  } catch (err) { toast("Your comment didn't post: " + err.message); }
-  btn.disabled = false;
 });
 
 // Close any open ⋯ menu when clicking elsewhere.
