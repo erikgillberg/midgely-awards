@@ -1,0 +1,103 @@
+{
+  "slug": "midgley",
+  "draft": "story",
+  "keyCard": false,
+  "headline": "The fix that cost a nation IQ points",
+  "dek": "In 1921 a chemist put lead in gasoline to stop engines knocking. More than half of Americans alive in 2015 had too much lead in their blood as small children.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Stop the knock",
+      "text": "Early car engines knocked: the fuel burned unevenly, wore out parts and wasted power. Fix it, and cars could be faster, stronger and cheaper to run.",
+      "image": "/img/n/midgley/traffic.jpg",
+      "alt": "A busy Los Angeles intersection in 1922, with streetcars, early automobiles and a Union Gasoline station",
+      "credit": "North Broadway and Sunset Boulevard, Los Angeles, 1922. Automobile Club of Southern California. Public domain."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "A pinch of lead",
+      "text": "In 1921 Thomas Midgley found that a little tetraethyl lead in gasoline stopped the knock. It went on sale as Ethyl, and it was hailed as a triumph of chemistry.",
+      "image": "/img/n/midgley/pump.jpg",
+      "alt": "A rusted red Atlantic gasoline pump with a yellow and blue Ethyl anti-knock compound emblem",
+      "credit": "Atlantic Ethyl pump, Leola, Pennsylvania. John Margolies, 1982. Library of Congress. Public domain."
+    },
+    {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "Sixty seconds of proof",
+      "text": "In October 1924, workers making the additive at a New Jersey refinery began to die. That month, Midgley poured it on his hands for reporters and breathed its vapor for a minute. The year before, he had taken time off to recover from lead poisoning."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Lead in every city",
+      "stat": "824 million",
+      "statLabel": "IQ points lost by Americans alive in 2015, one study estimates",
+      "text": "For decades the lead came out of tailpipes, settled into dust and soil, and got into children, whose brains it harms.",
+      "also": [
+        "Source: McFarland, Hauer and Reuben, PNAS, 2022"
+      ]
+    },
+    {
+      "kind": "encore",
+      "label": "Then he did it again",
+      "title": "A safe fridge, a hole in the sky",
+      "text": "In 1928 he made CFCs, sold as Freon: no fire, no poison, safe in any kitchen. They were so stable they drifted up to the stratosphere, where sunlight split them and the chlorine ate the ozone layer.",
+      "image": "/img/n/midgley/ozone.jpg",
+      "alt": "A NASA satellite map of the globe from below, with a large purple ozone hole covering Antarctica",
+      "credit": "The ozone hole over Antarctica, October 1, 1998. NASA. Public domain."
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "The lead, yes. The ozone, no.",
+      "text": "Lead poisoning had been known for centuries, and the refinery deaths of 1924 made the papers. The chemistry that destroys ozone was first described in 1974, thirty years after Midgley died."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "A century to undo",
+      "text": "The US finished banning leaded gas for cars in 1996. The last country stopped selling it for cars in 2021. A 1987 treaty phased out CFCs, and the ozone hole over Antarctica should recover by about 2066."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The problem moves",
+      "patternKey": "moved"
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Nobody was watching the air",
+      "text": "Both fixes worked exactly where they were aimed: inside the engine, inside the fridge. The harm landed where nobody was measuring: in the air, on a windowsill, twenty miles up."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Your fixes move problems too",
+      "text": "A team keeps missing deadlines, so you add a daily status meeting. Deadlines improve. Focus time disappears, and the engineers start working nights. The problem didn't go away. It moved.",
+      "also": [
+        "Clutter that moves to the garage",
+        "A cost cut that lands on another team's budget"
+      ]
+    },
+    {
+      "kind": "ask",
+      "label": "Before your next fix",
+      "title": "Ask: where does it go?",
+      "text": "When something works, follow the problem out the door. Where does it land, who lives there, and who is watching?",
+      "also": [
+        "Save this for your next big fix",
+        "Moved a problem yourself? Tell us. It might win a Murphy."
+      ]
+    }
+  ],
+  "portrait": {
+    "image": "/img/n/midgley/portrait.jpg",
+    "photo": true,
+    "alt": "Studio portrait of Thomas Midgley Jr. in round glasses, suit and polka dot tie",
+    "credit": "Thomas Midgley Jr. Blank and Stoller, New York. Science History Institute. No known copyright."
+  }
+}

@@ -349,6 +349,12 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .cc-pattern .cc-title{font-size:4em}
 .cc-pattern .cc-label span{background:var(--deep)}
 .cc-gotright .cc-title,.cc-foresight .cc-title{font-size:3em}
+/* Story cards: the twist, the lesson and the question to take home */
+.cc-twist,.cc-anatomy{background:var(--deep)}
+.cc-mirror .cc-title,.cc-ask .cc-title,.cc-twist .cc-title,.cc-anatomy .cc-title,.cc-cleanup .cc-title{font-size:3em}
+.cc-ask{background:var(--base)}
+.cc-ask .cc-label span{background:var(--deep)}
+.cc-ask .cc-title{font-size:3.6em}
 /* payoff */
 .cc-payoff{background:linear-gradient(160deg,var(--deep) 0%,var(--deep) 55%,var(--base) 100%)}
 .cc-payoff .cc-body{flex:1;justify-content:center}

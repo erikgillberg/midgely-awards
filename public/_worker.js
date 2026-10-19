@@ -1298,7 +1298,7 @@ async function nomineePage(request, env, url, ctx, key) {
       fill: { "#list": `<p class="notice">That nominee isn't on the list. It may still be waiting for review. <a href="/">See all nominees</a>.</p>` },
     }, 404);
   }
-  if (n.id === HONOREE) return Response.redirect(SITE_ORIGIN(url) + "/midgley", 301);
+  if (n.id === HONOREE) return Response.redirect(SITE_ORIGIN(url) + "/midgley" + url.search, 301);
   if (key !== n.slug) return Response.redirect(SITE_ORIGIN(url) + nomineePath(n), 301);
   const flags = flagsOf(env);
   const thread = st.comments.filter((c) => c.nomineeId === n.id);
@@ -1449,6 +1449,11 @@ async function labPage(request, env, url, ctx, key) {
 const HANDWRITTEN = new Set(["haber", "midgley"]);
 const carouselCache = new Map();
 async function carouselFor(request, env, url, n) {
+  // Draft carousels, on staging and local only: /n/<slug>?draft=story reads /carousels/drafts/<slug>.json.
+  if (url.hostname !== SITE_HOST && url.searchParams.get("draft") === "story") {
+    const d = await env.ASSETS.fetch(new URL(`/carousels/drafts/${n.slug}.json`, url).toString()).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    if (d) return carouselHTML(n, d, flagsOf(env));
+  }
   if (!HANDWRITTEN.has(n.slug)) return carouselHTML(n, autoCarousel(n), flagsOf(env));
   if (!carouselCache.has(n.slug)) {
     // A plain request (no browser cache headers), so the answer is the file itself, never "not modified".
@@ -1534,6 +1539,7 @@ export default {
     // Access itself is the real lock.
     if (url.hostname !== SITE_HOST && !/^(localhost|127\.0\.0\.1)$/.test(url.hostname) && !request.headers.get("cf-access-jwt-assertion"))
       return new Response("This address is private.", { status: 403, headers: { "content-type": "text/plain", "X-Robots-Tag": "noindex" } });
+    if (url.hostname === SITE_HOST && url.pathname.startsWith("/carousels/drafts/")) return new Response("Not found.", { status: 404 });
     if (url.pathname.startsWith("/api/")) {
       try {
         return await handleApi(request, env, url, ctx);

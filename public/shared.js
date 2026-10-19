@@ -641,7 +641,8 @@ export function keyHTML(n) {
 export function carouselHTML(n, data, flags = {}) {
   const j = jewelOf(n.domain);
   const cards = [];
-  const total = data.slides.length + 3;
+  const key = data.keyCard !== false; // story-shaped carousels skip "How to read the tile"
+  const total = data.slides.length + (key ? 3 : 2);
   const foot = (i) => `<footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>${i} / ${total}</span></footer>`;
   cards.push(`<section class="cc cc-hook" aria-roledescription="slide" aria-label="1 of ${total}">
     ${data.portrait ? `<figure class="cc-portrait${data.portrait.photo ? " photo" : ""}"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="lazy"></figure>`
@@ -652,12 +653,14 @@ export function carouselHTML(n, data, flags = {}) {
     <p class="cc-swipe" aria-hidden="true">Swipe <span>→</span></p>
     ${foot(1)}
   </section>`);
-  cards.push(`<section class="cc cc-key" aria-roledescription="slide" aria-label="2 of ${total}">
+  if (key) cards.push(`<section class="cc cc-key" aria-roledescription="slide" aria-label="2 of ${total}">
     <p class="cc-label cc-key-title">How to read the tile</p>${keyHTML(n)}
     ${foot(2)}
   </section>`);
+  let num = 0; // the pattern card carries its own number, so story cards count without it
   data.slides.forEach((s, k) => {
-    const i = k + 3;
+    const i = k + (key ? 3 : 2);
+    if (s.kind !== "pattern") num++;
     const img = s.image ? `<figure class="cc-img"><img src="${esc(s.image)}" alt="${esc(s.alt || "")}" loading="lazy"><figcaption>${esc(s.credit || "")}</figcaption></figure>` : "";
     const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
     const chip = s.kind === "foresight" ? foresightHTML(n.knowable) : "";
@@ -668,7 +671,7 @@ export function carouselHTML(n, data, flags = {}) {
       <div class="cc-body">
         ${s.kind === "pattern"
           ? `<p class="cc-label cc-eyebrow">Pattern #${PATTERNS.findIndex((p) => p.key === s.patternKey) + 1}</p>`
-          : `<p class="cc-label"><span>${String(k + 1).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
+          : `<p class="cc-label"><span>${String(num).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
         ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${also}${patterns}
