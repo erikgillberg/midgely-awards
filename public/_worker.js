@@ -1009,8 +1009,9 @@ class Versioned {
   element(el) { const v = el.getAttribute(this.attr); if (v && !v.includes("?")) el.setAttribute(this.attr, `${v}?v=${ver()}`); }
 }
 const LOOK_SCRIPT = `<script>(function(){var d=document.documentElement,k="bf.look",l=null,q=new URLSearchParams(location.search).get("look");
-try{if(q==="70s"||q==="classic")localStorage.setItem(k,q);l=localStorage.getItem(k)}catch(e){}
-l=l||d.getAttribute("data-look-default")||"classic";d.setAttribute("data-look",l)})()</script>`;
+if(q!=="70s"&&q!=="classic")q=null;
+try{if(q)localStorage.setItem(k,q);l=localStorage.getItem(k)}catch(e){}
+l=q||l||d.getAttribute("data-look-default")||"classic";d.setAttribute("data-look",l)})();</script>`;
 class Append {
   constructor(value) { this.value = value; }
   element(el) { el.append(this.value, { html: true }); }
@@ -1022,7 +1023,7 @@ function decorate(res, env, url, meta = {}, status = 0) {
   let rw = new HTMLRewriter()
     .on('link[rel="stylesheet"][href^="/"]', new Versioned("href"))
     .on('script[src^="/"]', new Versioned("src"))
-    .on("#site-head", new SetHTML(headerHTML(flags)))
+    .on("#site-head", new SetHTML(headerHTML({ ...flags, staging: url.hostname !== SITE_HOST })))
     .on("#site-foot", new SetHTML(footerHTML()))
     .on("body", new Append(sheetHTML()))
     .on("#weekly-oops", new SetHTML(signupHTML("home")))
@@ -1034,9 +1035,7 @@ function decorate(res, env, url, meta = {}, status = 0) {
     // ?look=70s or ?look=classic overrides it for this browser (kept in localStorage).
     .on("html", new SetAttr("data-look-default", env.LOOK_DEFAULT === "70s" ? "70s" : "classic"))
     .on("head", new Append(LOOK_SCRIPT));
-  if (url.hostname !== SITE_HOST) {
-    rw = rw.on(".menu-in", new Append(`<section class="menu-look"><h2>Look (staging only)</h2><a href="?look=70s">1970s</a><a href="?look=classic">Classic</a></section>`));
-  }
+
   if (meta.canonical) {
     rw = rw.on('meta[property="og:url"]', new SetAttr("content", meta.canonical))
       .on('link[rel="canonical"]', new SetAttr("href", meta.canonical));

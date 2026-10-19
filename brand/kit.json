@@ -4,7 +4,7 @@
   "scope": "The Backfire Awards site at backfireawards.com: the feed of nominee posts and Murphys, the carousels and their Instagram exports, The Midgley and The Murphy pages, the Categoric Table, search, the guidelines and terms, the Weekly Oops, and the merch.",
   "colorNote": "Warm 1970s retro futurism, matching the rocket merch: aubergine and ivory grounds, tangerine for the one call to action, rust for oops, dusty turquoise for links. Each category has an earth tone. Type stays Big Shoulders Display, IBM Plex Sans and IBM Plex Mono. Every color has a night value. The site switches looks with html[data-look]; 70s is the approved look, classic is the earlier cool palette.",
   "status": "Approved by Erik: the 1970s palette with the original type",
-  "updated": "2026-10-19",
+  "updated": "2026-10-18",
   "site": "https://backfireawards.com",
   "fonts": "https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap",
   "logos": [
@@ -39,7 +39,7 @@
   "theme": {
     "dark": "#25202d",
     "accent": "#e98946",
-    "accentLight": "#f4d9cc",
+    "accentLight": "#fbe3cf",
     "accentNight": "#e98946",
     "secondary": "#2e6b68",
     "secondaryNight": "#7fc1bc"
@@ -76,7 +76,7 @@
       },
       {
         "name": "Ink 3",
-        "hex": "#76687a",
+        "hex": "#6a5c6e",
         "night": "#a39488",
         "token": "--ink-3",
         "use": "Mono labels, years and fine print."
@@ -97,7 +97,7 @@
       },
       {
         "name": "Rust",
-        "hex": "#ad4935",
+        "hex": "#a3432f",
         "night": "#e07a5a",
         "token": "--ethyl",
         "use": "What went oops: a cast vote, knowable-harm chips, the Midgley's card."
@@ -141,7 +141,7 @@
     "data": [
       {
         "name": "Amber",
-        "hex": "#8a6410",
+        "hex": "#7e5a0c",
         "night": "#e3b04b",
         "token": "--amber",
         "use": "Mixed and contested evidence chips."
@@ -169,7 +169,7 @@
       },
       {
         "name": "Harvest gold energy",
-        "hex": "#b7801a",
+        "hex": "#8e6410",
         "night": "#b7801a",
         "token": "--jw-citrine-b",
         "use": "Group 3, Energy and Climate. Deep #3a2a08, light #f5dda0."
@@ -190,7 +190,7 @@
       },
       {
         "name": "Turquoise governance",
-        "hex": "#3f8380",
+        "hex": "#36726f",
         "night": "#3f8380",
         "token": "--jw-tourmaline-b",
         "use": "Group 6, Policy and Incentives. Deep #0f2e2d, light #bfe0dd."

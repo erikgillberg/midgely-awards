@@ -409,6 +409,7 @@ export function headerHTML(flags = {}) {
       <button class="menu-x" type="button" data-menu-close aria-label="Close menu">×</button>
       <section class="menu-oops"><h2>The Weekly Oops</h2><p>${OOPS_LINE}</p>${signupHTML("menu")}</section>
       ${MENU.map(([h, links]) => `<section><h2>${h}</h2>${links.map(([href, t]) => `<a href="${href}" data-menu-close>${t}</a>`).join("")}</section>`).join("")}
+      ${flags.staging ? `<section class="menu-look"><h2>Look (staging only)</h2><a href="?look=70s">1970s</a><a href="?look=classic">Classic</a></section>` : ""}
     </div>
   </div>`;
 }

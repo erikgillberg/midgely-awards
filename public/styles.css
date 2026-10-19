@@ -1040,17 +1040,17 @@ body:has(#oops) .site-foot .oops-mini{display:none}
    Type is unchanged: Big Shoulders headlines, IBM Plex body and labels.
    ====================================================================== */
 html[data-look="70s"]{
-  --ground:#F3E4C8; --surface:#FBF4E6; --ink:#25202D; --ink-2:#584C5C; --ink-3:#76687A;
-  --line:#E2CFAF; --ethyl:#AD4935; --ethyl-soft:#F4D9CC; --ozone:#2E6B68; --ozone-soft:#D4E7E3;
-  --amber:#8A6410; --amber-soft:#F3E3BC; --tile:#25202D; --tile-ink:#F3E4C8;
+  --ground:#F3E4C8; --surface:#FBF4E6; --ink:#25202D; --ink-2:#584C5C; --ink-3:#6A5C6E;
+  --line:#E2CFAF; --ethyl:#A3432F; --ethyl-soft:#F4D9CC; --ozone:#2E6B68; --ozone-soft:#D4E7E3;
+  --amber:#7E5A0C; --amber-soft:#F3E3BC; --tile:#25202D; --tile-ink:#F3E4C8;
   --cta:#E98946; --cta-ink:#25202D;
   /* category colors, 70s earth tones (deep / base / light) */
   --jw-ruby-d:#3A1610; --jw-ruby-b:#AD4935; --jw-ruby-l:#F2C3B5;              /* materials: rust */
   --jw-sapphire-d:#0E2A33; --jw-sapphire-b:#1F6680; --jw-sapphire-l:#B9DCE6;  /* cities: petrol */
-  --jw-citrine-d:#3A2A08; --jw-citrine-b:#B7801A; --jw-citrine-l:#F5DDA0;     /* energy: harvest gold */
+  --jw-citrine-d:#3A2A08; --jw-citrine-b:#8E6410; --jw-citrine-l:#F5DDA0;     /* energy: harvest gold */
   --jw-emerald-d:#262A10; --jw-emerald-b:#6C7630; --jw-emerald-l:#DCE0B0;     /* food: avocado */
   --jw-amethyst-d:#2A1530; --jw-amethyst-b:#7A4A7E; --jw-amethyst-l:#E3C8E2;  /* information: plum */
-  --jw-tourmaline-d:#0F2E2D; --jw-tourmaline-b:#3F8380; --jw-tourmaline-l:#BFE0DD; /* governance: turquoise */
+  --jw-tourmaline-d:#0F2E2D; --jw-tourmaline-b:#36726F; --jw-tourmaline-l:#BFE0DD; /* governance: turquoise */
   --jw-garnet-d:#2E1A0E; --jw-garnet-b:#8A5A34; --jw-garnet-l:#EBD2B8;        /* finance: saddle brown */
   --jw-rhodolite-d:#3A1C22; --jw-rhodolite-b:#A35E6B; --jw-rhodolite-l:#F0CDD2; /* health: muted rose */
   --jw-onyx-d:#25202D; --jw-onyx-b:#4A4256; --jw-onyx-l:#DDD3E3;
