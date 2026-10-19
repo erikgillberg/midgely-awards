@@ -1203,7 +1203,7 @@ async function shopProducts(ctx) {
 // can see what is printed without leaving the site. Products without an entry show the Shopify photo only.
 const SHOP_ART = {
   "bright-idea-tee-charcoal-black": [
-    { src: "/img/shop/bright-idea-front.jpg", alt: "Front print: a retro light bulb with the Backfire Awards wordmark", label: "Front" },
+    { src: "/img/shop/bright-idea-front.jpg", alt: "Front print: a retro light bulb holding the Earth, cracking open in fire over a burning city skyline, with the Backfire Awards wordmark", label: "Front" },
     { src: "/img/shop/bf-badge-back.jpg", alt: "Back print: the Bf element badge reading backfireawards.com", label: "Back, below the collar" },
   ],
 };
