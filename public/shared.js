@@ -249,15 +249,26 @@ function postShell(p, ctx = {}) {
       ${p.more ? `<div class="pv-full" hidden>${p.more}</div>` : ""}</div>
     <div class="pv-comments" data-collapsed>
       ${thread.length > 2 ? `<button class="pv-viewall" type="button" data-act="comments">View all ${thread.length} comments</button>` : ""}
-      <div class="pv-thread">${thread.map((c, i) => commentHTML(c, i < thread.length - 2)).join("")}</div>
+      <div class="pv-thread">${threadHTML(thread)}</div>
       <button class="pv-add" type="button" data-act="comment-new">Add a comment…</button>
     </div>
   </article>`;
 }
 
 // One comment. The full thread is in every post; the comments panel shows all of it, the post the latest two.
+// Replies (one level) follow their comment, marked cm-r; the post hides them and the panel indents them.
 export const commentHTML = (c, old = false) =>
-  `<p class="cm${old ? " pv-old" : ""}" data-cid="${esc(c.id)}"><b>${esc(c.author || "Anonymous")}</b> <span class="cm-t">${esc(c.text)}</span> <small>${esc(ago(c.createdAt))} · <button type="button" class="pv-rep" data-act="report-c">Report</button></small></p>`;
+  `<p class="cm${c.parentId ? " cm-r" : ""}${old ? " pv-old" : ""}${c.goat ? " cm-goat" : ""}" data-cid="${esc(c.id)}"${c.parentId ? ` data-parent="${esc(c.parentId)}"` : ""}><b>${esc(c.author || "Anonymous")}</b>${c.goat ? ` <span class="cm-badge">AI moderator</span>` : ""} <span class="cm-t">${esc(c.text)}</span> <small>${esc(ago(c.createdAt))} · <button type="button" class="pv-rep" data-act="reply-c">Reply</button>${c.goat ? "" : ` · <button type="button" class="pv-rep" data-act="report-c">Report</button>`}</small></p>`;
+
+// A post's comments in reading order: each comment, oldest first, followed by its replies.
+// A reply whose comment is hidden stands on its own.
+export function threadHTML(thread) {
+  const top = new Set(thread.filter((c) => !c.parentId).map((c) => c.id));
+  const tops = thread.filter((c) => !c.parentId || !top.has(c.parentId));
+  const kids = {};
+  thread.forEach((c) => { if (c.parentId && top.has(c.parentId)) (kids[c.parentId] = kids[c.parentId] || []).push(c); });
+  return tops.map((c, i) => commentHTML(c.parentId ? { ...c, parentId: undefined } : c, i < tops.length - 2) + (kids[c.id] || []).map((r) => commentHTML(r)).join("")).join("");
+}
 
 export function postHTML(n, ctx = {}) {
   return postShell({

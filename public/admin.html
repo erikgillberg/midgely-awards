@@ -54,7 +54,11 @@ textarea.subs{width:100%;min-height:120px;font:13px var(--mono);border:1px solid
   <div id="panels" hidden style="display:flex;flex-direction:column;gap:36px">
     <section><h2>Waiting for review <span class="label" id="c-pending"></span></h2><div id="pending"></div></section>
     <section><h2>Reported nominees <span class="label" id="c-rnom"></span></h2><div id="rnom"></div></section>
-    <section><h2>Flagged comments <span class="label" id="c-flag"></span></h2><div id="flag"></div></section>
+    <section><h2>Flagged comments <span class="label" id="c-flag"></span></h2>
+      <p class="hint" id="goat-state" style="margin:-4px 0 10px;color:var(--ink-3);font-size:14px"></p><div id="flag"></div></section>
+    <section><h2>Goat's reply drafts <span class="label" id="c-drafts"></span></h2>
+      <p class="hint" style="margin:-4px 0 10px;color:var(--ink-3);font-size:14px">Nothing Goat writes is public until you approve it here. Edit the text first if you like.</p><div id="drafts"></div></section>
+    <section><h2>Recent comments <span class="label">Latest 40</span></h2><div id="recent"></div></section>
     <section><h2>Murphys <span class="label" id="c-murphys"></span></h2>
       <div class="btns" style="margin-bottom:10px"><button id="murphy-csv">Download all as CSV</button></div>
       <div id="murphys"></div></section>

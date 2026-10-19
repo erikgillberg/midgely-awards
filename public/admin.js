@@ -145,13 +145,31 @@
     $("#pending").innerHTML = pending.map((n) => nomRow(n, act(n))).join("") || `<p class="empty-row">Nothing waiting.</p>`;
     $("#c-rnom").textContent = rnom.length;
     $("#rnom").innerHTML = rnom.map((n) => nomRow(n, act(n))).join("") || `<p class="empty-row">No reports.</p>`;
+    const why = { flag: "Goat flagged", hold: "Goat is holding", unchecked: "Goat couldn't check" };
+    const cmMeta = (c) => `<span class="by" style="font:12px var(--mono);color:var(--ink-3)">${esc(c.author || "Anonymous")}${c.goat ? " (AI moderator)" : ""} on ${esc(c.nomineeName)}${c.parentId ? " · a reply" : ""} · ${new Date(c.createdAt).toLocaleString()}</span>`;
     $("#c-flag").textContent = data.flaggedComments.length;
+    $("#goat-state").textContent = data.goat
+      ? "Goat reads every new comment. Flagged comments still show; held ones stay hidden until you keep them. Goat never deletes anything."
+      : "Goat is off: no Anthropic API key yet. Run tools/set-anthropic-key.sh to turn it on.";
     $("#flag").innerHTML = data.flaggedComments.map((c) => `<div class="row">
-        <div class="top"><span class="by" style="font:12px var(--mono);color:var(--ink-3)">${esc(c.author || "Anonymous")} on ${esc(c.nomineeName)} · ${new Date(c.createdAt).toLocaleString()}</span>
-        ${c.hidden ? `<span class="chip st-pending">hidden</span>` : ""}<span class="chip st-rejected">${c.reports} report${c.reports === 1 ? "" : "s"}</span></div>
+        <div class="top">${cmMeta(c)}
+        ${c.hidden && c.mod !== "hold" ? `<span class="chip st-pending">hidden</span>` : ""}${why[c.mod] ? `<span class="chip st-pending">${why[c.mod]}</span>` : ""}${c.reports ? `<span class="chip st-rejected">${c.reports} report${c.reports === 1 ? "" : "s"}</span>` : ""}</div>
         <p style="white-space:pre-wrap">${esc(c.text)}</p>
-        <div class="btns"><button class="ok" data-act="restore" data-cid="${esc(c.id)}">Keep and clear reports</button>${c.hidden ? "" : `<button data-act="hide" data-cid="${esc(c.id)}">Hide</button>`}<button class="danger" data-act="cdelete" data-cid="${esc(c.id)}">Delete</button></div>
+        ${c.modReason && why[c.mod] ? `<p style="margin:0;color:var(--ink-3);font-size:14px">Goat: ${esc(c.modReason)}</p>` : ""}
+        <div class="btns"><button class="ok" data-act="restore" data-cid="${esc(c.id)}">${c.hidden ? "Show it" : "Keep it"}</button>${c.hidden ? "" : `<button data-act="hide" data-cid="${esc(c.id)}">Hide</button>`}<button class="danger" data-act="cdelete" data-cid="${esc(c.id)}">Delete</button></div>
       </div>`).join("") || `<p class="empty-row">No flagged comments.</p>`;
+    $("#c-drafts").textContent = data.goatDrafts.length;
+    $("#drafts").innerHTML = data.goatDrafts.map((c) => `<div class="row">
+        <div class="top"><span class="by" style="font:12px var(--mono);color:var(--ink-3)">Reply on ${esc(c.nomineeName)} · ${new Date(c.createdAt).toLocaleString()} · ${esc(c.modReason)}</span></div>
+        ${c.parentText ? `<p style="white-space:pre-wrap;margin:0;color:var(--ink-2)"><b>${esc(c.parentAuthor || "Anonymous")}</b> ${esc(c.parentText)}</p>` : ""}
+        <textarea id="draft-${esc(c.id)}" rows="3" maxlength="1000" style="width:100%;font:15px var(--sans)">${esc(c.text)}</textarea>
+        <div class="btns"><button class="ok" data-act="draft-ok" data-cid="${esc(c.id)}">Approve and post as Goat</button><button class="danger" data-act="draft-no" data-cid="${esc(c.id)}">Discard</button></div>
+      </div>`).join("") || `<p class="empty-row">No drafts waiting.</p>`;
+    $("#recent").innerHTML = data.recentComments.map((c) => `<div class="row">
+        <div class="top">${cmMeta(c)}</div>
+        <p style="white-space:pre-wrap">${esc(c.text)}</p>
+        <div class="btns">${c.goat ? "" : `<button data-act="goat-draft" data-cid="${esc(c.id)}"${data.goat ? "" : " disabled"}>Ask Goat for a reply</button>`}<button data-act="hide" data-cid="${esc(c.id)}">Hide</button></div>
+      </div>`).join("") || `<p class="empty-row">No comments yet.</p>`;
     const rest = noms.filter((n) => n.state !== "pending");
     $("#c-all").textContent = rest.length;
     $("#all").innerHTML = rest.map((n) => nomRow(n, act(n))).join("");
@@ -231,6 +249,19 @@
         return;
       case "hide":
         try { await api("/api/admin/comments/" + cid, { method: "PATCH", body: JSON.stringify({ hide: true }) }); toast("Comment hidden"); load(); } catch (err) { toast(err.message); }
+        return;
+      case "draft-ok": {
+        const text = $("#draft-" + CSS.escape(cid)).value.trim();
+        if (!text) return toast("The reply is empty.");
+        try { await api("/api/admin/comments/" + cid, { method: "PATCH", body: JSON.stringify({ approve: true, text }) }); toast("Posted as Goat"); load(); } catch (err) { toast(err.message); }
+        return;
+      }
+      case "draft-no":
+        try { await api("/api/admin/comments/" + cid, { method: "DELETE" }); toast("Draft discarded"); load(); } catch (err) { toast(err.message); }
+        return;
+      case "goat-draft":
+        b.disabled = true; toast("Asking Goat…");
+        try { await api("/api/admin/comments/" + cid + "/goat", { method: "POST", body: "{}" }); toast("Draft ready under Goat's reply drafts"); load(); } catch (err) { b.disabled = false; toast(err.message); }
         return;
       case "cdelete":
         if (!confirm("Delete this comment?")) return;

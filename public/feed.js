@@ -41,20 +41,44 @@ sheet.innerHTML = `<div class="cs-panel" role="dialog" aria-modal="true" aria-la
   <div class="cs-grab" aria-hidden="true"></div>
   <header class="cs-head"><h2 id="cs-h">Comments</h2><button type="button" class="cs-x" aria-label="Close comments">×</button></header>
   <div class="cs-list"></div>
+  <div class="cs-to" hidden><span></span><button type="button" class="cs-to-x" aria-label="Stop replying">×</button></div>
   <form class="cs-form"><input name="author" maxlength="60" placeholder="Name" aria-label="Your name" autocomplete="nickname"><input name="text" maxlength="1000" placeholder="Add a comment…" aria-label="Comment" required enterkeyhint="send"><button type="submit">Post</button></form>
 </div>`;
 document.body.appendChild(sheet);
 const panel = $(".cs-panel", sheet), list = $(".cs-list", sheet), form = $(".cs-form", sheet);
 let sheetPost = null, lastFocus = null;
 
+// Newest comments first, each with its replies under it, oldest reply first.
 function fillList() {
-  const items = [...sheetPost.querySelectorAll(".pv-thread .cm")].reverse(); // newest first
-  list.innerHTML = items.length ? "" : `<p class="cs-empty">No comments yet. Start the conversation.</p>`;
-  items.forEach((c) => { const x = c.cloneNode(true); x.classList.remove("pv-old"); list.appendChild(x); });
+  const groups = [];
+  sheetPost.querySelectorAll(".pv-thread .cm").forEach((c) => {
+    if (!c.classList.contains("cm-r") || !groups.length) groups.push([]);
+    groups[groups.length - 1].push(c);
+  });
+  list.innerHTML = groups.length ? "" : `<p class="cs-empty">No comments yet. Start the conversation.</p>`;
+  groups.reverse().flat().forEach((c) => { const x = c.cloneNode(true); x.classList.remove("pv-old"); list.appendChild(x); });
 }
+
+// Replying: one level, so a reply to a reply joins the first comment's conversation.
+const replyBar = $(".cs-to", sheet);
+let replyTo = null;
+function startReply(cm) {
+  const top = cm.classList.contains("cm-r") ? cm.dataset.parent : cm.dataset.cid;
+  const who = $("b", cm).textContent;
+  replyTo = { id: top };
+  $("span", replyBar).textContent = "Replying to " + who;
+  replyBar.hidden = false;
+  form.text.placeholder = "Reply to " + who + "…";
+  if (!form.text.value.trim()) form.text.value = cm.classList.contains("cm-r") ? "@" + who + " " : "";
+  form.text.focus();
+}
+function stopReply() {
+  replyTo = null; replyBar.hidden = true; form.text.placeholder = "Add a comment…";
+}
+$(".cs-to-x", sheet).addEventListener("click", () => { stopReply(); form.text.focus(); });
 let draftFor = null;
 function openSheet(post, typing) {
-  if (draftFor !== post) { form.text.value = ""; draftFor = post; } // a draft belongs to one post
+  if (draftFor !== post) { form.text.value = ""; draftFor = post; stopReply(); } // a draft belongs to one post
   sheetPost = post; lastFocus = document.activeElement;
   $("#cs-h", sheet).textContent = "Comments · " + $(".pv-who b", post).textContent;
   fillList();
@@ -76,7 +100,9 @@ function closeSheet() {
 sheet.addEventListener("click", (e) => {
   if (e.target === sheet || e.target.closest(".cs-x")) return closeSheet();
   const rep = e.target.closest("[data-act=report-c]");
-  if (rep) reportComment(rep);
+  if (rep) return reportComment(rep);
+  const re = e.target.closest("[data-act=reply-c]");
+  if (re) startReply(re.closest(".cm"));
 });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheet(); });
 
@@ -120,26 +146,37 @@ form.addEventListener("submit", async (e) => {
   if (author) store.set("midgley.name", author);
   const btn = form.querySelector("button"); btn.disabled = true;
   try {
-    const c = await api("/api/comments", { method: "POST", body: JSON.stringify({ nomineeId: post.dataset.id, text, author }) });
-    const tmp = document.createElement("div");
-    tmp.innerHTML = commentHTML({ id: c.id, author: c.author, text: c.text, createdAt: new Date().toISOString() });
-    const cm = tmp.firstElementChild;
-    // The post shows the latest two; older ones fold away behind "View all".
-    const thread = $(".pv-thread", post);
-    thread.appendChild(cm);
-    const all = thread.querySelectorAll(".cm");
-    all.forEach((x, i) => x.classList.toggle("pv-old", i < all.length - 2));
-    const n = $(".cc-n", post); n.textContent = all.length;
-    let vb = $(".pv-viewall", post);
-    if (all.length > 2) {
-      if (!vb) { vb = document.createElement("button"); vb.type = "button"; vb.className = "pv-viewall"; vb.dataset.act = "comments"; thread.before(vb); }
-      vb.textContent = `View all ${all.length} comments`;
+    const parentId = replyTo ? replyTo.id : undefined;
+    const c = await api("/api/comments", { method: "POST", body: JSON.stringify({ nomineeId: post.dataset.id, text, author, parentId }) });
+    if (c.held) {
+      toast("Thanks. Goat, our AI moderator, is holding this one for a person to review before it shows.");
+    } else {
+      const tmp = document.createElement("div");
+      tmp.innerHTML = commentHTML({ id: c.id, author: c.author, text: c.text, parentId: c.parentId, createdAt: new Date().toISOString() });
+      const cm = tmp.firstElementChild;
+      const thread = $(".pv-thread", post);
+      // A reply goes after the last reply in its conversation; a comment goes at the end.
+      const lastOf = (root, pid) => { const all = [...root.querySelectorAll(`.cm[data-cid="${CSS.escape(pid)}"], .cm[data-parent="${CSS.escape(pid)}"]`)]; return all[all.length - 1]; };
+      const after = c.parentId && lastOf(thread, c.parentId);
+      if (after) after.after(cm); else thread.appendChild(cm);
+      // The post shows the latest two comments; older ones and all replies fold away behind "View all".
+      const tops = [...thread.querySelectorAll(".cm:not(.cm-r)")];
+      tops.forEach((x, i) => x.classList.toggle("pv-old", i < tops.length - 2));
+      const all = thread.querySelectorAll(".cm");
+      $(".cc-n", post).textContent = all.length;
+      let vb = $(".pv-viewall", post);
+      if (all.length > 2) {
+        if (!vb) { vb = document.createElement("button"); vb.type = "button"; vb.className = "pv-viewall"; vb.dataset.act = "comments"; thread.before(vb); }
+        vb.textContent = `View all ${all.length} comments`;
+      }
+      if (sheetPost === post) { // the panel may have moved on to another post while this one was sending
+        $(".cs-empty", list)?.remove();
+        const copy = cm.cloneNode(true); copy.classList.remove("pv-old");
+        const at = c.parentId && lastOf(list, c.parentId);
+        if (at) at.after(copy); else { list.prepend(copy); list.scrollTop = 0; }
+      }
     }
-    if (sheetPost === post) { // the panel may have moved on to another post while this one was sending
-      $(".cs-empty", list)?.remove();
-      const copy = cm.cloneNode(true); copy.classList.remove("pv-old"); list.prepend(copy); list.scrollTop = 0;
-    }
-    if (draftFor === post) form.text.value = "";
+    if (draftFor === post) { form.text.value = ""; stopReply(); }
   } catch (err) { toast("Your comment didn't post: " + err.message); }
   btn.disabled = false;
 });
@@ -182,6 +219,7 @@ document.addEventListener("click", async (e) => {
     return;
   }
   if (act === "report-c") return reportComment(btn);
+  if (act === "reply-c") { const cm = btn.closest(".cm"); openSheet(post, true); const twin = list.querySelector(`.cm[data-cid="${CSS.escape(cm.dataset.cid)}"]`); return startReply(twin || cm); }
   if (act === "vote") {
     const on = btn.getAttribute("aria-pressed") === "true";
     btn.setAttribute("aria-pressed", String(!on));
