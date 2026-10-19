@@ -1,11 +1,11 @@
 {
   "id": "midgley-awards",
-  "name": "The Midgley Awards",
-  "scope": "The Midgley Awards site: the nominee list, the Midgley page, the guidelines, terms, share pages at /n/<id>, the og card and the winners email list.",
-  "colorNote": "A cool gray ground with near-black ink, like a lab report. Ethyl red (for leaded gasoline) is the one action color; ozone blue carries links and focus. Amber marks contested or mixed evidence. Every color has a night value.",
-  "status": "Draft for Erik's review",
-  "updated": "2026-10-08",
-  "site": "https://midgley-awards.pages.dev",
+  "name": "The Backfire Awards",
+  "scope": "The Backfire Awards site at backfireawards.com: the feed of nominee posts and Murphys, the carousels and their Instagram exports, The Midgley and The Murphy pages, the Categoric Table, search, the guidelines and terms, the Weekly Oops, and the merch.",
+  "colorNote": "Warm 1970s retro futurism, matching the rocket merch: aubergine and ivory grounds, tangerine for the one call to action, rust for oops, dusty turquoise for links. Each category has an earth tone. Type stays Big Shoulders Display, IBM Plex Sans and IBM Plex Mono. Every color has a night value. The site switches looks with html[data-look]; 70s is the approved look, classic is the earlier cool palette.",
+  "status": "Approved by Erik: the 1970s palette with the original type",
+  "updated": "2026-10-19",
+  "site": "https://backfireawards.com",
   "fonts": "https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap",
   "logos": [
     {
@@ -18,10 +18,10 @@
   ],
   "imagery": [
     {
-      "label": "Home page",
-      "file": "images/screenshot-home.jpg",
+      "label": "1970s scenes",
+      "file": "images/seventies-tokyo.jpg",
       "kind": "jpg",
-      "note": "Captured from the live site on 2026-10-08. The element tile beside the uppercase display title, the ethyl red mono tagline, a heavy ink rule, and the dark panel for the first award."
+      "note": "From the 1970s image kit (AI-generated, Codex): eight scenes of 1970s retro futurism, including cities in Tokyo, India, West Africa and a Middle Eastern desert. Used on the home cards. Each nominee's carousel will use the retro future of its invention's decade; see images_codex/briefs/era-scenes-brief.md in Drive."
     },
     {
       "label": "The Midgley page",
@@ -37,99 +37,177 @@
     }
   ],
   "theme": {
-    "accent": "#c8301f",
-    "accentLight": "#f7e1dc",
-    "accentNight": "#f0624f",
-    "secondary": "#2f6e8f",
-    "secondaryNight": "#78b7d6"
+    "dark": "#25202d",
+    "accent": "#e98946",
+    "accentLight": "#f4d9cc",
+    "accentNight": "#e98946",
+    "secondary": "#2e6b68",
+    "secondaryNight": "#7fc1bc"
   },
   "colors": {
     "brand": [
       {
-        "name": "Ground",
-        "hex": "#edf0f2",
-        "night": "#0e1216",
+        "name": "Ivory",
+        "hex": "#f3e4c8",
+        "night": "#1c1823",
         "token": "--ground",
-        "use": "The page background, and field backgrounds."
+        "use": "The page background by day; aubergine-black by night."
       },
       {
         "name": "Surface",
-        "hex": "#ffffff",
-        "night": "#161c22",
+        "hex": "#fbf4e6",
+        "night": "#25202d",
         "token": "--surface",
-        "use": "The nomination form, buttons and vote boxes."
+        "use": "Posts, forms, panels and the comments sheet."
       },
       {
-        "name": "Ink",
-        "hex": "#12161c",
-        "night": "#e6eaee",
+        "name": "Aubergine",
+        "hex": "#25202d",
+        "night": "#f3e4c8",
         "token": "--ink",
-        "use": "Text, the masthead rule and the element tile (--tile)."
+        "use": "Text, the element tile (--tile) and the dark wash on home cards."
       },
       {
         "name": "Ink 2",
-        "hex": "#48525e",
-        "night": "#a7b1bc",
+        "hex": "#584c5c",
+        "night": "#d2c3aa",
         "token": "--ink-2",
-        "use": "Secondary text: rules, hints, question boxes."
+        "use": "Secondary text: captions, hints."
       },
       {
         "name": "Ink 3",
-        "hex": "#7a8491",
-        "night": "#7d8894",
+        "hex": "#76687a",
+        "night": "#a39488",
         "token": "--ink-3",
-        "use": "Mono labels, years and fine print. 3.31 on ground, so short of AA for small text."
+        "use": "Mono labels, years and fine print."
       },
       {
         "name": "Line",
-        "hex": "#d5dbe1",
-        "night": "#29323b",
+        "hex": "#e2cfaf",
+        "night": "#3b3344",
         "token": "--line",
         "use": "Borders and dividers."
       },
       {
-        "name": "Ethyl",
-        "hex": "#c8301f",
-        "night": "#f0624f",
+        "name": "Tangerine",
+        "hex": "#e98946",
+        "night": "#e98946",
+        "token": "--cta",
+        "use": "The one call to action: Nominate, Subscribe, the first button on a card. Always with aubergine text, never white."
+      },
+      {
+        "name": "Rust",
+        "hex": "#ad4935",
+        "night": "#e07a5a",
         "token": "--ethyl",
-        "use": "The primary button, a cast vote, the tagline, the first award's tile and knowable-harm chips."
+        "use": "What went oops: a cast vote, knowable-harm chips, the Midgley's card."
       },
       {
-        "name": "Ethyl soft",
-        "hex": "#f7e1dc",
-        "night": "#3a1c18",
+        "name": "Rust soft",
+        "hex": "#f4d9cc",
+        "night": "#3a2420",
         "token": "--ethyl-soft",
-        "use": "Knowable-harm chip fills and the highlighter under emphasis in the charter."
+        "use": "Knowable-harm chip fills."
       },
       {
-        "name": "Ozone",
-        "hex": "#2f6e8f",
-        "night": "#78b7d6",
+        "name": "Dusty turquoise",
+        "hex": "#2e6b68",
+        "night": "#7fc1bc",
         "token": "--ozone",
-        "use": "Links, focus rings, the question rule and unforeseeable-harm chips."
+        "use": "Links and focus rings; The Murphy's button (#579996 with aubergine text). Darkened from the illustration turquoise #579996 for small text."
       },
       {
-        "name": "Ozone soft",
-        "hex": "#ddebf2",
-        "night": "#16303d",
+        "name": "Turquoise soft",
+        "hex": "#d4e7e3",
+        "night": "#1e3533",
         "token": "--ozone-soft",
         "use": "Unforeseeable-harm chip fills."
+      },
+      {
+        "name": "Avocado",
+        "hex": "#85864a",
+        "night": "#85864a",
+        "token": "--avocado",
+        "use": "Illustration and supporting color only; not for text."
+      },
+      {
+        "name": "Muted rose",
+        "hex": "#b97d87",
+        "night": "#b97d87",
+        "token": "--rose",
+        "use": "Illustration and supporting color only; not for text."
       }
     ],
     "data": [
       {
         "name": "Amber",
-        "hex": "#9a6a00",
+        "hex": "#8a6410",
         "night": "#e3b04b",
         "token": "--amber",
-        "use": "Mixed and contested evidence chips. 4.14 on ground."
+        "use": "Mixed and contested evidence chips."
       },
       {
         "name": "Amber soft",
-        "hex": "#f5eacb",
-        "night": "#342911",
+        "hex": "#f3e3bc",
+        "night": "#3a2e14",
         "token": "--amber-soft",
         "use": "Mixed and contested chip fills."
+      },
+      {
+        "name": "Rust materials",
+        "hex": "#ad4935",
+        "night": "#ad4935",
+        "token": "--jw-ruby-b",
+        "use": "Group 1, Chemistry and Materials. Deep #3a1610, light #f2c3b5."
+      },
+      {
+        "name": "Petrol cities",
+        "hex": "#1f6680",
+        "night": "#1f6680",
+        "token": "--jw-sapphire-b",
+        "use": "Group 2, Cities and Transport. Deep #0e2a33, light #b9dce6."
+      },
+      {
+        "name": "Harvest gold energy",
+        "hex": "#b7801a",
+        "night": "#b7801a",
+        "token": "--jw-citrine-b",
+        "use": "Group 3, Energy and Climate. Deep #3a2a08, light #f5dda0."
+      },
+      {
+        "name": "Avocado food",
+        "hex": "#6c7630",
+        "night": "#6c7630",
+        "token": "--jw-emerald-b",
+        "use": "Group 4, Ecology and Agriculture. Deep #262a10, light #dce0b0."
+      },
+      {
+        "name": "Plum information",
+        "hex": "#7a4a7e",
+        "night": "#7a4a7e",
+        "token": "--jw-amethyst-b",
+        "use": "Group 5, Tech and AI. Deep #2a1530, light #e3c8e2."
+      },
+      {
+        "name": "Turquoise governance",
+        "hex": "#3f8380",
+        "night": "#3f8380",
+        "token": "--jw-tourmaline-b",
+        "use": "Group 6, Policy and Incentives. Deep #0f2e2d, light #bfe0dd."
+      },
+      {
+        "name": "Saddle brown finance",
+        "hex": "#8a5a34",
+        "night": "#8a5a34",
+        "token": "--jw-garnet-b",
+        "use": "Group 7, Business and Marketing. Deep #2e1a0e, light #ebd2b8."
+      },
+      {
+        "name": "Muted rose health",
+        "hex": "#a35e6b",
+        "night": "#a35e6b",
+        "token": "--jw-rhodolite-b",
+        "use": "Group 8, Health and Medicine. Deep #3a1c22, light #f0cdd2."
       }
     ]
   },
@@ -138,8 +216,8 @@
       "role": "Display",
       "family": "Big Shoulders Display",
       "weights": "600, 800, 900",
-      "sample": "The Midgley Awards",
-      "spec": "Uppercase. The masthead title in 900 at 44 to 76px, line-height 0.9; nominee names and form titles in 800 at 28 to 30px; the Mg symbol in 900."
+      "sample": "The Backfire Awards",
+      "spec": "Uppercase. Card and page headlines in 900, nominee names in 800; element tile symbols and the Bf mark in 900. Kept from the original kit; it pairs with the 1970s palette."
     },
     {
       "role": "Body",
@@ -210,8 +288,7 @@
     "There is no logo file for the full element mark: the masthead tile is drawn in HTML and CSS, and the only SVG is the favicon, which carries Mg alone.",
     "The favicon sets Mg as live text in Arial Narrow, not Big Shoulders Display, and the text is not outlined, so it renders differently by platform.",
     "The repository is named midgely-awards while the site, the package and the Pages project spell it Midgley.",
-    "Ink 3 #7a8491 carries the 11px mono labels but measures 3.31 on ground, short of the 4.5 AA minimum. Amber #9a6a00 chips measure 4.14 on ground.",
-    "At night, white text on ethyl #f0624f (the primary button and a cast vote) measures 3.20, which passes only for large text.",
-    "The Years field placeholder in index.html writes its example ranges with an en dash, while the Midgley page writes 1889 to 1944."
+    "The home page and Midgley page screenshots in images/ show the earlier classic look.",
+    "Avocado and muted rose are illustration colors; no text pairing has been measured for them."
   ]
 }

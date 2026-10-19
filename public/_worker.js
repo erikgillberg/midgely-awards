@@ -1010,8 +1010,7 @@ class Versioned {
 }
 const LOOK_SCRIPT = `<script>(function(){var d=document.documentElement,k="bf.look",l=null,q=new URLSearchParams(location.search).get("look");
 try{if(q==="70s"||q==="classic")localStorage.setItem(k,q);l=localStorage.getItem(k)}catch(e){}
-l=l||d.getAttribute("data-look-default")||"classic";d.setAttribute("data-look",l);
-if(l==="70s"){var f=document.createElement("link");f.rel="stylesheet";f.href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,0..100,0..1&display=swap";document.head.appendChild(f)}})()</script>`;
+l=l||d.getAttribute("data-look-default")||"classic";d.setAttribute("data-look",l)})()</script>`;
 class Append {
   constructor(value) { this.value = value; }
   element(el) { el.append(this.value, { html: true }); }
@@ -1031,7 +1030,7 @@ function decorate(res, env, url, meta = {}, status = 0) {
     .on('meta[property="og:image"]', new SetAttr("content", SITE + "/og.png"))
     .on('meta[name="twitter:image"]', new SetAttr("content", SITE + "/og.png"))
     .on("body", new SetAttr("data-flags", [flags.scores && "scores", flags.categories && "categories"].filter(Boolean).join(" ")))
-    // The site "look": classic, or the 1970s palette and type. LOOK_DEFAULT picks it per environment;
+    // The site "look": classic, or the 1970s palette. LOOK_DEFAULT picks it per environment;
     // ?look=70s or ?look=classic overrides it for this browser (kept in localStorage).
     .on("html", new SetAttr("data-look-default", env.LOOK_DEFAULT === "70s" ? "70s" : "classic"))
     .on("head", new Append(LOOK_SCRIPT));

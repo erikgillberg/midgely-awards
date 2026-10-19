@@ -1037,14 +1037,13 @@ body:has(#oops) .site-foot .oops-mini{display:none}
    The 1970s look (html[data-look="70s"]). Warm palette from the 1970s image kit:
    aubergine #25202D, ivory #F3E4C8, tangerine #E98946, rust #AD4935,
    dusty turquoise #579996 (darkened for text), avocado #85864A, muted rose #B97D87.
-   Headlines in Fraunces (soft, "wonky"); element tiles and the Bf mark stay Big Shoulders.
+   Type is unchanged: Big Shoulders headlines, IBM Plex body and labels.
    ====================================================================== */
 html[data-look="70s"]{
   --ground:#F3E4C8; --surface:#FBF4E6; --ink:#25202D; --ink-2:#584C5C; --ink-3:#76687A;
   --line:#E2CFAF; --ethyl:#AD4935; --ethyl-soft:#F4D9CC; --ozone:#2E6B68; --ozone-soft:#D4E7E3;
   --amber:#8A6410; --amber-soft:#F3E3BC; --tile:#25202D; --tile-ink:#F3E4C8;
   --cta:#E98946; --cta-ink:#25202D;
-  --headline:"Fraunces", Georgia, "Times New Roman", serif;
   /* category colors, 70s earth tones (deep / base / light) */
   --jw-ruby-d:#3A1610; --jw-ruby-b:#AD4935; --jw-ruby-l:#F2C3B5;              /* materials: rust */
   --jw-sapphire-d:#0E2A33; --jw-sapphire-b:#1F6680; --jw-sapphire-l:#B9DCE6;  /* cities: petrol */
@@ -1064,26 +1063,7 @@ html[data-look="70s"]{
     --amber:#E3B04B; --amber-soft:#3A2E14; --tile:#F3E4C8; --tile-ink:#25202D;
   }
 }
-/* headlines */
-html[data-look="70s"] :is(.sq h1,.sq h2,.cc-headline,.cc-title,.feed-h,.doc h1,.doc h2,.sheet h2,.oops-box-in h2,.feed-oops h2,.pagehead h1,.writeup h2,.pv-full h2,.award-card h2,.post-head h1,.post-details h2,.nom-card h3,.sh-pick b,.memorial h2,.subscribe h2,.mast h1){
-  font-family:var(--headline);text-transform:none;font-weight:800;letter-spacing:-.012em;line-height:1.02;
-  font-variation-settings:"SOFT" 100,"WONK" 1
-}
-html[data-look="70s"] .sq h1,html[data-look="70s"] .sq h2{font-size:2.2em}
-html[data-look="70s"] .sq-hero h1{font-size:2.7em}
-html[data-look="70s"] .sq-award h2{font-size:2.6em}
-html[data-look="70s"] .sq-rule h2{font-size:2.3em}
-html[data-look="70s"] .sq-carpet h1{font-size:2.5em}
-html[data-look="70s"] .cc-headline{font-size:2.9em;max-width:12ch;line-height:1}
-html[data-look="70s"] .cc-headline.mid{font-size:2.5em}
-html[data-look="70s"] .cc-headline.long{font-size:2.05em;max-width:15ch}
-html[data-look="70s"] .cc-title{font-size:1.65em}
-html[data-look="70s"] .cc-pattern .cc-title{font-size:2em}
-html[data-look="70s"] :is(.cc-gotright,.cc-foresight) .cc-title{font-size:1.9em}
-html[data-look="70s"] .cc-payoff .cc-title{font-size:1.75em}
-html[data-look="70s"] .doc h1{font-size:clamp(34px,5.5vw,48px)}
-html[data-look="70s"] .doc h2{font-size:22px}
-html[data-look="70s"] .feed-h{font-size:28px;color:#F3E4C8}
+html[data-look="70s"] .feed-h{color:#F3E4C8}
 /* buttons: tangerine with aubergine text */
 html[data-look="70s"] :is(.primary,.wrap.home .sq-go a:first-child,.sq-go a:first-child){background:var(--cta);color:var(--cta-ink)}
 html[data-look="70s"] .wrap.home .sq.has-bg.aw-murphy .sq-go a:first-child{background:#579996;color:#25202D}
