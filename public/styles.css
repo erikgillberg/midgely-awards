@@ -1074,7 +1074,9 @@ html[data-look="70s"] .wrap.home .sq.has-bg.aw-murphy{background:linear-gradient
 html[data-look="70s"] .wrap.home .sq.has-bg :is(.sq-label,.sq-down){color:#E98946}
 html[data-look="70s"] #intro{--bg:url(/img/seventies/01-tokyo-skyways-sq.jpg)!important}
 html[data-look="70s"] #murphy{--bg:url(/img/seventies/05-orbital-home-sq.jpg)!important}
-html[data-look="70s"] .sq-rule{--bg:url(/img/seventies/07-silent-orbit-sq.jpg)!important}
+html[data-look="70s"] .sq-rule{--bg:url(/img/cards/rules-1.jpg)!important}
+html[data-look="70s"] .sq-rule:nth-child(2){--bg:url(/img/cards/rules-2.jpg)!important}
+html[data-look="70s"] .sq-rule:nth-child(3){--bg:url(/img/cards/rules-3.jpg)!important}
 html[data-look="70s"] #question{--bg:url(/img/seventies/03-west-african-future-sq.jpg)!important}
 html[data-look="70s"] #gap{--bg:url(/img/seventies/02-indian-solar-city-sq.jpg)!important}
 html[data-look="70s"] #oops{--bg:url(/img/seventies/08-lunar-departure-sq.jpg)!important}
@@ -1143,3 +1145,11 @@ html[data-look="70s"] body[data-page="shop"]{background:#fff}
   .shop-item{grid-template-columns:1fr;gap:18px}
   .shop-info{position:static}
 }
+/* shop: the footer keeps its dark-page colors on an aubergine band, so it reads on the white page */
+body[data-page="shop"] .site-foot{background:#25202D;color:#F3E4C8;border:0;padding:24px clamp(16px,3vw,28px) 28px;margin-top:28px}
+body[data-page="shop"] .site-foot nav.foot{border-top-color:#3B3344}
+
+/* home: the Bright Ideas poster opens the page as an image-only square */
+.sq-poster{margin:0;padding:0;background:#1d2b3a;display:block}
+.sq-poster img{display:block;width:100%;height:100%;object-fit:cover}
+body[data-page="shop"] .site-foot b,body[data-page="shop"] .site-foot .oops-mini p{color:#F3E4C8}
