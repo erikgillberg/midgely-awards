@@ -1073,7 +1073,6 @@ html[data-look="70s"] .wrap.home .sq.has-bg.aw-midgley{background:linear-gradien
 html[data-look="70s"] .wrap.home .sq.has-bg.aw-murphy{background:linear-gradient(180deg,rgb(18 50 52/.9) 0%,rgb(18 50 52/.55) 48%,rgb(18 50 52/.94) 100%),var(--bg) center/cover no-repeat,#123234}
 html[data-look="70s"] .wrap.home .sq.has-bg :is(.sq-label,.sq-down){color:#E98946}
 html[data-look="70s"] #intro{--bg:url(/img/seventies/01-tokyo-skyways-sq.jpg)!important}
-html[data-look="70s"] #murphy{--bg:url(/img/seventies/05-orbital-home-sq.jpg)!important}
 html[data-look="70s"] .sq-rule{--bg:url(/img/cards/rules-1.jpg)!important}
 html[data-look="70s"] .sq-rule:nth-child(2){--bg:url(/img/cards/rules-2.jpg)!important}
 html[data-look="70s"] .sq-rule:nth-child(3){--bg:url(/img/cards/rules-3.jpg)!important}
@@ -1153,3 +1152,6 @@ body[data-page="shop"] .site-foot nav.foot{border-top-color:#3B3344}
 .sq-poster{margin:0;padding:0;background:#1d2b3a;display:block}
 .sq-poster img{display:block;width:100%;height:100%;object-fit:cover}
 body[data-page="shop"] .site-foot b,body[data-page="shop"] .site-foot .oops-mini p{color:#F3E4C8}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* the swipeable award cards: photo cards keep the award's tint */
+.sq-carousel .sq.sq-award h2{font-size:3.2em}
