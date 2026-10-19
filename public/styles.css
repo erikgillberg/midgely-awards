@@ -203,6 +203,7 @@ nav.foot span{color:var(--ink-3);text-transform:none;letter-spacing:0}
 .socials{display:flex;flex-wrap:wrap;gap:6px 16px;font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase}
 .socials a{color:var(--ink-2)}
 .runby{margin:0;font-size:13px;color:var(--ink-3)}
+.runby a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .placeholder{color:var(--amber);background:var(--amber-soft);padding:2px 6px;font-size:13px}
 .crumbs{margin:0;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .pagehead h1{font:900 clamp(40px,7vw,60px)/.95 var(--display);text-transform:uppercase;margin:6px 0 0}

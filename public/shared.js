@@ -490,9 +490,10 @@ export function footerHTML() {
       <a href="/guidelines">Guidelines</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
+      <a href="https://goatfarm.team">Who we are ↗</a>
     </nav>
     <div class="socials">${socials}</div>
-    <p class="runby">Run by Goat Farm. Better to try and fail than never try. Mostly.</p>
+    <p class="runby">Run by <a href="https://goatfarm.team">Goat Farm</a>: five humans and one AI goat. Better to try and fail than never try. Mostly.</p>
   </div>`;
 }
 
