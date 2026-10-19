@@ -1,56 +1,123 @@
 {
   "slug": "midgley",
-  "headline": "Two fixes, one long cleanup",
-  "dek": "In the 1920s one engineer solved two of the decade's big problems. The world spent most of a century cleaning up after both.",
+  "keyCard": false,
+  "headline": "The fix that cost a nation IQ points",
+  "dek": "In 1921 a chemist put lead in gasoline to stop engines knocking. More than half of Americans alive in 2015 had too much lead in their blood as small children.",
   "slides": [
     {
       "kind": "meant",
-      "label": "What it was meant to do",
-      "title": "Stop engines knocking and fridges leaking poison",
-      "text": "Early car engines knocked: the fuel burned unevenly, wore out parts and wasted power. Home refrigerators used ammonia or sulfur dioxide, and a leak could kill the family in the kitchen.",
+      "label": "The bright idea",
+      "title": "Stop the knock",
+      "text": "Early car engines knocked: the fuel burned unevenly, wore out parts and wasted power. Fix it, and cars could be faster, stronger and cheaper to run.",
       "image": "/img/n/midgley/traffic.jpg",
       "alt": "A busy Los Angeles intersection in 1922, with streetcars, early automobiles and a Union Gasoline station",
       "credit": "North Broadway and Sunset Boulevard, Los Angeles, 1922. Automobile Club of Southern California. Public domain."
     },
     {
       "kind": "right",
-      "label": "What went right",
-      "title": "Both worked",
-      "text": "In 1921 Thomas Midgley found that a little tetraethyl lead in gasoline stopped the knock. In 1928 he made chlorofluorocarbons, sold as Freon: no fire, no poison. Cars got more powerful and fridges became safe to own.",
+      "label": "It worked",
+      "title": "A pinch of lead",
+      "text": "In 1921 Thomas Midgley found that a little tetraethyl lead in gasoline stopped the knock. It went on sale as Ethyl, and it was hailed as a triumph of chemistry.",
       "image": "/img/n/midgley/pump.jpg",
       "alt": "A rusted red Atlantic gasoline pump with a yellow and blue Ethyl anti-knock compound emblem",
       "credit": "Atlantic Ethyl pump, Leola, Pennsylvania. John Margolies, 1982. Library of Congress. Public domain."
     },
     {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "Sixty seconds of proof",
+      "text": "In October 1924, workers making the additive at a New Jersey refinery began to die. That month, Midgley poured it on his hands for reporters and breathed its vapor for a minute. The year before, he had taken time off to recover from lead poisoning."
+    },
+    {
       "kind": "oops",
-      "label": "What went oops",
-      "title": "Lead in the air, a hole in the sky",
-      "text": "The lead came out of tailpipes and settled into the dust of every city, and into children, for half a century. The CFCs drifted up to the stratosphere, where sunlight split them and the chlorine ate the ozone layer.",
-      "image": "/img/n/midgley/ozone.jpg",
-      "alt": "A NASA satellite map of the globe from below, with a large purple ozone hole covering Antarctica",
-      "credit": "The ozone hole over Antarctica, October 1, 1998. NASA. Public domain.",
+      "label": "The backfire",
+      "title": "Lead in every city",
+      "stat": "824 million",
+      "statLabel": "IQ points lost by Americans alive in 2015, one study estimates",
+      "text": "For decades the lead came out of tailpipes, settled into dust and soil, and got into children, whose brains it harms.",
       "also": [
-        "Workers poisoned making the lead additive in 1924",
-        "CFCs are also powerful greenhouse gases"
+        "Source: McFarland, Hauer and Reuben, PNAS, 2022"
       ]
     },
     {
-      "kind": "gotright",
-      "label": "What he got right",
-      "title": "Safe at home",
-      "text": "The goal behind Freon still holds: a fridge should be safe to keep in the kitchen. Today's refrigerants are far safer than the ammonia and sulfur dioxide of the 1920s, and gentle on the ozone layer."
+      "kind": "encore",
+      "label": "Then he did it again",
+      "title": "A safe fridge, a hole in the sky",
+      "text": "In 1928 he made CFCs, sold as Freon: no fire, no poison, safe in any kitchen. They were so stable they drifted up to the stratosphere, where sunlight split them and the chlorine ate the ozone layer.",
+      "image": "/img/n/midgley/ozone.jpg",
+      "alt": "A NASA satellite map of the globe from below, with a large purple ozone hole covering Antarctica",
+      "credit": "The ozone hole over Antarctica, October 1, 1998. NASA. Public domain."
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "The lead, yes. The ozone, no.",
-      "text": "Lead poisoning had been known for centuries, and Midgley was treated for it in 1923. The chemistry that destroys ozone was first described in 1974, thirty years after he died."
+      "text": "Lead poisoning had been known for centuries, and the refinery deaths of 1924 made the papers. The chemistry that destroys ozone was first described in 1974, thirty years after Midgley died."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "A century to undo",
+      "text": "The US finished banning leaded gas for cars in 1996. The last country stopped selling it for cars in 2021. A 1987 treaty phased out CFCs, and the ozone hole over Antarctica should recover by about 2066."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Engines that stopped knocking, and more powerful cars and planes",
+        "Fridges that no longer used ammonia or sulfur dioxide, gases that could poison a family",
+        "Cheap cooling for food and medicine"
+      ],
+      "costs": [
+        "824 million IQ points lost by Americans alive in 2015 (PNAS, 2022)",
+        "At least 15 workers killed in the plants that made the lead additive",
+        "A hole in the ozone layer, still healing"
+      ],
+      "text": "Both fixes did real good. Both sent a bill to people who never chose them. You decide if it was worth it.",
+      "gainsLabel": "What they gave",
+      "costsLabel": "What they cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe him one",
+      "text": "Midgley went after real problems: engines that knocked and wore out, and dangerous home fridges. He was wrong about lead and couldn't have known about ozone. Much of what we know about checking a fix before it ships, we learned cleaning up after him."
     },
     {
       "kind": "pattern",
       "label": "Pattern",
       "title": "The problem moves",
-      "patternKey": "moved"
+      "patternKey": "moved",
+      "focus": true,
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself.",
+      "eyebrow": "What's the pattern?"
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Nobody was watching the air",
+      "text": "Both fixes worked exactly where they were aimed: inside the engine, inside the fridge. The harm landed where nobody was measuring: in the air, on a windowsill, twenty miles up."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Your fixes move problems too",
+      "text": "A team keeps missing deadlines, so you add a daily status meeting. Deadlines improve. Focus time disappears, and the engineers start working nights. The problem didn't go away. It moved.",
+      "also": [
+        "Clutter that moves to the garage",
+        "A cost cut that lands on another team's budget"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "Whether a fix works and who pays for it are separate questions.",
+        "The first warnings came from the people closest to the danger.",
+        "A big success makes a known risk easy to wave away."
+      ]
     }
   ],
   "portrait": {
