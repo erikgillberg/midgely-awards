@@ -364,6 +364,7 @@ const ICON = {
   plus: '<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/>',
   table: '<rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="10" width="5" height="5"/><rect x="9.5" y="10" width="5" height="5"/><rect x="16" y="10" width="5" height="5"/><rect x="6" y="17.5" width="12" height="3.5"/>',
   award: '<circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5 5 2.5-1.5-8"/>',
+  bag: '<path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>',
   menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
   mail: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/>',
 };
@@ -386,6 +387,7 @@ export function headerHTML(flags = {}) {
       <button class="nav-i nav-nom" type="button" data-open-sheet="">${icon("plus")}<span>Nominate</span></button>
       ${item("/table", "table", "The Table")}
       ${item("/awards", "award", "The Awards")}
+      ${item("/shop", "bag", "Shop")}
     </nav>
     <button class="nav-i nav-oops" type="button" data-oops aria-haspopup="dialog">${icon("mail")}<span>Weekly Oops</span></button>
     <button class="nav-i nav-more" type="button" data-menu aria-expanded="false" aria-controls="menu-panel">${icon("menu")}<span>More</span></button>

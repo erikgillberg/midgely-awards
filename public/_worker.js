@@ -1199,25 +1199,48 @@ async function shopProducts(ctx) {
   const data = await res.json().catch(() => ({}));
   return (data.products || []).filter((x) => x.variants && x.variants.length);
 }
+// Artwork shown big on /shop, keyed by the Shopify product handle. Rendered on the shirt color, so people
+// can see what is printed without leaving the site. Products without an entry show the Shopify photo only.
+const SHOP_ART = {
+  "bright-idea-tee-charcoal-black": [
+    { src: "/img/shop/bright-idea-front.jpg", alt: "Front print: a retro light bulb with the Backfire Awards wordmark", label: "Front" },
+    { src: "/img/shop/bf-badge-back.jpg", alt: "Back print: the Bf element badge reading backfireawards.com", label: "Back, below the collar" },
+  ],
+};
+const stripTags = (h) => String(h || "").replace(/<br\s*\/?>/gi, "\n").replace(/<\/p>/gi, "\n").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&nbsp;/g, " ").replace(/&#39;/g, "'").replace(/&quot;/g, '"');
 function shopCardHTML(x) {
   const prices = x.variants.map((v) => Number(v.price)).filter((n) => n > 0);
   const min = prices.length ? Math.min(...prices) : null;
-  const money = (n) => "$" + (Number.isInteger(n) ? n : n.toFixed(2));
-  const img = x.images && x.images[0] ? x.images[0].src : "";
+  const money = (n) => "$" + n.toFixed(2);
+  const photo = x.images && x.images[0] ? x.images[0].src : "";
   const sold = !x.variants.some((v) => v.available !== false);
   const href = `${SHOP_ORIGIN}/products/${encodeURIComponent(x.handle)}?utm_source=site&utm_medium=shop`;
-  return `<a class="shop-card" href="${esc(href)}">
-    ${img ? `<img src="${esc(img)}${img.includes("?") ? "&" : "?"}width=800" alt="${esc(x.title)}" loading="lazy" width="800" height="800">` : ""}
-    <span class="shop-t">${esc(x.title)}</span>
-    <span class="shop-p">${min != null ? (prices.some((n) => n !== min) ? "From " : "") + money(min) : ""}${sold ? " · Sold out" : ""}</span>
-    <span class="shop-go">Choose your size →</span>
-  </a>`;
+  const sizes = ((x.options || []).find((o) => /size/i.test(o.name)) || {}).values || [];
+  // Our copy leads the description; Printful's fabric notes follow. Keep the first four sentences at most.
+  const first = stripTags(x.body_html).split("\n").map((t) => t.trim()).filter(Boolean)[0] || "";
+  const intro = (first.match(/[^.!?]+[.!?]+/g) || [first]).slice(0, 4).join("").trim();
+  const art = SHOP_ART[x.handle] || [];
+  const views = art.length
+    ? art.map((a, i) => `<figure class="${i ? "art-side" : "art-main"}"><img src="${esc(a.src)}" alt="${esc(a.alt)}" width="1200" height="1200" ${i ? 'loading="lazy"' : ""}><figcaption>${esc(a.label)}</figcaption></figure>`).join("")
+      + (photo ? `<figure class="art-side photo"><img src="${esc(photo)}${photo.includes("?") ? "&" : "?"}width=800" alt="${esc(x.title)} as printed" width="800" height="800" loading="lazy"><figcaption>On the shirt</figcaption></figure>` : "")
+    : photo ? `<figure class="art-main photo"><img src="${esc(photo)}${photo.includes("?") ? "&" : "?"}width=1200" alt="${esc(x.title)}" width="1200" height="1200"></figure>` : "";
+  return `<article class="shop-item">
+    <div class="shop-art${art.length ? "" : " single"}">${views}</div>
+    <div class="shop-info">
+      <h2>${esc(x.title)}</h2>
+      <p class="shop-p">${min != null ? (prices.some((n) => n !== min) ? "From " : "") + money(min) : ""}${sold ? " · Sold out" : ""}</p>
+      ${intro ? `<p class="shop-intro">${esc(intro)}</p>` : ""}
+      ${sizes.length ? `<p class="shop-sizes"><span>Sizes</span> ${sizes.map(esc).join(" · ")}</p>` : ""}
+      <a class="shop-go" href="${esc(href)}">${sold ? "See it on our store" : "Choose your size"} →</a>
+      <p class="shop-fine">Checkout is on shop.backfireawards.com, run by Shopify. Printed to order, so allow time for printing before it ships.</p>
+    </div>
+  </article>`;
 }
 async function shopPage(request, env, url, ctx) {
   const items = await shopProducts(ctx);
   const grid = items.length
     ? items.map(shopCardHTML).join("")
-    : `<div class="shop-soon"><h2>Opening soon</h2><p>The first shirts are being printed and checked. Get The Weekly Oops and you'll hear the day the shop opens.</p>${signupHTML("shop")}</div>`;
+    : `<div class="shop-soon"><h2>Back soon</h2><p>The shop is restocking. Get The Weekly Oops and you'll hear when new shirts are in.</p>${signupHTML("shop")}</div>`;
   return decorate(await asset(env, url, request, "/shop"), env, url, { canonical: SITE + "/shop", fill: { "#shop-grid": grid } });
 }
 
