@@ -1190,8 +1190,8 @@ async function shopProducts(ctx) {
   const key = new Request(SHOP_ORIGIN + "/products.json?limit=50");
   let res = await cache.match(key);
   if (!res) {
-    res = await fetch(key, { headers: { accept: "application/json" }, redirect: "manual" }).catch(() => null);
-    if (!res || !res.ok) return [];
+    res = await fetch(key, { headers: { accept: "application/json", "user-agent": "Mozilla/5.0 (compatible; BackfireAwardsSite/1.0; +https://backfireawards.com/shop)" }, redirect: "manual" }).catch(() => null);
+    if (!res || !res.ok) { console.log("shop feed", res && res.status); return []; }
     res = new Response(res.body, res);
     res.headers.set("cache-control", "public, max-age=600");
     ctx.waitUntil(cache.put(key, res.clone()));
