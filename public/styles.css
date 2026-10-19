@@ -1097,3 +1097,7 @@ html[data-look="70s"] .sq-tag{color:#E98946}
 .shop-soon .signup{display:flex;flex-wrap:wrap;gap:8px;max-width:100%}
 .shop-soon .signup input[type=email]{flex:1 1 200px;min-width:0;width:auto}
 body:has(.shop-soon) .site-foot .oops-mini{display:none}
+/* product photos come on white: the card is white in every look and mode, so they breathe */
+.shop-card{background:#fff;color:#25202D;border-color:#25202D}
+.shop-card img{background:#fff}
+.shop-card .shop-p{color:#584C5C}
