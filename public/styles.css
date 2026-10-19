@@ -949,7 +949,7 @@ body[data-bg="cat"] .wrap.home{max-width:600px}
   .pagehead .lede{font-size:14px}
 }
 .pv-q{white-space:nowrap}
-@media (max-width:420px){ .pv-btn[data-act="herd"] span{display:none} .pv-bar{gap:2px} }
+@media (max-width:420px){ .pv-btn[data-act="herd"] span:not(.emo){display:none} .pv-bar{gap:2px} }
 @container (max-width:30px){ .pt-bf{display:none} }
 .el > span:empty{visibility:hidden}
 @media (min-width:761px){ .pt-wrap .pt-tools{right:auto;left:50%;transform:translateX(-50%)} }
@@ -1107,3 +1107,7 @@ body:has(.shop-soon) .site-foot .oops-mini{display:none}
 .matrix th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .matrix td:last-child{white-space:nowrap;font-family:var(--mono)}
 @media (max-width:560px){ .matrix th:nth-child(2),.matrix th:nth-child(3),.matrix td:nth-child(2),.matrix td:nth-child(3){display:none} }
+/* "Worth it?" vote: emoji icons in the post action bar */
+.pv-btn .emo{font-size:20px;line-height:1;filter:grayscale(.15)}
+.pv-btn[aria-pressed="true"] .emo{filter:none}
+.pv-btn.pv-yes[aria-pressed="true"]{background:var(--cta,#E98946);color:var(--cta-ink,#25202D)}

@@ -137,10 +137,10 @@ export function scoresHTML(n, size = "small") {
 
 function herdVoteHTML(n, mine) {
   const yes = mine === true, no = mine === false;
-  return `<div class="herdvote" role="group" aria-label="Is ${esc(n.name)} Midgley-worthy?">
-    <span class="q">Midgley-worthy?</span>
-    <button data-act="herd" data-vote="yes" aria-pressed="${yes}">Yes</button>
-    <button data-act="herd" data-vote="no" aria-pressed="${no}">No</button>
+  return `<div class="herdvote" role="group" aria-label="${esc(n.name)}: worth it?">
+    <span class="q">Worth it?</span>
+    <button data-act="herd" data-vote="no" aria-pressed="${no}">💡 Yes</button>
+    <button data-act="herd" data-vote="yes" aria-pressed="${yes}">🤦 No</button>
   </div>`;
 }
 
@@ -213,6 +213,8 @@ const picon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${PICON[k]}</s
 // A post: the same shape for every kind of item, like a social feed.
 //   header (tile, name, ⋯) / carousel / actions / scores / caption with "more" / comments
 // p: { id, kind, path, title, sub, tile, carousel, captionTitle, caption, more, worthy, herdYes, herdTotal, oops, score }
+// The vote asks "Worth it?". 💡 Yes is stored as a "no" vote and 🤦 No as a "yes" vote: stored "yes" has always
+// meant facepalm (it began as "Midgley-worthy?"), and the Facepalm Index is the share of "yes" votes.
 export const herdLine = (yes, total) => {
   const pct = total >= MIN_HERD_VOTES ? Math.round((100 * yes) / total) : null;
   return `Facepalm <b>${pct != null ? pct + "%" : "?"}</b>${pct != null ? ` of ${total}` : total ? ` (${total} vote${total === 1 ? "" : "s"} so far)` : ""}`;
@@ -223,8 +225,8 @@ function postShell(p, ctx = {}) {
   const pct = p.herdTotal >= MIN_HERD_VOTES ? Math.round((100 * p.herdYes) / p.herdTotal) : null;
   const vote = flags.scores || p.kind === "murphy"
     ? `<div class="pv-vote" role="group" aria-label="${esc(p.worthy)}"><span class="pv-q">${esc(p.worthy)}</span>
-        <button class="pv-btn" data-act="herd" data-vote="yes" aria-pressed="false">${picon("yes")}<span>Yes</span></button>
-        <button class="pv-btn" data-act="herd" data-vote="no" aria-pressed="false">${picon("no")}<span>No</span></button></div>`
+        <button class="pv-btn pv-yes" data-act="herd" data-vote="no" aria-pressed="false" aria-label="Yes, worth it"><span class="emo" aria-hidden="true">💡</span><span>Yes</span></button>
+        <button class="pv-btn pv-no" data-act="herd" data-vote="yes" aria-pressed="false" aria-label="No, a facepalm"><span class="emo" aria-hidden="true">🤦</span><span>No</span></button></div>`
     : `<button class="pv-btn" data-act="vote" aria-pressed="false">${upIcon}<span class="c">${p.score}</span></button>`;
   const stats = [
     p.kind !== "murphy" && flags.scores ? `Oops <b>${p.oops ?? "?"}</b>` : "",
@@ -261,7 +263,7 @@ export function postHTML(n, ctx = {}) {
   return postShell({
     id: n.id, kind: "nominee", path: nomineePath(n), title: n.name, sub: [n.years, DOMAINS[n.domain]].filter(Boolean).join(" · "),
     tile: elementHTML(n, "mini"), carousel: ctx.carousel || "", captionTitle: n.work, caption: n.backfire,
-    more: ctx.more || fullSections(n), worthy: n.id === HONOREE ? "Deserved it?" : "Midgley-worthy?", herdYes: n.herdYes, herdTotal: n.herdTotal, oops: n.oops, score: n.score,
+    more: ctx.more || fullSections(n), worthy: "Worth it?", herdYes: n.herdYes, herdTotal: n.herdTotal, oops: n.oops, score: n.score,
     vars: jewelVars(jewelOf(n.domain)),
   }, ctx);
 }
@@ -292,7 +294,7 @@ export function murphyPostHTML(m, ctx = {}) {
   return postShell({
     id: m.id, kind: "murphy", path: murphyPath(m), title: "A Murphy", sub: m.name ? `from ${m.name}` : "from a reader",
     tile: murphyTileHTML(m), carousel: murphyCarouselHTML(m), captionTitle: "The Murphy.", caption: `${sentence(m.fix)} ${sentence(m.oops)}`, more: "",
-    worthy: "Murphy-worthy?", herdYes: m.herdYes, herdTotal: m.herdTotal, vars: "--deep:#0B2230;--base:#2F6E8F;--light:#BFE0EF",
+    worthy: "Worth it?", herdYes: m.herdYes, herdTotal: m.herdTotal, vars: "--deep:#0B2230;--base:#2F6E8F;--light:#BFE0EF",
   }, ctx);
 }
 
@@ -679,7 +681,7 @@ export function carouselHTML(n, data, flags = {}) {
         <div><span class="k">Oops Score</span><b>${n.oops != null ? n.oops : "?"}</b><span class="s">${band ? esc(band.label) : "Judges still scoring"}</span></div>
         <div><span class="k">Facepalm Index</span><b>${pct != null ? pct + "%" : "?"}</b><span class="s">${pct != null ? n.herdTotal + " votes" : "Not enough votes yet"}</span></div>
       </div>
-      <h3 class="cc-title">Is ${esc(n.name)} Midgley-worthy?</h3>
+      <h3 class="cc-title">${esc(n.work)}: worth it?</h3>
       <p class="cc-cta">Vote and argue at <b>${BRAND_DOMAIN}${nomineePath(n)}</b></p>
       <p class="cc-follow">Follow the Backfire Awards for a new backfire every week.</p>
     </div>
