@@ -1101,3 +1101,9 @@ body:has(.shop-soon) .site-foot .oops-mini{display:none}
 .shop-card{background:#fff;color:#25202D;border-color:#25202D}
 .shop-card img{background:#fff}
 .shop-card .shop-p{color:#584C5C}
+/* scores page: the Oops Score decision matrix */
+.matrix{width:100%;border-collapse:collapse;margin:8px 0 16px;font-size:14px}
+.matrix th,.matrix td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+.matrix th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.matrix td:last-child{white-space:nowrap;font-family:var(--mono)}
+@media (max-width:560px){ .matrix th:nth-child(2),.matrix th:nth-child(3),.matrix td:nth-child(2),.matrix td:nth-child(3){display:none} }

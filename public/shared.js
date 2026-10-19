@@ -71,7 +71,7 @@ export const feedOopsHTML = () => `<section class="feed-oops" aria-labelledby="f
   <p class="ob-label">The newsletter</p><h2 id="fo-h">Get one backfire a week</h2><p>${OOPS_LINE} Unsubscribe any time.</p>${signupHTML("feed")}</section>`;
 // Scores
 export const MIN_JUDGES = 2;      // an Oops Score is public once this many judges have scored
-export const MIN_HERD_VOTES = 10; // a Herd Score shows once this many readers have voted
+export const MIN_HERD_VOTES = 10; // a Facepalm Index shows once this many readers have voted
 export function oopsBand(score) {
   if (score == null) return null;
   if (score >= 90) return { key: "certified", label: "Certified Backfire" };
@@ -131,7 +131,7 @@ export function scoresHTML(n, size = "small") {
     : `<span class="num none">?</span><span class="sub">Not enough votes yet</span>`;
   return `<div class="scores ${size}">
     <a class="score oops" href="/scores"><span class="label">Oops Score</span>${oops}</a>
-    <a class="score herd" href="/scores"><span class="label">Herd Score</span>${herd}</a>
+    <a class="score herd" href="/scores"><span class="label">Facepalm Index</span>${herd}</a>
   </div>`;
 }
 
@@ -215,7 +215,7 @@ const picon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${PICON[k]}</s
 // p: { id, kind, path, title, sub, tile, carousel, captionTitle, caption, more, worthy, herdYes, herdTotal, oops, score }
 export const herdLine = (yes, total) => {
   const pct = total >= MIN_HERD_VOTES ? Math.round((100 * yes) / total) : null;
-  return `Herd <b>${pct != null ? pct + "%" : "?"}</b>${pct != null ? ` of ${total}` : total ? ` (${total} vote${total === 1 ? "" : "s"} so far)` : ""}`;
+  return `Facepalm <b>${pct != null ? pct + "%" : "?"}</b>${pct != null ? ` of ${total}` : total ? ` (${total} vote${total === 1 ? "" : "s"} so far)` : ""}`;
 };
 function postShell(p, ctx = {}) {
   const flags = ctx.flags || {};
@@ -321,7 +321,7 @@ export function nomCardHTML(n, flags = {}) {
   const j = jewelOf(n.domain);
   const pct = herdPct(n);
   const scores = flags.scores
-    ? `<p class="nc-scores"><span>Oops <b>${n.oops ?? "?"}</b></span><span>Herd <b>${pct != null ? pct + "%" : "?"}</b></span></p>`
+    ? `<p class="nc-scores"><span>Oops <b>${n.oops ?? "?"}</b></span><span>Facepalm <b>${pct != null ? pct + "%" : "?"}</b></span></p>`
     : `<p class="nc-scores"><span>${n.score} upvote${n.score === 1 ? "" : "s"}</span></p>`;
   return `<article class="nom-card" id="nom-${esc(n.id)}" data-id="${esc(n.id)}" style="${jewelVars(j)}">
     <a href="${nomineePath(n)}">
@@ -372,7 +372,7 @@ const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg
 export const MENU = [
   ["The awards", [["/midgley", "The Midgley"], ["/murphy", "The Murphy"], ["/awards", "Awards night"], ["/scores", "How scores work"], ["/table", "The Categoric Table"]]],
   ["What this is", [["/#intro", "The big picture"], ["/#rules", "What makes a good nominee"], ["/#question", "The serious question"], ["/#gap", "The gender gap"], ["/guidelines", "Community guidelines"]]],
-  ["More from us", [["/goat", "Goat, our chief judge"], ["/shop", "Shop"], ["/#oops", "The Weekly Oops"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
+  ["More from us", [["/shop", "Shop"], ["/#oops", "The Weekly Oops"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
 ];
 export function headerHTML(flags = {}) {
   const item = (href, k, label, extra = "") => `<a class="nav-i" href="${href}" ${extra}>${icon(k)}<span>${label}</span></a>`;
@@ -470,7 +470,6 @@ export function footerHTML() {
       <a href="/midgley">The Midgley</a>
       <a href="/murphy">The Murphy</a>
       <a href="/awards">The Awards</a>
-      <a href="/goat">Goat</a>
       <a href="/shop">Shop</a>
       <a href="/scores">How scores work</a>
       <a href="/guidelines">Guidelines</a>
@@ -501,7 +500,7 @@ export const PATTERNS = [
 
 export const HONOREE = "midgley"; // holds the first award; shown on /midgley, kept out of the ranked list
 
-// "Top" ranks by upvotes, or by Herd "yes" votes once scores are on.
+// "Top" ranks by upvotes, or by Facepalm "yes" votes once scores are on.
 export const topValue = (n, flags) => (flags && flags.scores ? n.herdYes || 0 : n.score || 0);
 export const byTop = (flags) => (a, b) => topValue(b, flags) - topValue(a, flags) || String(a.createdAt).localeCompare(String(b.createdAt));
 
@@ -678,7 +677,7 @@ export function carouselHTML(n, data, flags = {}) {
       <p class="cc-label">The verdict so far</p>
       <div class="cc-scores">
         <div><span class="k">Oops Score</span><b>${n.oops != null ? n.oops : "?"}</b><span class="s">${band ? esc(band.label) : "Judges still scoring"}</span></div>
-        <div><span class="k">Herd Score</span><b>${pct != null ? pct + "%" : "?"}</b><span class="s">${pct != null ? n.herdTotal + " votes" : "Not enough votes yet"}</span></div>
+        <div><span class="k">Facepalm Index</span><b>${pct != null ? pct + "%" : "?"}</b><span class="s">${pct != null ? n.herdTotal + " votes" : "Not enough votes yet"}</span></div>
       </div>
       <h3 class="cc-title">Is ${esc(n.name)} Midgley-worthy?</h3>
       <p class="cc-cta">Vote and argue at <b>${BRAND_DOMAIN}${nomineePath(n)}</b></p>

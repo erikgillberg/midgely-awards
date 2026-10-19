@@ -156,7 +156,7 @@
     $("#c-all").textContent = rest.length;
     $("#all").innerHTML = rest.map((n) => nomRow(n, act(n))).join("");
     $("#judging").innerHTML = judgesHTML();
-    $("#c-votes").textContent = `${data.voteCounts.up} upvotes, ${data.voteCounts.herd} Herd votes`;
+    $("#c-votes").textContent = `${data.voteCounts.up} upvotes, ${data.voteCounts.herd} Facepalm votes`;
     $("#flags").textContent = `Scores ${data.flags.scores ? "on" : "off"} · Categories ${data.flags.categories ? "on" : "off"}`;
     if (!$("#new-form").dataset.ready) {
       $("#new-form").innerHTML = `<div class="edit" data-edit="new">${fieldsHTML({ harms: [] }, "new")}
@@ -218,7 +218,7 @@
         return;
       }
       case "clear-votes": {
-        if (prompt("This removes every upvote and Herd vote. Type CLEAR to confirm.") !== "CLEAR") return;
+        if (prompt("This removes every upvote and Facepalm vote. Type CLEAR to confirm.") !== "CLEAR") return;
         try { await api("/api/admin/clear-votes", { method: "POST", body: JSON.stringify({ confirm: "CLEAR" }) }); toast("All votes removed"); load(); } catch (err) { toast(err.message); }
         return;
       }

@@ -6,7 +6,7 @@
 //   ADMIN_TOKEN       secret — unlocks /admin             required for moderation
 //   TURNSTILE_SITE_KEY + TURNSTILE_SECRET                 optional bot check on submissions
 //   AUTO_APPROVE = "1"                                    optional — skip the approval queue
-//   FEATURE_SCORES = "1"                                  Oops Score and Herd Score (replaces upvotes)
+//   FEATURE_SCORES = "1"                                  Oops Score and Facepalm Index (replaces upvotes)
 //   FEATURE_CATEGORIES = "1"                              category chips and /category pages
 //   CF_BEACON_TOKEN                                       optional — Cloudflare Web Analytics, injected into every page
 //
@@ -65,7 +65,7 @@ const TABLES = [
   `CREATE TABLE IF NOT EXISTS hits (k TEXT NOT NULL, ts INTEGER NOT NULL)`,
   `CREATE INDEX IF NOT EXISTS comments_nominee ON comments (nominee_id, created_at)`,
   `CREATE INDEX IF NOT EXISTS hits_k_ts ON hits (k, ts)`,
-  // v4: Herd Score votes (yes = 1, no = 0) and judges' Oops Scores (1 to 100)
+  // v4: Facepalm Index votes, stored as "herd" (yes = 1, no = 0) and judges' Oops Scores (1 to 100)
   `CREATE TABLE IF NOT EXISTS herd_votes (
     nominee_id TEXT NOT NULL, voter TEXT NOT NULL, yes INTEGER NOT NULL, created_at TEXT NOT NULL,
     PRIMARY KEY (nominee_id, voter))`,
@@ -481,7 +481,7 @@ function isAdmin(request, env) {
 
 // ---------------------------------------------------------------- public API
 
-// Nominees with their upvotes, Herd Score and Oops Score, plus visible comments.
+// Nominees with their upvotes, Facepalm Index and Oops Score, plus visible comments.
 async function loadNominees(db, where, withComments, admin = false) {
   const q = [
     db.prepare(`SELECT * FROM nominees WHERE ${where} ORDER BY created_at`),
@@ -696,7 +696,7 @@ async function handleApi(request, env, url, ctx) {
   }
 
   if (path === "/api/herd" && method === "POST") {
-    if (!flagsOf(env).scores) return bad("Herd voting isn't open yet.", 404);
+    if (!flagsOf(env).scores) return bad("Voting isn't open yet.", 404);
     const b = await readBody(request);
     const nomineeId = clean(b && b.nomineeId, 64);
     const voter = b && b.voter;
@@ -867,7 +867,7 @@ async function handleAdmin(request, env, url, db, path, method) {
     return json({ ok: true, judge });
   }
 
-  // Launch: remove every upvote and Herd vote cast before launch.
+  // Launch: remove every upvote and Facepalm vote cast before launch.
   if (path === "/api/admin/clear-votes" && method === "POST") {
     const b = (await readBody(request)) || {};
     if (b.confirm !== "CLEAR") return bad("Send confirm: CLEAR to remove all votes.");
@@ -1134,7 +1134,7 @@ async function nomineePage(request, env, url, ctx, key) {
   const thread = st.comments.filter((c) => c.nomineeId === n.id);
   const page = await asset(env, url, request, "/nominee");
   const pct = herdPct(n);
-  const scores = flags.scores ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Herd Score ${pct}%` : ""].filter(Boolean).join(", ") : "";
+  const scores = flags.scores ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Facepalm Index ${pct}%` : ""].filter(Boolean).join(", ") : "";
   return decorate(page, env, url, {
     canonical: SITE + nomineePath(n),
     title: `${n.name}: ${n.work} · The Backfire Awards`,
@@ -1311,7 +1311,7 @@ const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
-  const paths = ["/", "/search", "/table", "/midgley", "/murphy", "/awards", "/goat", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
+  const paths = ["/", "/search", "/table", "/midgley", "/murphy", "/awards", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
   if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -1376,6 +1376,7 @@ export default {
     if (p === "/shop") return shopPage(request, env, url, ctx);
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
     if (p === "/murphy") return decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy", fill: { "#murphy-embed": tallyHTML(LINKS.microFormId, "Share your Murphy") } });
+    if (p === "/goat") return Response.redirect(SITE_ORIGIN(url) + "/scores", 301); // Goat retired as a character
     if (p === "/micro") return Response.redirect(SITE_ORIGIN(url) + "/murphy" + url.search, 301); // old name
 
     // Pages (no file extension, or .html) are rewritten per request; never let the browser's cached copy stand in.
