@@ -75,9 +75,15 @@
         "At least 15 workers killed in the plants that made the lead additive",
         "A hole in the ozone layer, still healing"
       ],
-      "text": "Both fixes did real good. Both sent a bill to people who never chose them. You decide if it was worth it: vote at the end.",
+      "text": "Both fixes did real good. Both sent a bill to people who never chose them. You decide if it was worth it.",
       "gainsLabel": "What they gave",
       "costsLabel": "What they cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe him one",
+      "text": "Midgley went after real problems: engines that knocked and wore out, and dangerous home fridges. He was wrong about lead and couldn't have known about ozone. Much of what we know about checking a fix before it ships, we learned cleaning up after him."
     },
     {
       "kind": "pattern",
@@ -85,7 +91,8 @@
       "title": "The problem moves",
       "patternKey": "moved",
       "focus": true,
-      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself.",
+      "eyebrow": "What's the pattern?"
     },
     {
       "kind": "anatomy",
@@ -104,13 +111,13 @@
       ]
     },
     {
-      "kind": "ask",
-      "label": "Before your next fix",
-      "title": "Ask: where does it go?",
-      "text": "When something works, follow the problem out the door. Where does it land, who lives there, and who is watching?",
-      "also": [
-        "Save this for your next big fix",
-        "Moved a problem yourself? Tell us. It might win a Murphy."
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "Whether a fix works and who pays for it are separate questions.",
+        "The first warnings came from the people closest to the danger.",
+        "A big success makes a known risk easy to wave away."
       ]
     }
   ],

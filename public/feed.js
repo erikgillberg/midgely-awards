@@ -206,11 +206,15 @@ document.addEventListener("click", async (e) => {
   if (act === "share" || act === "share-link") { btn.closest("details")?.removeAttribute("open"); return shareLink(post); }
   if (act === "share-ig") {
     btn.closest("details")?.removeAttribute("open");
-    const cards = [...post.querySelectorAll(".carousel .cc")];
-    if (!cards.length) return toast("This post has no cards to save yet.");
+    // Instagram gets its own ending: the site's vote card stays here, the "answer in the comments" card goes there.
+    const car = $(".carousel", post);
+    if (!car) return toast("This post has no cards to save yet.");
+    const cards = [...car.querySelectorAll(".cc")].filter((c) => !c.hasAttribute("data-web-only"));
     toast("Making the cards…");
     const { shareCards } = await import("./share.js");
-    return shareCards(cards, $(".pv-who b", post).textContent, location.origin + post.dataset.path);
+    car.classList.add("ig-export");
+    try { return await shareCards(cards, $(".pv-who b", post).textContent, location.origin + post.dataset.path); }
+    finally { car.classList.remove("ig-export"); }
   }
   if (act === "report") {
     btn.closest("details")?.removeAttribute("open");

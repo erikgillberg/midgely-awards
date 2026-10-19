@@ -1,7 +1,7 @@
 // Arrow buttons, dots and keyboard for the square-card carousels. Swiping is plain scroll-snap.
 document.querySelectorAll("[data-carousel]").forEach((root) => {
   const track = root.querySelector(".cc-track");
-  const cards = [...track.children];
+  const cards = [...track.children].filter((c) => !c.hasAttribute("data-ig-only")); // the Instagram-only last card never shows here
   const dots = [...root.querySelectorAll("[data-cc-dot]")];
   const prev = root.querySelector('[data-cc="prev"]');
   const next = root.querySelector('[data-cc="next"]');

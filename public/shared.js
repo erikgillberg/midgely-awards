@@ -296,7 +296,7 @@ export function murphyCarouselHTML(m) {
         <div class="cc-hook-top"><div class="el lg mu-el"><span class="el-num">2</span><span class="el-year"></span><span class="el-sym">Mu</span><span class="el-name">MURPHY</span><span class="el-up"></span><span class="el-down"></span></div><p class="cc-kicker">A Murphy<br>${esc(who)}</p></div>
         <h2 class="cc-headline mid">The fix</h2><p class="cc-dek">${esc(m.fix)}</p><p class="cc-swipe" aria-hidden="true">Swipe <span>→</span></p>${foot(1)}</section>
       <section class="cc no-img" data-sym="Mu"><div class="cc-body"><p class="cc-label"><span>01</span> What went oops</p><h3 class="cc-title">${esc(m.oops)}</h3></div>${foot(2)}</section>
-      <section class="cc cc-payoff"><div class="cc-body"><p class="cc-label">Murphy's law</p><h3 class="cc-title">Anything that can go wrong will go wrong.</h3><p class="cc-cta">Got one? Share yours at <b>${BRAND_DOMAIN}</b></p><p class="cc-follow">Follow the Backfire Awards for a new backfire every week.</p></div>${foot(3)}</section>
+      <section class="cc cc-payoff"><div class="cc-body"><p class="cc-label">Murphy's law</p><h3 class="cc-title">Anything that can go wrong will go wrong.</h3><p class="cc-cta">Got one? Share yours at <b>${BRAND_DOMAIN}</b></p><p class="cc-follow site-follow">Follow the Backfire Awards for a new backfire every week.</p></div>${foot(3)}</section>${IG_ASK}
     </div>
     <div class="cc-nav"><button type="button" data-cc="prev" aria-label="Previous card">←</button><span class="cc-dots"><i data-cc-dot="0"></i><i data-cc-dot="1"></i><i data-cc-dot="2"></i></span><button type="button" data-cc="next" aria-label="Next card">→</button></div>
   </div>`;
@@ -636,6 +636,19 @@ export function keyHTML(n) {
   </div>`;
 }
 
+// Instagram has no vote buttons, so an exported post ends by asking in the comments instead.
+// Hidden on the site; feed.js shows it only while saving cards for Instagram.
+const IG_ASK = `<section class="cc cc-igask" data-ig-only aria-hidden="true">
+    <div class="cc-body">
+      <p class="cc-label">Your verdict</p>
+      <h3 class="cc-title">Worth it?</h3>
+      <p class="cc-igvote"><span>💡 Yes</span><span>🤦 No</span></p>
+      <p class="cc-text">Answer in the comments.</p>
+      <p class="cc-follow">Follow, like and share. Help your fellow humans avoid the lion at the watering hole.</p>
+    </div>
+    <footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>@backfireawards</span></footer>
+  </section>`;
+
 // The carousel: a headline card, the write-up one idea per card, then the payoff and the ask.
 // data comes from /carousels/<slug>.json.
 export function carouselHTML(n, data, flags = {}) {
@@ -670,6 +683,7 @@ export function carouselHTML(n, data, flags = {}) {
     const focus = s.kind === "pattern" && s.focus;
     const ledger = s.kind === "ledger" ? `<div class="cc-lg"><div class="lg-gave"><h4>${esc(s.gainsLabel || "What it gave")}</h4><ul>${(s.gains || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div>
       <div class="lg-cost"><h4>${esc(s.costsLabel || "What it cost")}</h4><ul>${(s.costs || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div></div>` : "";
+    const lessons = s.items && s.items.length ? `<ol class="cc-lessons">${s.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
     const patterns = focus ? `<p class="cc-text">${esc(PATTERNS[pi].text)}</p>${s.why ? `<p class="cc-why">${esc(s.why)}</p>` : ""}
       <ol class="cc-pdots" aria-label="The nine patterns">${PATTERNS.map((p, i) => `<li class="${i === pi ? "on" : ""}" title="${esc(p.name)}">${i + 1}</li>`).join("")}</ol>`
       : s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p, i) => `<li class="${p.key === s.patternKey ? "on" : ""}"><span class="pn">${p.key === s.patternKey ? "→ " : ""}#${i + 1}</span><span><b>${esc(p.name)}</b> ${esc(p.text)}</span></li>`).join("")}</ol>` : "";
@@ -677,27 +691,29 @@ export function carouselHTML(n, data, flags = {}) {
       ${img}
       <div class="cc-body">
         ${s.kind === "pattern"
-          ? `<p class="cc-label cc-eyebrow">${focus ? `Pattern ${pi + 1} of ${PATTERNS.length}` : `Pattern #${pi + 1}`}</p>`
+          ? `<p class="cc-label cc-eyebrow">${focus ? `${s.eyebrow ? esc(s.eyebrow) + " · " : ""}Pattern ${pi + 1} of ${PATTERNS.length}` : `Pattern #${pi + 1}`}</p>`
           : `<p class="cc-label"><span>${String(num).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
-        ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${ledger}${also}${patterns}
+        ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${ledger}${lessons}${also}${patterns}
       </div>
       ${foot(i)}
     </section>`);
   });
   const pct = herdPct(n);
   const band = oopsBand(n.oops);
-  if (n.id === HONOREE) cards.push(`<section class="cc cc-payoff" aria-roledescription="slide" aria-label="${total} of ${total}">
+  if (n.id === HONOREE) cards.push(`<section class="cc cc-award" aria-roledescription="slide" aria-label="${total} of ${total}">
+    <figure class="cc-trophy"><img src="/img/brand/lifetime-midgley.jpg" alt="A bronze figure of Thomas Midgley Jr. under a glass dome. The plaque reads: The Midgley. Contains lead. In case of emergency, do not break glass." loading="lazy"></figure>
     <div class="cc-body">
-      <p class="cc-label">The first Midgley · Lifetime Achievement</p>
-      <h3 class="cc-title">Awarded to Thomas Midgley Jr.</h3>
+      <p class="cc-label">The first Midgley</p>
+      <p class="cc-award-kind">Lifetime Achievement</p>
+      <h3 class="cc-title">Thomas Midgley Jr.</h3>
+      <p class="cc-text">For changing the world twice.</p>
       <p class="cc-cta">Nominate the next one at <b>${BRAND_DOMAIN}</b></p>
-      <p class="cc-follow">Follow the Backfire Awards for a new backfire every week.</p>
     </div>
     ${foot(total)}
   </section>`);
-  else cards.push(`<section class="cc cc-payoff" aria-roledescription="slide" aria-label="${total} of ${total}">
+  else cards.push(`<section class="cc cc-payoff" data-web-only aria-roledescription="slide" aria-label="${total} of ${total}">
     <div class="cc-body">
       <p class="cc-label">The verdict so far</p>
       <div class="cc-scores">
@@ -710,6 +726,7 @@ export function carouselHTML(n, data, flags = {}) {
     </div>
     ${foot(total)}
   </section>`);
+  cards.push(IG_ASK);
   return `<div class="carousel" style="${jewelVars(j)}" data-carousel>
     <div class="cc-track" tabindex="0" aria-label="${esc(n.name)}, ${total} cards">${cards.join("")}</div>
     <div class="cc-nav">

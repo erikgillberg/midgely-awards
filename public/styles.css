@@ -1181,3 +1181,24 @@ body[data-page="shop"] .site-foot b,body[data-page="shop"] .site-foot .oops-mini
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* the swipeable award cards: photo cards keep the award's tint */
 .sq-carousel .sq.sq-award h2{font-size:3.2em}
+
+/* The Midgley's award card: the trophy under glass beside the citation */
+.cc-award{flex-direction:row;background:#111;background:linear-gradient(90deg,#0c0c0c 0%,#141414 45%,var(--deep) 100%)}
+.cc-trophy{margin:0;flex:0 0 46%;height:100%;overflow:hidden}
+.cc-trophy img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+.cc-award .cc-body{flex:1;justify-content:center;padding:6% 6% 14% 5%;gap:.5em}
+.cc-award .cc-label{color:#d9c08a}
+.cc-award-kind{margin:0;font:600 .9em var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#d9c08a;border-top:1px solid rgba(217,192,138,.5);border-bottom:1px solid rgba(217,192,138,.5);padding:.35em 0;align-self:flex-start}
+.cc-award .cc-title{font-size:2.6em}
+.cc-award .cc-cta b{background:#d9c08a;color:#111}
+/* Instagram-only ending: hidden on the site, shown while exporting */
+.cc[data-ig-only]{display:none}
+.ig-export .cc[data-ig-only]{display:flex}
+.cc-igask{background:linear-gradient(160deg,var(--deep) 0%,var(--deep) 55%,var(--base) 100%)}
+.cc-igask .cc-body{flex:1;justify-content:center}
+.cc-igask .cc-title{font-size:4.2em}
+.cc-igvote{margin:.2em 0;display:flex;gap:.6em;font:800 1.6em var(--display);text-transform:uppercase}
+.cc-igvote span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);padding:.25em .6em}
+.cc-lessons{margin:.2em 0 0;padding:0 0 0 1.3em;display:flex;flex-direction:column;gap:.55em;font-size:.98em;line-height:1.4;color:rgba(255,255,255,.92)}
+.cc-lessons li::marker{font:600 .9em var(--mono);color:var(--light)}
+.ig-export .site-follow{display:none} /* the Instagram card asks for the follow */
