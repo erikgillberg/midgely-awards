@@ -1181,6 +1181,46 @@ async function honoreePage(request, env, url, ctx) {
   });
 }
 
+// /shop: the products from the Shopify store (shop.backfireawards.com), read from its public product feed
+// and cached for ten minutes. Buyers pick a size and check out on Shopify. While the store is still
+// password-protected the feed is closed, and the page offers the Weekly Oops instead.
+const SHOP_ORIGIN = "https://shop.backfireawards.com";
+async function shopProducts(ctx) {
+  const cache = caches.default;
+  const key = new Request(SHOP_ORIGIN + "/products.json?limit=50");
+  let res = await cache.match(key);
+  if (!res) {
+    res = await fetch(key, { headers: { accept: "application/json" }, redirect: "manual" }).catch(() => null);
+    if (!res || !res.ok) return [];
+    res = new Response(res.body, res);
+    res.headers.set("cache-control", "public, max-age=600");
+    ctx.waitUntil(cache.put(key, res.clone()));
+  }
+  const data = await res.json().catch(() => ({}));
+  return (data.products || []).filter((x) => x.variants && x.variants.length);
+}
+function shopCardHTML(x) {
+  const prices = x.variants.map((v) => Number(v.price)).filter((n) => n > 0);
+  const min = prices.length ? Math.min(...prices) : null;
+  const money = (n) => "$" + (Number.isInteger(n) ? n : n.toFixed(2));
+  const img = x.images && x.images[0] ? x.images[0].src : "";
+  const sold = !x.variants.some((v) => v.available !== false);
+  const href = `${SHOP_ORIGIN}/products/${encodeURIComponent(x.handle)}?utm_source=site&utm_medium=shop`;
+  return `<a class="shop-card" href="${esc(href)}">
+    ${img ? `<img src="${esc(img)}${img.includes("?") ? "&" : "?"}width=800" alt="${esc(x.title)}" loading="lazy" width="800" height="800">` : ""}
+    <span class="shop-t">${esc(x.title)}</span>
+    <span class="shop-p">${min != null ? (prices.some((n) => n !== min) ? "From " : "") + money(min) : ""}${sold ? " · Sold out" : ""}</span>
+    <span class="shop-go">Choose your size →</span>
+  </a>`;
+}
+async function shopPage(request, env, url, ctx) {
+  const items = await shopProducts(ctx);
+  const grid = items.length
+    ? items.map(shopCardHTML).join("")
+    : `<div class="shop-soon"><h2>Opening soon</h2><p>The first shirts are being printed and checked. Get The Weekly Oops and you'll hear the day the shop opens.</p>${signupHTML("shop")}</div>`;
+  return decorate(await asset(env, url, request, "/shop"), env, url, { canonical: SITE + "/shop", fill: { "#shop-grid": grid } });
+}
+
 // Design lab (staging and local only): the carousel for one nominee, the table and the palette.
 async function labPage(request, env, url, ctx, key) {
   const st = await siteState(env, url, ctx);
@@ -1333,6 +1373,7 @@ export default {
       });
     }
     if (p === "/midgley") return honoreePage(request, env, url, ctx);
+    if (p === "/shop") return shopPage(request, env, url, ctx);
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
     if (p === "/murphy") return decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy", fill: { "#murphy-embed": tallyHTML(LINKS.microFormId, "Share your Murphy") } });
     if (p === "/micro") return Response.redirect(SITE_ORIGIN(url) + "/murphy" + url.search, 301); // old name

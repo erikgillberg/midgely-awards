@@ -1081,3 +1081,19 @@ html[data-look="70s"] #oops{--bg:url(/img/seventies/08-lunar-departure-sq.jpg)!i
 html[data-look="70s"] body[data-bg="fair"]{background:linear-gradient(rgb(37 32 45/.5),rgb(37 32 45/.85)),url(/img/seventies/07-silent-orbit-wide.jpg) center/cover fixed #25202D}
 html[data-look="70s"] .sq-tag{color:#E98946}
 .menu-look a{font-weight:500!important}
+/* ---------- shop */
+.wrap.doc.shop{max-width:880px}
+.shop .lede{font-size:17px;color:var(--ink-2);max-width:60ch}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin-top:8px}
+.shop-card{display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1.5px solid var(--ink);padding:12px;color:var(--ink);text-decoration:none}
+.shop-card img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;background:var(--ground)}
+.shop-t{font:800 22px/1.05 var(--display);text-transform:uppercase}
+.shop-p{font:500 13px var(--mono);color:var(--ink-2)}
+.shop-go{margin-top:4px;align-self:flex-start;background:var(--cta,var(--ethyl));color:var(--cta-ink,#fff);font:600 14px var(--sans);padding:9px 14px}
+.shop-card:hover .shop-go{filter:brightness(1.05)}
+.shop-soon{grid-column:1/-1;background:var(--surface);border:1.5px solid var(--ink);padding:24px}
+.shop-soon h2{margin:0 0 8px;font:900 32px/1 var(--display);text-transform:uppercase}
+.shop-soon p{margin:0 0 14px;max-width:52ch}
+.shop-soon .signup{display:flex;flex-wrap:wrap;gap:8px;max-width:100%}
+.shop-soon .signup input[type=email]{flex:1 1 200px;min-width:0;width:auto}
+body:has(.shop-soon) .site-foot .oops-mini{display:none}
