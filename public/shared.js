@@ -51,7 +51,7 @@ export const LINKS = {
   microForm: "https://tally.so/r/KpQa0D",    // Tally: Share your Murphy (form id kept from its Micro Midgley days)
   waitlistForm: "kbakOe",                    // Tally: Backfire Awards shop waitlist (form id, embedded on /shop/waitlist)
   beehiivForm: "71cdf4c1-b2c8-4913-bb03-cc836734a7b1", // Beehiiv: The Weekly Oops sign-up form
-  socials: [],        // [{ name: "Instagram", url: "https://..." }]
+  socials: [{ name: "Instagram", url: "https://www.instagram.com/backfireawards/" }],
 };
 
 // The Weekly Oops sign-up: our own form. The server keeps the address and passes it on to the newsletter service.
