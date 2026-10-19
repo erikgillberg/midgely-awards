@@ -16,7 +16,7 @@
 // The schema creates and migrates itself on first request (v1 databases upgrade in place).
 
 import {
-  SITE, feedOopsHTML, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
+  SITE, feedOopsHTML, jewelVar, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML, categoricTableHTML, categoricLegendHTML,
   postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath,
@@ -1008,6 +1008,10 @@ class Versioned {
   constructor(attr) { this.attr = attr; }
   element(el) { const v = el.getAttribute(this.attr); if (v && !v.includes("?")) el.setAttribute(this.attr, `${v}?v=${ver()}`); }
 }
+const LOOK_SCRIPT = `<script>(function(){var d=document.documentElement,k="bf.look",l=null,q=new URLSearchParams(location.search).get("look");
+try{if(q==="70s"||q==="classic")localStorage.setItem(k,q);l=localStorage.getItem(k)}catch(e){}
+l=l||d.getAttribute("data-look-default")||"classic";d.setAttribute("data-look",l);
+if(l==="70s"){var f=document.createElement("link");f.rel="stylesheet";f.href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,0..100,0..1&display=swap";document.head.appendChild(f)}})()</script>`;
 class Append {
   constructor(value) { this.value = value; }
   element(el) { el.append(this.value, { html: true }); }
@@ -1026,7 +1030,14 @@ function decorate(res, env, url, meta = {}, status = 0) {
     .on("#waitlist-embed", new SetHTML(waitlistHTML()))
     .on('meta[property="og:image"]', new SetAttr("content", SITE + "/og.png"))
     .on('meta[name="twitter:image"]', new SetAttr("content", SITE + "/og.png"))
-    .on("body", new SetAttr("data-flags", [flags.scores && "scores", flags.categories && "categories"].filter(Boolean).join(" ")));
+    .on("body", new SetAttr("data-flags", [flags.scores && "scores", flags.categories && "categories"].filter(Boolean).join(" ")))
+    // The site "look": classic, or the 1970s palette and type. LOOK_DEFAULT picks it per environment;
+    // ?look=70s or ?look=classic overrides it for this browser (kept in localStorage).
+    .on("html", new SetAttr("data-look-default", env.LOOK_DEFAULT === "70s" ? "70s" : "classic"))
+    .on("head", new Append(LOOK_SCRIPT));
+  if (url.hostname !== SITE_HOST) {
+    rw = rw.on(".menu-in", new Append(`<section class="menu-look"><h2>Look (staging only)</h2><a href="?look=70s">1970s</a><a href="?look=classic">Classic</a></section>`));
+  }
   if (meta.canonical) {
     rw = rw.on('meta[property="og:url"]', new SetAttr("content", meta.canonical))
       .on('link[rel="canonical"]', new SetAttr("href", meta.canonical));
@@ -1134,7 +1145,7 @@ async function nomineePage(request, env, url, ctx, key) {
       "#list": postHTML(n, { flags, thread, open: true, carousel: await carouselFor(request, env, url, n), more: await moreFor(env, n) }),
       "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, n.id),
     },
-    attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelOf(n.domain).deep}`]] },
+    attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelVar(jewelOf(n.domain), "deep")}`]] },
   });
 }
 
@@ -1168,7 +1179,7 @@ async function honoreePage(request, env, url, ctx) {
       "#mg-post": postHTML(n, { flags, thread: st.comments.filter((c) => c.nomineeId === n.id), open: true, carousel: await carouselFor(request, env, url, n), more: await moreFor(env, n) }),
       "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, n.id),
     },
-    attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelOf(n.domain).deep}`]] },
+    attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelVar(jewelOf(n.domain), "deep")}`]] },
   });
 }
 

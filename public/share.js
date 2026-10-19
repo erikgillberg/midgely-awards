@@ -14,9 +14,9 @@ let fontCSS = null;
 async function embedFonts() {
   if (fontCSS !== null) return fontCSS;
   try {
-    const link = document.querySelector('link[href*="fonts.googleapis.com/css"]');
-    if (!link) return (fontCSS = "");
-    let css = await fetch(link.href).then((r) => r.text());
+    const links = [...document.querySelectorAll('link[href*="fonts.googleapis.com/css"]')];
+    if (!links.length) return (fontCSS = "");
+    let css = (await Promise.all(links.map((l) => fetch(l.href).then((r) => r.text())))).join("\n");
     // Keep only the Latin subset ("/* latin */" blocks); the cards are English.
     css = css.split("/* ").filter((b) => b.startsWith("latin */")).map((b) => "/* " + b).join("") || css;
     const urls = [...new Set(css.match(/https:\/\/fonts\.gstatic\.com\/[^)'"]+/g) || [])];
