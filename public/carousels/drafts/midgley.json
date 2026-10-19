@@ -62,10 +62,30 @@
       "text": "The US finished banning leaded gas for cars in 1996. The last country stopped selling it for cars in 2021. A 1987 treaty phased out CFCs, and the ozone hole over Antarctica should recover by about 2066."
     },
     {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Engines that stopped knocking, and more powerful cars and planes",
+        "Fridges that no longer used ammonia or sulfur dioxide, gases that could poison a family",
+        "Cheap cooling for food and medicine"
+      ],
+      "costs": [
+        "824 million IQ points lost by Americans alive in 2015 (PNAS, 2022)",
+        "At least 15 workers killed in the plants that made the lead additive",
+        "A hole in the ozone layer, still healing"
+      ],
+      "text": "Both fixes did real good. Both sent a bill to people who never chose them. You decide if it was worth it: vote at the end.",
+      "gainsLabel": "What they gave",
+      "costsLabel": "What they cost"
+    },
+    {
       "kind": "pattern",
       "label": "Pattern",
       "title": "The problem moves",
-      "patternKey": "moved"
+      "patternKey": "moved",
+      "focus": true,
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
     },
     {
       "kind": "anatomy",

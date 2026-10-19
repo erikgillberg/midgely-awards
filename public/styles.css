@@ -355,6 +355,19 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .cc-ask{background:var(--base)}
 .cc-ask .cc-label span{background:var(--deep)}
 .cc-ask .cc-title{font-size:3.6em}
+.cc-pattern .cc-why ~ .cc-pdots{margin-top:1em}
+.cc-pattern:has(.cc-pdots) .cc-title{font-size:4em}
+.cc-why{margin:.5em 0 0;font-size:1.05em;line-height:1.4;font-weight:600;color:#fff}
+.cc-pdots{display:flex;gap:.35em;margin:.8em 0 0;padding:0;list-style:none}
+.cc-pdots li{width:1.9em;height:1.9em;display:grid;place-items:center;border:1px solid rgba(255,255,255,.4);font:600 .8em var(--mono);color:rgba(255,255,255,.6)}
+.cc-pdots li.on{background:#fff;color:var(--deep);border-color:#fff}
+.cc-lg{display:grid;grid-template-columns:1fr 1fr;gap:.9em;margin-top:.3em}
+.cc-lg h4{margin:0 0 .35em;font:600 .72em var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--light)}
+.cc-lg ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.45em;font-size:.86em;line-height:1.3}
+.cc-lg li{padding-left:1.1em;position:relative}
+.lg-gave li::before{content:"+";position:absolute;left:0;font-weight:700;color:#fff}
+.lg-cost li::before{content:"\2212";position:absolute;left:0;font-weight:700;color:#fff}
+.cc-lg .lg-cost{border-left:1px solid rgba(255,255,255,.3);padding-left:.9em}
 /* payoff */
 .cc-payoff{background:linear-gradient(160deg,var(--deep) 0%,var(--deep) 55%,var(--base) 100%)}
 .cc-payoff .cc-body{flex:1;justify-content:center}

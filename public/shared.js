@@ -665,16 +665,23 @@ export function carouselHTML(n, data, flags = {}) {
     const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
     const chip = s.kind === "foresight" ? foresightHTML(n.knowable) : "";
     const also = s.also && s.also.length ? `<ul class="cc-also">${s.also.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : "";
-    const patterns = s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p, i) => `<li class="${p.key === s.patternKey ? "on" : ""}"><span class="pn">${p.key === s.patternKey ? "→ " : ""}#${i + 1}</span><span><b>${esc(p.name)}</b> ${esc(p.text)}</span></li>`).join("")}</ol>` : "";
+    // A focused pattern card (story carousels): this pattern big, why patterns matter, and the nine as a small row.
+    const pi = PATTERNS.findIndex((p) => p.key === s.patternKey);
+    const focus = s.kind === "pattern" && s.focus;
+    const ledger = s.kind === "ledger" ? `<div class="cc-lg"><div class="lg-gave"><h4>${esc(s.gainsLabel || "What it gave")}</h4><ul>${(s.gains || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div>
+      <div class="lg-cost"><h4>${esc(s.costsLabel || "What it cost")}</h4><ul>${(s.costs || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div></div>` : "";
+    const patterns = focus ? `<p class="cc-text">${esc(PATTERNS[pi].text)}</p>${s.why ? `<p class="cc-why">${esc(s.why)}</p>` : ""}
+      <ol class="cc-pdots" aria-label="The nine patterns">${PATTERNS.map((p, i) => `<li class="${i === pi ? "on" : ""}" title="${esc(p.name)}">${i + 1}</li>`).join("")}</ol>`
+      : s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p, i) => `<li class="${p.key === s.patternKey ? "on" : ""}"><span class="pn">${p.key === s.patternKey ? "→ " : ""}#${i + 1}</span><span><b>${esc(p.name)}</b> ${esc(p.text)}</span></li>`).join("")}</ol>` : "";
     cards.push(`<section class="cc cc-${esc(s.kind)} ${img ? "has-img" : "no-img"}" data-sym="${esc(symbol(n.name))}" aria-roledescription="slide" aria-label="${i} of ${total}">
       ${img}
       <div class="cc-body">
         ${s.kind === "pattern"
-          ? `<p class="cc-label cc-eyebrow">Pattern #${PATTERNS.findIndex((p) => p.key === s.patternKey) + 1}</p>`
+          ? `<p class="cc-label cc-eyebrow">${focus ? `Pattern ${pi + 1} of ${PATTERNS.length}` : `Pattern #${pi + 1}`}</p>`
           : `<p class="cc-label"><span>${String(num).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
-        ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${also}${patterns}
+        ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${ledger}${also}${patterns}
       </div>
       ${foot(i)}
     </section>`);
