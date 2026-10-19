@@ -170,7 +170,7 @@
       {
         "name": "Harvest gold energy",
         "hex": "#8e6410",
-        "night": "#b7801a",
+        "night": "#8e6410",
         "token": "--jw-citrine-b",
         "use": "Group 3, Energy and Climate. Deep #3a2a08, light #f5dda0."
       },
@@ -191,7 +191,7 @@
       {
         "name": "Turquoise governance",
         "hex": "#36726f",
-        "night": "#3f8380",
+        "night": "#36726f",
         "token": "--jw-tourmaline-b",
         "use": "Group 6, Policy and Incentives. Deep #0f2e2d, light #bfe0dd."
       },

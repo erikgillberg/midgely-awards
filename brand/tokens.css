@@ -38,13 +38,13 @@
   --data-petrol-cities: #1f6680;
   --data-petrol-cities-night: #1f6680;
   --data-harvest-gold-energy: #8e6410;
-  --data-harvest-gold-energy-night: #b7801a;
+  --data-harvest-gold-energy-night: #8e6410;
   --data-avocado-food: #6c7630;
   --data-avocado-food-night: #6c7630;
   --data-plum-information: #7a4a7e;
   --data-plum-information-night: #7a4a7e;
   --data-turquoise-governance: #36726f;
-  --data-turquoise-governance-night: #3f8380;
+  --data-turquoise-governance-night: #36726f;
   --data-saddle-brown-finance: #8a5a34;
   --data-saddle-brown-finance-night: #8a5a34;
   --data-muted-rose-health: #a35e6b;
@@ -75,10 +75,10 @@
     --data-amber-soft: #3a2e14;
     --data-rust-materials: #ad4935;
     --data-petrol-cities: #1f6680;
-    --data-harvest-gold-energy: #b7801a;
+    --data-harvest-gold-energy: #8e6410;
     --data-avocado-food: #6c7630;
     --data-plum-information: #7a4a7e;
-    --data-turquoise-governance: #3f8380;
+    --data-turquoise-governance: #36726f;
     --data-saddle-brown-finance: #8a5a34;
     --data-muted-rose-health: #a35e6b;
     --secondary: #7fc1bc;
