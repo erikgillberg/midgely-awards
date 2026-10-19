@@ -1199,10 +1199,10 @@ async function shopProducts(ctx) {
   const data = await res.json().catch(() => ({}));
   return (data.products || []).filter((x) => x.variants && x.variants.length);
 }
-// Artwork shown big on /shop, keyed by the Shopify product handle. Rendered on the shirt color, so people
+// Artwork shown big on /shop, keyed by part of the Shopify product handle. Rendered on the shirt color, so people
 // can see what is printed without leaving the site. Products without an entry show the Shopify photo only.
 const SHOP_ART = {
-  "bright-idea-tee-charcoal-black": [
+  "bright-idea": [
     { src: "/img/shop/bright-idea-front.jpg", alt: "Front print: a retro light bulb holding the Earth, cracking open in fire over a burning city skyline, with the Backfire Awards wordmark", label: "Front" },
     { src: "/img/shop/bf-badge-back.jpg", alt: "Back print: the Bf element badge reading backfireawards.com", label: "Back, below the collar" },
   ],
@@ -1218,8 +1218,10 @@ function shopCardHTML(x) {
   const sizes = ((x.options || []).find((o) => /size/i.test(o.name)) || {}).values || [];
   // Our copy leads the description; Printful's fabric notes follow. Keep the first four sentences at most.
   const first = stripTags(x.body_html).split("\n").map((t) => t.trim()).filter(Boolean)[0] || "";
-  const intro = (first.match(/[^.!?]+[.!?]+/g) || [first]).slice(0, 4).join("").trim();
-  const art = SHOP_ART[x.handle] || [];
+  const ours = first.split(/\s+(?=The tri-blend|The fabric|This t-shirt is|This tee is|•)/)[0];
+  const intro = (ours.match(/[^.!?]+[.!?]+/g) || [ours]).slice(0, 4).join("").trim();
+  // Matched on part of the handle, so renaming the product in Shopify doesn't lose its artwork.
+  const art = Object.entries(SHOP_ART).find(([k]) => x.handle.includes(k))?.[1] || [];
   const views = art.length
     ? art.map((a, i) => `<figure class="${i ? "art-side" : "art-main"}"><img src="${esc(a.src)}" alt="${esc(a.alt)}" width="1200" height="1200" ${i ? 'loading="lazy"' : ""}><figcaption>${esc(a.label)}</figcaption></figure>`).join("")
       + (photo ? `<figure class="art-side photo"><img src="${esc(photo)}${photo.includes("?") ? "&" : "?"}width=800" alt="${esc(x.title)} as printed" width="800" height="800" loading="lazy"><figcaption>On the shirt</figcaption></figure>` : "")
