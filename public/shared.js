@@ -677,7 +677,7 @@ export function carouselHTML(n, data, flags = {}) {
     if (s.kind !== "pattern") num++;
     const img = s.image ? `<figure class="cc-img"><img src="${esc(s.image)}" alt="${esc(s.alt || "")}" loading="lazy"><figcaption>${esc(s.credit || "")}</figcaption></figure>` : "";
     const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
-    const chip = s.kind === "foresight" ? foresightHTML(n.knowable) : "";
+    const chip = s.kind === "foresight" ? foresightHTML(s.knowable || n.knowable) : ""; // a story may correct the rating
     const also = s.also && s.also.length ? `<ul class="cc-also">${s.also.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : "";
     // A focused pattern card (story carousels): this pattern big, why patterns matter, and the nine as a small row.
     const pi = PATTERNS.findIndex((p) => p.key === s.patternKey);

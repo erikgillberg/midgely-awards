@@ -1,0 +1,102 @@
+{
+  "slug": "borlaug",
+  "keyCard": false,
+  "headline": "Bigger harvests, emptier aquifers",
+  "dek": "Norman Borlaug's short wheat gave India a record harvest in 1968. By 2010, the farming boom that followed drew Punjab's groundwater 45 percent faster than rain refilled it.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Grow more on the same land",
+      "text": "Around 1960, West Pakistan grew about a ton of wheat per hectare and fell short of its needs every year. Feeding the wheat more fertilizer was no answer: past a point, the tall plants snapped."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Short wheat, big harvests",
+      "text": "Borlaug's team in Mexico bred dwarf wheat that could take two or three times the fertilizer and lifted top yields by more than 70 percent. Mexico grew all its own wheat by 1956. Pakistan and India took up the seed in the 1960s."
+    },
+    {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "Rumors, then a stamp",
+      "text": "In Pakistan, the new seed first had to get past rumors that it would cause sterility. In India, the 1968 harvest was the biggest in the country's history and got its own postage stamp: \"The Indian Wheat Revolution 1968.\""
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Wells that keep getting deeper",
+      "stat": "109 km³",
+      "statLabel": "of groundwater lost in three northwest Indian states, 2002 to 2008, likely from irrigation and other human use",
+      "text": "The new seeds paid off when fed water and fertilizer. Punjab moved to nearly 80 percent rice and wheat, two thirsty crops, watered from wells. Farmers who once pumped from 5 to 10 feet down now drill 200 to 300 feet.",
+      "also": [
+        "Source: Rodell, Velicogna and Famiglietti, Nature, 2009"
+      ]
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "In 1970 Borlaug called the Green Revolution \"a temporary success\" that bought \"a breathing space,\" though his worry was population, not water. Punjab's water table was falling 18 cm a year by the mid-1980s, and about a meter a year by 2010."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Cereal harvests in the developing world tripled in 50 years, on 30 percent more land (PNAS, 2012)",
+        "India's record wheat crop of 17 million tons in 1968 (Nobel Committee)",
+        "Mexico self-supporting in wheat by 1956 (Nobel Committee)"
+      ],
+      "costs": [
+        "109 cubic kilometers of groundwater lost in northwest India, 2002 to 2008 (Nature, 2009)",
+        "Punjab pumping 45 percent more groundwater each year than rain puts back (Columbia Water Center, 2010)",
+        "Water use, soil damage and chemical runoff beyond the fields (PNAS, 2012)"
+      ],
+      "text": "The harvests ended chronic food shortages across much of the developing world and spared land from the plow. The water bill is still arriving. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe him one",
+      "text": "Borlaug took on hunger at the scale of whole nations, and the harvests came. A later review found the damage came less from the seeds than from policies that made water and fertilizer cheap to overuse. Fixing that is still unfinished work."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Cheap now, paid later",
+      "patternKey": "later",
+      "focus": true,
+      "eyebrow": "What's the pattern?",
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Water that felt free",
+      "text": "Punjab charged farmers a flat fee for the electricity that runs their pumps, so pumping more cost nothing extra. Guaranteed prices kept rice and wheat in the ground. The harvest pays every season. The aquifer bill comes due over decades."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Ship now, fix later",
+      "text": "A team hits every deadline by skipping tests and notes. For a year, output looks great. Then every change breaks something, and new features take twice as long. The speed was borrowed, and the loan came due.",
+      "also": [
+        "Putting off a roof repair until the ceiling stains",
+        "Skipping sleep to finish one big week"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "A harvest shows up every season. A falling water table shows up slowly, a meter at a time.",
+        "When a resource costs a flat fee, nobody has a reason to use less of it.",
+        "The people who make a tool and the people who set the prices around it share the outcome."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "slug": "muller",
+  "keyCard": false,
+  "headline": "The bug killer that wouldn't leave",
+  "dek": "Paul Müller's DDT, patented in 1940, killed the insects that spread typhus and malaria. It lasted so long in nature that eagles laid eggs with weakened shells.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Kill the bugs that kill us",
+      "text": "Lice spread typhus. Mosquitoes spread malaria. The best insect killer of the day came from pyrethrum flowers, and it had to be sprayed on walls every week. In World War II, supplies ran short."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "A powder that stopped typhus",
+      "text": "In 1935 Müller, a chemist at J. R. Geigy in Basel, began hunting for a new insecticide. In 1939 he found that DDT, a compound first made in 1874, killed insects on contact. In Naples in early 1944, DDT was among the powders used to dust 50,000 people a day."
+    },
+    {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "Its best feature: it lasted",
+      "text": "Sprayed on a wall, DDT kept killing mosquitoes for six months or more, where pyrethrum lasted a week. Crews could cover whole rural regions, and wiping out malaria began to look possible. A world campaign started in 1955."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Thin shells",
+      "stat": "417",
+      "statLabel": "bald eagle nesting pairs left in the lower 48 states in 1963",
+      "text": "Outdoors, lasting meant lingering. DDT built up in fatty tissue. In the US, three declining birds of prey, bald eagles among them, laid eggs with shells 19 percent or more thinner, and in Britain more falcon eggs broke in the nest.",
+      "also": [
+        "Mosquitoes in Greece were resistant to DDT by 1951",
+        "Source: US Fish and Wildlife Service, 2007"
+      ]
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "Lasting was DDT's selling point. In 1946 US wildlife biologists published a study of its effects on fish and wildlife, and resistant houseflies were reported in 1947. The thinning eggshells were only measured in 1967 and 1968, after Müller died.",
+      "knowable": "mixed"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Banned, with one exception",
+      "text": "The US canceled DDT in 1972. A global treaty in force since 2004 bans it except to fight malaria mosquitoes. Bald eagles climbed back to 9,789 nesting pairs and came off the federal threatened and endangered list in 2007. Residues from old use remain."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Over 50,000 people a day dusted against typhus lice in Naples by January 1944, DDT among the powders (US National Library of Medicine)",
+        "Malaria spraying once or twice a year instead of every week",
+        "Italy declared free of malaria in 1970, after DDT spraying began in 1947"
+      ],
+      "costs": [
+        "Bald eagles down to 417 nesting pairs in the lower 48 states in 1963 (US Fish and Wildlife Service)",
+        "Eggshells 19 percent or more thinner in three declining US birds of prey (Science, 1968)",
+        "Residues still in the environment decades after the US ban"
+      ],
+      "text": "DDT saved people from two of the oldest killers there are. The bill went to birds, rivers and the food chain. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe him one",
+      "text": "Müller went after insects that spread typhus and malaria when the best tools were running short, and won the 1948 Nobel Prize for it. Chemicals are now screened for how long they last and how they build up in animals, the traits that made DDT a problem."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Too stable to go away",
+      "patternKey": "stable",
+      "focus": true,
+      "eyebrow": "What's the pattern?",
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Built to last, still running",
+      "text": "You give a contractor access that never expires, so nobody gets locked out mid-project. The project ends in March. Three years later the access still works, and nobody remembers it is there.",
+      "also": [
+        "A weekly meeting that outlives its project",
+        "A temporary workaround still in the code years later"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "The quality that made DDT work was the same one that made it a problem.",
+        "Benefits showed up in weeks. The slow harm took decades to measure.",
+        "Banning a tool for most uses and keeping it for its best one can both be sound decisions."
+      ]
+    }
+  ]
+}

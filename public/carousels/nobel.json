@@ -1,0 +1,100 @@
+{
+  "slug": "nobel",
+  "keyCard": false,
+  "headline": "Safe enough to carry anywhere",
+  "dek": "Alfred Nobel patented dynamite in 1867 to make nitroglycerin safe to handle. Safe to handle also meant easy to carry, for miners and for bombers.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Tame the oil",
+      "text": "Nitroglycerin was a powerful blasting oil, and it went off in transit and in storage. In 1864 an explosion at Nobel's factory in Stockholm killed five people, including his younger brother Emil. The city banned the experiments."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Dynamite",
+      "text": "Nobel soaked nitroglycerin into a porous earth called kieselguhr and patented it in 1867 as dynamite. Even soaked through, it was quite safe to handle. His Krümmel plant made 11 tons that year and 3,150 tons in 1874."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Easy to carry, for anyone",
+      "text": "A stable explosive can be carried into a city and left behind. From 1881 to 1885 Irish republican bombers waged a dynamite campaign in Britain. In January 1885 bombs went off in the House of Commons, Westminster Hall and the Tower of London.",
+      "also": [
+        "Source: Niall Whelehan, The Dynamiters, Cambridge University Press"
+      ]
+    },
+    {
+      "kind": "encore",
+      "label": "Then he did it again",
+      "title": "Powder for armies",
+      "text": "In 1887 Nobel patented ballistite, a nearly smokeless powder well suited to firing military projectiles, and Italy's military adopted it. In 1894 he bought the Bofors ironworks in Sweden, which became the basis of the Bofors arms company."
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Yes, in his lifetime",
+      "text": "Armies used dynamite in the Franco-Prussian War of 1870 to 1871, four years after the patent. Bombers used it in Britain from 1881, and in 1887 Nobel patented a powder for armies himself. The uses for war and terror were plain in his lifetime."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "One plant's dynamite output: 11 tons in 1867, 3,150 tons in 1874 (Nobel Foundation)",
+        "Lucerne to Milan by rail in about 5.5 hours instead of 27, once the Gotthard tunnel opened in 1882",
+        "A much lower risk of accidental explosion than liquid nitroglycerin"
+      ],
+      "costs": [
+        "A bombing campaign in Britain, 1881 to 1885, aimed at Parliament and the Tower of London",
+        "A smokeless military powder, ballistite, adopted by Italy's army",
+        "Weapons for both sides of the Franco-Prussian War, 1870 to 1871, within four years of the patent"
+      ],
+      "text": "Dynamite built tunnels, mines and roads. It also put a portable bomb within reach of anyone who could buy it. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe him one",
+      "text": "Nobel took on a deadly problem: a blasting oil that exploded in factories, in storage and in transit. He made it safe to handle. In 1895 his will left most of his fortune to prizes for those who confer the greatest benefit on mankind."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The problem moves",
+      "patternKey": "moved",
+      "focus": true,
+      "eyebrow": "What's the pattern?",
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "From accident to intent",
+      "text": "The danger of nitroglycerin was that it went off when nobody meant it to. Dynamite fixed that. The same stability made it easy to carry, hide and set off on purpose. The risk moved from the factory floor to whoever held the stick."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Your fixes move risk too",
+      "text": "Analysts kept breaking the fragile scripts that pulled customer data, so you build a one-click export. The broken scripts stop. Now anyone can put the whole customer list on a laptop. The risk didn't go away. It moved.",
+      "also": [
+        "A spare key under the mat, so nobody gets locked out",
+        "A shared password that ends the access requests"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "Making something safe to handle also makes it easy to use, by anyone.",
+        "A fix aimed at accidents does nothing about intent.",
+        "The people who use an invention decide much of what it does."
+      ]
+    }
+  ]
+}

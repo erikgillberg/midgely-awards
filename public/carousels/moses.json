@@ -1,0 +1,102 @@
+{
+  "slug": "moses",
+  "keyCard": false,
+  "headline": "The roads that filled themselves",
+  "dek": "Robert Moses built New York's parks, parkways and expressways. His roads kept filling with traffic, and his biographer counts 250,000 people displaced for his highways alone.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Parks and a way to reach them",
+      "text": "New York needed parks, and its streets were jammed. A 1930 plan from a parks group Robert Moses chaired called for buying thousands of acres of the city's last natural land, plus a system of parkways to solve the traffic."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Beaches, pools, playgrounds",
+      "text": "Jones Beach opened in 1929, and 350,000 people came in the first month. As city parks commissioner from 1934 to 1960, Moses took New York from 119 playgrounds to 777 and opened 11 huge outdoor pools in the summer of 1936."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "More road, more cars",
+      "stat": "250,000",
+      "statLabel": "people displaced for his highways alone, by biographer Robert Caro's count",
+      "text": "Caro found that the more highways were built to relieve congestion, the more cars poured in to fill them. Expressways like the Cross Bronx, built 1948 to 1972, cut through working-class neighborhoods.",
+      "also": [
+        "Source: Robert Caro, The Power Broker, 1974"
+      ]
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Yes, and people said so",
+      "text": "In 1930 a transit executive told a St. Louis commission that widening streets simply produces more traffic. Caro documents Moses's own new parkways jamming soon after they opened, and Moses proposing about 200 more miles of road by 1942."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Studying the damage",
+      "text": "In 2022 the federal government gave New York City $2 million to study how to ease the Cross Bronx's harm to nearby neighborhoods. In 2024 it added $150 million for a connector road with bus lanes and bike and walking paths, which critics call a highway expansion."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Playgrounds up from 119 to 777 in his 26 years as parks commissioner",
+        "City park land up from 14,000 to 34,673 acres",
+        "13 bridges and 416 miles of parkway, by one count"
+      ],
+      "costs": [
+        "250,000 people displaced for his highways alone, by Robert Caro's count",
+        "Parkways that jammed soon after opening, as Caro documents",
+        "Bronx neighborhoods exposed to the Cross Bronx's noise and air pollution, officials say"
+      ],
+      "text": "He gave a crowded city beaches, pools and parks. His roads moved cars well until more cars came, and some neighborhoods paid with their homes. You decide if it was worth it.",
+      "gainsLabel": "What he gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe him one",
+      "text": "Moses took on real problems: a city that needed parks and streets choked with traffic. Jones Beach is still a state park. His roads also became a textbook case of what planners now call induced demand."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Great for one, bad for all",
+      "patternKey": "everyone",
+      "focus": true,
+      "eyebrow": "What's the pattern?",
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Faster for one, slower for all",
+      "text": "A new road makes the trip faster for each driver, so more people choose to drive, until it is slow again. A study of US cities found driving grows in step with highway miles and concluded more roads are unlikely to relieve congestion."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "You stand up too",
+      "text": "At a concert, one person stands up to see better. It works, so the people behind them stand. Soon everyone is standing, nobody sees better than before, and everyone's feet hurt.",
+      "also": [
+        "Leaving early to beat traffic, along with everyone else",
+        "Marking every request urgent"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "Making something easier tends to bring more of it.",
+        "Traffic is thousands of separate choices, and it responds to what gets built.",
+        "The people who pay for a road are often not the people who drive on it."
+      ]
+    }
+  ]
+}

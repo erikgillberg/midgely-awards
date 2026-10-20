@@ -1,56 +1,114 @@
 {
   "slug": "haber",
+  "keyCard": false,
   "headline": "Bread from air",
-  "dek": "In 1909 a chemist pulled nitrogen out of the sky and turned it into fertilizer. It worked. Then it kept working.",
+  "dek": "In 1909 a chemist found how to turn the nitrogen in air into fertilizer. One estimate says it feeds about half the world. What crops don't take up runs into rivers and the sea.",
   "slides": [
     {
       "kind": "meant",
-      "label": "What it was meant to do",
-      "title": "Fix a coming food shortage",
-      "text": "Crops need nitrogen. Around 1900 most fertilizer nitrogen came from bird droppings dug off islands near Peru and from saltpeter mined in Chile. Both were running out. In 1898 the chemist William Crookes warned that the world would soon not grow enough wheat.",
+      "label": "The bright idea",
+      "title": "Feed a hungry world",
+      "text": "Crops need nitrogen. Around 1900 most fertilizer nitrogen came from bird droppings dug off islands near Peru and from saltpeter mined in Chile. In 1898 the chemist William Crookes warned that the world would soon not grow enough wheat.",
       "image": "/img/n/haber/guano.jpg",
       "alt": "Workers loading guano into a rail cart at the foot of a huge pale heap, Chincha Islands, Peru, 1865",
       "credit": "Guano mining, Chincha Islands, Peru, 1865. Henry de Witt Moulton. Public domain."
     },
     {
       "kind": "right",
-      "label": "What went right",
-      "title": "Half the world eats because of it",
-      "text": "Fritz Haber found a way to make ammonia from the nitrogen in air. Carl Bosch scaled it up, and the first plant opened in 1913. Roughly half the people alive today eat food grown with it.",
+      "label": "It worked",
+      "title": "Ammonia out of thin air",
+      "text": "In July 1909 Fritz Haber made ammonia from the nitrogen in air. Carl Bosch scaled it up at BASF, and the first plant started in September 1913. One estimate finds about half the world's people are fed by it.",
       "image": "/img/n/haber/wheat.jpg",
       "alt": "A combine harvesting a vast golden wheat field on rolling hills",
       "credit": "Wheat harvest on the Palouse. USDA. Public domain."
     },
     {
-      "kind": "oops",
-      "label": "What went oops",
-      "title": "The extra nitrogen goes somewhere",
-      "text": "Crops take up only part of it. The rest washes into rivers and the sea, feeds algae and uses up the oxygen. Each summer the Gulf of Mexico grows a dead zone thousands of square miles wide.",
-      "image": "/img/n/haber/gulf.jpg",
-      "alt": "Satellite view of brown and green water spreading from the Louisiana coast into the deep blue Gulf of Mexico",
-      "credit": "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain.",
-      "also": [
-        "Nitrous oxide, a strong greenhouse gas",
-        "Explosives for World War I"
-      ]
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "Same ammonia, other use",
+      "text": "In World War I a blockade cut Germany off from Chilean saltpeter. Ammonia from the new plants was turned into nitric acid and then into explosives, including TNT and nitroglycerin."
     },
     {
-      "kind": "gotright",
-      "label": "What they got right",
-      "title": "The chemistry still holds",
-      "text": "More than a century later the world still makes ammonia the way Haber and Bosch did. The fixes being tried now leave the process alone and use less of it: fertilizer applied at the right time, in the right amount, in the right place."
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "The extra goes somewhere",
+      "stat": "100 to 17",
+      "statLabel": "Million tonnes of factory nitrogen on farms in 2005, and 17 in all food eaten, one study found",
+      "text": "Crops take up only part of the nitrogen. The rest washes into rivers and the sea, feeds algae and uses up the oxygen. Each summer the Gulf of Mexico gets a dead zone, mostly from farm runoff.",
+      "image": "/img/n/haber/gulf.jpg",
+      "alt": "Satellite view of brown and green water spreading from the Louisiana coast into the deep blue Gulf of Mexico",
+      "credit": "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain."
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Partly",
-      "text": "The use in explosives was obvious by 1914. The damage to rivers, coasts and the climate was understood much later, once fertilizer use had grown many times over."
+      "text": "The use in explosives was plain by World War I. The damage to rivers, coasts and the climate came into view much later, once fertilizer use had grown many times over. A 2008 review says Haber could not have foreseen it."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Still unfolding",
+      "text": "The process itself has barely changed since 1913. The Gulf dead zone measured 4,402 square miles in 2025. Its five-year average is more than twice the size of the target set for 2035."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Food for 48% of the world's people in 2008, one estimate finds (Nature Geoscience, 2008)",
+        "People fed per hectare of farmland: 1.9 in 1908, 4.3 in 2008 (same study)",
+        "An end to depending on mined bird droppings and saltpeter"
+      ],
+      "costs": [
+        "Nitric acid for German explosives in World War I, after the blockade cut off Chilean saltpeter (Nature Geoscience, 2008)",
+        "A Gulf of Mexico dead zone of 4,402 square miles, summer 2025 (NOAA)",
+        "Farming: 74% of human-made nitrous oxide, a greenhouse gas, in the 2010s (Global Carbon Project)"
+      ],
+      "text": "It feeds billions. It also sends nitrogen where nobody wants it. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "Credit where due",
+      "text": "Haber took on a real problem, a world short of the nitrogen its farms needed, and solved it. It won him the 1918 Nobel Prize. This award is for the ammonia. In 1915 he also directed Germany's first chlorine gas attack, at Ypres, a separate decision."
     },
     {
       "kind": "pattern",
       "label": "Pattern",
       "title": "Solve a shortage, create a surplus",
-      "patternKey": "surplus"
+      "patternKey": "surplus",
+      "focus": true,
+      "eyebrow": "What's the pattern?",
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Cheap makes plenty",
+      "text": "Once nitrogen was cheap to make, farms could apply more than the crop would take up. The shortage ended at the factory gate. The surplus ended up in rivers, the sea and the air."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Your fixes overflow too",
+      "text": "New hires kept waiting days for laptops, so you set up a standing order. Nobody waits now. Two years later a closet of unopened laptops is aging out of warranty. The shortage is gone, and the extra had to go somewhere.",
+      "also": [
+        "An auto-refill that fills the pantry with expired cans",
+        "A hiring push that leaves a team with more people than work"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "A fix for too little can quietly become a source of too much.",
+        "When something gets cheap, people use more of it than they need.",
+        "The same breakthrough can feed people and arm a war at the same time."
+      ]
     }
   ],
   "portrait": {

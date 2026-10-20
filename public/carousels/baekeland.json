@@ -1,0 +1,107 @@
+{
+  "slug": "baekeland",
+  "keyCard": false,
+  "headline": "The plastic built never to melt",
+  "dek": "In 1907 Leo Baekeland invented Bakelite, the first fully synthetic plastic. One study estimates 79% of all plastic waste made by 2015 sits in landfills or nature.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Bugs can't keep up",
+      "text": "The United States was wiring itself for electricity, and a common natural insulator was shellac, made by lac insects in Asia. Supply was limited. Leo Baekeland, a chemist, set out to make a substitute in the lab."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Heat, pressure, Bakelite",
+      "text": "In 1907 he combined phenol and formaldehyde under controlled heat and pressure and got Bakelite, the first fully synthetic plastic. He announced it in 1909. It soon went into car parts, radios and telephones."
+    },
+    {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "Heat can't touch it",
+      "text": "Once Bakelite set, heat could not melt it and solvents could not dissolve it. That was the selling point: a part that resisted heat and carried no current would keep its shape for good."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Made to last, so it does",
+      "stat": "79%",
+      "statLabel": "of the 6.3 billion metric tons of plastic waste made by 2015 sat in landfills or the environment, one study estimates",
+      "text": "Bakelite was first. Most of the plastics that came after it don't biodegrade in any meaningful sense, one of that study's authors says. A 2022 study found plastic particles in the blood of 17 of 22 donors.",
+      "also": [
+        "Source: Geyer, Jambeck and Law, Science Advances, 2017"
+      ]
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Not in his lifetime",
+      "text": "In 1950, six years after Baekeland died, the world made about 2 million metric tons of plastic a year. Plastic in the ocean was first noticed in the 1960s, and scientists named microplastics in 2004. Nothing in 1907 pointed here."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Still negotiating",
+      "text": "In 2022, 175 nations agreed at the UN to write a binding treaty to end plastic pollution, aiming for a draft by the end of 2024. Talks in 2024 and again in 2025 ended without a deal. In 2026 negotiators chose a new chair to try again."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Insulation for a country going electric, without waiting on lac insects",
+        "Molded parts for cars, radios and telephones, made quickly and cheaply",
+        "A material the world was making at about 400 million metric tons a year by 2015"
+      ],
+      "costs": [
+        "79% of 6.3 billion metric tons of plastic waste in landfills or the environment by 2015 (Science Advances, 2017)",
+        "Plastic particles in the blood of 17 of 22 donors in one 2022 study",
+        "A treaty to end plastic pollution, still unwritten after four years of talks"
+      ],
+      "text": "Bakelite solved a real shortage. The bill for the age it opened came due long after its inventor died. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe him one",
+      "text": "Baekeland went after a real supply problem in a country running on new electricity, and solved it with chemistry. The waste came from scale and decades he never saw. Asking where a material goes after its job is a question his age taught us."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Too stable to go away",
+      "patternKey": "stable",
+      "focus": true,
+      "eyebrow": "What's the pattern?",
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "The feature is the flaw",
+      "text": "Bakelite was prized because it would not break down. Much of what came after shares that toughness. The quality that keeps a part working in a radio for decades keeps a bottle cap intact on a beach for decades."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "You build things to last too",
+      "text": "You glue a shelf to the wall instead of screwing it in, so it never wobbles. It never does. Then you move out, and the shelf won't come off without taking the wall with it.",
+      "also": [
+        "Permanent marker on the shared whiteboard",
+        "A temporary workaround still running five years later"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "How long a thing lasts and how long it stays useful are different numbers.",
+        "A harm can wait for scale: one factory's output looks nothing like a planet's."
+      ]
+    }
+  ]
+}

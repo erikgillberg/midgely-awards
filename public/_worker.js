@@ -22,7 +22,7 @@ import {
   postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath,
 } from "./shared.js";
 
-const SCHEMA_VERSION = 12;
+const SCHEMA_VERSION = 13;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Old and spare domains: each forwards to the same page on backfireawards.com, so shared links keep working.
@@ -245,6 +245,21 @@ const SEED_MEDIA = [
     credit: "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain.", edits: "Resized", retrieved: "2026-10-17" },
 ];
 
+// [nominee id, column, corrected value]. Columns are fixed names, never user input.
+const RECORD_FIXES = [
+  ["nobel", "backfire", "Armies used it within four years, in the Franco-Prussian War, and bombers made it a weapon of terror, as in the Fenian campaign in Britain, 1881 to 1885. In war it was soon overtaken by smokeless powders, including Nobel's own ballistite, and by TNT."],
+  ["haber", "backfire", "Explosives for Germany in World War I, fertilizer runoff, nitrous oxide emissions and a disrupted global nitrogen cycle."],
+  ["magie", "knowable", "mixed"],
+  ["magie", "foresight", "Partly. Her own rules made getting rich the way to win, and players were changing the rules for decades before 1935. A mass-market version that dropped the argument was harder to see."],
+  ["muller", "knowable", "mixed"],
+  ["franz", "years", "1929 to 2026"],
+  ["berners-lee", "knowable", "mixed"],
+  ["c259c539-a00a-493f-b83b-7ebe3b3b52c7", "work", "Use zoning (New York's 1916 Zoning Resolution)"],
+  ["c259c539-a00a-493f-b83b-7ebe3b3b52c7", "status", "unfolding"],
+  ["c259c539-a00a-493f-b83b-7ebe3b3b52c7", "harms", "social,economic"],
+  ["c259c539-a00a-493f-b83b-7ebe3b3b52c7", "backfire", "As zoning spread, later codes went further than New York's, barring apartments from whole districts and keeping homes, jobs and shops apart. The results include car dependence and a housing shortage that is now hard to legislate away."],
+];
+
 // Further reading: [id, nominee, sort, title, author, year, publisher, url, kind]
 const SEED_READINGS = [
   ["midgley-r1", "midgley", 1, "Half of US population exposed to adverse lead levels in early childhood", "Michael J. McFarland, Matt E. Hauer and Aaron Reuben", "2022", "PNAS", "https://doi.org/10.1073/pnas.2118631119", "Paper"],
@@ -347,6 +362,10 @@ async function migrate(db) {
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('seeded','1')"));
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)));
   await db.batch(stmts);
+  // v13: corrections to nominee records found while writing the story carousels (sources in docs/story-sources).
+  if (ver < 13 && RECORD_FIXES.length) {
+    await db.batch(RECORD_FIXES.map(([id, field, value]) => db.prepare(`UPDATE nominees SET ${field} = ? WHERE id = ?`).bind(value, id)));
+  }
   await db.prepare("CREATE UNIQUE INDEX IF NOT EXISTS nominees_slug ON nominees (slug)").run();
   // v5: catalog numbers, given once in the order nominees joined (Midgley is No. 1) and never reused.
   const noNum = await db.prepare("SELECT id FROM nominees WHERE catalog_no IS NULL ORDER BY created_at").all();
@@ -1446,20 +1465,20 @@ async function labPage(request, env, url, ctx, key) {
 }
 
 // Hand-written carousels live in /carousels/<slug>.json; every other nominee gets one built from its write-up.
-const HANDWRITTEN = new Set(["haber", "midgley"]);
+// A nominee uses its written story at /carousels/<slug>.json when one exists, otherwise the automatic cards.
+// Misses are cached too, so each slug is looked up once per worker.
 const carouselCache = new Map();
+const jsonOrNull = (r) => (r.ok && (r.headers.get("content-type") || "").includes("json") ? r.json() : null);
 async function carouselFor(request, env, url, n) {
   // Draft carousels, on staging and local only: /n/<slug>?draft=story reads /carousels/drafts/<slug>.json.
   if (url.hostname !== SITE_HOST && url.searchParams.get("draft") === "story") {
-    const d = await env.ASSETS.fetch(new URL(`/carousels/drafts/${n.slug}.json`, url).toString()).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    const d = await env.ASSETS.fetch(new URL(`/carousels/drafts/${n.slug}.json`, url).toString()).then(jsonOrNull).catch(() => null);
     if (d) return carouselHTML(n, d, flagsOf(env));
   }
-  if (!HANDWRITTEN.has(n.slug)) return carouselHTML(n, autoCarousel(n), flagsOf(env));
   if (!carouselCache.has(n.slug)) {
     // A plain request (no browser cache headers), so the answer is the file itself, never "not modified".
-    const data = await env.ASSETS.fetch(new URL(`/carousels/${n.slug}.json`, url).toString()).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-    if (data) carouselCache.set(n.slug, data);
-    else return carouselHTML(n, autoCarousel(n), flagsOf(env));
+    const data = await env.ASSETS.fetch(new URL(`/carousels/${n.slug}.json`, url).toString()).then(jsonOrNull).catch(() => null);
+    carouselCache.set(n.slug, data);
   }
   return carouselHTML(n, carouselCache.get(n.slug) || autoCarousel(n), flagsOf(env));
 }

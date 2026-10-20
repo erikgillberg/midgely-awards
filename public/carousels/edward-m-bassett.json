@@ -1,0 +1,108 @@
+{
+  "slug": "edward-m-bassett",
+  "keyCard": false,
+  "headline": "The zoning tool that kept going",
+  "dek": "In 1916 Edward M. Bassett led the commission behind New York's zoning code, the nation's first. Copies spread fast, and later ones used the same tool to keep apartments out.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "A shadow over Broadway",
+      "text": "Manhattan in the 1910s had overcrowded tenements with little light or air, and factories creeping toward Fifth Avenue's shops. In 1915 the 538-foot Equitable Building went up and cast a seven-acre shadow on its neighbors."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "America's first zoning code",
+      "text": "Edward M. Bassett, a lawyer and former congressman, chaired the commission whose 1916 report gave New York the first comprehensive zoning code in the US. It limited building height and kept factories out of residential districts."
+    },
+    {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "Further than he went",
+      "text": "Bassett advised cities not to ban apartments from residence districts. In 1926 the Supreme Court upheld a code that did, in Euclid, Ohio, saying an apartment house near homes was very often \"a mere parasite.\""
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Homes far from everything",
+      "stat": "1.5 million",
+      "statLabel": "homes the US was short in 2022, a Moody's estimate the White House cited",
+      "text": "New York's code let apartments into residence districts. Later ones, like Euclid, Ohio's, kept them out. The EPA noted in 2001 that homes and shops sit apart, so people rely on cars. In 2022 the White House said exclusionary zoning inflates prices.",
+      "also": [
+        "Source: White House Housing Supply Action Plan fact sheet, May 2022"
+      ]
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "In 1924 a federal judge struck down a zoning law, writing that its result was to \"classify the population and segregate them according to their income.\" The Supreme Court reversed him in 1926. The cost in driving came later, when cities spread out."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Undoing it takes new law",
+      "text": "In 2019 Oregon required its cities of more than 10,000 people to allow duplexes on land zoned for single-family homes, with deadlines in 2021 and 2022. It took a state law to change what local codes had fixed in place."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Light and air for streets under towers like the Equitable, whose shadow covered seven acres",
+        "Homes kept apart from factories",
+        "A tool so useful that 218 municipalities with over 22 million people had zoning by the end of 1923"
+      ],
+      "costs": [
+        "A shortfall of more than 1.5 million homes, by one 2022 estimate",
+        "Homes, jobs and shops set far apart, so people rely on cars (EPA, 2001)",
+        "Districts closed to apartments in later codes; Oregon needed a 2019 state law to allow duplexes in them"
+      ],
+      "text": "Zoning fixed real dangers in a crowded city. The rules it spread outlived the conditions they were written for. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe him one",
+      "text": "Bassett took on real harms: dark streets, crowded tenements and factories next to homes. His code worked well enough that hundreds of cities copied it. Today's zoning reformers start by asking what those rules were for."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Cheap now, paid later",
+      "patternKey": "later",
+      "focus": true,
+      "eyebrow": "What's the pattern?",
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "The bill came with growth",
+      "text": "In 1916 the benefit was immediate: light, air and homes safe from factories. The cost arrived slowly, as cities grew outward under rules that kept homes, shops and jobs apart and made it hard to add homes where people wanted to live."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Your rules send bills too",
+      "text": "After one bad release, your team rules that every change needs sign-off from three leads. Mistakes drop right away. Years later the team is five times bigger, and that rule is why nothing ships.",
+      "also": [
+        "A cheap lease with a rent jump in year five",
+        "Skipping the oil change"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "A rule written for one city's problem becomes a template for places that never had it.",
+        "The costs of a rule can keep growing long after the people who wrote it are gone.",
+        "Courts and copycats can take a rule further than the person who wrote it."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "slug": "magie",
+  "keyCard": false,
+  "headline": "The game that taught the opposite",
+  "dek": "Lizzie Magie patented The Landlord's Game in 1904 to show how land monopolies make tenants poor. Sold as Monopoly, it became a game about winning one.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "A lesson you could play",
+      "text": "Lizzie Magie followed the economist Henry George, who argued that rent paid to landowners enriches the few and keeps tenants poor. In 1902 she described her game as a practical demonstration of the present system of land-grabbing."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Patented and passed around",
+      "text": "She was granted a US patent on January 5, 1904. Players drew their own boards and changed the street names. A Wharton economist used it in class, and Quakers in Atlantic City played it with local streets."
+    },
+    {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "To win, get rich",
+      "text": "Her 1904 patent says the object of the game is to obtain as much wealth or money as possible. The lesson depended on players seeing what that did to everyone else. In 1932 she added Prosperity rules, where everyone gains when someone gets rich."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Monopoly",
+      "stat": "275 million",
+      "statLabel": "Monopoly sets sold worldwide, Hasbro said in 2015",
+      "text": "In 1935 Parker Brothers began selling a version as Monopoly, bought from Charles Darrow, who claimed he invented it. Its rules: become the wealthiest player, and the last player left in the game wins. The warning became the goal.",
+      "also": [
+        "Source: Hasbro figures, reported February 2015"
+      ]
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "Her own 1904 rules made getting rich the way to win, and the lesson rested on players noticing the cost. Before 1935 people were copying the board and changing its rules. A store-bought version that kept the race and dropped the argument was harder to see.",
+      "knowable": "mixed"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Her name came back",
+      "text": "In 1935 Parker Brothers paid Magie $500 for a revised patent. By 1936 she and her anti-monopolist rules were largely forgotten. In the 1970s, research for a lawsuit over a game called Anti-Monopoly brought her patents back to light."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "275 million Monopoly sets sold worldwide, Hasbro said in 2015",
+        "A board still in use: spaces around the edge, a jail, a corner to start from (US patent 748,626, 1904)",
+        "A game economics teachers used in class decades before it hit stores"
+      ],
+      "costs": [
+        "A game built to criticize land monopoly, best known as a game about winning one",
+        "$500 from Parker Brothers for her patent, and decades without credit",
+        "Her anti-monopolist rules, largely forgotten by 1936"
+      ],
+      "text": "Millions learned to play. Fewer learned what she meant. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "We owe her one",
+      "text": "Magie took on a hard problem: making an economic argument something people could feel at a kitchen table. She kept refining it, with a second patent in 1924. The board she designed is still the one families play."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The lesson flipped",
+      "patternKey": "flipped",
+      "focus": true,
+      "eyebrow": "What's the pattern?",
+      "why": "Backfires repeat. We sort every one into nine patterns, so you can spot one before you make one yourself."
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Players learn the rules",
+      "text": "To show the harm of land-grabbing, the game made land-grabbing the way to win. Players practiced the winning moves. The warning lived in the commentary, and the commentary did not come in the box."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Your warnings flip too",
+      "text": "You start a channel of the worst customer emails so the team learns how not to treat people. Within a month it is the most popular channel at work, and people post the emails to laugh at the customers. The lesson flipped.",
+      "also": [
+        "A biggest-bill leaderboard meant to shame waste that people try to top",
+        "A scary safety video that people quote for fun"
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "People learn what they practice, not what they are told it means.",
+        "A message that depends on its explanation can lose the explanation when it spreads.",
+        "The version that sells is not always the version that was meant."
+      ]
+    }
+  ]
+}
