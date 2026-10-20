@@ -48,6 +48,12 @@ H3. It works without the subtitle. If a stranger needs the dek to get it, it fai
 H4. It is short enough to read at a glance on a phone: about eight words, under about 48 characters.
 H5. It makes a reader think "wait, really?" A headline that is merely accurate fails.
 H6. It is true at the headline level too: no claim the story can't back, no scope stretched.
+H7. The cover sets up; the swipe pays off. The subtitle is one line of setup, under 90 characters,
+    and does not reveal the backfire. Curiosity comes from a gap the reader wants to close
+    (Loewenstein, Psychological Bulletin, 1994); a cover that tells the whole story closes it.
+H8. Card 2 must hook on its own too. Instagram reportedly re-shows a carousel starting from the second
+    slide to people who scrolled past it.
+H9. Measure, then adjust: these rules hold until our own swipe-through numbers say otherwise.
 The editor (Erik) approves every cover before it goes live.
 
 ### Truth (blocking)
@@ -76,7 +82,7 @@ The editor (Erik) approves every cover before it goes live.
 17. Avoid: villain, evil, idiot; claims about motives; undocumented effects.
 
 ### Fit and format (should fix)
-18. Card text fits at 375 pixels wide with room above the footer. Body text is about 260 characters at most.
+18. Card text fits at 375 pixels wide with room above the footer, measured in a browser on every published nominee (staging, not only the local copy). Body text is about 260 characters at most; about 200 on a card with a photo.
 19. Every image has alt text and a credit line with its license.
 20. Would someone save it? There must be a lesson worth keeping. Would someone share it? The hook must work without the rest.
 

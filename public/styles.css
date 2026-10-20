@@ -1211,3 +1211,4 @@ body[data-page="shop"] .site-foot b,body[data-page="shop"] .site-foot .oops-mini
 .naf-rule{display:inline-block;margin-left:6px;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
 .naf p{margin:4px 0 0}
 .cc.has-img:has(.cc-stat) .cc-img{height:26%;flex-basis:26%} /* a photo and a big number share the card */
+.cc-hook .cc-dek{margin-bottom:12%} /* keep cover text clear of the footer line */
