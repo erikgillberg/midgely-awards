@@ -21,8 +21,11 @@ import {
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML, categoricTableHTML, categoricLegendHTML,
   postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath, notAFitFor, notAFitHTML, NOT_A_FIT, NOT_A_FIT_RULES,
 } from "./shared.js";
+import { CODEBOOK, DIMENSIONS } from "./codebook.js";
+import { codebookHTML, dataHTML } from "./codebook-ui.js";
+const PATTERN_KEYS = CODEBOOK.map((p) => p.key);
 
-const SCHEMA_VERSION = 15;
+const SCHEMA_VERSION = 16;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Old and spare domains: each forwards to the same page on backfireawards.com, so shared links keep working.
@@ -101,6 +104,8 @@ const NEW_COLUMNS = {
     ["catalog_no", "INTEGER"], ["began", "INTEGER"], ["recognized", "INTEGER"], ["reach", "INTEGER"],
     // v6: the tile shows the birth (or founding) year, and how many people it helped and harmed, as powers of ten.
     ["born", "INTEGER"], ["helped", "INTEGER"], ["harmed", "INTEGER"],
+    // v16: codebook tags (public/codebook.js). patterns: comma list, primary first. bearer: comma list.
+    ["patterns", "TEXT"], ["scale", "TEXT"], ["lag", "TEXT"], ["bearer", "TEXT"], ["reversibility", "TEXT"],
   ],
   comments: [["hidden", "INTEGER DEFAULT 0"], ["reports", "INTEGER DEFAULT 0"],
     // v12: one level of replies, and Goat's moderation. mod: "" (unchecked), ok, flag, hold, draft (a Goat reply awaiting approval).
@@ -276,6 +281,23 @@ const SEED_MEDIA = [
   { id: "nobel-ballistite", nominee: "nobel", role: "encore", path: "/img/n/nobel/ballistite.jpg", alt: "A paper rocket case with a wooden nose and metal fittings, inscribed in ink and dated September 1896, in a museum display", title: "Case for rocket powered by ballistite, designed by Alfred Nobel and W. T. Unge, 1896, TM23655, Tekniska museet", creator: "Daderot (photo); object by Alfred Nobel and W. T. Unge", made: "Object 1896; photo 2014-09-16", license: "CC0", licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/", sourcePage: "https://commons.wikimedia.org/wiki/File:Case_for_rocket_powered_by_ballistite,_designed_by_Alfred_Nobel_and_W._T._Unge,_1896,_TM23655_-_Tekniska_museet_-_Stockholm,_Sweden_-_DSC01526.JPG", credit: "Ballistite rocket case by Alfred Nobel and W. T. Unge, 1896, Tekniska museet. Photo: Daderot. CC0.", edits: "Resized", retrieved: "2026-10-19" },
 ];
 
+// Codebook tags per case, codebook v0.1: two independent coders, disagreements adjudicated (docs/codebook-coding.md).
+// Patterns list the primary first. began = the year the fix was invented or first demonstrated.
+const CASE_TAGS = [
+  { id: "midgley", patterns: ["moved","stable"], scale: "global", lag: "decades", bearer: ["others","future","nature"], reversibility: "slow", began: 1921 },
+  { id: "haber", patterns: ["surplus","moved"], scale: "global", lag: "decades", bearer: ["others","nature","future"], reversibility: "slow", began: 1909 },
+  { id: "nobel", patterns: ["moved"], scale: "global", lag: "years", bearer: ["others"], reversibility: "irreversible", began: 1867 },
+  { id: "franz", patterns: ["resistance"], scale: "global", lag: "decades", bearer: ["users"], reversibility: "slow", began: 1970 },
+  { id: "muller", patterns: ["stable","resistance"], scale: "global", lag: "decades", bearer: ["nature","users","future"], reversibility: "slow", began: 1939 },
+  { id: "baekeland", patterns: ["stable","later"], scale: "global", lag: "generations", bearer: ["nature","future","others"], reversibility: "irreversible", began: 1907 },
+  { id: "borlaug", patterns: ["later","everyone"], scale: "regional", lag: "decades", bearer: ["users","future"], reversibility: "slow", began: 1963 },
+  { id: "moses", patterns: ["everyone","moved"], scale: "regional", lag: "years", bearer: ["users","others"], reversibility: "slow", began: 1930 },
+  { id: "zuckerberg", patterns: ["metric","gamed"], scale: "global", lag: "years", bearer: ["users","others"], reversibility: "reversible", began: 2018 },
+  { id: "berners-lee", patterns: ["moved"], scale: "global", lag: "years", bearer: ["users","others"], reversibility: "slow", began: 1989 },
+  { id: "c259c539-a00a-493f-b83b-7ebe3b3b52c7", patterns: ["later","moved","everyone"], scale: "national", lag: "decades", bearer: ["others","future"], reversibility: "slow", began: 1916 },
+  { id: "magie", patterns: ["flipped"], scale: "global", lag: "decades", bearer: ["users"], reversibility: "slow", began: 1904 },
+];
+
 // [nominee id, column, corrected value]. Columns are fixed names, never user input.
 const RECORD_FIXES = [
   ["nobel", "backfire", "Armies used it within four years, in the Franco-Prussian War, and bombers made it a weapon of terror, as in the Fenian campaign in Britain, 1881 to 1885. In war it was soon overtaken by smokeless powders, including Nobel's own ballistite, and by TNT."],
@@ -393,6 +415,11 @@ async function migrate(db) {
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('seeded','1')"));
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)));
   await db.batch(stmts);
+  // v16: codebook tags for each case, coded by two independent coders and reconciled (docs/codebook-coding.md).
+  if (ver < 16 && CASE_TAGS.length) {
+    await db.batch(CASE_TAGS.map((t) => db.prepare("UPDATE nominees SET patterns = ?, scale = ?, lag = ?, bearer = ?, reversibility = ?, began = COALESCE(?, began) WHERE id = ?")
+      .bind(t.patterns.join(","), t.scale, t.lag, t.bearer.join(","), t.reversibility, t.began || null, t.id)));
+  }
   // v13: corrections to nominee records found while writing the story carousels (sources in docs/story-sources).
   if (ver < 13 && RECORD_FIXES.length) {
     await db.batch(RECORD_FIXES.map(([id, field, value]) => db.prepare(`UPDATE nominees SET ${field} = ? WHERE id = ?`).bind(value, id)));
@@ -507,6 +534,8 @@ function nomineeOut(r, admin = false) {
     pattern: r.pattern || "", source1: r.source1 || "", source2: r.source2 || "",
     catalogNo: r.catalog_no || null, began: r.began || null, recognized: r.recognized || null, reach: r.reach ?? null,
     born: r.born || null, helped: r.helped ?? null, harmed: r.harmed ?? null,
+    patterns: r.patterns ? r.patterns.split(",").filter(Boolean) : [], scale: r.scale || "", lag: r.lag || "",
+    bearer: r.bearer ? r.bearer.split(",").filter(Boolean) : [], reversibility: r.reversibility || "",
     herdYes: r.herd_yes || 0, herdTotal: r.herd_total || 0,
     oops: r.oops_judges >= MIN_JUDGES ? Math.round(r.oops_avg) : null, oopsJudges: r.oops_judges >= MIN_JUDGES ? r.oops_judges : 0,
     author: r.author || "", seeded: !!r.seeded, createdAt: r.created_at, score: r.score || 0,
@@ -1127,6 +1156,10 @@ async function handleAdmin(request, env, url, db, path, method) {
       if (await db.prepare("SELECT 1 FROM nominees WHERE slug = ? AND id != ?").bind(slug, m[1]).first()) return bad("Another nominee already uses that address.");
       sets.push("slug = ?"); vals.push(slug);
     }
+    if ("patterns" in b) { sets.push("patterns = ?"); vals.push(pickMany(b.patterns, PATTERN_KEYS).split(",").slice(0, 3).join(",") || null); }  // one main, up to two more
+    if ("bearer" in b) { sets.push("bearer = ?"); vals.push(pickMany(b.bearer, Object.keys(DIMENSIONS.bearer.values)) || null); }
+    for (const k of ["scale", "lag", "reversibility"]) if (k in b) { sets.push(`${k} = ?`); vals.push(pick(b[k], Object.keys(DIMENSIONS[k].values)) || null); }
+    if ("began" in b) { sets.push("began = ?"); vals.push(yearOf(b.began)); }
     if ("domain" in b) { sets.push("domain = ?"); vals.push(pick(b.domain, DOMAINS) || null); }
     if ("harms" in b) { sets.push("harms = ?"); vals.push(pickMany(b.harms, HARMS) || null); }
     if ("knowable" in b) { sets.push("knowable = ?"); vals.push(pick(b.knowable, KNOWABLE) || null); }
@@ -1623,7 +1656,8 @@ export default {
       const st = await siteState(env, url, ctx);
       return decorate(await asset(env, url, request, "/table"), env, url, {
         canonical: SITE + "/table",
-        fill: { "#pt-grid": `<div class="pt-gap" style="grid-row:8;grid-column:1"></div>` + categoricTableHTML(st ? st.nominees : []), "#pt-legend": categoricLegendHTML() },
+        fill: { "#pt-grid": `<div class="pt-gap" style="grid-row:8;grid-column:1"></div>` + categoricTableHTML(st ? st.nominees : []), "#pt-legend": categoricLegendHTML(),
+          "#codebook": codebookHTML(st ? st.nominees : []), "#data": dataHTML(st ? st.nominees : []) },
       });
     }
     if (p === "/midgley") return honoreePage(request, env, url, ctx);

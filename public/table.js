@@ -58,3 +58,49 @@ if (view && grid) {
   window.addEventListener("resize", () => setZoom(zoom));
   setZoom(1);
 }
+
+// The codebook: a pattern card opens its full entry in a sheet. The address keeps it (#p-surplus) so it can be shared.
+const dialog = document.getElementById("cb-dialog");
+if (dialog) {
+  const body = dialog.querySelector(".cb-dialog-body");
+  const open = (key, push = true) => {
+    const src = document.getElementById("p-" + key);
+    if (!src) return;
+    body.innerHTML = src.innerHTML;
+    dialog.setAttribute("aria-label", src.querySelector("h3").textContent);
+    if (!dialog.open) dialog.showModal();
+    dialog.scrollTop = 0;
+    if (push) history.replaceState(null, "", "#p-" + key);
+  };
+  document.querySelector(".cb-grid")?.addEventListener("click", (e) => {
+    const b = e.target.closest(".cb-card"); if (b) { e.preventDefault(); open(b.dataset.p); }
+  });
+  dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });   // a click on the backdrop
+  dialog.addEventListener("close", () => {
+    if (location.hash.startsWith("#p-")) history.replaceState(null, "", location.pathname + "#codebook");
+  });
+  if (location.hash.startsWith("#p-")) open(location.hash.slice(3), false);
+}
+
+// Chart tooltips: anything with data-tip shows its title and lines on hover or keyboard focus.
+const ctip = document.getElementById("pt-tip");
+function showTip(el, x, y) {
+  ctip.innerHTML = "";
+  const b = document.createElement("b"); b.textContent = el.dataset.tip;
+  ctip.append(b);
+  el.dataset.tipLines.split("\n").forEach((t) => { const p = document.createElement("p"); p.textContent = t; ctip.append(p); });
+  ctip.dataset.for = "";
+  ctip.hidden = false;
+  ctip.style.left = Math.max(12, Math.min(x + 16, innerWidth - ctip.offsetWidth - 12)) + "px";
+  ctip.style.top = Math.max(12, Math.min(y + 16, innerHeight - ctip.offsetHeight - 12)) + "px";
+}
+document.addEventListener("mousemove", (e) => {
+  const el = e.target.closest?.("[data-tip]");
+  if (el) showTip(el, e.clientX, e.clientY);
+  else if (ctip && !e.target.closest?.(".pt-cell")) ctip.hidden = true;
+});
+document.addEventListener("focusin", (e) => {
+  const el = e.target.closest?.("[data-tip]"); if (!el) return;
+  const r = el.getBoundingClientRect(); showTip(el, r.left, r.bottom);
+});
+document.addEventListener("focusout", (e) => { if (e.target.closest?.("[data-tip]")) ctip.hidden = true; });

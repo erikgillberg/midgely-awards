@@ -1,16 +1,27 @@
 // Search and filter every nominee and featured Murphy. The address keeps the filters, so a search can be shared.
 import { api } from "./site.js";
 import { DOMAINS, HONOREE, nomCardHTML, byTop, esc, murphyPath } from "./shared.js";
+import { CODEBOOK, DIMENSIONS, ERAS, periodOf } from "./codebook.js";
 
 const $ = (s) => document.querySelector(s);
 const params = new URLSearchParams(location.search);
 const state = { q: params.get("q") || "", award: params.get("award") || "", cat: params.get("cat") || "", status: params.get("status") || "", sort: params.get("sort") || "top" };
+// Codebook filters: pattern, scale, time period, who pays.
+const FACETS = [
+  ["pattern", "Pattern", CODEBOOK.map((p, i) => [p.key, `${i + 1}. ${p.name}`])],
+  ["scale", "Scale", Object.entries(DIMENSIONS.scale.values)],
+  ["era", "Time period", ERAS.map((e) => [e.key, e.label])],
+  ["bearer", "Who pays", Object.entries(DIMENSIONS.bearer.values)],
+];
+FACETS.forEach(([k]) => (state[k] = params.get(k) || ""));
 let data = { nominees: [], murphys: [], comments: [] };
 let flags = {};
 (document.body.dataset.flags || "").split(" ").forEach((f) => f && (flags[f] = true));
 
 $("#cat-chips").innerHTML = `<button type="button" data-v="" aria-pressed="true">All categories</button>` +
   Object.entries(DOMAINS).map(([k, v]) => `<button type="button" data-v="${k}" aria-pressed="false">${esc(v)}</button>`).join("");
+$("#facets").innerHTML = FACETS.map(([k, label, opts]) => `<label>${label} <select data-facet="${k}"><option value="">Any</option>${opts.map(([v, t]) => `<option value="${v}"${state[k] === v ? " selected" : ""}>${esc(t)}</option>`).join("")}</select></label>`).join("");
+$("#facets").addEventListener("change", (e) => { const k = e.target.dataset.facet; if (k) { state[k] = e.target.value; render(); } });
 $("#q").value = state.q;
 $("#sort").value = state.sort;
 document.querySelectorAll("[data-filter]").forEach((g) => g.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === state[g.dataset.filter]))));
@@ -27,9 +38,12 @@ function render() {
   if (state.award !== "murphy") {
     items = items.concat(data.nominees.filter((n) => n.id !== HONOREE
       && (!state.cat || n.domain === state.cat) && (!state.status || n.status === state.status)
-      && hit([n.name, n.work, n.solved, n.backfire, DOMAINS[n.domain] || "", n.pattern || ""].join(" "))).map((n) => ({ kind: "n", n, c: ccount[n.id] || 0 })));
+      && (!state.pattern || (n.patterns || []).includes(state.pattern)) && (!state.scale || n.scale === state.scale)
+      && (!state.era || periodOf(n.began) === state.era) && (!state.bearer || (n.bearer || []).includes(state.bearer))
+      && hit([n.name, n.work, n.solved, n.backfire, DOMAINS[n.domain] || "", n.pattern || "",
+        ...(n.patterns || []).map((k) => CODEBOOK.find((p) => p.key === k)?.name || "")].join(" "))).map((n) => ({ kind: "n", n, c: ccount[n.id] || 0 })));
   }
-  if (state.award !== "midgley" && !state.cat && !state.status) {
+  if (state.award !== "midgley" && !state.cat && !state.status && !FACETS.some(([k]) => state[k])) {
     items = items.concat(data.murphys.filter((m) => hit([m.fix, m.oops, m.name].join(" "))).map((m) => ({ kind: "m", m, c: ccount[m.id] || 0 })));
   }
   const top = byTop(flags);

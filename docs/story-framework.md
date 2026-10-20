@@ -8,7 +8,7 @@ The joke gets the reader in. The ledger and the pattern are why they save it. Th
 
 ## The arc
 
-A story has four movements. Length flexes with the story: a simple Murphy can take 4 cards, a big nominee 16.
+A story has four movements. Length flexes with the story: a simple Murphy can take 4 cards, a big nominee 18.
 Instagram allows 20.
 
 | # | Card | Required? | Its job |
@@ -26,12 +26,14 @@ Instagram allows 20.
 | **The postmortem** | | | |
 | 9 | The ledger: worth it? | Required | What it gave against what it cost, side by side. The verdict is the reader's. |
 | 10 | Credit for trying | Required when a person is named | What we owe them: the real problem they took on, and what the rest of us learned. |
-| 11 | What's the pattern? | Required | One of the patterns (ten so far, listed in public/shared.js), its meaning, and why patterns matter. |
+| 11 | What's the pattern? | Required | The case's main pattern from the codebook (public/codebook.js), its meaning, and why patterns matter. It must match the main pattern in the case's tags. |
 | 12 | How the pattern works | Optional | The mechanism in this story, if the pattern card doesn't carry it. |
 | **The resolve** | | | |
-| 13 | How you do this | Required | The same pattern in ordinary life or work. |
-| 14 | Lessons | Required | Two or three observations to take home. |
-| 15 | The ending | Required | Site: the vote ("Worth it?"). Instagram: "Worth it? 💡 Yes 🤦 No, answer in the comments," then follow, like and share. The Midgley ends on its trophy. |
+| 13 | How you do this | Required | The same pattern in the reader's own work: a product, a company, an invention. |
+| 14 | With hindsight | Recommended | The risks that were on the table, and what might have caught or softened them, using what builders have learned since. Tie each one to a question from the pattern's "Ask before you ship" list. |
+| 15 | What if? | Optional | One plausible alternative future from a documented fork in the road: the choice that was made, the one that wasn't, and where it could have led. Labeled as speculation. |
+| 16 | Lessons | Required | Two or three observations to take home. With hindsight feeds this card; don't repeat it. |
+| 17 | The ending | Required | Site: the vote ("Worth it?"). Instagram: "Worth it? 💡 Yes 🤦 No, answer in the comments," then follow, like and share. The Midgley ends on its trophy. |
 
 ## The tests
 
@@ -67,6 +69,10 @@ The editor (Erik) approves every cover before it goes live.
 6. Judge decisions, not people: no motives, character or private life.
 7. The ledger is balanced. If the costs are specific and sourced, the gains must be too.
 8. The foresight card is honest about what was knowable then, not what is obvious now.
+8a. With hindsight names mitigations that existed or were proposed at the time, or says plainly that a
+    mitigation is what we know now. No "they should have known."
+8b. A What if card starts from a real, documented choice point, is labeled "What if" on the card,
+    and never states the alternative as fact. It is fun because it is plausible, not because it is wild.
 
 ### Story (blocking)
 9. Cold open: a stranger reading only the cover can say what this is and why it matters.
