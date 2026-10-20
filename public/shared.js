@@ -440,7 +440,7 @@ export function sheetHTML() {
       <h2 id="sheet-h">Which award?</h2>
       <div class="sh-pick" role="radiogroup" aria-label="Award">
         <button type="button" role="radio" aria-checked="false" data-award="midgley"><span class="element aw-midgley"><span class="n">No. 1</span><span class="sym">Mg</span><span class="w">MIDGLEY</span></span><b>The Midgley</b><small>A backfire at world scale: an invention, product or decision.</small></button>
-        <button type="button" role="radio" aria-checked="false" data-award="murphy"><span class="element aw-murphy"><span class="n">No. 2</span><span class="sym">Mu</span><span class="w">MURPHY</span></span><b>The Murphy</b><small>An everyday backfire: the small fix that made things worse.</small></button>
+        <button type="button" role="radio" aria-checked="false" data-award="murphy"><span class="element aw-murphy"><span class="n">No. 2</span><span class="sym">Mu</span><span class="w">MURPHY</span></span><b>The Murphy</b><small>A backfire you built yourself: the fix in your product, company or invention that made things worse.</small></button>
       </div>
       <form class="sh-form" data-award-form="midgley" hidden novalidate>
         ${f("s-name", "Nominee", `<input id="s-name" maxlength="80" required placeholder="Person, company or program">`)}
@@ -457,8 +457,9 @@ export function sheetHTML() {
         <p class="sh-fine">Nominations appear after a quick review against the <a href="/guidelines">guidelines</a>.</p>
       </form>
       <form class="sh-form" data-award-form="murphy" hidden novalidate>
-        ${f("m-fix", "What did you (or someone) try to fix?", `<textarea id="m-fix" maxlength="600" required placeholder="The office added a rule that every meeting needs an agenda"></textarea>`)}
-        ${f("m-oops", "What went oops?", `<textarea id="m-oops" maxlength="600" required placeholder="Now there are meetings to write the agendas"></textarea>`)}
+        ${f("m-fix", "What were you trying to fix?", `<textarea id="m-fix" maxlength="600" required placeholder="We offered a launch discount to win our first customers"></textarea>`)}
+        ${f("m-oops", "What happened instead?", `<textarea id="m-oops" maxlength="600" required placeholder="Customers learned to wait for the next discount"></textarea>`)}
+        ${f("m-building", "What are you building? (optional, never published)", `<input id="m-building" maxlength="120" placeholder="A scheduling app for clinics">`)}
         ${f("m-name", "Your first name (optional)", `<input id="m-name" maxlength="40" autocomplete="given-name">`, "Used if we feature it.")}
         ${f("m-email", "Email (optional)", `<input id="m-email" type="email" maxlength="254" autocomplete="email">`, "Only to tell you if it's featured.")}
         <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">

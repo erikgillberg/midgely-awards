@@ -140,8 +140,8 @@ if (sheet) {
       path = "/api/nominees";
       thanks = `${body.name} is in the review queue and will appear once a moderator approves it.`;
     } else {
-      body = { fix: v("m-fix"), oops: v("m-oops"), name: v("m-name"), email: v("m-email"), utm };
-      if (!body.fix || !body.oops) { msg.textContent = "Tell us what was fixed and what went oops."; return; }
+      body = { fix: v("m-fix"), oops: v("m-oops"), building: v("m-building"), name: v("m-name"), email: v("m-email"), utm };
+      if (!body.fix || !body.oops) { msg.textContent = "Tell us what you were trying to fix and what happened instead."; return; }
       if (body.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(body.email)) { msg.textContent = "That email address doesn't look right."; return; }
       path = "/api/murphys";
       thanks = "We read every Murphy. If we feature yours, it'll be in The Weekly Oops or on our social accounts. Want to post it yourself? Make your cards below.";
