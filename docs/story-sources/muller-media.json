@@ -1,0 +1,50 @@
+[
+  {
+    "id": "muller-portrait",
+    "nominee": "muller",
+    "role": "portrait",
+    "path": "/img/n/muller/portrait.jpg",
+    "alt": "Photograph of Paul Müller smiling, in a dark suit and tie, in front of a tree trunk",
+    "title": "Bad Schachen: Porträt; Paul H. Müller (Staatsarchiv Freiburg W 134 Nr. 020185)",
+    "creator": "Willy Pragher",
+    "made": "1951",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Bad_Schachen-_Porträt;_Paul_H._Müller_-_LABW_-_Staatsarchiv_Freiburg_W_134_Nr._020185.jpeg",
+    "credit": "Paul Müller, 1951. Willy Pragher, Landesarchiv Baden-Württemberg. CC BY 4.0.",
+    "edits": "Resized",
+    "retrieved": "2026-10-19"
+  },
+  {
+    "id": "muller-mosquito",
+    "nominee": "muller",
+    "role": "meant",
+    "path": "/img/n/muller/mosquito.jpg",
+    "alt": "Close-up of an Anopheles gambiae mosquito, a carrier of malaria, biting human skin against a blue background",
+    "title": "Anopheles gambiae mosquito feeding (CDC PHIL 1354)",
+    "creator": "James D. Gathany, CDC",
+    "made": "1994",
+    "license": "Public domain (CDC)",
+    "licenseUrl": "",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Anopheles_gambiae_mosquito_feeding_(CDC_PHIL_1354).jpg",
+    "credit": "Anopheles gambiae mosquito feeding, 1994. James Gathany, CDC. Public domain.",
+    "edits": "Resized",
+    "retrieved": "2026-10-19"
+  },
+  {
+    "id": "muller-eagle",
+    "nominee": "muller",
+    "role": "oops",
+    "path": "/img/n/muller/eagle.jpg",
+    "alt": "A bald eagle perched at the edge of a large stick nest high in a mossy tree",
+    "title": "Bald eagle in nest (52013020803)",
+    "creator": "U.S. Fish and Wildlife Service, Pacific Region",
+    "made": "2021-05-08",
+    "license": "Public domain (USFWS)",
+    "licenseUrl": "",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Bald_eagle_in_nest_(52013020803).jpg",
+    "credit": "Bald eagle on its nest, 2021. US Fish and Wildlife Service. Public domain.",
+    "edits": "Resized",
+    "retrieved": "2026-10-19"
+  }
+]

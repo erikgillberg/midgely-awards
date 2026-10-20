@@ -1,14 +1,17 @@
 {
   "slug": "muller",
   "keyCard": false,
-  "headline": "The bug killer that wouldn't leave",
-  "dek": "Paul Müller's DDT, patented in 1940, killed the insects that spread typhus and malaria. It lasted so long in nature that eagles laid eggs with weakened shells.",
+  "headline": "DDT won a Nobel Prize. Then bird eggs broke.",
+  "dek": "Paul Müller found that DDT kills the insects that spread typhus and malaria, and won the 1948 Nobel Prize. It lasted so long in nature that birds of prey laid eggs with thin shells.",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Kill the bugs that kill us",
-      "text": "Lice spread typhus. Mosquitoes spread malaria. The best insect killer of the day came from pyrethrum flowers, and it had to be sprayed on walls every week. In World War II, supplies ran short."
+      "text": "Lice spread typhus. Mosquitoes spread malaria. The best insect killer of the day came from pyrethrum flowers, and it had to be sprayed on walls every week. In World War II, supplies ran short.",
+      "image": "/img/n/muller/mosquito.jpg",
+      "alt": "Close-up of an Anopheles gambiae mosquito, a carrier of malaria, biting human skin against a blue background",
+      "credit": "Anopheles gambiae mosquito feeding, 1994. James Gathany, CDC. Public domain."
     },
     {
       "kind": "right",
@@ -32,7 +35,10 @@
       "also": [
         "Mosquitoes in Greece were resistant to DDT by 1951",
         "Source: US Fish and Wildlife Service, 2007"
-      ]
+      ],
+      "image": "/img/n/muller/eagle.jpg",
+      "alt": "A bald eagle perched at the edge of a large stick nest high in a mossy tree",
+      "credit": "Bald eagle on its nest, 2021. US Fish and Wildlife Service. Public domain."
     },
     {
       "kind": "foresight",
@@ -100,5 +106,11 @@
         "Banning a tool for most uses and keeping it for its best one can both be sound decisions."
       ]
     }
-  ]
+  ],
+  "portrait": {
+    "image": "/img/n/muller/portrait.jpg",
+    "alt": "Photograph of Paul Müller smiling, in a dark suit and tie, in front of a tree trunk",
+    "credit": "Paul Müller, 1951. Willy Pragher, Landesarchiv Baden-Württemberg. CC BY 4.0.",
+    "photo": true
+  }
 }

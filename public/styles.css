@@ -315,7 +315,7 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .cc-body{position:relative;padding:6% 5.5% 12%;display:flex;flex-direction:column;gap:.7em}
 .cc-label{margin:0;font:500 .72em var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--light)}
 .cc-label span{display:inline-block;background:var(--base);color:#fff;padding:.15em .45em;margin-right:.4em}
-.cc-title{margin:0;font:900 2.3em/.95 var(--display);text-transform:uppercase;text-wrap:balance}
+.cc-title{margin:0;font:900 2.1em/1.04 var(--display);text-transform:uppercase;text-wrap:balance}
 .cc-text{margin:0;font-size:.95em;line-height:1.45;color:rgba(255,255,255,.88);max-width:46ch}
 .cc-stat{margin:0;font:500 .8em var(--mono);color:var(--light);text-transform:uppercase;letter-spacing:.06em}
 .cc-stat b{display:block;font:900 2.6em/1 var(--display);color:#fff;letter-spacing:0}
@@ -338,7 +338,7 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .cc-hook .el.lg .el-name{font-size:clamp(9px,2.7cqi,16px)}
 .cc-hook .el.lg .el-group{font-size:clamp(7px,1.9cqi,11px)}
 .cc-kicker{margin:0;font:500 .72em/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--light)}
-.cc-headline{position:relative;margin:auto 0 0;font:900 4.6em/.86 var(--display);text-transform:uppercase;max-width:9ch}
+.cc-headline{position:relative;margin:auto 0 0;font:900 3.6em/1 var(--display);text-transform:uppercase;max-width:14ch;text-wrap:balance}
 .cc-dek{position:relative;margin:0 0 7%;max-width:30ch;font-size:1em;line-height:1.4;color:rgba(255,255,255,.9)}
 .cc-swipe{position:absolute;right:5.5%;top:5.5%;margin:0;font:500 .7em var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--light)}
 .cc-swipe span{display:inline-block;animation:cc-nudge 1.6s ease-in-out infinite}
@@ -349,15 +349,15 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .cc-pattern{background:var(--base)}
 .cc-pattern .cc-title{font-size:4em}
 .cc-pattern .cc-label span{background:var(--deep)}
-.cc-gotright .cc-title,.cc-foresight .cc-title{font-size:3em}
+.cc-gotright .cc-title,.cc-foresight .cc-title{font-size:2.5em}
 /* Story cards: the twist, the lesson and the question to take home */
 .cc-twist,.cc-anatomy{background:var(--deep)}
-.cc-mirror .cc-title,.cc-ask .cc-title,.cc-twist .cc-title,.cc-anatomy .cc-title,.cc-cleanup .cc-title{font-size:3em}
+.cc-mirror .cc-title,.cc-ask .cc-title,.cc-twist .cc-title,.cc-anatomy .cc-title,.cc-cleanup .cc-title{font-size:2.5em}
 .cc-ask{background:var(--base)}
 .cc-ask .cc-label span{background:var(--deep)}
 .cc-ask .cc-title{font-size:3.6em}
 .cc-pattern .cc-why ~ .cc-pdots{margin-top:1em}
-.cc-pattern:has(.cc-pdots) .cc-title{font-size:4em}
+.cc-pattern:has(.cc-pdots) .cc-title{font-size:3.2em}
 .cc-why{margin:.5em 0 0;font-size:1.05em;line-height:1.4;font-weight:600;color:#fff}
 .cc-pdots{display:flex;gap:.35em;margin:.8em 0 0;padding:0;list-style:none}
 .cc-pdots li{width:1.9em;height:1.9em;display:grid;place-items:center;border:1px solid rgba(255,255,255,.4);font:600 .8em var(--mono);color:rgba(255,255,255,.6)}
@@ -797,8 +797,8 @@ body[data-bg="cat"]{background:linear-gradient(color-mix(in srgb,var(--cat) 78%,
 .cc-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42;filter:saturate(.8)}
 .cc-hook > .cc-hook-top,.cc-hook > .cc-headline,.cc-hook > .cc-dek{position:relative}
 .cc-hook:has(.cc-scene){background:linear-gradient(180deg,color-mix(in srgb,var(--deep) 40%,transparent),var(--deep) 85%)}
-.cc-headline.mid{font-size:3.6em}
-.cc-headline.long{font-size:2.8em;max-width:12ch}
+.cc-headline.mid{font-size:3.1em}
+.cc-headline.long{font-size:2.6em;max-width:16ch}
 body[data-bg="cat"]{background:linear-gradient(color-mix(in srgb,var(--cat) 88%,transparent),color-mix(in srgb,var(--cat) 97%,black)),var(--scene) center/cover fixed var(--cat)}
 .cc-hook > .cc-swipe,.cc-hook > .cc-foot{position:absolute}
 
@@ -1203,3 +1203,11 @@ body[data-page="shop"] .site-foot b,body[data-page="shop"] .site-foot .oops-mini
 .cc-lessons{margin:.2em 0 0;padding:0 0 0 1.3em;display:flex;flex-direction:column;gap:.55em;font-size:.98em;line-height:1.4;color:rgba(255,255,255,.92)}
 .cc-lessons li::marker{font:600 .9em var(--mono);color:var(--light)}
 .ig-export .site-follow{display:none} /* the Instagram card asks for the follow */
+
+/* Not a fit, and why (guidelines) */
+.naf{list-style:none;padding:0;margin:16px 0 28px;display:grid;gap:14px}
+.naf li{border-left:4px solid var(--ethyl);padding:4px 0 4px 14px}
+.naf b{font-weight:600}
+.naf-rule{display:inline-block;margin-left:6px;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+.naf p{margin:4px 0 0}
+.cc.has-img:has(.cc-stat) .cc-img{height:26%;flex-basis:26%} /* a photo and a big number share the card */

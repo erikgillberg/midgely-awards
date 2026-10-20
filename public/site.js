@@ -48,8 +48,11 @@ document.addEventListener("input", (e) => {
   matchTimer = setTimeout(async () => {
     try {
       const r = await api("/api/match?q=" + encodeURIComponent(q));
-      box.hidden = !r.matches.length;
-      box.innerHTML = r.matches.length ? `<p>Already nominated:</p>` + r.matches.map((m) => `<a href="${m.path}"><b>${m.name.replace(/</g, "&lt;")}</b> ${m.work.replace(/</g, "&lt;")} <span>Open it →</span></a>`).join("") + `<p class="sh-fine">If it's the same one, add your case in its comments instead.</p>` : "";
+      const nf = r.notFit;
+      const e = (t) => String(t).replace(/</g, "&lt;");
+      box.hidden = !r.matches.length && !nf;
+      box.innerHTML = (nf ? `<p><b>${e(nf.name)} isn't a fit.</b> ${e(nf.why)} <a href="/guidelines#not-a-fit">Why some things don't qualify</a></p>` : "")
+        + (r.matches.length ? `<p>Already nominated:</p>` + r.matches.map((m) => `<a href="${m.path}"><b>${e(m.name)}</b> ${e(m.work)} <span>Open it →</span></a>`).join("") + `<p class="sh-fine">If it's the same one, add your case in its comments instead.</p>` : "");
     } catch (err) { box.hidden = true; }
   }, 250);
 });

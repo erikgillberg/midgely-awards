@@ -1,20 +1,26 @@
 {
   "slug": "berners-lee",
   "keyCard": false,
-  "headline": "Anyone could publish. Anyone did.",
-  "dek": "In 1989 Tim Berners-Lee proposed the World Wide Web so a lab could stop losing information. By 2017 he warned that misinformation spread too easily on it.",
+  "headline": "Built to keep facts, the web spreads fakes too",
+  "dek": "In 1989 Tim Berners-Lee proposed the web so a lab could stop losing information. By 2017 he warned it let misinformation spread too easily.",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Stop losing what people know",
-      "text": "At CERN, the physics lab near Geneva, people often stayed about two years, and what they knew left with them. Notes sat on many different kinds of computers. In March 1989 Tim Berners-Lee proposed linked documents anyone could reach."
+      "text": "At CERN, the physics lab near Geneva, people often stayed about two years, and what they knew left with them. Notes sat on many different kinds of computers. In March 1989 Tim Berners-Lee proposed linked documents anyone could reach.",
+      "image": "/img/n/berners-lee/cern.jpg",
+      "alt": "Aerial view of CERN's main site near Geneva: low lab buildings, parking lots and roads set among farm fields and woods",
+      "credit": "CERN's main site near Geneva from the air, 2012. Brücke-Osteuropa. CC0."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "One site, then 1.49 billion",
-      "text": "By Christmas 1990 the first web server was running at CERN. In April 1993 CERN put the software in the public domain, free for anyone. By the end of 1994 there were 10,000 servers. In July 2026 Netcraft counted about 1.49 billion sites."
+      "text": "By Christmas 1990 the first web server was running at CERN. In April 1993 CERN put the software in the public domain, free for anyone. By the end of 1994 there were 10,000 servers. In July 2026 Netcraft counted about 1.49 billion sites.",
+      "image": "/img/n/berners-lee/server.jpg",
+      "alt": "A black NeXT computer and monitor in a museum case, with a handwritten label on the computer reading \"This machine is a server. DO NOT POWER IT DOWN!!\"",
+      "credit": "The NeXT computer that ran the first web server, shown at CERN, 2005. Coolcaesar. CC BY-SA 3.0."
     },
     {
       "kind": "twist",

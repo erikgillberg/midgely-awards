@@ -1,0 +1,50 @@
+[
+  {
+    "id": "edward-m-bassett-portrait",
+    "nominee": "edward-m-bassett",
+    "role": "portrait",
+    "path": "/img/n/edward-m-bassett/portrait.jpg",
+    "alt": "Portrait photograph of Edward M. Bassett in a dark suit, high white collar and tie",
+    "title": "Portrait of Edward Murray Bassett c1914",
+    "creator": "Reuben Leslie Maynard",
+    "made": "About 1914",
+    "license": "Public domain (PD-US-expired)",
+    "licenseUrl": "",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Portrait_of_Edward_Murray_Bassett_c1914.jpg",
+    "credit": "Edward M. Bassett, about 1914. Reuben Leslie Maynard. Public domain.",
+    "edits": "Cropped off the printed caption; resized",
+    "retrieved": "2026-10-19"
+  },
+  {
+    "id": "edward-m-bassett-equitable",
+    "nominee": "edward-m-bassett",
+    "role": "meant",
+    "path": "/img/n/edward-m-bassett/equitable.jpg",
+    "alt": "The Equitable Building, a huge flat-topped office block, towering over Trinity Church and its neighbors in lower Manhattan",
+    "title": "Equitable Building, New York City",
+    "creator": "Unknown photographer",
+    "made": "1915",
+    "license": "Public domain (Library of Congress, no known restrictions)",
+    "licenseUrl": "",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Equitable_Building,_New_York_City_LCCN2003668551.jpg",
+    "credit": "Equitable Building, New York City, 1915. Library of Congress. Public domain.",
+    "edits": "Cropped off the print border and handwritten note; resized",
+    "retrieved": "2026-10-19"
+  },
+  {
+    "id": "edward-m-bassett-setback",
+    "nominee": "edward-m-bassett",
+    "role": "right",
+    "path": "/img/n/edward-m-bassett/setback.jpg",
+    "alt": "Charcoal drawing of a stepped skyscraper mass, its towers narrowing in setbacks as they rise",
+    "title": "Drawing, Study for Maximum Mass Permitted by the 1916 New York Zoning Law, Stage 4, 1922",
+    "creator": "Hugh Ferriss",
+    "made": "1922",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Drawing,_Study_for_Maximum_Mass_Permitted_by_the_1916_New_York_Zoning_Law,_Stage_4,_1922_(CH_18468717).jpg",
+    "credit": "Study of the largest building the 1916 zoning law allowed, 1922. Hugh Ferriss. Cooper Hewitt. Public domain.",
+    "edits": "Cropped off the mat; resized",
+    "retrieved": "2026-10-19"
+  }
+]

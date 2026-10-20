@@ -1,20 +1,26 @@
 {
   "slug": "baekeland",
   "keyCard": false,
-  "headline": "The plastic built never to melt",
+  "headline": "Plastic was made to last. Most of it still is.",
   "dek": "In 1907 Leo Baekeland invented Bakelite, the first fully synthetic plastic. One study estimates 79% of all plastic waste made by 2015 sits in landfills or nature.",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Bugs can't keep up",
-      "text": "The United States was wiring itself for electricity, and a common natural insulator was shellac, made by lac insects in Asia. Supply was limited. Leo Baekeland, a chemist, set out to make a substitute in the lab."
+      "text": "The United States was wiring itself for electricity, and a common natural insulator was shellac, made by lac insects in Asia. Supply was limited. Leo Baekeland, a chemist, set out to make a substitute in the lab.",
+      "image": "/img/n/baekeland/shellac.jpg",
+      "alt": "Two piles of amber and dark red shellac flakes on white paper",
+      "credit": "Shellac flakes, 2009. Nuberger13. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Heat, pressure, Bakelite",
-      "text": "In 1907 he combined phenol and formaldehyde under controlled heat and pressure and got Bakelite, the first fully synthetic plastic. He announced it in 1909. It soon went into car parts, radios and telephones."
+      "text": "In 1907 he combined phenol and formaldehyde under controlled heat and pressure and got Bakelite, the first fully synthetic plastic. He announced it in 1909. It soon went into car parts, radios and telephones.",
+      "image": "/img/n/baekeland/radio.jpg",
+      "alt": "A round brown Bakelite radio with a curved station dial, a cloth speaker grille and three knobs",
+      "credit": "Radio with a Bakelite case, designed by Wells Coates, 1932. Daderot. CC0."
     },
     {
       "kind": "twist",
@@ -31,7 +37,10 @@
       "text": "Bakelite was first. Most of the plastics that came after it don't biodegrade in any meaningful sense, one of that study's authors says. A 2022 study found plastic particles in the blood of 17 of 22 donors.",
       "also": [
         "Source: Geyer, Jambeck and Law, Science Advances, 2017"
-      ]
+      ],
+      "image": "/img/n/baekeland/beach.jpg",
+      "alt": "Plastic bottles, crates, rope, a tire and other debris heaped along a beach, with surf and a mountain behind",
+      "credit": "Plastic debris in Kanapou Bay, Kaho'olawe, Hawaii, 2012. NOAA. Public domain."
     },
     {
       "kind": "foresight",
@@ -103,5 +112,11 @@
         "A harm can wait for scale: one factory's output looks nothing like a planet's."
       ]
     }
-  ]
+  ],
+  "portrait": {
+    "image": "/img/n/baekeland/portrait.jpg",
+    "photo": true,
+    "alt": "Profile photograph of Leo Baekeland, balding, with a dark beard and a light jacket",
+    "credit": "Leo Baekeland, 1916. The World's Work. Public domain."
+  }
 }

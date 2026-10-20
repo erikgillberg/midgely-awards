@@ -1,20 +1,26 @@
 {
   "slug": "edward-m-bassett",
   "keyCard": false,
-  "headline": "The zoning tool that kept going",
-  "dek": "In 1916 Edward M. Bassett led the commission behind New York's zoning code, the nation's first. Copies spread fast, and later ones used the same tool to keep apartments out.",
+  "headline": "How a skyscraper's shadow helped zone America",
+  "dek": "In 1915 the Equitable Building cast a seven-acre shadow over lower Manhattan. It hastened New York's 1916 zoning code, drafted by a commission Edward M. Bassett chaired. Copies spread nationwide, some written to keep apartments out.",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "A shadow over Broadway",
-      "text": "Manhattan in the 1910s had overcrowded tenements with little light or air, and factories creeping toward Fifth Avenue's shops. In 1915 the 538-foot Equitable Building went up and cast a seven-acre shadow on its neighbors."
+      "text": "Manhattan in the 1910s had overcrowded tenements with little light or air, and factories creeping toward Fifth Avenue's shops. In 1915 the 538-foot Equitable Building went up and cast a seven-acre shadow on its neighbors.",
+      "image": "/img/n/edward-m-bassett/equitable.jpg",
+      "alt": "The Equitable Building, a huge flat-topped office block, towering over Trinity Church and its neighbors in lower Manhattan",
+      "credit": "Equitable Building, New York City, 1915. Library of Congress. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "America's first zoning code",
-      "text": "Edward M. Bassett, a lawyer and former congressman, chaired the commission whose 1916 report gave New York the first comprehensive zoning code in the US. It limited building height and kept factories out of residential districts."
+      "text": "Edward M. Bassett, a lawyer and former congressman, chaired the commission whose 1916 report gave New York the first comprehensive zoning code in the US. It limited building height and kept factories out of residential districts.",
+      "image": "/img/n/edward-m-bassett/setback.jpg",
+      "alt": "Charcoal drawing of a stepped skyscraper mass, its towers narrowing in setbacks as they rise",
+      "credit": "Study of the largest building the 1916 zoning law allowed, 1922. Hugh Ferriss. Cooper Hewitt. Public domain."
     },
     {
       "kind": "twist",
@@ -104,5 +110,11 @@
         "Courts and copycats can take a rule further than the person who wrote it."
       ]
     }
-  ]
+  ],
+  "portrait": {
+    "image": "/img/n/edward-m-bassett/portrait.jpg",
+    "photo": true,
+    "alt": "Portrait photograph of Edward M. Bassett in a dark suit, high white collar and tie",
+    "credit": "Edward M. Bassett, about 1914. Reuben Leslie Maynard. Public domain."
+  }
 }

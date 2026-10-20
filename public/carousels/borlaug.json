@@ -1,20 +1,26 @@
 {
   "slug": "borlaug",
   "keyCard": false,
-  "headline": "Bigger harvests, emptier aquifers",
+  "headline": "India's harvest miracle is draining its wells",
   "dek": "Norman Borlaug's short wheat gave India a record harvest in 1968. By 2010, the farming boom that followed drew Punjab's groundwater 45 percent faster than rain refilled it.",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Grow more on the same land",
-      "text": "Around 1960, West Pakistan grew about a ton of wheat per hectare and fell short of its needs every year. Feeding the wheat more fertilizer was no answer: past a point, the tall plants snapped."
+      "text": "Around 1960, West Pakistan grew about a ton of wheat per hectare and fell short of its needs every year. Feeding the wheat more fertilizer was no answer: past a point, the tall plants snapped.",
+      "image": "/img/n/borlaug/lodged.jpg",
+      "alt": "A wheat field with a wide patch of tall stalks knocked flat to the ground",
+      "credit": "Wheat flattened by rain and wind, 2013. Azizkhan327. CC BY-SA 3.0."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Short wheat, big harvests",
-      "text": "Borlaug's team in Mexico bred dwarf wheat that could take two or three times the fertilizer and lifted top yields by more than 70 percent. Mexico grew all its own wheat by 1956. Pakistan and India took up the seed in the 1960s."
+      "text": "Borlaug's team in Mexico bred dwarf wheat that could take two or three times the fertilizer and lifted top yields by more than 70 percent. Mexico grew all its own wheat by 1956. Pakistan and India took up the seed in the 1960s.",
+      "image": "/img/n/borlaug/wheat.jpg",
+      "alt": "A broad field of ripe golden wheat beside a stretch of water under a cloudy sky in Punjab",
+      "credit": "Ripe wheat in Punjab, 2019. Harvinder Chandigarh. CC BY-SA 4.0."
     },
     {
       "kind": "twist",
@@ -31,7 +37,10 @@
       "text": "The new seeds paid off when fed water and fertilizer. Punjab moved to nearly 80 percent rice and wheat, two thirsty crops, watered from wells. Farmers who once pumped from 5 to 10 feet down now drill 200 to 300 feet.",
       "also": [
         "Source: Rodell, Velicogna and Famiglietti, Nature, 2009"
-      ]
+      ],
+      "image": "/img/n/borlaug/tubewell.jpg",
+      "alt": "A pump engine and pipe at a brick tube well beside a green wheat field",
+      "credit": "Tube well in Mansa district, Punjab, India, 2012. Tari Buttar. CC0."
     },
     {
       "kind": "foresight",
@@ -98,5 +107,11 @@
         "The people who make a tool and the people who set the prices around it share the outcome."
       ]
     }
-  ]
+  ],
+  "portrait": {
+    "image": "/img/n/borlaug/portrait.jpg",
+    "photo": true,
+    "alt": "Norman Borlaug at 90, white-haired, in a dark suit and dotted tie on a city street",
+    "credit": "Norman Borlaug, 2004. Ben Zinner, USAID. Public domain."
+  }
 }

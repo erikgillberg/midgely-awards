@@ -1,0 +1,34 @@
+[
+  {
+    "id": "berners-lee-cern",
+    "nominee": "berners-lee",
+    "role": "meant",
+    "path": "/img/n/berners-lee/cern.jpg",
+    "alt": "Aerial view of CERN's main site near Geneva: low lab buildings, parking lots and roads set among farm fields and woods",
+    "title": "CERN-aerial 1 (Luftbild vom CERN)",
+    "creator": "Brücke-Osteuropa",
+    "made": "2012-11-04",
+    "license": "CC0 1.0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:CERN-aerial_1.jpg",
+    "credit": "CERN's main site near Geneva from the air, 2012. Brücke-Osteuropa. CC0.",
+    "edits": "Resized",
+    "retrieved": "2026-10-19"
+  },
+  {
+    "id": "berners-lee-server",
+    "nominee": "berners-lee",
+    "role": "right",
+    "path": "/img/n/berners-lee/server.jpg",
+    "alt": "A black NeXT computer and monitor in a museum case, with a handwritten label on the computer reading \"This machine is a server. DO NOT POWER IT DOWN!!\"",
+    "title": "First Web Server (NeXTcube used by Tim Berners-Lee at CERN, displayed at Microcosm)",
+    "creator": "Coolcaesar (en.wikipedia)",
+    "made": "2005-08-10",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:First_Web_Server.jpg",
+    "credit": "The NeXT computer that ran the first web server, shown at CERN, 2005. Coolcaesar. CC BY-SA 3.0.",
+    "edits": "Resized",
+    "retrieved": "2026-10-19"
+  }
+]

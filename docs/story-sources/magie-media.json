@@ -1,0 +1,50 @@
+[
+  {
+    "id": "magie-portrait",
+    "nominee": "magie",
+    "role": "portrait",
+    "path": "/img/n/magie/portrait.jpg",
+    "alt": "Photograph of Lizzie Magie in profile, with short curly hair and a pale draped top",
+    "title": "Lizzie Magie, frontispiece of My Betrothed, and Other Poems",
+    "creator": "Unknown photographer",
+    "made": "By 1892",
+    "license": "Public domain (published 1892)",
+    "licenseUrl": "",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Lizzie_Magie_-_My_Betrothed,_and_Other_Poems.jpg",
+    "credit": "Lizzie Magie, about 1892. Unknown photographer. Public domain.",
+    "edits": "Resized",
+    "retrieved": "2026-10-19"
+  },
+  {
+    "id": "magie-george",
+    "nominee": "magie",
+    "role": "meant",
+    "path": "/img/n/magie/george.jpg",
+    "alt": "Studio portrait of the economist Henry George, balding, with a full beard and a bow tie",
+    "title": "Henry George c1885 retouched",
+    "creator": "Unknown photographer (New York Public Library)",
+    "made": "About 1886",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Henry_George_c1885_retouched.jpg",
+    "credit": "Henry George, about 1886. Unknown photographer. New York Public Library. Public domain.",
+    "edits": "Resized",
+    "retrieved": "2026-10-19"
+  },
+  {
+    "id": "magie-patent",
+    "nominee": "magie",
+    "role": "right",
+    "path": "/img/n/magie/patent.jpg",
+    "alt": "Patent drawing of a square game board with spaces marked For Sale and For Rent, railroads, a Bank, a Public Treasury and a Go to Jail corner",
+    "title": "United States patent 748626, Fig. 1 (The Landlord's Game)",
+    "creator": "Lizzie J. Magie",
+    "made": "Filed 1903-03-23, granted 1904-01-05",
+    "license": "Public domain (US patent drawing)",
+    "licenseUrl": "",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:United_States_patent_748626_-_Fig_1.png",
+    "credit": "The Landlord's Game, US patent 748,626, 1904. Lizzie J. Magie. Public domain.",
+    "edits": "Converted to JPEG; resized",
+    "retrieved": "2026-10-19"
+  }
+]

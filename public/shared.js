@@ -499,6 +499,38 @@ export function footerHTML() {
 
 // ---------------------------------------------------------------- patterns
 
+// Things people nominate that don't meet the standard, and why. One list for the guidelines page,
+// the Nominate form's name check and Goat. Each "why" sticks to documented facts.
+export const NOT_A_FIT_RULES = {
+  failed: "A failure, not a backfire",
+  design: "A weapon, not a fix",
+  fraud: "It was a deception",
+  accident: "An accident, not a solution",
+};
+export const NOT_A_FIT = [
+  { name: "Thalidomide", match: ["thalidomide"], rule: "failed",
+    why: "A sedative sold as safe in pregnancy that caused severe birth defects in more than 10,000 babies. It was never properly tested for the people it was sold to. A safety failure, not a fix that worked." },
+  { name: "Chernobyl", match: ["chernobyl"], rule: "accident",
+    why: "A reactor explosion during a safety test on a flawed design in 1986. It was a disaster, not the side effect of nuclear power doing its job." },
+  { name: "Three Mile Island", match: ["three mile island"], rule: "accident",
+    why: "A partial meltdown in 1979 from equipment failure and operator confusion. An accident, not a backfire." },
+  { name: "The Ford Pinto", match: ["pinto", "ford pinto"], rule: "failed",
+    why: "A fuel tank placement that made rear-end crashes more dangerous. A product defect, not a fix that worked." },
+  { name: "New Coke", match: ["new coke"], rule: "failed",
+    why: "A product people didn't want. The old formula was back on shelves within three months in 1985. A flop, not a backfire." },
+  { name: "Agent Orange", match: ["agent orange"], rule: "design",
+    why: "A defoliant sprayed as a weapon of war. Its dioxin did lasting harm to Vietnamese civilians and US veterans, but a weapon is not a fix for a problem, so it is out of scope here." },
+  { name: "The atomic bomb", match: ["atomic bomb", "atom bomb", "nuclear bomb", "manhattan project"], rule: "design",
+    why: "Built to destroy. Harm by design doesn't qualify, though nuclear power and its waste can." },
+  { name: "Theranos", match: ["theranos", "elizabeth holmes"], rule: "fraud",
+    why: "Its blood tests never worked as claimed, and its founder was convicted of fraud in 2022. Lying is not an unintended consequence." },
+];
+const norm = (t) => String(t || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
+export const notAFitFor = (q) => { const t = norm(q); return t.length < 4 ? null : NOT_A_FIT.find((x) => x.match.some((m) => t.includes(m) || (m.includes(t) && t.length >= 5))) || null; };
+export function notAFitHTML() {
+  return `<ul class="naf">${NOT_A_FIT.map((x) => `<li><b>${esc(x.name)}</b> <span class="naf-rule">${esc(NOT_A_FIT_RULES[x.rule])}</span><p>${esc(x.why)}</p></li>`).join("")}</ul>`;
+}
+
 // The patterns behind backfires. Every nominee gets one. Order is fixed; add new ones at the end.
 export const PATTERNS = [
   { key: "surplus", name: "Solve a shortage, create a surplus", text: "Too little becomes too much, and the extra goes somewhere." },
@@ -510,7 +542,12 @@ export const PATTERNS = [
   { key: "gamed", name: "The reward gets gamed", text: "People chase the incentive instead of the goal." },
   { key: "later", name: "Cheap now, paid later", text: "The bill arrives decades after the benefit." },
   { key: "flipped", name: "The lesson flipped", text: "Built to teach one lesson, it taught the opposite." },
+  { key: "buffered", name: "The risk piles up", text: "Stop every small failure, and the risk saves up for one big one." },
 ];
+const COUNT_WORD = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+export const PATTERN_COUNT = COUNT_WORD[PATTERNS.length] || String(PATTERNS.length);
+// Why patterns matter, on every focused pattern card. Built from the count so it stays true as patterns are added.
+export const PATTERN_WHY = `Backfires repeat. We sort every one into ${PATTERN_COUNT} patterns, so you can spot one before you make one yourself.`;
 
 // ---------------------------------------------------------------- lists
 
@@ -679,14 +716,14 @@ export function carouselHTML(n, data, flags = {}) {
     const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
     const chip = s.kind === "foresight" ? foresightHTML(s.knowable || n.knowable) : ""; // a story may correct the rating
     const also = s.also && s.also.length ? `<ul class="cc-also">${s.also.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : "";
-    // A focused pattern card (story carousels): this pattern big, why patterns matter, and the nine as a small row.
+    // A focused pattern card (story carousels): this pattern big, why patterns matter, and all the patterns as a small row.
     const pi = PATTERNS.findIndex((p) => p.key === s.patternKey);
     const focus = s.kind === "pattern" && s.focus;
     const ledger = s.kind === "ledger" ? `<div class="cc-lg"><div class="lg-gave"><h4>${esc(s.gainsLabel || "What it gave")}</h4><ul>${(s.gains || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div>
       <div class="lg-cost"><h4>${esc(s.costsLabel || "What it cost")}</h4><ul>${(s.costs || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div></div>` : "";
     const lessons = s.items && s.items.length ? `<ol class="cc-lessons">${s.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
-    const patterns = focus ? `<p class="cc-text">${esc(PATTERNS[pi].text)}</p>${s.why ? `<p class="cc-why">${esc(s.why)}</p>` : ""}
-      <ol class="cc-pdots" aria-label="The nine patterns">${PATTERNS.map((p, i) => `<li class="${i === pi ? "on" : ""}" title="${esc(p.name)}">${i + 1}</li>`).join("")}</ol>`
+    const patterns = focus ? `<p class="cc-text">${esc(PATTERNS[pi].text)}</p><p class="cc-why">${esc(PATTERN_WHY)}</p>
+      <ol class="cc-pdots" aria-label="The ${PATTERN_COUNT} patterns">${PATTERNS.map((p, i) => `<li class="${i === pi ? "on" : ""}" title="${esc(p.name)}">${i + 1}</li>`).join("")}</ol>`
       : s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p, i) => `<li class="${p.key === s.patternKey ? "on" : ""}"><span class="pn">${p.key === s.patternKey ? "→ " : ""}#${i + 1}</span><span><b>${esc(p.name)}</b> ${esc(p.text)}</span></li>`).join("")}</ol>` : "";
     cards.push(`<section class="cc cc-${esc(s.kind)} ${img ? "has-img" : "no-img"}" data-sym="${esc(symbol(n.name))}" aria-roledescription="slide" aria-label="${i} of ${total}">
       ${img}

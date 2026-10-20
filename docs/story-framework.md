@@ -26,7 +26,7 @@ Instagram allows 20.
 | **The postmortem** | | | |
 | 9 | The ledger: worth it? | Required | What it gave against what it cost, side by side. The verdict is the reader's. |
 | 10 | Credit for trying | Required when a person is named | What we owe them: the real problem they took on, and what the rest of us learned. |
-| 11 | What's the pattern? | Required | One of the nine patterns, its meaning, and why patterns matter. |
+| 11 | What's the pattern? | Required | One of the patterns (ten so far, listed in public/shared.js), its meaning, and why patterns matter. |
 | 12 | How the pattern works | Optional | The mechanism in this story, if the pattern card doesn't carry it. |
 | **The resolve** | | | |
 | 13 | How you do this | Required | The same pattern in ordinary life or work. |
@@ -36,6 +36,19 @@ Instagram allows 20.
 ## The tests
 
 A draft fails if any **blocking** test fails.
+
+### The hook (blocking)
+The cover decides whether anyone sees the rest. Write at least five candidate headlines, pick the best
+against these tests, and keep the runner-up for an Instagram A/B test.
+H1. It names something the reader already knows in the first few words (Monopoly, Facebook, DDT,
+    Roundup, dynamite, lead, highways, plastic, the web), not an unknown name or an abstraction.
+H2. It turns in one line: what it was meant to do against what happened, or a fact that sounds wrong
+    but is true.
+H3. It works without the subtitle. If a stranger needs the dek to get it, it fails.
+H4. It is short enough to read at a glance on a phone: about eight words, under about 48 characters.
+H5. It makes a reader think "wait, really?" A headline that is merely accurate fails.
+H6. It is true at the headline level too: no claim the story can't back, no scope stretched.
+The editor (Erik) approves every cover before it goes live.
 
 ### Truth (blocking)
 1. Every fact, date and number has a source a reader could check. No myths, even popular ones.
@@ -87,4 +100,4 @@ The tests come from mistakes the Midgley draft made or nearly made:
 - A ledger listed sourced costs against vague gains (test 7).
 - A workplace example showed the problem coming back, not moving (test 12).
 - "Before your next fix" read as preachy (test 14).
-- The pattern card listed all nine patterns without saying why patterns matter (card 11).
+- The pattern card listed every pattern without saying why patterns matter (card 11).

@@ -1,8 +1,8 @@
 {
   "slug": "zuckerberg",
   "keyCard": false,
-  "headline": "A comment worth 30 likes",
-  "dek": "In 2018 Mark Zuckerberg retuned Facebook's News Feed to favor posts that drew comments. Facebook's researchers later warned of \"unhealthy side effects\" on politics and news.",
+  "headline": "Facebook counted anger as five likes",
+  "dek": "From 2017, Facebook's feed counted every emoji reaction, angry included, as five likes. In 2018 Mark Zuckerberg retuned it toward comments. Its own researchers later warned of \"unhealthy side effects.\"",
   "slides": [
     {
       "kind": "meant",
