@@ -24,7 +24,6 @@ import {
 import { CODEBOOK, DIMENSIONS } from "./codebook.js";
 import { CASE_RISKS, cleanRisks, cleanMitigations } from "./case-risks.js";
 import { patternsTeaserHTML, patternsPageHTML, dashboardsHTML } from "./codebook-ui.js";
-import { homeNextHTML } from "./home-next.js";
 const PATTERN_KEYS = CODEBOOK.map((p) => p.key);
 
 const SCHEMA_VERSION = 17;
@@ -1666,18 +1665,6 @@ export default {
     if (p === "/nominee" || p === "/category-page") return Response.redirect(SITE_ORIGIN(url) + "/", 302); // page shells, filled above
     const lab = p.match(/^\/lab\/carousel\/([a-z0-9-]{1,64})$/);
     if (lab && url.hostname !== SITE_HOST) return labPage(request, env, url, ctx, lab[1]);
-    if ((p === "/lab-home" || p === "/lab-home.html") && url.hostname === SITE_HOST) return new Response("Not found", { status: 404 });
-    // A sketch of the next front page, staging and local only.
-    if (p === "/lab/home" && url.hostname !== SITE_HOST) {
-      const st = await siteState(env, url, ctx);
-      const noms = st ? st.nominees : [];
-      const heads = {};
-      await Promise.all(noms.map(async (n) => {
-        const d = await env.ASSETS.fetch(new URL(`/carousels/${n.slug}.json`, url).toString()).then(jsonOrNull).catch(() => null);
-        if (d) heads[n.slug] = { headline: d.headline || "", dek: d.dek || "" };
-      }));
-      return decorate(await asset(env, url, request, "/lab-home"), env, url, { fill: { "#hn": homeNextHTML(noms, heads) } });
-    }
     if (p === "/table") {
       const st = await siteState(env, url, ctx);
       return decorate(await asset(env, url, request, "/table"), env, url, {

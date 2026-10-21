@@ -1474,46 +1474,15 @@ body[data-bg="patterns"] .pt-tip p{color:rgb(242 214 176/.78)}
 .db-links{display:flex;gap:16px;margin-top:16px!important}
 .db-links a{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#7CC9CF}
 .db-page .pp-note{margin-top:20px}
-/* ---- front page sketch (/lab/home): the Patterns page look, teardowns first ---- */
-.hn-hero{gap:clamp(20px,4vw,48px);align-items:center;justify-content:center;flex-wrap:wrap;min-height:auto;padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(32px,6vw,72px)}
-.hn-hero .pp-hero-card{flex:1 1 420px;max-width:640px}
-.hn-hero h1{font-size:clamp(48px,7.5vw,92px)}
-.hn-poster{flex:0 1 420px;width:min(420px,100%);height:auto;border-radius:24px;box-shadow:0 30px 80px rgb(0 0 0/.45);border:1px solid rgb(255 255 255/.2)}
-.hn-sec{max-width:1200px;margin:0 auto;padding:clamp(36px,6vw,72px) clamp(16px,4vw,48px) 8px;scroll-margin-top:24px}
-.hn-sec>.pp-kicker{margin-bottom:6px}
-.hn-lede{max-width:62ch;font-size:16px;line-height:1.55;color:var(--cream-2);margin:-8px 0 20px}
-.hn-cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.hn-card{height:100%;box-sizing:border-box;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"el who" "head head" "dek dek" "pat pat";gap:10px 12px;align-content:start;padding:18px;border-radius:22px;text-decoration:none;
-  background:linear-gradient(160deg,rgb(255 255 255/.09),rgb(255 255 255/.03) 65%);border:1px solid rgb(255 255 255/.13);border-top:3px solid var(--hue);
-  -webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);transition:transform .2s,box-shadow .2s}
-.hn-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgb(0 0 0/.3)}
-.hn-el{grid-area:el}
-.hn-el .el{width:52px}
-.hn-who{grid-area:who;align-self:center;font:600 14px/1.25 var(--sans);color:var(--cream)}
-.hn-who small{display:block;font:400 12px var(--sans);color:var(--cream-3)}
-.hn-head{grid-area:head;font:900 26px/.95 var(--display);text-transform:uppercase;color:var(--cream)}
-.hn-dek{grid-area:dek;font-size:14px;line-height:1.45;color:var(--cream-2)}
-.hn-pat{grid-area:pat;display:inline-flex;align-items:center;gap:8px;margin-top:4px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--cream-2)}
-.hn-pat i{width:10px;height:10px;border-radius:50%;background:var(--hue);box-shadow:0 0 10px var(--hue)}
-.hn-slab{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
-.hn-slab .pp-sec{margin-bottom:14px}
-.hn-slab h3{margin:0 0 12px}
-.hn-pills{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.hn-pills a{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border-radius:999px;background:rgb(255 255 255/.06);border:1px solid rgb(255 255 255/.12);text-decoration:none;font:500 13px var(--sans);color:var(--cream)}
-.hn-pills a:hover{border-color:var(--hue);background:rgb(255 255 255/.1)}
-.hn-pills span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--hue);color:#04101A;font:800 12px/1 var(--display)}
-.hn-asks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.hn-asks li{padding-left:14px;border-left:3px solid var(--hue)}
-.hn-asks q{display:block;font:500 18px/1.35 var(--sans);color:var(--cream);quotes:none}
-.hn-asks a{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--cream-3)}
-.hn-award{grid-template-columns:minmax(0,4fr) minmax(0,7fr);align-items:center}
-.hn-award img{width:100%;height:auto;border-radius:18px}
-.hn-ghost{color:var(--cream)!important;background:rgb(255 255 255/.08)!important;border-color:rgb(255 255 255/.25)!important}
-.hn-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.hn-next li{padding:20px;border-radius:22px;border:1px dashed rgb(242 214 176/.35);display:flex;flex-direction:column;gap:6px}
-.hn-next b{font:800 22px/1 var(--display);text-transform:uppercase;color:var(--cream)}
-.hn-next span{font-size:14px;line-height:1.5;color:var(--cream-2)}
-.hn-oops{align-items:center}
-@media (max-width:860px){ .hn-slab,.hn-award{grid-template-columns:1fr} }
-body:has(#hn) .site-foot .oops-mini{display:none}
 @media (max-width:860px){ .db-gauges{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px} .db-gauges .db-gauge:first-child{grid-column:1/-1;max-width:50%;justify-self:center} }
+/* ---- the feed in the logo palette: posts keep square corners; the bits around each carousel are frosted glass ---- */
+html[data-look="70s"] .post{background:transparent;border-radius:0;border:1px solid color-mix(in srgb,var(--surface) 45%,transparent);box-shadow:0 18px 44px rgb(4 16 26/.28)}
+html[data-look="70s"]{--frost:92%}
+@media (prefers-color-scheme: dark){ html[data-look="70s"]:not([data-theme="light"]){--frost:78%} }
+html[data-look="70s"][data-theme="dark"]{--frost:78%}
+html[data-look="70s"] .post>:not(.carousel),html[data-look="70s"] .post .cc-nav{
+  background:color-mix(in srgb,var(--surface) var(--frost),transparent);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%)}
+html[data-look="70s"] .post .cc-nav button{background:color-mix(in srgb,var(--surface) 60%,transparent);border-color:color-mix(in srgb,var(--ink) 18%,transparent);color:var(--ink)}
+html[data-look="70s"] .post-intro{background:color-mix(in srgb,var(--surface) var(--frost),transparent);color:var(--ink);border-radius:0;border:1px solid color-mix(in srgb,var(--surface) 45%,transparent);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%)}
