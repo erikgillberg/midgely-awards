@@ -183,9 +183,10 @@ export function impactPanelHTML(all, nomineeId, code = "DB-06") {
   return panel(code, `Impact over time: ${n ? n.name : nomineeId}`,
     "What the fixes gave and what they cost, year by year. Each measure has its own scale; dollar figures come from separate studies and are not added together.",
     `<div class="im-wrap"><div class="im-events">${events}</div><ol class="im-rows">${rows}</ol><div class="im-axis">${ticks.join("")}</div></div>
+     ${c.series.filter((s) => s.featured).length > 4 ? `<button class="im-all" type="button" data-im-all>Show all ${c.series.filter((s) => s.featured).length} measures</button>` : ""}
      <p class="cb-legend db-legend"><span><i class="im-key harm"></i>Harm</span><span><i class="im-key benefit"></i>Benefit</span><span><i class="im-key proj"></i>Projected</span></p>
-     ${money ? `<h4 class="im-h">In dollars, where studies estimate it</h4><ul class="im-moneys">${money}</ul>` : ""}
-     ${(c.gaps || []).length ? `<h4 class="im-h">Not yet quantified</h4><ul class="im-gaps">${c.gaps.map((g) => `<li>${esc(g)}</li>`).join("")}</ul>` : ""}`, table, " wide");
+     ${money ? `<details class="im-fold"><summary>In dollars, where studies estimate it <span>${(c.money || []).length}</span></summary><ul class="im-moneys">${money}</ul></details>` : ""}
+     ${(c.gaps || []).length ? `<details class="im-fold"><summary>Not yet quantified <span>${c.gaps.length}</span></summary><ul class="im-gaps">${c.gaps.map((g) => `<li>${esc(g)}</li>`).join("")}</ul></details>` : ""}`, table, " wide");
 }
 
 // The Dashboards page: every panel. The Patterns page shows the gauges and links here.

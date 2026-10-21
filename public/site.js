@@ -294,3 +294,9 @@ document.addEventListener("click", (e) => {
     light("story");
   }
 }
+
+// teardown impact chart: show every measure
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-im-all]"); if (!b) return;
+  b.closest(".db-panel")?.querySelector(".im-rows")?.classList.add("all"); b.remove();
+});

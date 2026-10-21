@@ -51,12 +51,11 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
       <a class="td-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(page)}" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(n.id)}">Share on LinkedIn</a>
       <button class="td-btn" type="button" data-copy-link="${esc(page)}">Copy link</button>
     </div>
-    <div class="td-comments">
-      <h2>Discussion</h2>
-      <p>What would you have done differently?</p>
+    <aside class="td-comments td-float" id="discussion" aria-label="Discussion">
+      <p class="td-float-q">What would you have done differently?</p>
       <button class="td-btn primary" type="button" data-intent="comment-login" data-id="${esc(n.id)}">Log in to comment</button>
       <p class="td-intent" hidden>Comments open soon. Thanks for the nudge: we counted it.</p>
-    </div>`;
+    </aside>`;
 
   const others = all.filter((x) => x.id !== n.id).slice(0, 8).map((x) =>
     `<a class="td-other" href="${nomineePath(x)}"><span class="td-sym">${esc(symbol(x.name))}</span><span>${esc(x.name)}<small>${esc(x.work || "")}</small></span></a>`).join("");
