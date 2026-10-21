@@ -65,7 +65,7 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
 
   return `${bgs.length ? `<div class="td-bgs" aria-hidden="true">${bgs.map((b, i) => `<span class="${i ? "" : "on"}" style="background-image:url(${esc(b)})"></span>`).join("")}</div>` : ""}
   <section class="td" style="${jewelVars(jewelOf(n.domain))}">
-    ${share.split('<div class="td-comments">')[0]}
+    ${share}
     ${impact ? sec("impact", "Impact over time", `<div class="td-dark">${impact}</div>`) : ""}
     ${(() => {
       const k = (n.patterns || [])[0], p = CODEBOOK.find((c) => c.key === k);
@@ -77,7 +77,7 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
         <p class="td-link"><a href="/dashboards">Open the dashboards →</a></p></section>`;
     })()}
     ${sec("tags", "The pattern and tags", tags)}
-    <div class="td-comments" id="discussion">${share.split('<div class="td-comments">')[1]}
+
     ${refs ? sec("references", "References", `<ol class="td-refs">${refs}</ol>`, false) : ""}
     ${credits ? sec("credits", "Image credits", `<ul class="td-credits">${credits}</ul>`, false) : ""}
     ${sec("corrections", "Corrections", corrections, false)}
@@ -91,7 +91,7 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
 export function teardownMastHTML(n, story = {}) {
   const main = CODEBOOK.find((c) => c.key === (n.patterns || [])[0]);
   const stops = [["story", "The story"], ["impact", "Impact"], ["pattern", "Pattern"], ["dashboards", "Dashboards"], ["tags", "Tags"],
-    ["discussion", "Discussion"], ["references", "Sources"], ["corrections", "Corrections"], ["more", "More"]];
+    ["references", "Sources"], ["corrections", "Corrections"], ["more", "More"]];
   return `<a class="td-hero" href="/" aria-label="The Backfire Awards home">
       <img src="/img/brand/hero-compact.jpg" srcset="/img/brand/hero-compact.webp" width="1920" height="640" alt="Backfire Awards. Bright Ideas. Unintended Consequences.">
     </a>
