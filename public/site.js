@@ -246,7 +246,7 @@ document.addEventListener("click", (e) => {
   fetch("/api/intent", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ what: b.dataset.intent, id: b.dataset.id }) }).catch(() => {});
   if (b.dataset.intent === "comment-login") {
     e.preventDefault();
-    const note = b.parentElement.querySelector(".td-intent"); if (note) note.hidden = false;
+    const note = b.closest(".td-nav, .td-comments")?.querySelector(".td-intent"); if (note) { note.hidden = false; setTimeout(() => (note.hidden = true), 4000); }
     b.disabled = true;
   }
 });
@@ -255,7 +255,7 @@ document.addEventListener("click", (e) => {
 {
   const layers = [...document.querySelectorAll(".td-bgs span")];
   if (layers.length > 1) {
-    const marks = [...document.querySelectorAll("#td-mast, .post, .td-sec, .td-wide, .td-comments, .td-others")];
+    const marks = [...document.querySelectorAll(".td-mast, #pattern, #more")];   // three changes per page, no more
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (!e.isIntersecting) return;
       const i = marks.indexOf(e.target) % layers.length;
@@ -267,7 +267,7 @@ document.addEventListener("click", (e) => {
 
 // ---------- teardown pages: the floating hero shrinks as you scroll; the section menu lights where you are
 {
-  const hero = document.querySelector(".td-hero img");
+  const hero = null; // the hero scrolls away with the page
   if (hero) {
     const root = document.documentElement;
     const big = () => Math.min(innerHeight * 0.3, 320, innerWidth / 3);

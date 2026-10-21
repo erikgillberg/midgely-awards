@@ -1554,8 +1554,7 @@ async function nomineePage(request, env, url, ctx, key) {
         everyone: st.nominees,
         // backgrounds that change as the reader scrolls: the story's photos, then its category scene
         // the warm 1970s scenes behind the page, changing as the reader scrolls
-        backgrounds: ["/img/seventies/01-tokyo-skyways-wide.jpg", "/img/seventies/02-indian-solar-city-sq.jpg", "/img/seventies/04-desert-research-city-sq.jpg",
-          "/img/seventies/03-west-african-future-sq.jpg", "/img/seventies/07-silent-orbit-wide.jpg"],
+        backgrounds: ["/img/seventies/01-tokyo-skyways-wide.jpg", "/img/seventies/04-desert-research-city-sq.jpg", "/img/seventies/07-silent-orbit-wide.jpg"],
       }),
     },
     image: shareImage || undefined,

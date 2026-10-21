@@ -1775,3 +1775,39 @@ body[data-page="nominee"] :is(.td-sec,.td-wide,#discussion,#more,#list){scroll-m
 .im-fold>summary{cursor:pointer;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--cream-2,#F2D6B0)}
 .im-fold>summary span{opacity:.6;margin-left:6px}
 .im-fold[open]>summary{margin-bottom:10px}
+/* ---- teardown: menu pinned across the top, square; hero scrolls away; footer full width ---- */
+:root{--railw:232px;--pl:248px}
+@media (max-width:1180px){ :root{--railw:76px;--pl:92px} }
+@media (max-width:760px){ :root{--railw:0px;--pl:16px} }
+.td-hero{position:static!important;margin:58px auto 0}
+.td-hero img{height:min(30svh,320px)!important}
+.td-nav{position:fixed!important;top:0;left:var(--railw);right:0;width:auto!important;max-width:none!important;margin:0!important;z-index:29;
+  border-radius:0!important;border:0!important;border-bottom:1px solid rgb(255 255 255/.14)!important;padding:6px 16px!important;
+  display:flex;align-items:center;gap:12px;background:rgb(10 32 51/.82)!important;overflow:visible!important}
+.td-nav ol{overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.td-nav ol::-webkit-scrollbar{display:none}
+.td-nav a{border-radius:0!important}
+.td-nav-act{display:flex;gap:6px;flex:none}
+.td-nav-btn{display:inline-flex;align-items:center;padding:7px 12px;border:1px solid rgb(255 255 255/.25);background:none;color:#F2D6B0;font:600 12px var(--sans);text-decoration:none;cursor:pointer;white-space:nowrap}
+.td-nav-btn.li{background:#0A66C2;border-color:#0A66C2;color:#fff}
+.td-nav-btn.cta{background:#EE6B3A;border-color:#EE6B3A;color:#0A2033}
+.td-nav .td-intent{position:absolute;right:16px;top:100%;margin:6px 0 0;padding:8px 12px;background:#0A2033;color:#F2D6B0;font-size:13px;border:1px solid rgb(255 255 255/.2)}
+body[data-page="nominee"] :is(.td-sec,.td-wide,#more,#list){scroll-margin-top:64px!important}
+.td-float,.td-actions{display:none!important}
+@media (max-width:760px){
+  .td-nav{top:0}
+  .td-nav-btn.li,.td-nav-btn[data-copy-link]{display:none}
+  .td-hero{margin-top:60px}
+}
+/* the backgrounds: a quiet wash over the scenes */
+.td-bgs span::after{background:linear-gradient(180deg,rgb(8 25 40/.42),rgb(8 25 40/.66))!important}
+.td-bgs span{transition:opacity 2s ease!important}
+/* the bottom: one column, in order */
+@media (min-width:1100px){
+  body[data-page="nominee"] .td>:is(#references,#credits,#corrections,#tags){grid-column:1/-1}
+}
+.td-others{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))!important}
+.td-other{border-radius:14px!important;align-items:center}
+.td-other small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
+/* footer: full width, square */
+.site-foot{border-radius:0!important;width:calc(100vw - var(--railw));margin-left:calc((100% - (100vw - var(--pl) - 16px)) / 2 - (var(--pl) - var(--railw)));box-sizing:border-box;padding-inline:max(16px,calc((100vw - var(--railw) - 880px) / 2))!important}

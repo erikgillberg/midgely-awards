@@ -65,7 +65,6 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
 
   return `${bgs.length ? `<div class="td-bgs" aria-hidden="true">${bgs.map((b, i) => `<span class="${i ? "" : "on"}" style="background-image:url(${esc(b)})"></span>`).join("")}</div>` : ""}
   <section class="td" style="${jewelVars(jewelOf(n.domain))}">
-    ${share}
     ${impact ? sec("impact", "Impact over time", `<div class="td-dark">${impact}</div>`) : ""}
     ${(() => {
       const k = (n.patterns || [])[0], p = CODEBOOK.find((c) => c.key === k);
@@ -105,5 +104,11 @@ export function teardownMastHTML(n, story = {}) {
       </div>
     </header>
     <span id="story" class="td-anchor"></span>
-    <nav class="td-nav" aria-label="On this page"><ol>${stops.map(([id, l]) => `<li><a href="#${id}" data-stop="${id}">${l}</a></li>`).join("")}</ol></nav>`;
+    <nav class="td-nav" aria-label="On this page"><ol>${stops.map(([id, l]) => `<li><a href="#${id}" data-stop="${id}">${l}</a></li>`).join("")}</ol>
+      <div class="td-nav-act">
+        <a class="td-nav-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://backfireawards.com" + nomineePath(n))}" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(n.id)}">Share</a>
+        <button class="td-nav-btn" type="button" data-copy-link="${esc("https://backfireawards.com" + nomineePath(n))}">Copy link</button>
+        <button class="td-nav-btn cta" type="button" data-intent="comment-login" data-id="${esc(n.id)}">Comment</button>
+      </div>
+      <p class="td-intent" hidden>Comments open soon. Thanks: we counted your click.</p></nav>`;
 }
