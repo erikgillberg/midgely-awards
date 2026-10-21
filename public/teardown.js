@@ -17,7 +17,7 @@ export const CORRECTIONS = [
 const label = (dim, v) => DIMENSIONS[dim]?.values?.[v] || v;
 let secN = 0;
 const sec = (id, title, body, open = true) =>
-  `<details class="td-sec" id="${id}" data-bg-i="${secN}"${open ? " open" : ""}><summary><h2><span class="td-n">${String(++secN).padStart(2, "0")}</span>${esc(title)}</h2></summary><div class="td-body">${body}</div></details>`;
+  `<details class="td-sec" id="${id}" data-bg-i="${secN}"${open ? " open" : ""}><summary><h2>${esc(title)}</h2></summary><div class="td-body">${body}</div></details>`;
 
 export function teardownHTML(n, all, media = [], url = "", story = {}) {
   const pats = (n.patterns || []).map((k, i) => {
@@ -34,7 +34,7 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
   const tags = `<div class="td-pats">${pats}</div>${facts ? `<dl class="td-facts">${facts}</dl>` : ""}
     <p class="td-note">Tags from the <a href="/patterns">codebook</a>. See every case in the <a href="/dashboards">dashboards</a>.</p>`;
 
-  const impact = impactPanelHTML(all, n.id, "Data");
+  const impact = impactPanelHTML(all, n.id, "");
 
   const refs = (CASE_SOURCES[n.slug] || CASE_SOURCES[n.id] || []).map((r) =>
     `<li>${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source)}</a>` : esc(r.source)}</li>`).join("");
@@ -72,17 +72,17 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
       const k = (n.patterns || [])[0], p = CODEBOOK.find((c) => c.key === k);
       if (!p) return "";
       const noms = tagged(story.everyone || all.concat([n]));
-      return `<section class="td-wide pp td-pattern" id="pattern"><p class="td-eyebrow">The pattern behind it</p>${patternChapterHTML(noms, p, CODEBOOK.indexOf(p), "pattern-" + k)}
+      return `<section class="td-wide pp td-pattern" id="pattern">${patternChapterHTML(noms, p, CODEBOOK.indexOf(p), "pattern-" + k)}
         <p class="td-link"><a href="/patterns">See all ten patterns →</a></p></section>
-        <section class="td-wide pp td-dash" id="dashboards"><p class="td-eyebrow">Dashboards</p><h2>What ${noms.length} backfires have in common</h2>${readouts(noms)}
+        <section class="td-wide pp td-dash" id="dashboards"><h2>What ${noms.length} backfires have in common</h2>${readouts(noms)}
         <p class="td-link"><a href="/dashboards">Open the dashboards →</a></p></section>`;
     })()}
     ${sec("tags", "The pattern and tags", tags)}
-    <div class="td-comments">${share.split('<div class="td-comments">')[1]}
+    <div class="td-comments" id="discussion">${share.split('<div class="td-comments">')[1]}
     ${refs ? sec("references", "References", `<ol class="td-refs">${refs}</ol>`, false) : ""}
     ${credits ? sec("credits", "Image credits", `<ul class="td-credits">${credits}</ul>`, false) : ""}
     ${sec("corrections", "Corrections", corrections, false)}
-    <h2 class="feed-h td-more">More teardowns</h2>
+    <h2 class="feed-h td-more" id="more">More teardowns</h2>
     <nav class="td-others" aria-label="More teardowns">${others}</nav>
   </section>`;
 }
@@ -91,13 +91,12 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
 // in the category's color. On a first visit this is the brand's front door.
 export function teardownMastHTML(n, story = {}) {
   const main = CODEBOOK.find((c) => c.key === (n.patterns || [])[0]);
-  return `<header class="td-mast">
-    <picture class="td-hero">
-      <source media="(max-width: 640px)" srcset="/img/brand/hero-mobile.webp" type="image/webp">
-      <source srcset="/img/brand/hero-compact.webp" type="image/webp">
-      <img src="/img/brand/hero-compact.jpg" width="1920" height="640" alt="Backfire Awards. Bright Ideas. Unintended Consequences.">
-    </picture>
-    <div class="td-mast-bar" style="${jewelVars(jewelOf(n.domain))}">
+  const stops = [["story", "The story"], ["impact", "Impact"], ["pattern", "Pattern"], ["dashboards", "Dashboards"], ["tags", "Tags"],
+    ["discussion", "Discussion"], ["references", "Sources"], ["corrections", "Corrections"], ["more", "More"]];
+  return `<a class="td-hero" href="/" aria-label="The Backfire Awards home">
+      <img src="/img/brand/hero-compact.jpg" srcset="/img/brand/hero-compact.webp" width="1920" height="640" alt="Backfire Awards. Bright Ideas. Unintended Consequences.">
+    </a>
+    <header class="td-mast" style="${jewelVars(jewelOf(n.domain))}">
       <div class="td-mast-tile">${elementHTML(n, "lg")}</div>
       <div class="td-mast-txt">
         <p class="td-kicker">A Backfire teardown · ${esc(DOMAINS[n.domain] || "")}</p>
@@ -105,6 +104,7 @@ export function teardownMastHTML(n, story = {}) {
         <p class="td-dek">${esc(n.work)}${n.years ? ` · ${esc(n.years)}` : ""}</p>
         ${main ? `<a class="td-mast-pat" href="#pattern" style="--hue:${HUES[main.key]}"><i></i>The pattern: ${esc(main.name)}</a>` : ""}
       </div>
-    </div>
-  </header>`;
+    </header>
+    <span id="story" class="td-anchor"></span>
+    <nav class="td-nav" aria-label="On this page"><ol>${stops.map(([id, l]) => `<li><a href="#${id}" data-stop="${id}">${l}</a></li>`).join("")}</ol></nav>`;
 }

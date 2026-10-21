@@ -264,3 +264,33 @@ document.addEventListener("click", (e) => {
     marks.forEach((m) => io.observe(m));
   }
 }
+
+// ---------- teardown pages: the floating hero shrinks as you scroll; the section menu lights where you are
+{
+  const hero = document.querySelector(".td-hero img");
+  if (hero) {
+    const root = document.documentElement;
+    const big = () => Math.min(innerHeight * 0.3, 320, innerWidth / 3);
+    const small = () => Math.min(64, innerWidth / 6);
+    const size = () => { const h = Math.max(small(), big() - scrollY * 0.5); root.style.setProperty("--hh", h + "px"); };
+    size(); addEventListener("scroll", size, { passive: true }); addEventListener("resize", size);
+  }
+  const nav = document.querySelector(".td-nav");
+  if (nav) {
+    const links = [...nav.querySelectorAll("a[data-stop]")];
+    links.forEach((a) => { if (!document.getElementById(a.dataset.stop)) a.parentElement.hidden = true; });
+    const live = links.filter((a) => !a.parentElement.hidden);
+    const light = (id) => live.forEach((a) => {
+      const on = a.dataset.stop === id;
+      a.toggleAttribute("aria-current", on);
+      if (on) nav.scrollTo({ left: a.offsetLeft - nav.clientWidth / 2 + a.offsetWidth / 2, behavior: "smooth" });
+    });
+    const targets = live.map((a) => a.dataset.stop === "story" ? document.querySelector("#list") : document.getElementById(a.dataset.stop)).filter(Boolean);
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      light(e.target.id === "list" ? "story" : e.target.id);
+    }), { rootMargin: "-40% 0px -55% 0px" });
+    targets.forEach((t) => io.observe(t));
+    light("story");
+  }
+}

@@ -24,7 +24,8 @@ export const HUES = {
 const nameOf = (key) => CODEBOOK.find((c) => c.key === key)?.name || "";
 
 function panel(code, title, sub, body, table, wide = "") {
-  return `<figure class="db-panel${wide}"><figcaption><p class="db-code">${code}</p><h3>${esc(title)}</h3><p>${esc(sub)}</p></figcaption>
+  // code "" drops the panel's own label and title (a teardown page names the section already)
+  return `<figure class="db-panel${wide}">${code ? `<figcaption><p class="db-code">${code}</p><h3>${esc(title)}</h3><p>${esc(sub)}</p></figcaption>` : `<figcaption><p>${esc(sub)}</p></figcaption>`}
     <div class="db-plot">${body}</div>
     <details class="db-table"><summary>Show as a table</summary>${table}</details></figure>`;
 }

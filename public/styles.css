@@ -1682,7 +1682,6 @@ body[data-bg="patterns"] .nav-theme{display:none} /* these pages are always nigh
 @media (max-width:560px){ .td-mast-bar{grid-template-columns:1fr;gap:12px} .td-mast-tile .el{width:80px} }
 @media (min-width:641px){ .td-hero{height:min(34svh,360px)} .td-hero img{height:100%;object-fit:contain} }
 @media (min-width:1100px){
-  body[data-page="nominee"] #td-mast{--tdw:min(1240px,calc(100vw - 340px));width:var(--tdw);margin-left:calc((100% - var(--tdw)) / 2)}
   body[data-page="nominee"] .td-mast-bar{padding:26px 40px}
   body[data-page="nominee"] .td-mast-tile .el{width:130px}
   body[data-page="nominee"] .td>:is(.td-wide){grid-column:1/-1}
@@ -1720,3 +1719,33 @@ body[data-page="nominee"]:has(.td-bgs){background:#08192A}
 /* on a teardown page the pattern chapter sits over bright scenes: darker glass so it reads */
 .td-pattern .pp-slab{background:linear-gradient(135deg,rgb(10 32 51/.72),rgb(10 32 51/.6));border-color:rgb(255 255 255/.14)}
 @media (max-width:560px){ .td-mast-tile{display:none} }
+/* ---- one rule: square for the objects (carousel cards, posts, element tiles), rounded for everything around them ---- */
+body[data-page="nominee"] :is(.td-sec,.td-comments,.td-mast,.td-other,.td-dark .db-panel){border-radius:20px;overflow:hidden}
+body[data-page="nominee"] .td-btn{border-radius:999px}
+.td-dark{margin:0}
+.td-dark .db-panel{border-radius:16px}
+.td-sec{border-top:1px solid rgb(255 255 255/.12)!important}
+/* the hero floats at the top: large on arrival, shrinking to a small bar as the reader scrolls */
+.td-hero{position:sticky;top:10px;z-index:26;display:block;width:max-content;max-width:100%;margin:0 auto;border-radius:20px;overflow:hidden;
+  box-shadow:0 18px 40px rgb(4 16 26/.45);background:#053543;height:auto}
+.td-hero img{display:block;height:var(--hh,min(30svh,320px));width:auto;max-width:100%;object-fit:contain;transition:height .08s linear}
+/* the section menu floats under the hero and lights the section you're in */
+.td-anchor{display:block;scroll-margin-top:calc(var(--hh,90px) + 80px)}
+.td-nav{position:sticky;top:calc(var(--hh,min(30svh,320px)) + 20px);z-index:25;margin:0 auto;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none;
+  border-radius:999px;padding:5px;background:rgb(15 38 56/.62);border:1px solid rgb(255 255 255/.14);
+  -webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);box-shadow:0 12px 30px rgb(0 0 0/.3)}
+.td-nav::-webkit-scrollbar{display:none}
+.td-nav ol{list-style:none;display:flex;gap:2px;margin:0;padding:0}
+.td-nav a{display:block;white-space:nowrap;padding:7px 13px;border-radius:999px;color:rgb(242 214 176/.75);text-decoration:none;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.td-nav a:hover{color:#F2D6B0;background:rgb(255 255 255/.08)}
+.td-nav a[aria-current]{background:#EE6B3A;color:#0A2033}
+.td-nav li[hidden]{display:none}
+body[data-page="nominee"] :is(.td-sec,.td-wide,#discussion,#more,#list){scroll-margin-top:calc(var(--hh,90px) + 80px)}
+.td-mast{margin-top:4px}
+.td-mast{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;padding:20px 22px;color:#F2D6B0;
+  background:rgb(10 32 51/.62);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border:1px solid rgb(255 255 255/.12)}
+@media (min-width:1100px){ body[data-page="nominee"] .td-mast{padding:26px 40px} }
+@media (max-width:560px){ .td-mast{grid-template-columns:1fr;gap:12px} }
+/* the masthead slot dissolves, so the hero and the menu stay pinned for the whole page */
+#td-mast{display:contents}
+@media (min-width:1100px){ body[data-page="nominee"] .td-mast{--tdw:min(1240px,calc(100vw - 340px));width:var(--tdw);margin-left:calc((100% - var(--tdw)) / 2)} }
