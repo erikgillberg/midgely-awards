@@ -13,7 +13,8 @@ const seen = new IntersectionObserver((entries) => entries.forEach((e) => e.isIn
   { rootMargin: "-35% 0px -60% 0px" });
 links.forEach((_, id) => { const s = document.getElementById(id); if (s) seen.observe(s); });
 
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+// Arriving at a section (#moved) shows everything at once; scrolling from the top lets panels rise.
+if (!location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const rise = new IntersectionObserver((entries) => entries.forEach((e) => {
     if (e.isIntersecting) { e.target.classList.add("in"); rise.unobserve(e.target); }
   }), { rootMargin: "0px 0px -8% 0px" });
@@ -22,5 +23,4 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
   els.filter((el) => el.getBoundingClientRect().top > innerHeight).forEach((el) => { el.classList.add("rise"); rise.observe(el); });
   const all = () => els.forEach((el) => el.classList.add("in"));
   addEventListener("hashchange", all); addEventListener("beforeprint", all);
-  if (location.hash) all();   // arriving at a section: show it at once
 }

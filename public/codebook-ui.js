@@ -14,9 +14,11 @@ const tip = (title, lines) => `data-tip="${esc(title)}" data-tip-lines="${esc(li
 // Night instrument panels. Marks glow in the palette; text stays in the cream inks so the numbers read first.
 const SCALE_ROWS = ["global", "national", "regional", "local"];
 const LAG_COLS = ["immediate", "years", "decades", "generations"];
+// Each pattern's color, from the Switchback family in the logo, stepped for the night background.
+// The seven chart hues pass the colorblind and contrast checks on navy; every bar also carries its name.
 const HUES = {
-  surplus: "#E98946", stable: "#A3A45C", moved: "#5FB3AF", everyone: "#D08F9A", metric: "#5AA3C0",
-  resistance: "#E06A4E", gamed: "#E0AC3E", later: "#B585BA", flipped: "#C9925F", buffered: "#86AE93",
+  surplus: "#E56636", stable: "#6CB8E8", moved: "#1FA9AF", everyone: "#CD6199", metric: "#5981E0",
+  resistance: "#E04A3F", gamed: "#D99B1F", later: "#A269C9", flipped: "#E9CFA4", buffered: "#47AA62",
 };
 const nameOf = (key) => CODEBOOK.find((c) => c.key === key)?.name || "";
 
@@ -60,7 +62,7 @@ function matrix(noms) {
   const head = `<span></span>${LAG_COLS.map((l) => `<span class="db-mh">${esc(DIMENSIONS.lag.values[l])}</span>`).join("")}`;
   const body = SCALE_ROWS.map((s) => `<span class="db-mh row">${esc(DIMENSIONS.scale.values[s])}</span>` + LAG_COLS.map((l) => {
     const cs = cell(s, l);
-    return `<span class="db-mc${cs.length ? " on" : ""}${cs.length / max >= 0.5 ? " hot" : ""}" style="--a:${cs.length / max}" ${tip(`${DIMENSIONS.scale.values[s]}, ${DIMENSIONS.lag.values[l].toLowerCase()}`, cs.length ? cs.map((n) => n.name) : ["No cases"])}>${cs.length || "·"}</span>`;
+    return `<span class="db-mc${cs.length ? " on" : ""}${cs.length === max ? " hot" : ""}" style="--a:${cs.length / max}" ${tip(`${DIMENSIONS.scale.values[s]}, ${DIMENSIONS.lag.values[l].toLowerCase()}`, cs.length ? cs.map((n) => n.name) : ["No cases"])}>${cs.length || "·"}</span>`;
   }).join("")).join("");
   const table = `<table><thead><tr><th>Scale</th>${LAG_COLS.map((l) => `<th>${esc(DIMENSIONS.lag.values[l])}</th>`).join("")}</tr></thead><tbody>${SCALE_ROWS.map((s) => `<tr><td>${esc(DIMENSIONS.scale.values[s])}</td>${LAG_COLS.map((l) => `<td>${cell(s, l).length}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
   return panel("DB-02", "How far and how slow", "Cases by how far the harm reached, against how long it took to show. Brighter means more.",
@@ -88,7 +90,7 @@ function whoPays(noms) {
   const d = DIMENSIONS.bearer;
   const rows = Object.entries(d.values).map(([k, label]) => ({ label, cs: noms.filter((n) => n.bearer.includes(k)) }));
   const max = Math.max(1, ...rows.map((r) => r.cs.length));
-  const bars = rows.map((r) => `<li style="--hue:#5FB3AF" ${tip(r.label, r.cs.length ? r.cs.map((n) => n.name) : ["No cases"])}>
+  const bars = rows.map((r) => `<li style="--hue:#1FA9AF" ${tip(r.label, r.cs.length ? r.cs.map((n) => n.name) : ["No cases"])}>
     <span class="db-bl">${esc(r.label)}</span><span class="db-track"><span class="db-seg" style="width:${(r.cs.length / max) * 100}%"></span><b>${r.cs.length}</b></span></li>`).join("");
   const table = `<table><thead><tr><th>Who pays</th><th>Cases</th></tr></thead><tbody>${rows.map((r) => `<tr><td>${esc(r.label)}</td><td>${r.cs.length}</td></tr>`).join("")}</tbody></table>`;
   return panel("DB-04", "Who pays", "Cases where each group carried the cost. Most cases have more than one.", `<ol class="db-bars">${bars}</ol>`, table);
