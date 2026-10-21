@@ -145,7 +145,7 @@ if (sheet) {
       if (!body.fix || !body.oops) { msg.textContent = "Tell us what you were trying to fix and what happened instead."; return; }
       if (body.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(body.email)) { msg.textContent = "That email address doesn't look right."; return; }
       path = "/api/murphys";
-      thanks = "We read every Murphy. If we feature yours, it'll be in The Weekly Oops or on our social accounts. Want to post it yourself? Make your cards below.";
+      thanks = "We read every Murphy. If we feature yours, it'll be in The Backfire Newsletter or on our social accounts. Want to post it yourself? Make your cards below.";
     }
     await configReady;
     if (config.turnstileSiteKey && !form.dataset.ts) { msg.textContent = "Complete the human check first."; return; }
@@ -166,7 +166,7 @@ if (sheet) {
   });
 }
 
-// ---------- The Weekly Oops sign-up forms
+// ---------- The Backfire Newsletter sign-up forms
 document.addEventListener("focusin", (e) => { const f = e.target.closest && e.target.closest("[data-signup]"); if (f) turnstileFor(f); });
 document.addEventListener("submit", async (e) => {
   const form = e.target.closest("[data-signup]");
@@ -182,7 +182,7 @@ document.addEventListener("submit", async (e) => {
   try {
     await api("/api/subscribe", { method: "POST", body: JSON.stringify({ email, website: form.querySelector('[name="website"]').value, turnstile: form.dataset.ts || "", utm: new URLSearchParams(location.search).get("utm_source") || "" }) });
     form.querySelectorAll("input, button, [data-ts]").forEach((x) => (x.hidden = true));
-    msg.classList.add("ok"); msg.textContent = "You're on the list for The Weekly Oops.";
+    msg.classList.add("ok"); msg.textContent = "You're on the list for The Backfire Newsletter.";
   } catch (err) { msg.textContent = err.message; resetTurnstile(form); }
   btn.disabled = false;
 });
@@ -204,7 +204,7 @@ if (panel) {
 // Mark the current page in the menu.
 document.querySelectorAll(".nav-i[href]").forEach((a) => { if (a.getAttribute("href") === location.pathname) a.setAttribute("aria-current", "page"); });
 
-// ---------- the Weekly Oops box (left rail button)
+// ---------- the Backfire Newsletter box (left rail button)
 const oopsBox = $("#oops-box");
 if (oopsBox) {
   let back = null;
@@ -219,3 +219,13 @@ if (oopsBox) {
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !oopsBox.hidden) setOops(false); });
 }
+
+// ---------- night / day: night is the default; the choice is remembered in this browser
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("[data-theme-toggle]")) return;
+  const d = document.documentElement, next = d.dataset.theme === "light" ? "dark" : "light";
+  d.dataset.theme = next;
+  try { localStorage.setItem("bf.theme", next); } catch {}
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = next === "light" ? "#F4E8D6" : "#0A2033";
+});

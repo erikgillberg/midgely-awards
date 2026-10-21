@@ -743,7 +743,7 @@ async function getState(db, url, ctx) {
 
 // Copies of each submission go to outside services when their settings exist. The site's database stays the record.
 //   FORMSPREE_SUBSCRIBE, FORMSPREE_MURPHY, FORMSPREE_NOMINATION: a Formspree form id (the part after /f/)
-//   MAILCHIMP_API_KEY (secret) + MAILCHIMP_AUDIENCE_ID: adds Weekly Oops sign-ups to the Mailchimp audience
+//   MAILCHIMP_API_KEY (secret) + MAILCHIMP_AUDIENCE_ID: adds newsletter sign-ups to the Mailchimp audience
 //   BEEHIIV_API_KEY + BEEHIIV_PUBLICATION_ID: adds newsletter sign-ups to Beehiiv
 async function forward(env, kind, data) {
   const jobs = [];
@@ -1274,6 +1274,9 @@ class Versioned {
   constructor(attr) { this.attr = attr; }
   element(el) { const v = el.getAttribute(this.attr); if (v && !v.includes("?")) el.setAttribute(this.attr, `${v}?v=${ver()}`); }
 }
+// Night is the default; the reader's choice (the Day / Night switch in the menu) is remembered.
+const THEME_SCRIPT = `<script>(function(){var d=document.documentElement,t=null;try{t=localStorage.getItem("bf.theme")}catch(e){}
+t=t==="light"?"light":"dark";d.setAttribute("data-theme",t);var m=document.querySelector('meta[name="theme-color"]');if(m&&t==="light")m.content="#F4E8D6"})();</script>`;
 const LOOK_SCRIPT = `<script>(function(){var d=document.documentElement,k="bf.look",l=null,q=new URLSearchParams(location.search).get("look");
 if(q!=="70s"&&q!=="classic")q=null;
 try{if(q)localStorage.setItem(k,q);l=localStorage.getItem(k)}catch(e){}
@@ -1303,7 +1306,7 @@ function decorate(res, env, url, meta = {}, status = 0) {
     // The site "look": classic, or the 1970s palette. LOOK_DEFAULT picks it per environment;
     // ?look=70s or ?look=classic overrides it for this browser (kept in localStorage).
     .on("html", new SetAttr("data-look-default", env.LOOK_DEFAULT === "70s" ? "70s" : "classic"))
-    .on("head", new Append(LOOK_SCRIPT));
+    .on("head", new Append(LOOK_SCRIPT + THEME_SCRIPT));
 
   if (meta.canonical) {
     rw = rw.on('meta[property="og:url"]', new SetAttr("content", meta.canonical))
@@ -1452,7 +1455,7 @@ async function honoreePage(request, env, url, ctx) {
 
 // /shop: the products from the Shopify store (shop.backfireawards.com), read from its public product feed
 // and cached for ten minutes. Buyers pick a size and check out on Shopify. While the store is still
-// password-protected the feed is closed, and the page offers the Weekly Oops instead.
+// password-protected the feed is closed, and the page offers the Backfire Newsletter instead.
 const SHOP_ORIGIN = "https://shop.backfireawards.com";
 async function shopProducts(ctx) {
   const cache = caches.default;
@@ -1511,7 +1514,7 @@ async function shopPage(request, env, url, ctx) {
   const items = await shopProducts(ctx);
   const grid = items.length
     ? items.map(shopCardHTML).join("")
-    : `<div class="shop-soon"><h2>Back soon</h2><p>The shop is restocking. Get The Weekly Oops and you'll hear when new shirts are in.</p>${signupHTML("shop")}</div>`;
+    : `<div class="shop-soon"><h2>Back soon</h2><p>The shop is restocking. Get The Backfire Newsletter and you'll hear when new shirts are in.</p>${signupHTML("shop")}</div>`;
   return decorate(await asset(env, url, request, "/shop"), env, url, { canonical: SITE + "/shop", fill: { "#shop-grid": grid } });
 }
 
@@ -1610,7 +1613,7 @@ const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
-  const paths = ["/", "/search", "/table", "/patterns", "/dashboards", "/midgley", ...(MURPHYS_LIVE ? ["/murphy"] : []), "/awards", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
+  const paths = ["/", "/search", "/table", "/patterns", "/dashboards", "/midgley", ...(MURPHYS_LIVE ? ["/murphy"] : []), "/awards", "/shop", "/faq", "/guidelines", "/privacy", "/terms"];
   if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -1692,7 +1695,8 @@ export default {
     if (p === "/shop/waitlist" || p === "/shop/waitlist.html") return Response.redirect(SITE_ORIGIN(url) + "/shop", 301); // the shop is open; the Tally waitlist is retired
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
     if (p === "/murphy") return decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy", fill: { "#murphy-embed": tallyHTML(LINKS.microFormId, "Share your Murphy") } });
-    if (p === "/goat") return Response.redirect(SITE_ORIGIN(url) + "/scores", 301); // Goat retired as a character
+    if (p === "/goat") return Response.redirect(SITE_ORIGIN(url) + "/faq", 301); // Goat retired as a character
+    if (p === "/scores" || p === "/scores.html") return Response.redirect(SITE_ORIGIN(url) + "/faq#scores", 301); // scores moved into the FAQ
     if (p === "/micro") return Response.redirect(SITE_ORIGIN(url) + "/murphy" + url.search, 301); // old name
 
     // Pages (no file extension, or .html) are rewritten per request; never let the browser's cached copy stand in.

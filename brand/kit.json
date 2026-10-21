@@ -1,7 +1,7 @@
 {
   "id": "midgley-awards",
   "name": "The Backfire Awards",
-  "scope": "The Backfire Awards site at backfireawards.com: the feed of nominee posts and Murphys, the carousels and their Instagram exports, The Midgley and The Murphy pages, the Categoric Table, search, the guidelines and terms, the Weekly Oops, and the merch.",
+  "scope": "The Backfire Awards site at backfireawards.com: the feed of nominee posts and Murphys, the carousels and their Instagram exports, The Midgley and The Murphy pages, the Categoric Table, search, the guidelines and terms, the Backfire Newsletter, and the merch.",
   "colorNote": "The Switchback palette from the logo, on every page: navy and cream grounds, orange for the one call to action, vermilion for oops, petrol and faded teal for links and data. No browns: warm hues are never mixed into dark grounds or used as faded washes. The 1970s scenes stay as illustration only. Type stays Big Shoulders Display, IBM Plex Sans and IBM Plex Mono. Every color has a night value. The site look is still named 70s in code (html[data-look]) so saved choices keep working. Night dashboards use the seven chart colors in fixed order and a teal ramp for amounts; text on charts stays cream, color sits on marks only. Each of the ten patterns has its own color, listed in public/codebook-ui.js.",
   "status": "Approved by Erik 2026-10-20: the Switchback palette from the logo as the master palette, extended for data; 1970s scenes for illustration only",
   "updated": "2026-10-20",

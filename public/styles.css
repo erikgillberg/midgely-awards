@@ -470,10 +470,10 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .el-key dl div{grid-template-columns:64px 1fr}
 
 /* ---- tile v4: corner numbers in small boxes, group number top left ---- */
-.el-num,.el-year,.el-up,.el-down{justify-self:start;align-self:start;border:1px solid rgba(255,255,255,.55);padding:.12em .32em;line-height:1.15}
+.el-num,.el-year,.el-up,.el-down{justify-self:start;align-self:start;border:0;padding:.12em 0;line-height:1.15}
 .el-year,.el-down{justify-self:end}
 .el-up,.el-down{align-self:end}
-.el-num{min-width:1.6em;aspect-ratio:1;display:grid;place-items:center;padding:0}
+.el-num{padding:.12em 0}
 /* bigger small type: these cards get shrunk to phone width */
 .cc-kicker{font-size:.95em;line-height:1.5}
 .cc-label,.cc-swipe{font-size:.85em}
@@ -624,6 +624,8 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
   :root:not([data-theme="light"]) .sq-hero,:root:not([data-theme="light"]) .sq-award{color:#E6EAEE}
   :root:not([data-theme="light"]) .sq-hero{background:#161C22;border:1.5px solid #29323B}
 }
+:root[data-theme="dark"] .sq-hero,:root[data-theme="dark"] .sq-award{color:#E6EAEE}
+:root[data-theme="dark"] .sq-hero{background:#161C22;border:1.5px solid #29323B}
 .wrap.home{container-type:inline-size}
 .sq-hero h1{font-size:4em}
 .sq-hero .element{background:#EDF0F2;color:#12161C}
@@ -747,7 +749,7 @@ body[data-bg="orbit"]{background:linear-gradient(rgba(8,25,40,.6),rgba(8,25,40,.
 .pt-bf{font:900 34cqi/1 var(--display);color:color-mix(in srgb,var(--base) 70%,transparent)}
 .pt-mark{display:grid;place-items:center;color:rgba(255,255,255,.4);font:600 12px var(--mono)}
 .el.pt{width:100%;height:100%;padding:6cqi}
-.el.pt .el-num,.el.pt .el-year,.el.pt .el-up,.el.pt .el-down{font-size:9cqi;border-width:1px}
+.el.pt .el-num,.el.pt .el-year,.el.pt .el-up,.el.pt .el-down{font-size:9cqi}
 .el.pt .el-sym{font-size:40cqi}
 .el.pt .el-name{font-size:8cqi}
 .pt-more{display:none}
@@ -1123,6 +1125,14 @@ html[data-look="70s"]{
     --amber:#C9B2F2; --amber-soft:#2A2550; --tile:#F2D6B0; --tile-ink:#0A2033;
   }
 }
+/* the site's own night/day switch (data-theme) wins over the browser setting both ways; night is the default */
+html[data-look="70s"][data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#08192A; --surface:#0F2638; --ink:#F2D6B0; --ink-2:#D9C3A3; --ink-3:#AEB9C2;
+  --line:#1F3A52; --ethyl:#F07D5A; --ethyl-soft:#3B1530; --ozone:#7CC9CF; --ozone-soft:#0F3340;
+  --amber:#C9B2F2; --amber-soft:#2A2550; --tile:#F2D6B0; --tile-ink:#0A2033;
+}
+html[data-theme="light"]{color-scheme:light}
 @media (prefers-color-scheme: dark){ html:not([data-theme="light"]) .cb{--cb-mark:#EE6B3A;--cb-on:#0A2033} }
 html[data-theme="dark"] .cb{--cb-mark:#EE6B3A;--cb-on:#0A2033}
 html[data-look="70s"] .feed-h{color:#F2D6B0}
@@ -1486,3 +1496,16 @@ html[data-look="70s"] .post>:not(.carousel),html[data-look="70s"] .post .cc-nav{
 html[data-look="70s"] .post .cc-nav button{background:color-mix(in srgb,var(--surface) 60%,transparent);border-color:color-mix(in srgb,var(--ink) 18%,transparent);color:var(--ink)}
 html[data-look="70s"] .post-intro{background:color-mix(in srgb,var(--surface) var(--frost),transparent);color:var(--ink);border-radius:0;border:1px solid color-mix(in srgb,var(--surface) 45%,transparent);
   -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%)}
+/* the menu rail and phone bars: frosted glass over the page */
+html[data-look="70s"] .rail{background:color-mix(in srgb,var(--surface) var(--frost),transparent);border-right-color:color-mix(in srgb,var(--ink) 12%,transparent);
+  -webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
+html[data-look="70s"] .tabbar{background:color-mix(in srgb,var(--surface) 78%,transparent);border-top-color:color-mix(in srgb,var(--ink) 12%,transparent);
+  -webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
+.nav-theme .t-day,html[data-theme="light"] .nav-theme .t-night{display:inline}
+.nav-theme .t-night,html[data-theme="light"] .nav-theme .t-day{display:none}
+.menu-theme{background:none;border:0;padding:7px 0;color:var(--ink);font:600 16px var(--sans);cursor:pointer;text-align:left}
+.wrap.faq{gap:12px}
+.faq h2{margin:28px 0 0;scroll-margin-top:80px}
+.faq h3{margin:12px 0 0}
+.faq-toc{font-size:14px}
+body[data-bg="patterns"] .nav-theme{display:none} /* these pages are always night */

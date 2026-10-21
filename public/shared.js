@@ -50,11 +50,11 @@ export const LINKS = {
   microFormId: "KpQa0D",
   microForm: "https://tally.so/r/KpQa0D",    // Tally: Share your Murphy (form id kept from its Micro Midgley days)
   waitlistForm: "kbakOe",                    // Tally: Backfire Awards shop waitlist (form id, embedded on /shop/waitlist)
-  beehiivForm: "71cdf4c1-b2c8-4913-bb03-cc836734a7b1", // Beehiiv: The Weekly Oops sign-up form
+  beehiivForm: "71cdf4c1-b2c8-4913-bb03-cc836734a7b1", // Beehiiv: The Backfire Newsletter sign-up form
   socials: [{ name: "Instagram", url: "https://www.instagram.com/backfireawards/" }],
 };
 
-// The Weekly Oops sign-up: our own form. The server keeps the address and passes it on to the newsletter service.
+// The Backfire Newsletter sign-up: our own form. The server keeps the address and passes it on to the newsletter service.
 export const signupHTML = (where = "foot") =>
   `<form class="signup" data-signup novalidate>
     <label class="hp" for="su-${where}">Email</label>
@@ -133,8 +133,8 @@ export function scoresHTML(n, size = "small") {
     ? `<span class="num">${pct}%</span><span class="sub">${n.herdTotal} votes</span>`
     : `<span class="num none">?</span><span class="sub">Not enough votes yet</span>`;
   return `<div class="scores ${size}">
-    <a class="score oops" href="/scores"><span class="label">Oops Score</span>${oops}</a>
-    <a class="score herd" href="/scores"><span class="label">Facepalm Index</span>${herd}</a>
+    <a class="score oops" href="/faq#scores"><span class="label">Oops Score</span>${oops}</a>
+    <a class="score herd" href="/faq#scores"><span class="label">Facepalm Index</span>${herd}</a>
   </div>`;
 }
 
@@ -247,7 +247,7 @@ function postShell(p, ctx = {}) {
       <button class="pv-btn" data-act="comments" aria-label="Comments">${picon("comment")}<span class="cc-n">${thread.length}</span></button>
       <button class="pv-btn" data-act="share" aria-label="Share">${picon("share")}</button>
     </div>
-    <p class="pv-stats">${stats} · <a href="/scores">scores</a></p>
+    <p class="pv-stats">${stats} · <a href="/faq#scores">scores</a></p>
     <div class="pv-caption"><p><a href="${esc(p.path)}"><b>${esc(p.captionTitle)}</b></a> ${esc(p.caption)}${p.more ? ` <button class="pv-more" type="button" data-act="more">more</button>` : ""}</p>
       ${p.more ? `<div class="pv-full" hidden>${p.more}</div>` : ""}</div>
     <div class="pv-comments" data-collapsed>
@@ -376,6 +376,7 @@ const ICON = {
   home: '<path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
   gauge: '<path d="M4.5 16.5a8 8 0 1 1 15 0"/><path d="m12 13 4-4.5"/><circle cx="12" cy="13" r="1.4"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/>',
   patterns: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.2 8.2l3.6 7.6M16.8 8.2l-3.6 7.6"/>',
   plus: '<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/>',
   table: '<rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="10" width="5" height="5"/><rect x="9.5" y="10" width="5" height="5"/><rect x="16" y="10" width="5" height="5"/><rect x="6" y="17.5" width="12" height="3.5"/>',
@@ -389,9 +390,9 @@ const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg
 // Every page's navigation: a rail on the left on wide screens, a top bar and a bottom tab bar on phones,
 // and the full menu (every section of the site) behind More.
 export const MENU = [
-  ["The awards", [["/midgley", "The Midgley"], ...(MURPHYS_LIVE ? [["/murphy", "The Murphy"]] : []), ["/awards", "Awards night"], ["/scores", "How scores work"], ["/table", "The Categoric Table"], ["/patterns", "The Patterns"], ["/dashboards", "Dashboards"]]],
-  ["What this is", [["/#intro", "The big picture"], ["/#rules", "What makes a good nominee"], ["/#question", "The serious question"], ["/#gap", "The gender gap"], ["/guidelines", "Community guidelines"]]],
-  ["More from us", [["/shop", "Shop"], ["/#oops", "The Weekly Oops"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
+  ["The awards", [["/midgley", "The Midgley"], ...(MURPHYS_LIVE ? [["/murphy", "The Murphy"]] : []), ["/awards", "Awards night"], ["/table", "The Categoric Table"], ["/patterns", "The Patterns"], ["/dashboards", "Dashboards"]]],
+  ["What this is", [["/faq", "FAQ"], ["/faq#nominee", "What makes a good nominee"], ["/faq#scores", "How scores work"], ["/guidelines", "Community guidelines"]]],
+  ["More from us", [["/shop", "Shop"], ["/#oops", "The newsletter"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
 ];
 export function headerHTML(flags = {}) {
   const item = (href, k, label, extra = "") => `<a class="nav-i" href="${href}" ${extra}>${icon(k)}<span>${label}</span></a>`;
@@ -407,14 +408,15 @@ export function headerHTML(flags = {}) {
       ${item("/awards", "award", "The Awards")}
       ${item("/shop", "bag", "Shop")}
     </nav>
-    <button class="nav-i nav-oops" type="button" data-oops aria-haspopup="dialog">${icon("mail")}<span>Weekly Oops</span></button>
+    <button class="nav-i nav-theme" type="button" data-theme-toggle aria-label="Switch between night and day">${icon("sun")}<span class="t-day">Day mode</span><span class="t-night">Night mode</span></button>
+    <button class="nav-i nav-oops" type="button" data-oops aria-haspopup="dialog">${icon("mail")}<span>Newsletter</span></button>
     <button class="nav-i nav-more" type="button" data-menu aria-expanded="false" aria-controls="menu-panel">${icon("menu")}<span>More</span></button>
   </div>
   <div class="oops-box" id="oops-box" role="dialog" aria-modal="true" aria-labelledby="ob-h" hidden>
     <div class="oops-box-in">
       <button class="menu-x" type="button" data-oops-close aria-label="Close">×</button>
       <p class="ob-label">The newsletter</p>
-      <h2 id="ob-h">The Weekly Oops</h2>
+      <h2 id="ob-h">The Backfire Newsletter</h2>
       <p>${OOPS_LINE}</p>
       ${signupHTML("rail")}
     </div>
@@ -429,7 +431,8 @@ export function headerHTML(flags = {}) {
   <div class="menu-panel" id="menu-panel" hidden>
     <div class="menu-in">
       <button class="menu-x" type="button" data-menu-close aria-label="Close menu">×</button>
-      <section class="menu-oops"><h2>The Weekly Oops</h2><p>${OOPS_LINE}</p>${signupHTML("menu")}</section>
+      <section class="menu-oops"><h2>The Backfire Newsletter</h2><p>${OOPS_LINE}</p>${signupHTML("menu")}</section>
+      <section><h2>Display</h2><button class="nav-theme menu-theme" type="button" data-theme-toggle><span class="t-day">Switch to day mode</span><span class="t-night">Switch to night mode</span></button></section>
       ${MENU.map(([h, links]) => `<section><h2>${h}</h2>${links.map(([href, t]) => `<a href="${href}" data-menu-close>${t}</a>`).join("")}</section>`).join("")}
       ${flags.staging ? `<section class="menu-look"><h2>Look (staging only)</h2><a href="?look=70s">1970s</a><a href="?look=classic">Classic</a></section>` : ""}
     </div>
@@ -485,7 +488,7 @@ export function footerHTML() {
     : `<span class="placeholder">Social links coming soon</span>`;
   return `<div class="site-foot-in">
     <div class="oops-mini">
-      <p><b>The Weekly Oops</b> One short email a week about things that worked too well.</p>
+      <p><b>The Backfire Newsletter</b> One short email a week about things that worked too well.</p>
       ${signupHTML("foot")}
     </div>
     <nav class="foot" aria-label="Site">
@@ -494,7 +497,7 @@ export function footerHTML() {
       ${MURPHYS_LIVE ? `<a href="/murphy">The Murphy</a>` : ""}
       <a href="/awards">The Awards</a>
       <a href="/shop">Shop</a>
-      <a href="/scores">How scores work</a>
+      <a href="/faq">FAQ</a>
       <a href="/guidelines">Guidelines</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
