@@ -1,3 +1,4 @@
+import { codeOf } from "./codebook.js";
 // Shared by the server (_worker.js) and the browser (app.js, admin.js): labels,
 // links, and the markup for nominee cards, the site header and the footer.
 // One copy of each, so the page the server sends matches what the browser redraws.
@@ -76,6 +77,8 @@ export const MURPHYS_LIVE = false;
 // the one call to action. The forms, the comment code and the data stay; flip these to bring them back.
 export const NOMINATIONS_LIVE = false;
 export const COMMENTS_LIVE = false;
+// Scores (the judges' Oops Score and the Facepalm Index numbers) are hidden for now; the "Worth it?" vote stays.
+export const SCORES_VISIBLE = false;
 // The sign-up card that sits in the feed, once, after a few posts.
 export const feedOopsHTML = () => `<section class="feed-oops" aria-labelledby="fo-h">
   <p class="ob-label">The newsletter</p><h2 id="fo-h">Get one backfire a week</h2><p>${OOPS_LINE} Unsubscribe any time.</p>${signupHTML("feed")}</section>`;
@@ -179,7 +182,7 @@ export function cardHTML(n, ctx = {}) {
     <div class="body">
       <div class="head">${title}${n.years ? `<span class="yrs">${esc(n.years)}</span>` : ""}</div>
       <p class="work">${esc(n.work)}</p>
-      ${flags.scores ? scoresHTML(n, ctx.full ? "large" : "small") : ""}
+      ${flags.scores && SCORES_VISIBLE ? scoresHTML(n, ctx.full ? "large" : "small") : ""}
       ${ctx.full ? fullSections(n) : `<dl class="ledger">
         <dt class="s">Went right</dt><dd>${esc(n.solved)}</dd>
         <dt class="b">Went oops</dt><dd>${esc(n.backfire)}</dd>
@@ -254,7 +257,7 @@ function postShell(p, ctx = {}) {
       ${COMMENTS_LIVE ? `<button class="pv-btn" data-act="comments" aria-label="Comments">${picon("comment")}<span class="cc-n">${thread.length}</span></button>` : ""}
       <button class="pv-btn" data-act="share" aria-label="Share">${picon("share")}</button>
     </div>
-    <p class="pv-stats">${stats} · <a href="/faq#scores">scores</a></p>
+    ${SCORES_VISIBLE ? `<p class="pv-stats">${stats} · <a href="/faq#scores">scores</a></p>` : ""}
     <div class="pv-caption"><p><a href="${esc(p.path)}"><b>${esc(p.captionTitle)}</b></a> ${esc(p.caption)}${p.more ? ` <button class="pv-more" type="button" data-act="more">more</button>` : ""}</p>
       ${p.more ? `<div class="pv-full" hidden>${p.more}</div>` : ""}</div>
     ${COMMENTS_LIVE ? `<div class="pv-comments" data-collapsed>
@@ -398,7 +401,7 @@ const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg
 // and the full menu (every section of the site) behind More.
 export const MENU = [
   ["The awards", [["/midgley", "The Midgley"], ...(MURPHYS_LIVE ? [["/murphy", "The Murphy"]] : []), ["/awards", "Awards night"], ["/table", "The Categoric Table"], ["/patterns", "The Patterns"], ["/dashboards", "Dashboards"]]],
-  ["What this is", [["/faq", "FAQ"], ["/faq#nominee", "What makes a good nominee"], ["/faq#scores", "How scores work"], ["/guidelines", "Community guidelines"]]],
+  ["What this is", [["/faq", "FAQ"], ["/faq#nominee", "What makes a good nominee"], ["/guidelines", "Community guidelines"]]],
   ["More from us", [["/shop", "Shop"], ["/#oops", "The newsletter"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
 ];
 export function headerHTML(flags = {}) {
@@ -585,7 +588,7 @@ export const PATTERNS = [
 const COUNT_WORD = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
 export const PATTERN_COUNT = COUNT_WORD[PATTERNS.length] || String(PATTERNS.length);
 // Why patterns matter, on every focused pattern card. Built from the count so it stays true as patterns are added.
-export const PATTERN_WHY = `Backfires repeat. We sort every one into ${PATTERN_COUNT} patterns, so you can spot one before you make one yourself.`;
+export const PATTERN_WHY = `One of ${PATTERN_COUNT} ways a good fix backfires. Learn all ${PATTERN_COUNT} at backfireawards.com/patterns.`;
 
 // ---------------------------------------------------------------- lists
 
@@ -719,7 +722,7 @@ const IG_ASK = `<section class="cc cc-igask" data-ig-only aria-hidden="true">
       <p class="cc-label">Your verdict</p>
       <h3 class="cc-title">Worth it?</h3>
       <p class="cc-igvote"><span>💡 Yes</span><span>🤦 No</span></p>
-      <p class="cc-text">Answer in the comments.</p>
+      <p class="cc-text">Answer in the comments, and send it to a friend who is building something.</p>
       <p class="cc-follow">Follow, like and share. Help your fellow humans avoid the lion at the watering hole.</p>
     </div>
     <footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>@backfireawards</span></footer>
@@ -760,14 +763,14 @@ export function carouselHTML(n, data, flags = {}) {
     const ledger = s.kind === "ledger" ? `<div class="cc-lg"><div class="lg-gave"><h4>${esc(s.gainsLabel || "What it gave")}</h4><ul>${(s.gains || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div>
       <div class="lg-cost"><h4>${esc(s.costsLabel || "What it cost")}</h4><ul>${(s.costs || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div></div>` : "";
     const lessons = s.items && s.items.length ? `<ol class="cc-lessons">${s.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
-    const patterns = focus ? `<p class="cc-text">${esc(PATTERNS[pi].text)}</p><p class="cc-why">${esc(PATTERN_WHY)}</p>
-      <ol class="cc-pdots" aria-label="The ${PATTERN_COUNT} patterns">${PATTERNS.map((p, i) => `<li class="${i === pi ? "on" : ""}" title="${esc(p.name)}">${i + 1}</li>`).join("")}</ol>`
+    const ask = focus ? codeOf(s.patternKey)?.questions?.[0] : "";
+    const patterns = focus ? `<p class="cc-text">${esc(PATTERNS[pi].text)}</p>${ask ? `<p class="cc-q"><span>Ask before you ship</span>${esc(ask)}</p>` : ""}<p class="cc-why">${esc(PATTERN_WHY)}</p>`
       : s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p, i) => `<li class="${p.key === s.patternKey ? "on" : ""}"><span class="pn">${p.key === s.patternKey ? "→ " : ""}#${i + 1}</span><span><b>${esc(p.name)}</b> ${esc(p.text)}</span></li>`).join("")}</ol>` : "";
     cards.push(`<section class="cc cc-${esc(s.kind)} ${img ? "has-img" : "no-img"}" data-sym="${esc(symbol(n.name))}" aria-roledescription="slide" aria-label="${i} of ${total}">
       ${img}
       <div class="cc-body">
         ${s.kind === "pattern"
-          ? `<p class="cc-label cc-eyebrow">${focus ? `${s.eyebrow ? esc(s.eyebrow) + " · " : ""}Pattern ${pi + 1} of ${PATTERNS.length}` : `Pattern #${pi + 1}`}</p>`
+          ? `<p class="cc-label cc-eyebrow">${focus ? "The pattern behind it" : `Pattern #${pi + 1}`}</p>`
           : `<p class="cc-label"><span>${String(num).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
@@ -786,6 +789,16 @@ export function carouselHTML(n, data, flags = {}) {
       <h3 class="cc-title">Thomas Midgley Jr.</h3>
       <p class="cc-text">For changing the world twice.</p>
       <p class="cc-cta">${NOMINATIONS_LIVE ? "Nominate" : "Suggest"} the next one at <b>${BRAND_DOMAIN}</b></p>
+    </div>
+    ${foot(total)}
+  </section>`);
+  else if (!SCORES_VISIBLE) cards.push(`<section class="cc cc-payoff" data-web-only aria-roledescription="slide" aria-label="${total} of ${total}">
+    <div class="cc-body">
+      <p class="cc-label">Your verdict</p>
+      <h3 class="cc-title">${esc(n.work)}: worth it?</h3>
+      <p class="cc-igvote"><span>💡 Yes</span><span>🤦 No</span></p>
+      <p class="cc-text">Vote below, then send it to a friend who is building something.</p>
+      <p class="cc-follow">Follow the Backfire Awards for more teardowns.</p>
     </div>
     ${foot(total)}
   </section>`);

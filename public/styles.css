@@ -358,7 +358,11 @@ img.goat-photo{background:var(--surface);border:1px solid var(--line);image-rend
 .cc-ask .cc-title{font-size:3.6em}
 .cc-pattern .cc-why ~ .cc-pdots{margin-top:1em}
 .cc-pattern:has(.cc-pdots) .cc-title{font-size:3.2em}
+.cc-pattern:has(.cc-q) .cc-title{font-size:3em}
 .cc-why{margin:.5em 0 0;font-size:1.05em;line-height:1.4;font-weight:600;color:#fff}
+.cc-q{margin:.9em 0 0;padding:.6em .8em;border-left:3px solid rgb(255 255 255/.85);background:rgb(0 0 0/.18);font-size:1.02em;line-height:1.35;font-weight:600;color:#fff}
+.cc-q span{display:block;margin-bottom:.25em;font:500 .62em var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.cc-pattern .cc-why{margin-top:.8em;font-size:.9em;font-weight:500;opacity:.92}
 .cc-pdots{display:flex;gap:.35em;margin:.8em 0 0;padding:0;list-style:none}
 .cc-pdots li{width:1.9em;height:1.9em;display:grid;place-items:center;border:1px solid rgba(255,255,255,.4);font:600 .8em var(--mono);color:rgba(255,255,255,.6)}
 .cc-pdots li.on{background:#fff;color:var(--deep);border-color:#fff}

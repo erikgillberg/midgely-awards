@@ -19,7 +19,7 @@ import {
   SITE, feedOopsHTML, jewelVar, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML, categoricTableHTML, categoricLegendHTML,
-  postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath, MURPHYS_LIVE, notAFitFor, notAFitHTML, NOT_A_FIT, NOT_A_FIT_RULES,
+  postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath, MURPHYS_LIVE, SCORES_VISIBLE, notAFitFor, notAFitHTML, NOT_A_FIT, NOT_A_FIT_RULES,
 } from "./shared.js";
 import { CODEBOOK, DIMENSIONS } from "./codebook.js";
 import { CASE_RISKS, cleanRisks, cleanMitigations } from "./case-risks.js";
@@ -428,8 +428,8 @@ async function migrate(db) {
   for (const n of SEED_ADDED) {
     stmts.push(db.prepare(`INSERT OR IGNORE INTO nominees (id,slug,name,years,work,meant,solved,backfire,got_right,foresight,pattern,knowable,domain,harms,status,
         wiki_name,wiki_work,born,helped,harmed,author,seeded,state,created_at,category)
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NULL,1,'approved',?,'')`).bind(n.id, n.id, n.name, n.years, n.work, n.meant, n.solved, n.backfire,
-      n.gotRight, n.foresight, n.pattern, n.knowable, n.domain, n.harms, n.status, n.wikiName, n.wikiWork, n.born, n.helped, n.harmed, n.created));
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NULL,1,?,?,'')`).bind(n.id, n.id, n.name, n.years, n.work, n.meant, n.solved, n.backfire,
+      n.gotRight, n.foresight, n.pattern, n.knowable, n.domain, n.harms, n.status, n.wikiName, n.wikiWork, n.born, n.helped, n.harmed, n.state || "approved", n.created));
   }
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('seeded','1')"));
   await db.batch(stmts);
@@ -755,7 +755,8 @@ async function getState(db, url, ctx) {
     const hit = await caches.default.match(key);
     if (hit) return hit;
   } catch {}
-  const { nominees, comments } = await loadNominees(db, "state = 'approved'", true);
+  // Drafts (new teardowns waiting for the editor) show on staging and local only, never on backfireawards.com.
+  const { nominees, comments } = await loadNominees(db, url.hostname === SITE_HOST ? "state = 'approved'" : "state IN ('approved','draft')", true);
   const murphys = await loadMurphys(db);
   const body = JSON.stringify({
     nominees,
@@ -1461,7 +1462,7 @@ async function nomineePage(request, env, url, ctx, key) {
   const thread = st.comments.filter((c) => c.nomineeId === n.id);
   const page = await asset(env, url, request, "/nominee");
   const pct = herdPct(n);
-  const scores = flags.scores ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Facepalm Index ${pct}%` : ""].filter(Boolean).join(", ") : "";
+  const scores = flags.scores && SCORES_VISIBLE ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Facepalm Index ${pct}%` : ""].filter(Boolean).join(", ") : "";
   return decorate(page, env, url, {
     canonical: SITE + nomineePath(n),
     title: `${n.name}: ${n.work} · The Backfire Awards`,
@@ -1751,7 +1752,7 @@ export default {
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
     if (p === "/murphy") return decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy", fill: { "#murphy-embed": tallyHTML(LINKS.microFormId, "Share your Murphy") } });
     if (p === "/goat") return Response.redirect(SITE_ORIGIN(url) + "/faq", 301); // Goat retired as a character
-    if (p === "/scores" || p === "/scores.html") return Response.redirect(SITE_ORIGIN(url) + "/faq#scores", 301); // scores moved into the FAQ
+    if (p === "/scores" || p === "/scores.html") return Response.redirect(SITE_ORIGIN(url) + "/faq", 302); // scores are hidden for now
     if (p === "/micro") return Response.redirect(SITE_ORIGIN(url) + "/murphy" + url.search, 301); // old name
 
     // Pages (no file extension, or .html) are rewritten per request; never let the browser's cached copy stand in.
