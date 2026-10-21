@@ -106,7 +106,8 @@ function pairs(noms) {
       <span class="db-pn">${esc(nameOf(a))} <em>+</em> ${esc(nameOf(b))}</span><b>${names.length}</b></li>`;
   }).join("") : "<li>No case carries two patterns yet.</li>";
   const table = `<table><thead><tr><th>Pair</th><th>Cases</th></tr></thead><tbody>${rows.map(([k, names]) => `<tr><td>${esc(k.split("+").map(nameOf).join(" + "))}</td><td>${esc(names.join(", "))}</td></tr>`).join("")}</tbody></table>`;
-  return panel("DB-05", "Patterns that travel together", "Pairs of patterns found in the same case. Early days: each pair has turned up only a few times so far.", `<ol class="db-pairs">${list}</ol>`, table);
+  const most = rows.length ? rows[0][1].length : 0;
+  return panel("DB-05", "Patterns that travel together", `Pairs of patterns found in the same case.${most && most < 5 ? ` Early days: no pair has turned up in more than ${most === 1 ? "one case" : most + " cases"} yet.` : ""}`, `<ol class="db-pairs">${list}</ol>`, table);
 }
 
 export function dashboardsHTML(all) {
