@@ -8,7 +8,7 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Bugs can't keep up",
-      "text": "The United States was wiring itself for electricity, and a common natural insulator was shellac, made by lac insects in Asia. Supply was limited. Leo Baekeland, a chemist, set out to make a substitute in the lab.",
+      "text": "The US was wiring itself for electricity, and a common insulator was shellac, made by lac insects in Asia. Supply was limited. Leo Baekeland, a chemist, set out to make a substitute in the lab.",
       "image": "/img/n/baekeland/shellac.jpg",
       "alt": "Two piles of amber and dark red shellac flakes on white paper",
       "credit": "Shellac flakes, 2009. Nuberger13. Public domain."
@@ -34,7 +34,7 @@
       "title": "Made to last, so it does",
       "stat": "79%",
       "statLabel": "of the 6.3 billion metric tons of plastic waste made by 2015 sat in landfills or the environment, one study estimates",
-      "text": "Bakelite was first. Most of the plastics that came after it don't biodegrade in any meaningful sense, one of that study's authors says. A 2022 study found plastic particles in the blood of 17 of 22 donors.",
+      "text": "Bakelite came first. Most plastics after it don't biodegrade in any meaningful sense, a study author says. A 2022 study found plastic particles in the blood of 17 of 22 donors.",
       "also": [
         "Source: Geyer, Jambeck and Law, Science Advances, 2017"
       ],
@@ -68,7 +68,7 @@
         "Plastic particles in the blood of 17 of 22 donors in one 2022 study",
         "A treaty to end plastic pollution, still unwritten after four years of talks"
       ],
-      "text": "Bakelite solved a real shortage. The bill for the age it opened came due long after its inventor died. You decide if it was worth it.",
+      "text": "Bakelite solved a real shortage. The bill for the age it opened came due long after its inventor died.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },
@@ -96,9 +96,9 @@
       "kind": "mirror",
       "label": "How you do this",
       "title": "You build things to last too",
-      "text": "You glue a shelf to the wall instead of screwing it in, so it never wobbles. It never does. Then you move out, and the shelf won't come off without taking the wall with it.",
+      "text": "You keep every user's data forever because storage is cheap and you might need it. Nothing breaks. Ten years later a breach exposes customers who left long ago. The data outlived its use, and it was still there to lose.",
       "also": [
-        "Permanent marker on the shared whiteboard",
+        "A feature flag left on years after launch",
         "A temporary workaround still running five years later"
       ]
     },

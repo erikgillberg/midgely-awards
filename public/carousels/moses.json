@@ -7,8 +7,8 @@
     {
       "kind": "meant",
       "label": "The bright idea",
-      "title": "Parks and a way to reach them",
-      "text": "New York needed parks, and its streets were jammed. A 1930 plan from a parks group Robert Moses chaired called for buying thousands of acres of the city's last natural land, plus a system of parkways to solve the traffic.",
+      "title": "Jammed streets, too few parks",
+      "text": "New York needed parks, and its streets were jammed. A 1930 plan from a parks group Robert Moses chaired called for buying thousands of acres of the city's last natural land, plus parkways to fix the traffic.",
       "image": "/img/n/moses/parkways.jpg",
       "alt": "Aerial view of cars streaming along the Grand Central Parkway through a looping interchange among houses and fields",
       "credit": "Grand Central Parkway at the Kew Gardens Interchange, Queens, about 1946. U.S. Department of State. National Archives. Public domain."
@@ -17,7 +17,7 @@
       "kind": "right",
       "label": "It worked",
       "title": "Beaches, pools, playgrounds",
-      "text": "Jones Beach opened in 1929, and 350,000 people came in the first month. As city parks commissioner from 1934 to 1960, Moses took New York from 119 playgrounds to 777 and opened 11 huge outdoor pools in the summer of 1936.",
+      "text": "Jones Beach opened in 1929, and 350,000 people came in the first month. As parks commissioner from 1934 to 1960, Moses took New York from 119 playgrounds to 777 and opened 11 huge pools in the summer of 1936.",
       "image": "/img/n/moses/jones-beach.jpg",
       "alt": "Aerial view of Jones Beach in 1936: wide sand, the boardwalk, bathhouses, the water tower and vast parking fields",
       "credit": "Jones Beach from the air, 1936. U.S. Army. National Archives. Public domain."
@@ -46,7 +46,7 @@
       "kind": "cleanup",
       "label": "The long cleanup",
       "title": "Studying the damage",
-      "text": "In 2022 the federal government gave New York City $2 million to study how to ease the Cross Bronx's harm to nearby neighborhoods. In 2024 it added $150 million for a connector road with bus lanes and bike and walking paths, which critics call a highway expansion."
+      "text": "In 2022 the federal government gave New York City $2 million to study how to ease the Cross Bronx's harm to nearby neighborhoods. In 2024 it added $150 million for a connector road with bus lanes and paths for bikes and walkers."
     },
     {
       "kind": "ledger",
@@ -62,7 +62,7 @@
         "Parkways that jammed soon after opening, as Caro documents",
         "Bronx neighborhoods exposed to the Cross Bronx's noise and air pollution, officials say"
       ],
-      "text": "He gave a crowded city beaches, pools and parks. His roads moved cars well until more cars came, and some neighborhoods paid with their homes. You decide if it was worth it.",
+      "text": "He gave a crowded city beaches, pools and parks. His roads moved cars well until more cars came, and some neighborhoods paid with their homes.",
       "gainsLabel": "What he gave",
       "costsLabel": "What it cost"
     },
@@ -89,11 +89,11 @@
     {
       "kind": "mirror",
       "label": "How you do this",
-      "title": "You stand up too",
-      "text": "At a concert, one person stands up to see better. It works, so the people behind them stand. Soon everyone is standing, nobody sees better than before, and everyone's feet hurt.",
+      "title": "Your shortcuts fill up too",
+      "text": "Every team marks its requests to engineering urgent so theirs get done first. It works for the first team, so the others follow. Soon every ticket is urgent, the label means nothing, and work ships no faster than before.",
       "also": [
-        "Leaving early to beat traffic, along with everyone else",
-        "Marking every request urgent"
+        "Every startup in a category bidding on the same ad keywords",
+        "Every feature asking for push notifications, until users turn them all off"
       ]
     },
     {

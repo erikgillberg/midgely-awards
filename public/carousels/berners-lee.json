@@ -8,7 +8,7 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Stop losing what people know",
-      "text": "At CERN, the physics lab near Geneva, people often stayed about two years, and what they knew left with them. Notes sat on many different kinds of computers. In March 1989 Tim Berners-Lee proposed linked documents anyone could reach.",
+      "text": "At CERN, the physics lab near Geneva, people often stayed about two years, and what they knew left with them. In March 1989 Tim Berners-Lee proposed linked documents anyone could reach.",
       "image": "/img/n/berners-lee/cern.jpg",
       "alt": "Aerial view of CERN's main site near Geneva: low lab buildings, parking lots and roads set among farm fields and woods",
       "credit": "CERN's main site near Geneva from the air, 2012. Brücke-Osteuropa. CC0."
@@ -17,7 +17,7 @@
       "kind": "right",
       "label": "It worked",
       "title": "One site, then 1.49 billion",
-      "text": "By Christmas 1990 the first web server was running at CERN. In April 1993 CERN put the software in the public domain, free for anyone. By the end of 1994 there were 10,000 servers. In July 2026 Netcraft counted about 1.49 billion sites.",
+      "text": "The first web server ran at CERN by Christmas 1990. In April 1993 CERN put the software in the public domain. By the end of 1994 there were 10,000 servers. Netcraft now counts about 1.49 billion sites.",
       "image": "/img/n/berners-lee/server.jpg",
       "alt": "A black NeXT computer and monitor in a museum case, with a handwritten label on the computer reading \"This machine is a server. DO NOT POWER IT DOWN!!\"",
       "credit": "The NeXT computer that ran the first web server, shown at CERN, 2005. Coolcaesar. CC BY-SA 3.0."
@@ -42,7 +42,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Partly",
+      "title": "Abuse, yes. This scale, no.",
       "text": "Abuse of open networks was not new: the first mass ad email went out in 1978, and a worm crippled thousands of computers in 1988. The scale was not foreseeable: the 1989 proposal was for one lab, and in late 1993 there were just over 500 web servers.",
       "knowable": "mixed"
     },
@@ -66,7 +66,7 @@
         "3.8 million phishing attacks counted in 2025 (APWG)",
         "Misinformation that spreads because it gets clicks, by his own account"
       ],
-      "text": "The web put most of the world's knowledge a click away. It also opened a door that nobody guards. You decide if it was worth it.",
+      "text": "The web put most of the world's knowledge a click away. It also opened a door that nobody guards.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },
@@ -94,7 +94,7 @@
       "kind": "mirror",
       "label": "How you do this",
       "title": "Your open doors move work too",
-      "text": "You drop the approval step on a shared team drive so anyone can add files. Sharing takes off. Now every reader has to work out which version is current and who wrote it. The checking didn't go away. It moved.",
+      "text": "You launch an open API with no sign-up so developers can start in a minute. Usage takes off. So do scrapers and spam bots, and your support team spends its week telling real users from abuse. The checking didn't go away. It moved.",
       "also": [
         "An open comment section that someone now has to moderate",
         "A sign-up form with no check that fills with spam"

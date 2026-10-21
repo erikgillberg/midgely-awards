@@ -7,7 +7,7 @@
     {
       "kind": "meant",
       "label": "The bright idea",
-      "title": "Grow more on the same land",
+      "title": "Wheat that snapped",
       "text": "Around 1960, West Pakistan grew about a ton of wheat per hectare and fell short of its needs every year. Feeding the wheat more fertilizer was no answer: past a point, the tall plants snapped.",
       "image": "/img/n/borlaug/lodged.jpg",
       "alt": "A wheat field with a wide patch of tall stalks knocked flat to the ground",
@@ -17,7 +17,7 @@
       "kind": "right",
       "label": "It worked",
       "title": "Short wheat, big harvests",
-      "text": "Borlaug's team in Mexico bred dwarf wheat that could take two or three times the fertilizer and lifted top yields by more than 70 percent. Mexico grew all its own wheat by 1956. Pakistan and India took up the seed in the 1960s.",
+      "text": "Borlaug's team in Mexico bred dwarf wheat that could take two or three times the fertilizer and lifted top yields by more than 70 percent. In the 1960s Pakistan and India took up the seed.",
       "image": "/img/n/borlaug/wheat.jpg",
       "alt": "A broad field of ripe golden wheat beside a stretch of water under a cloudy sky in Punjab",
       "credit": "Ripe wheat in Punjab, 2019. Harvinder Chandigarh. CC BY-SA 4.0."
@@ -34,7 +34,7 @@
       "title": "Wells that keep getting deeper",
       "stat": "109 km³",
       "statLabel": "of groundwater lost in three northwest Indian states, 2002 to 2008, likely from irrigation and other human use",
-      "text": "The new seeds paid off when fed water and fertilizer. Punjab moved to nearly 80 percent rice and wheat, two thirsty crops, watered from wells. Farmers who once pumped from 5 to 10 feet down now drill 200 to 300 feet.",
+      "text": "The new seeds paid off when fed water and fertilizer. Punjab went nearly 80 percent rice and wheat, two thirsty crops, watered from wells. Farmers who pumped from 5 to 10 feet down now drill 200 to 300.",
       "also": [
         "Source: Rodell, Velicogna and Famiglietti, Nature, 2009"
       ],
@@ -45,7 +45,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Partly",
+      "title": "His worry was people, not water",
       "text": "In 1970 Borlaug called the Green Revolution \"a temporary success\" that bought \"a breathing space,\" though his worry was population, not water. Punjab's water table was falling 18 cm a year by the mid-1980s, and about a meter a year by 2010."
     },
     {
@@ -62,7 +62,7 @@
         "Punjab pumping 45 percent more groundwater each year than rain puts back (Columbia Water Center, 2010)",
         "Water use, soil damage and chemical runoff beyond the fields (PNAS, 2012)"
       ],
-      "text": "The harvests ended chronic food shortages across much of the developing world and spared land from the plow. The water bill is still arriving. You decide if it was worth it.",
+      "text": "The harvests ended chronic food shortages across much of the developing world and spared land from the plow. The water bill is still arriving.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },
@@ -92,8 +92,8 @@
       "title": "Ship now, fix later",
       "text": "A team hits every deadline by skipping tests and notes. For a year, output looks great. Then every change breaks something, and new features take twice as long. The speed was borrowed, and the loan came due.",
       "also": [
-        "Putting off a roof repair until the ceiling stains",
-        "Skipping sleep to finish one big week"
+        "Skipping the security review to hit a launch date",
+        "A free tier that wins users you pay to serve for years"
       ]
     },
     {

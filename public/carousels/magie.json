@@ -8,7 +8,7 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "A lesson you could play",
-      "text": "Lizzie Magie followed the economist Henry George, who argued that rent paid to landowners enriches the few and keeps tenants poor. In 1902 she described her game as a practical demonstration of the present system of land-grabbing.",
+      "text": "Lizzie Magie followed the economist Henry George, who argued that rent enriches landowners and keeps tenants poor. In 1902 she called her game \"a practical demonstration of the present system of land-grabbing.\"",
       "image": "/img/n/magie/george.jpg",
       "alt": "Studio portrait of the economist Henry George, balding, with a full beard and a bow tie",
       "credit": "Henry George, about 1886. Unknown photographer. New York Public Library. Public domain."
@@ -42,7 +42,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Partly",
+      "title": "Her own rules pointed the way",
       "text": "Her own 1904 rules made getting rich the way to win, and the lesson rested on players noticing the cost. Before 1935 people were copying the board and changing its rules. A store-bought version that kept the race and dropped the argument was harder to see.",
       "knowable": "mixed"
     },
@@ -66,7 +66,7 @@
         "$500 from Parker Brothers for her patent, and decades without credit",
         "Her anti-monopolist rules, largely forgotten by 1936"
       ],
-      "text": "Millions learned to play. Fewer learned what she meant. You decide if it was worth it.",
+      "text": "Millions learned to play. Fewer learned what she meant.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },

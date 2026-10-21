@@ -8,7 +8,7 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "A shadow over Broadway",
-      "text": "Manhattan in the 1910s had overcrowded tenements with little light or air, and factories creeping toward Fifth Avenue's shops. In 1915 the 538-foot Equitable Building went up and cast a seven-acre shadow on its neighbors.",
+      "text": "Manhattan in the 1910s had crowded tenements with little light or air, and factories creeping toward Fifth Avenue. In 1915 the 538-foot Equitable Building went up and cast a seven-acre shadow on its neighbors.",
       "image": "/img/n/edward-m-bassett/equitable.jpg",
       "alt": "The Equitable Building, a huge flat-topped office block, towering over Trinity Church and its neighbors in lower Manhattan",
       "credit": "Equitable Building, New York City, 1915. Library of Congress. Public domain."
@@ -17,7 +17,7 @@
       "kind": "right",
       "label": "It worked",
       "title": "America's first zoning code",
-      "text": "Edward M. Bassett, a lawyer and former congressman, chaired the commission whose 1916 report gave New York the first comprehensive zoning code in the US. It limited building height and kept factories out of residential districts.",
+      "text": "Edward M. Bassett, a lawyer and former congressman, chaired the commission behind New York's 1916 code, the first comprehensive zoning in the US. It capped heights and kept factories out of residential districts.",
       "image": "/img/n/edward-m-bassett/setback.jpg",
       "alt": "Charcoal drawing of a stepped skyscraper mass, its towers narrowing in setbacks as they rise",
       "credit": "Study of the largest building the 1916 zoning law allowed, 1922. Hugh Ferriss. Cooper Hewitt. Public domain."
@@ -34,7 +34,7 @@
       "title": "Homes far from everything",
       "stat": "1.5 million",
       "statLabel": "homes the US was short in 2022, a Moody's estimate the White House cited",
-      "text": "New York's code let apartments into residence districts. Later ones, like Euclid, Ohio's, kept them out. The EPA noted in 2001 that homes and shops sit apart, so people rely on cars. In 2022 the White House said exclusionary zoning inflates prices.",
+      "text": "As zoning spread, codes kept homes, shops and jobs in separate districts. The EPA noted in 2001 that this leaves people relying on cars. In 2022 the White House said exclusionary zoning inflates home prices.",
       "also": [
         "Source: White House Housing Supply Action Plan fact sheet, May 2022"
       ]
@@ -42,7 +42,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Partly",
+      "title": "A judge warned. The cars came later.",
       "text": "In 1924 a federal judge struck down a zoning law, writing that its result was to \"classify the population and segregate them according to their income.\" The Supreme Court reversed him in 1926. The cost in driving came later, when cities spread out."
     },
     {
@@ -65,7 +65,7 @@
         "Homes, jobs and shops set far apart, so people rely on cars (EPA, 2001)",
         "Districts closed to apartments in later codes; Oregon needed a 2019 state law to allow duplexes in them"
       ],
-      "text": "Zoning fixed real dangers in a crowded city. The rules it spread outlived the conditions they were written for. You decide if it was worth it.",
+      "text": "Zoning fixed real dangers in a crowded city. The rules it spread outlived the conditions they were written for.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },
@@ -96,7 +96,7 @@
       "text": "After one bad release, your team rules that every change needs sign-off from three leads. Mistakes drop right away. Years later the team is five times bigger, and that rule is why nothing ships.",
       "also": [
         "A cheap lease with a rent jump in year five",
-        "Skipping the oil change"
+        "A pricing rule written for your first ten customers, applied to ten thousand"
       ]
     },
     {

@@ -17,7 +17,7 @@
       "kind": "right",
       "label": "It worked",
       "title": "Roundup",
-      "text": "In 1970 Franz, a Monsanto chemist, found that glyphosate did the job. Sold as Roundup from 1974, it controls over 125 kinds of weeds and helped make no-till farming possible. In 1987 he received the National Medal of Technology.",
+      "text": "In 1970 Franz, a Monsanto chemist, found glyphosate. Sold as Roundup from 1974, it controls over 125 kinds of weeds and helped make no-till farming possible. He won the National Medal of Technology.",
       "image": "/img/n/franz/no-till.jpg",
       "alt": "Rows of young soybean plants growing up through the stalks of last year's corn in an unplowed field",
       "credit": "Soybeans in a no-till field. Lynn Betts, USDA NRCS. Public domain."
@@ -34,7 +34,7 @@
       "title": "The survivors took over",
       "stat": "62",
       "statLabel": "weed species that have evolved resistance to glyphosate, in 31 countries",
-      "text": "Global use rose almost 15-fold from 1995 to 2014, after those crops arrived, often as the only weed killer on a field. Each spraying left the rare weeds it could not kill. Many resistant weeds now shrug off other herbicides too.",
+      "text": "Global use rose almost 15-fold after those crops arrived, often as the only weed killer on a field. Each spraying left the rare weeds it could not kill. Many now survive other herbicides too.",
       "also": [
         "Source: Alcántara-de la Cruz and others, Pest Management Science, 2026"
       ],
@@ -45,14 +45,15 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Doubted, then disputed",
-      "text": "In 1997 Monsanto scientists wrote that decades of use had produced no verified resistant weeds. On cancer, a WHO agency in 2015 called glyphosate probably carcinogenic. US and EU regulators found it unlikely to be, and the EPA is reviewing it again, due in 2027."
+      "title": "Partly: the record looked clean",
+      "text": "In 1997 Monsanto scientists wrote that decades of use had produced no verified resistant weeds. That record came before tolerant crops made glyphosate the only weed killer on many fields, and weeds had already beaten older herbicides.",
+      "knowable": "mixed"
     },
     {
       "kind": "cleanup",
       "label": "Where it stands",
       "title": "Still in court, still on shelves",
-      "text": "Bayer, which owns Monsanto, says glyphosate is safe. In 2020 it agreed to pay up to $10.9 billion over cancer claims, admitting no liability. In 2026 the Supreme Court barred state claims that the label should have warned of cancer, without ruling on the science."
+      "text": "On cancer, a WHO agency called glyphosate probably carcinogenic in 2015; US and EU regulators found it unlikely to be. In 2020 Bayer, which owns Monsanto, agreed to pay up to $10.9 billion over cancer claims, admitting no liability."
     },
     {
       "kind": "ledger",
@@ -68,7 +69,7 @@
         "Resistant weeds that often survive other herbicides too",
         "A cancer question still argued, and up to $10.9 billion in settlements (Bayer, 2020)"
       ],
-      "text": "Glyphosate made weeding cheaper and plowing less necessary. Leaning on it everywhere wore down the very thing that made it work. You decide if it was worth it.",
+      "text": "Glyphosate made weeding cheaper and plowing less necessary. Leaning on it everywhere wore down the very thing that made it work.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },
@@ -92,8 +93,8 @@
       "title": "Your filters train the spammers",
       "text": "Your team blocks spam by banning a list of words. Most junk stops. The messages that slip through are the ones with clever misspellings, and those senders keep at it. Soon nearly all your spam is misspelled, and the list catches none of it.",
       "also": [
-        "Lice shampoo that leaves behind the lice it can't kill",
-        "Antibiotics stopped early, leaving the toughest germs"
+        "A fraud rule that teaches fraudsters which amounts slip under it",
+        "Bot checks that leave only the bots smart enough to pass"
       ]
     },
     {

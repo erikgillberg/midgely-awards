@@ -14,7 +14,7 @@
       "kind": "right",
       "label": "It worked",
       "title": "Dynamite",
-      "text": "Nobel soaked nitroglycerin into a porous earth called kieselguhr and patented it in 1867 as dynamite. Even soaked through, it was quite safe to handle. His Krümmel plant made 11 tons that year and 3,150 tons in 1874.",
+      "text": "Nobel soaked nitroglycerin into a porous earth called kieselguhr and patented it in 1867 as dynamite. Even soaked through, it was quite safe to handle. His Krümmel plant made 11 tons that year, 3,150 in 1874.",
       "image": "/img/n/nobel/ardeer.jpg",
       "alt": "Women in aprons mixing dynamite in wooden boxes along a bench, with a man standing at the left, inside a timber factory shed",
       "credit": "Mixing dynamite at Nobel's Ardeer factory, Scotland, 1897. Scott Photo, Ardrossan. Public domain."
@@ -23,7 +23,7 @@
       "kind": "oops",
       "label": "The backfire",
       "title": "Easy to carry, for anyone",
-      "text": "A stable explosive can be carried into a city and left behind. From 1881 to 1885 Irish republican bombers waged a dynamite campaign in Britain. In January 1885 bombs went off in the House of Commons, Westminster Hall and the Tower of London.",
+      "text": "A stable explosive can be carried into a city and left behind. From 1881 to 1885 Irish republican bombers waged a dynamite campaign in Britain, hitting the House of Commons and the Tower of London in 1885.",
       "also": [
         "Source: Niall Whelehan, The Dynamiters, Cambridge University Press"
       ],
@@ -33,9 +33,9 @@
     },
     {
       "kind": "encore",
-      "label": "Then he did it again",
+      "label": "What came next",
       "title": "Powder for armies",
-      "text": "In 1887 Nobel patented ballistite, a nearly smokeless powder well suited to firing military projectiles, and Italy's military adopted it. In 1894 he bought the Bofors ironworks in Sweden, which became the basis of the Bofors arms company.",
+      "text": "In 1887 Nobel patented ballistite, a nearly smokeless powder for firing military projectiles, and Italy's army adopted it. In 1894 he bought the Bofors ironworks in Sweden, the basis of the Bofors arms company.",
       "image": "/img/n/nobel/ballistite.jpg",
       "alt": "A paper rocket case with a wooden nose and metal fittings, inscribed in ink and dated September 1896, in a museum display",
       "credit": "Ballistite rocket case by Alfred Nobel and W. T. Unge, 1896, Tekniska museet. Photo: Daderot. CC0."
@@ -60,7 +60,7 @@
         "A smokeless military powder, ballistite, adopted by Italy's army",
         "Weapons for both sides of the Franco-Prussian War, 1870 to 1871, within three years of the patent"
       ],
-      "text": "Dynamite built tunnels, mines and roads. It also put a portable bomb within reach of anyone who could buy it. You decide if it was worth it.",
+      "text": "Dynamite built tunnels, mines and roads. It also put a portable bomb within reach of anyone who could buy it.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },
@@ -90,7 +90,7 @@
       "title": "Your fixes move risk too",
       "text": "Analysts kept breaking the fragile scripts that pulled customer data, so you build a one-click export. The broken scripts stop. Now anyone can put the whole customer list on a laptop. The risk didn't go away. It moved.",
       "also": [
-        "A spare key under the mat, so nobody gets locked out",
+        "A public-link setting that ends the sharing requests",
         "A shared password that ends the access requests"
       ]
     },

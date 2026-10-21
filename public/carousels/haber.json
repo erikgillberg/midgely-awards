@@ -7,8 +7,8 @@
     {
       "kind": "meant",
       "label": "The bright idea",
-      "title": "Feed a hungry world",
-      "text": "Crops need nitrogen. Around 1900 most fertilizer nitrogen came from bird droppings dug off islands near Peru and from saltpeter mined in Chile. In 1898 the chemist William Crookes warned that the world would soon not grow enough wheat.",
+      "title": "Fertilizer from bird droppings",
+      "text": "Crops need nitrogen. Around 1900 most of it came from bird droppings dug off islands near Peru and saltpeter mined in Chile. In 1898 the chemist William Crookes warned the world would soon run short of wheat.",
       "image": "/img/n/haber/guano.jpg",
       "alt": "Workers loading guano into a rail cart at the foot of a huge pale heap, Chincha Islands, Peru, 1865",
       "credit": "Guano mining, Chincha Islands, Peru, 1865. Henry de Witt Moulton. Public domain."
@@ -33,16 +33,19 @@
       "label": "The backfire",
       "title": "The extra goes somewhere",
       "stat": "100 to 17",
-      "statLabel": "Million tonnes of factory nitrogen on farms in 2005, and 17 in all food eaten, one study found",
+      "statLabel": "million tonnes of factory nitrogen spread on farms in 2005, against 17 million in all the food people ate, one study estimates",
       "text": "Crops take up only part of the nitrogen. The rest washes into rivers and the sea, feeds algae and uses up the oxygen. Each summer the Gulf of Mexico gets a dead zone, mostly from farm runoff.",
       "image": "/img/n/haber/gulf.jpg",
       "alt": "Satellite view of brown and green water spreading from the Louisiana coast into the deep blue Gulf of Mexico",
-      "credit": "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain."
+      "credit": "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain.",
+      "also": [
+        "Source: Erisman and others, Nature Geoscience, 2008"
+      ]
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Partly",
+      "title": "War, yes. Rivers, no.",
       "text": "The use in explosives was plain by World War I. The damage to rivers, coasts and the climate came into view much later, once fertilizer use had grown many times over. A 2008 review says Haber could not have foreseen it."
     },
     {
@@ -65,7 +68,7 @@
         "A Gulf of Mexico dead zone of 4,402 square miles, summer 2025 (NOAA)",
         "Farming: 74% of human-made nitrous oxide, a greenhouse gas, in the 2010s (Global Carbon Project)"
       ],
-      "text": "It feeds billions. It also sends nitrogen where nobody wants it. You decide if it was worth it.",
+      "text": "It feeds billions. It also sends nitrogen where nobody wants it.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },
@@ -73,7 +76,7 @@
       "kind": "thanks",
       "label": "Credit for trying",
       "title": "Credit where due",
-      "text": "Haber took on a real problem, a world short of the nitrogen its farms needed, and solved it. It won him the 1918 Nobel Prize. This award is for the ammonia. In 1915 he also directed Germany's first chlorine gas attack, at Ypres, a separate decision."
+      "text": "Haber took on a real problem, a world short of the nitrogen its farms needed, and solved it, winning the 1918 Nobel Prize. This nomination is for the ammonia. His 1915 chlorine gas attack at Ypres was a separate decision."
     },
     {
       "kind": "pattern",
@@ -95,7 +98,7 @@
       "title": "Your fixes overflow too",
       "text": "New hires kept waiting days for laptops, so you set up a standing order. Nobody waits now. Two years later a closet of unopened laptops is aging out of warranty. The shortage is gone, and the extra had to go somewhere.",
       "also": [
-        "An auto-refill that fills the pantry with expired cans",
+        "Free cloud credits that leave servers running for nobody",
         "A hiring push that leaves a team with more people than work"
       ]
     },

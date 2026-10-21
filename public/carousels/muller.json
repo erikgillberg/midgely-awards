@@ -16,7 +16,7 @@
     {
       "kind": "right",
       "label": "It worked",
-      "title": "A powder that stopped typhus",
+      "title": "A powder against typhus",
       "text": "In 1935 Müller, a chemist at J. R. Geigy in Basel, began hunting for a new insecticide. In 1939 he found that DDT, a compound first made in 1874, killed insects on contact. In Naples in early 1944, DDT was among the powders used to dust 50,000 people a day."
     },
     {
@@ -31,7 +31,7 @@
       "title": "Thin shells",
       "stat": "417",
       "statLabel": "bald eagle nesting pairs left in the lower 48 states in 1963",
-      "text": "Outdoors, lasting meant lingering. DDT built up in fatty tissue. In the US, three declining birds of prey, bald eagles among them, laid eggs with shells 19 percent or more thinner, and in Britain more falcon eggs broke in the nest.",
+      "text": "Outdoors, lasting meant lingering. DDT built up in fatty tissue. Eggshells of three declining US birds of prey, bald eagles among them, grew 19 percent or more thinner, and in Britain more falcon eggs broke.",
       "also": [
         "Mosquitoes in Greece were resistant to DDT by 1951",
         "Source: US Fish and Wildlife Service, 2007"
@@ -67,7 +67,7 @@
         "Eggshells 19 percent or more thinner in three declining US birds of prey (Science, 1968)",
         "Residues still in the environment decades after the US ban"
       ],
-      "text": "DDT saved people from two of the oldest killers there are. The bill went to birds, rivers and the food chain. You decide if it was worth it.",
+      "text": "DDT saved people from two of the oldest killers there are. The bill went to birds, rivers and the food chain.",
       "gainsLabel": "What it gave",
       "costsLabel": "What it cost"
     },
