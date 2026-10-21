@@ -233,3 +233,20 @@ document.addEventListener("click", (e) => {
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.content = next === "light" ? "#F4E8D6" : "#0A2033";
 });
+
+// ---------- teardown pages: copy link, and buttons that count interest in things not built yet
+document.addEventListener("click", (e) => {
+  const copy = e.target.closest("[data-copy-link]");
+  if (copy) {
+    navigator.clipboard?.writeText(copy.dataset.copyLink).then(() => { copy.textContent = "Link copied"; }).catch(() => {});
+    return;
+  }
+  const b = e.target.closest("[data-intent]");
+  if (!b) return;
+  fetch("/api/intent", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ what: b.dataset.intent, id: b.dataset.id }) }).catch(() => {});
+  if (b.dataset.intent === "comment-login") {
+    e.preventDefault();
+    const note = b.parentElement.querySelector(".td-intent"); if (note) note.hidden = false;
+    b.disabled = true;
+  }
+});

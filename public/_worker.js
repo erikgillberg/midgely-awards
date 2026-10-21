@@ -25,6 +25,7 @@ import { CODEBOOK, DIMENSIONS } from "./codebook.js";
 import { CASE_RISKS, cleanRisks, cleanMitigations } from "./case-risks.js";
 import { IMPACTS_VERSION, CASE_IMPACTS, impactRows } from "./case-impacts.js";
 import { patternsTeaserHTML, patternsPageHTML, dashboardsHTML } from "./codebook-ui.js";
+import { teardownHTML, CORRECTIONS } from "./teardown.js";
 const PATTERN_KEYS = CODEBOOK.map((p) => p.key);
 
 const STAGING_OPEN = true;
@@ -82,6 +83,7 @@ const TABLES = [
   `CREATE TABLE IF NOT EXISTS impact_money (
     id TEXT PRIMARY KEY, nominee_id TEXT NOT NULL, key TEXT NOT NULL, fix TEXT, label TEXT NOT NULL, direction TEXT NOT NULL,
     usd_year INTEGER, total_usd REAL, per_year_usd REAL, low_usd REAL, high_usd REAL, years TEXT, source TEXT, url TEXT, note TEXT, caption TEXT)`,
+  `CREATE TABLE IF NOT EXISTS intents (what TEXT NOT NULL, nominee_id TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (what, nominee_id, day))`,
   // v18: one new "Worth it?" vote per post per visitor (hashed IP) per day. Kept two days, then deleted.
   `CREATE TABLE IF NOT EXISTS vote_days (
     nominee_id TEXT NOT NULL, visitor TEXT NOT NULL, day TEXT NOT NULL, PRIMARY KEY (nominee_id, visitor, day))`,
@@ -1006,6 +1008,18 @@ async function handleApi(request, env, url, ctx) {
       200, { "cache-control": "public, max-age=300" });
   }
 
+  // Interest signals: a click on a button for something not built yet ("Log in to comment"), or a share. Counted only.
+  if (path === "/api/intent" && method === "POST") {
+    const b = await readBody(request);
+    const what = ["comment-login", "share-linkedin"].includes(b && b.what) ? b.what : "";
+    const id = clean(b && b.id, 64);
+    if (!what || !ID_RE.test(id)) return bad("Invalid.");
+    if (await rateLimited(db, request, env, "vote")) return json({ ok: true });
+    await db.prepare("INSERT INTO intents (what, nominee_id, day, n) VALUES (?,?,?,1) ON CONFLICT (what, nominee_id, day) DO UPDATE SET n = n + 1")
+      .bind(what, id, new Date().toISOString().slice(0, 10)).run();
+    return json({ ok: true });
+  }
+
   if (path === "/api/herd" && method === "POST") {
     if (!flagsOf(env).scores) return bad("Voting isn't open yet.", 404);
     const b = await readBody(request);
@@ -1418,8 +1432,8 @@ function decorate(res, env, url, meta = {}, status = 0) {
     .on("body", new Append(sheetHTML()))
     .on("#weekly-oops", new SetHTML(signupHTML("home")))
     .on("#waitlist-embed", new SetHTML(waitlistHTML()))
-    .on('meta[property="og:image"]', new SetAttr("content", SITE + "/og.png"))
-    .on('meta[name="twitter:image"]', new SetAttr("content", SITE + "/og.png"))
+    .on('meta[property="og:image"]', new SetAttr("content", meta.image ? SITE + meta.image : SITE + "/og.png"))
+    .on('meta[name="twitter:image"]', new SetAttr("content", meta.image ? SITE + meta.image : SITE + "/og.png"))
     .on("body", new SetAttr("data-flags", [flags.scores && "scores", flags.categories && "categories"].filter(Boolean).join(" ")))
     // The site "look": classic, or the 1970s palette. LOOK_DEFAULT picks it per environment;
     // ?look=70s or ?look=classic overrides it for this browser (kept in localStorage).
@@ -1524,15 +1538,19 @@ async function nomineePage(request, env, url, ctx, key) {
   const thread = st.comments.filter((c) => c.nomineeId === n.id);
   const page = await asset(env, url, request, "/nominee");
   const pct = herdPct(n);
+  const carousel = await carouselFor(request, env, url, n);
+  const cd = carouselCache.get(n.slug) || await env.ASSETS.fetch(new URL(`/carousels/${n.slug}.json`, url).toString()).then(jsonOrNull).catch(() => null);
+  const shareImage = cd?.portrait?.image || cd?.slides?.find((s) => s.image)?.image || "";
   const scores = flags.scores && SCORES_VISIBLE ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Facepalm Index ${pct}%` : ""].filter(Boolean).join(", ") : "";
   return decorate(page, env, url, {
     canonical: SITE + nomineePath(n),
     title: `${n.name}: ${n.work} · The Backfire Awards`,
     desc: `${scores ? scores + ". " : ""}Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
     fill: {
-      "#list": postHTML(n, { flags, thread, open: true, carousel: await carouselFor(request, env, url, n), more: await moreFor(env, n) }),
-      "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, n.id),
+      "#list": postHTML(n, { flags, thread, open: true, carousel, more: await moreFor(env, n) }),
+      "#more-feed": teardownHTML(n, st.nominees.filter((x) => x.id !== HONOREE), await mediaFor(env, n), SITE),
     },
+    image: shareImage || undefined,
     attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelVar(jewelOf(n.domain), "deep")}`]] },
   });
 }
@@ -1686,6 +1704,12 @@ async function carouselFor(request, env, url, n) {
 }
 
 // The full write-up behind "more": the seven sections, further reading and image credits.
+async function mediaFor(env, n) {
+  const db = findD1(env);
+  if (!db) return [];
+  return (await db.prepare("SELECT * FROM media WHERE nominee_id = ? ORDER BY role").bind(n.id).all().catch(() => ({ results: [] }))).results;
+}
+
 async function moreFor(env, n) {
   const parts = [writeupHTML(n)];
   const db = findD1(env);
@@ -1732,7 +1756,7 @@ const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
-  const paths = ["/", "/search", "/table", "/patterns", "/dashboards", "/midgley", ...(MURPHYS_LIVE ? ["/murphy"] : []), "/awards", "/shop", "/faq", "/guidelines", "/privacy", "/terms"];
+  const paths = ["/", "/search", "/table", "/patterns", "/dashboards", "/midgley", ...(MURPHYS_LIVE ? ["/murphy"] : []), "/awards", "/shop", "/faq", "/corrections", "/guidelines", "/privacy", "/terms"];
   if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -1804,6 +1828,15 @@ export default {
         fill: { "#pt-grid": `<div class="pt-gap" style="grid-row:8;grid-column:1"></div>` + categoricTableHTML(st ? st.nominees : []), "#pt-legend": categoricLegendHTML(),
           "#codebook": patternsTeaserHTML(st ? st.nominees : []) },
       });
+    }
+    if (p === "/corrections") {
+      const st = await siteState(env, url, ctx);
+      const name = (id) => st?.nominees.find((n) => n.id === id);
+      const list = [...CORRECTIONS].sort((x, y) => y.date.localeCompare(x.date)).map((c) => {
+        const n = name(c.id);
+        return `<li><time>${c.date}</time>${n ? `<a href="${nomineePath(n)}#corrections">${esc(n.name)}</a>: ` : ""}${esc(c.text)}</li>`;
+      }).join("");
+      return decorate(await asset(env, url, request, "/corrections"), env, url, { canonical: SITE + "/corrections", fill: { "#corrections": `<ul class="td-fixes">${list}</ul>` } });
     }
     if (p === "/dashboards") {
       const st = await siteState(env, url, ctx);

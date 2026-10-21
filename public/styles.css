@@ -1603,3 +1603,50 @@ body[data-bg="patterns"] .nav-theme{display:none} /* these pages are always nigh
 .cc-payoff.cc-hero .cc-body{padding-bottom:12%}
 .cc-short .cc.has-img:has(.cc-text.long) .cc-img{height:30%;flex:0 0 30%}
 .cc-short .cc.has-img:not(.cc-hook) .cc-text.long{font-size:1.4em}
+/* short format: the pattern card's question */
+.cc-short .cc-pattern .cc-eyebrow{display:block!important;font:500 .95em var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgb(255 255 255/.75)}
+.cc-badge{top:3%;left:3%;width:15%}
+/* the teardown page under the carousel */
+.td{display:flex;flex-direction:column;gap:10px;margin-top:6px;--cream:#F2D6B0;--cream-2:rgb(242 214 176/.78);--cream-3:rgb(242 214 176/.76)}
+.td-sec{background:color-mix(in srgb,var(--surface) var(--frost,92%),transparent);color:var(--ink);border:1px solid color-mix(in srgb,var(--surface) 45%,transparent);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%)}
+.td-sec>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.td-sec>summary::-webkit-details-marker{display:none}
+.td-sec>summary::after{content:"+";font:500 18px var(--mono);color:var(--ink-3)}
+.td-sec[open]>summary::after{content:"−"}
+.td-sec h2{margin:0;font:800 20px/1 var(--display);text-transform:uppercase}
+.td-body{padding:0 16px 16px}
+.td-pats{display:flex;flex-wrap:wrap;gap:8px}
+.td-pat{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font:600 14px var(--sans)}
+.td-pat i{width:10px;height:10px;border-radius:50%;background:var(--hue)}
+.td-pat small{font:500 10px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+.td-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0 0}
+.td-facts div{border-top:1px solid var(--line);padding-top:6px}
+.td-facts dt{font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+.td-facts dd{margin:2px 0 0;font:600 14px var(--sans)}
+.td-note{margin:12px 0 0;font-size:13px;color:var(--ink-2)}
+.td-note a,.td-refs a,.td-credits a,.td-fixes a{color:var(--ozone)}
+.td-dark{margin:0 -16px -16px}
+.td-dark .db-panel{border-radius:0;background:#0F2638;--cream:#F2D6B0;--cream-2:rgb(242 214 176/.78);--cream-3:rgb(242 214 176/.76)}
+.td-refs{margin:0;padding-left:20px;font-size:14px;line-height:1.5;display:flex;flex-direction:column;gap:6px}
+.td-credits{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.td-credits li{display:flex;gap:10px;font-size:13px}
+.td-credits img{object-fit:cover;flex:none}
+.td-credits b{display:block}
+.td-credits span{color:var(--ink-2)}
+.td-fixes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.45}
+.td-fixes time{display:block;font:500 11px var(--mono);color:var(--ink-3)}
+.td-actions{display:flex;gap:8px;flex-wrap:wrap}
+.td-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border:1px solid color-mix(in srgb,var(--ink) 25%,transparent);background:color-mix(in srgb,var(--surface) var(--frost,92%),transparent);color:var(--ink);font:600 14px var(--sans);text-decoration:none;cursor:pointer}
+.td-btn.li{background:#0A66C2;color:#fff;border-color:#0A66C2}
+.td-btn.primary{background:var(--cta);color:var(--cta-ink);border-color:var(--cta)}
+.td-btn:disabled{opacity:.6;cursor:default}
+.td-comments{padding:16px;background:color-mix(in srgb,var(--surface) var(--frost,92%),transparent);color:var(--ink);border:1px solid color-mix(in srgb,var(--surface) 45%,transparent)}
+.td-comments h2{margin:0 0 4px;font:800 20px/1 var(--display);text-transform:uppercase}
+.td-comments p{margin:0 0 10px;color:var(--ink-2)}
+.td-intent{margin:10px 0 0!important;font-size:13px}
+.td-more{margin-top:18px}
+.td-others{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.td-other{display:flex;gap:10px;align-items:center;padding:10px;background:color-mix(in srgb,var(--surface) var(--frost,92%),transparent);color:var(--ink);text-decoration:none;font:600 14px/1.2 var(--sans)}
+.td-other small{display:block;font:400 12px var(--sans);color:var(--ink-2)}
+.td-sym{display:grid;place-items:center;width:36px;height:36px;flex:none;background:var(--tile);color:var(--tile-ink);font:800 16px var(--display)}

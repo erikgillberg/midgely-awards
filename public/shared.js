@@ -528,6 +528,7 @@ export function footerHTML() {
       <a href="/awards">The Awards</a>
       <a href="/shop">Shop</a>
       <a href="/faq">FAQ</a>
+      <a href="/corrections">Corrections</a>
       <a href="/guidelines">Guidelines</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
@@ -777,7 +778,7 @@ export function carouselHTML(n, data, flags = {}) {
       ${img}
       <div class="cc-body">
         ${s.kind === "pattern"
-          ? `<p class="cc-label cc-eyebrow">${focus ? "The pattern behind it" : `Pattern #${pi + 1}`}</p>`
+          ? `<p class="cc-label cc-eyebrow">${focus ? (data.format === "short" ? "Pattern?" : "The pattern behind it") : `Pattern #${pi + 1}`}</p>`
           : `<p class="cc-label"><span>${String(num).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
