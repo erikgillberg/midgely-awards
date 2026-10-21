@@ -137,19 +137,27 @@ const DIR_HUE = { harm: "#E8604C", benefit: "#2BB5BB", context: "#AEB9C2" };
 const fmt = (v) => (v == null || !Number.isFinite(+v) ? "" : (v = +v, v === 0) ? "0" : Math.abs(v) >= 1e6 ? `${+(v / 1e6).toPrecision(3)}M` : Math.abs(v) >= 1e4 ? `${+(v / 1e3).toPrecision(3)}K` : `${+v.toPrecision(3)}`);
 const usd = (v) => (v >= 1e12 ? `$${+(v / 1e12).toPrecision(3)} trillion` : v >= 1e9 ? `$${+(v / 1e9).toPrecision(3)} billion` : v >= 1e6 ? `$${+(v / 1e6).toPrecision(3)} million` : `$${fmt(v)}`);
 
-export function impactPanelHTML(all, nomineeId) {
+export function impactPanelHTML(all, nomineeId, code = "DB-06") {
   const c = CASE_IMPACTS.find((x) => x.nominee === nomineeId);
   if (!c || !(c.series || []).length) return "";
   const n = all.find((x) => x.id === nomineeId);
-  const years = c.series.filter((s) => s.featured).flatMap((s) => s.points.map((p) => p.year)).concat((c.events || []).map((e) => e.year));
+  const shown = (p) => !c.chartFrom || p.year >= c.chartFrom;
+  const years = c.series.filter((s) => s.featured).flatMap((s) => s.points.filter(shown).map((p) => p.year)).concat((c.events || []).filter(shown).map((e) => e.year));
   const from = Math.floor(Math.min(...years) / 10) * 10, to = Math.ceil((Math.max(...years) + 1) / 10) * 10;
   const x = (y) => ((y - from) / (to - from)) * 100;
-  const events = (c.events || []).map((e) => `<span class="im-ev" style="left:${x(e.year)}%" ${tip(String(e.year), [e.label])}><i></i></span>`).join("");
+  const events = (c.events || []).filter(shown).map((e) => `<span class="im-ev" style="left:${x(e.year)}%" ${tip(String(e.year), [e.label])}><i></i></span>`).join("");
   const rows = c.series.filter((s) => s.featured).map((s) => {
-    const pts = s.points.filter((p) => Number.isFinite(p.value)).sort((a, b) => a.year - b.year);
+    const every = s.points.filter((p) => Number.isFinite(p.value)).sort((a, b) => a.year - b.year);
+    const pts = every.filter(shown), hidden = every.filter((p) => !shown(p));
     if (!pts.length) return "";
-    const max = Math.max(...pts.map((p) => Math.max(p.value, p.high ?? 0))) * 1.12 || 1;
-    const y = (v) => 100 - (v / max) * 100;
+    // Lines start at zero unless every value sits high up the scale (like nitrous oxide at 315 to 339 ppb); then the
+    // floor rises so the change shows, and the floor value is labeled.
+    // The scale counts every point, including early ones not drawn, so a long rise is never hidden.
+    const top = Math.max(...every.map((p) => Math.max(p.value, p.high ?? -Infinity)));
+    const low = Math.min(...every.map((p) => Math.min(p.value, p.low ?? Infinity)));
+    const floor = low > 0.5 * top ? low - (top - low) * 0.15 : 0;
+    const max = top + (top - floor) * 0.12 || 1;
+    const y = (v) => 100 - ((v - floor) / (max - floor)) * 100;
     const seg = (list) => list.map((p) => `${x(p.year).toFixed(2)},${y(p.value).toFixed(2)}`).join(" ");
     const known = pts.filter((p) => !p.projected), ahead = pts.filter((p) => p.projected);
     const bridge = known.length && ahead.length ? [known[known.length - 1], ...ahead] : ahead;
@@ -162,16 +170,16 @@ export function impactPanelHTML(all, nomineeId) {
       <div class="im-meta"><b>${esc(s.label)}</b><span>${esc([s.unit, s.geography].filter(Boolean).join(" · "))}</span><em class="im-dir">${s.direction}</em></div>
       <div class="im-plot"><div class="im-area"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${band}
         ${known.length > 1 ? `<polyline class="im-line" points="${seg(known)}"/>` : ""}${bridge.length > 1 ? `<polyline class="im-line proj" points="${seg(bridge)}"/>` : ""}</svg>
-        ${dots}</div><span class="im-max">${fmt(max / 1.12)}</span></div>
+        ${dots}</div><span class="im-max">${fmt(top)}</span>${floor ? `<span class="im-min">axis starts at ${fmt(floor)}</span>` : ""}${hidden.length ? `<span class="im-early">${hidden.map((p) => `${p.year}: ${fmt(p.value)}`).join(" · ")}</span>` : ""}</div>
     </li>`;
   }).join("");
   const ticks = [];
   for (let yv = from; yv <= to; yv += 20) ticks.push(`<span style="left:${x(yv)}%">${yv}</span>`);
-  const money = (c.money || []).map((m) => `<li class="im-money ${m.direction}"><em class="im-kind">${{ harm: "Harm", avoided: "Harm avoided", benefit: "Benefit" }[m.direction] || ""}</em><b>${m.low_usd && m.high_usd ? `${usd(m.low_usd)} to ${usd(m.high_usd).replace("$", "")}` : m.total_usd ? usd(m.total_usd) : m.per_year_usd ? `${usd(m.per_year_usd)} a year` : ""}</b>
+  const money = (c.money || []).map((m) => `<li class="im-money ${m.direction}"><em class="im-kind">${{ harm: "Harm", avoided: "Harm avoided", benefit: "Benefit", fix: "Cost of the fix" }[m.direction] || ""}</em><b>${m.low_usd && m.high_usd ? `${usd(m.low_usd)} to ${usd(m.high_usd).replace("$", "")}${m.per_year_usd != null || /a year|per year|annual/i.test(m.label) ? " a year" : ""}` : m.total_usd ? usd(m.total_usd) : m.per_year_usd ? `${usd(m.per_year_usd)} a year` : ""}</b>
     <span>${esc(m.label)}${m.years ? ` <em>${esc(m.years)}</em>` : ""}</span>${m.caption ? `<small class="im-note">${esc(m.caption)}</small>` : ""}<small>${esc(m.source)}${m.usd_year ? `, in ${m.usd_year} dollars` : ""}</small></li>`).join("");
   const table = `<table><thead><tr><th>Series</th><th>Year</th><th>Value</th><th>Source</th></tr></thead><tbody>${c.series.filter((s) => s.featured).flatMap((s) => s.points.map((p) =>
     `<tr><td>${esc(s.label)}</td><td>${p.year}${p.projected ? " (projected)" : ""}</td><td>${fmt(p.value)} ${esc(s.unit)}</td><td>${esc(p.source || s.source)}</td></tr>`)).join("")}</tbody></table>`;
-  return panel("DB-06", `Impact over time: ${n ? n.name : nomineeId}`,
+  return panel(code, `Impact over time: ${n ? n.name : nomineeId}`,
     "What the fixes gave and what they cost, year by year. Each measure has its own scale; dollar figures come from separate studies and are not added together.",
     `<div class="im-wrap"><div class="im-events">${events}</div><ol class="im-rows">${rows}</ol><div class="im-axis">${ticks.join("")}</div></div>
      <p class="cb-legend db-legend"><span><i class="im-key harm"></i>Harm</span><span><i class="im-key benefit"></i>Benefit</span><span><i class="im-key proj"></i>Projected</span></p>
@@ -189,7 +197,7 @@ export function dashboardsHTML(all) {
       <p class="db-links"><a href="/patterns">The ten patterns</a><a href="/table">The Categoric Table</a></p>
     </header>
     ${readouts(noms)}
-    <div class="db-grid">${patternBars(noms)}${matrix(noms)}${timeline(noms)}${whoPays(noms)}${pairs(noms)}${CASE_IMPACTS.map((c) => impactPanelHTML(all, c.nominee)).join("")}</div>
+    <div class="db-grid">${patternBars(noms)}${matrix(noms)}${timeline(noms)}${whoPays(noms)}${pairs(noms)}${CASE_IMPACTS.map((c, i) => impactPanelHTML(all, c.nominee, `DB-${String(6 + i).padStart(2, "0")}`)).join("")}</div>
     <p class="pp-note">Tags are provisional. Two separate automated passes coded every case and an editor settled the differences. Human coders review them next.</p>`;
 }
 

@@ -494,7 +494,7 @@ export function sheetHTML() {
 function suggestSheetHTML() {
   const ways = [
     LINKS.suggestEmail ? `<a class="primary" href="mailto:${esc(LINKS.suggestEmail)}?subject=${encodeURIComponent("A backfire to tear down")}">Email a suggestion</a>` : "",
-    LINKS.linkedin ? `<a class="ghost" href="${esc(LINKS.linkedin)}" target="_blank" rel="noopener">Message us on LinkedIn</a>` : "",
+    LINKS.linkedin ? `<a class="ghost" href="${esc(LINKS.linkedin)}" target="_blank" rel="noopener">Erik on LinkedIn</a>` : "",
   ].filter(Boolean).join("");
   return `<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" hidden>
     <div class="sheet-in sh-suggest">
