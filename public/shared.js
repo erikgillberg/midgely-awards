@@ -52,6 +52,8 @@ export const LINKS = {
   waitlistForm: "kbakOe",                    // Tally: Backfire Awards shop waitlist (form id, embedded on /shop/waitlist)
   beehiivForm: "71cdf4c1-b2c8-4913-bb03-cc836734a7b1", // Beehiiv: The Backfire Newsletter sign-up form
   socials: [{ name: "Instagram", url: "https://www.instagram.com/backfireawards/" }],
+  suggestEmail: "",   // where teardown suggestions go, once there is a public address
+  linkedin: "",       // the LinkedIn profile or page that takes suggestions
 };
 
 // The Backfire Newsletter sign-up: our own form. The server keeps the address and passes it on to the newsletter service.
@@ -69,6 +71,11 @@ export const OOPS_LINE = "One short email a week: a new backfire teardown, the p
 // The Murphy (backfires founders and inventors built themselves) is on the roadmap since 2026-10-20: its pages and
 // data stay, but nothing links to it and the Nominate form takes Midgley nominations only. Flip to bring it back.
 export const MURPHYS_LIVE = false;
+// Streamlined on 2026-10-20, the UserOnboard way: no nomination form and no on-site comments for now. Readers suggest
+// teardowns by replying to the newsletter (or by email or LinkedIn once those are set in LINKS), and the newsletter is
+// the one call to action. The forms, the comment code and the data stay; flip these to bring them back.
+export const NOMINATIONS_LIVE = false;
+export const COMMENTS_LIVE = false;
 // The sign-up card that sits in the feed, once, after a few posts.
 export const feedOopsHTML = () => `<section class="feed-oops" aria-labelledby="fo-h">
   <p class="ob-label">The newsletter</p><h2 id="fo-h">Get one backfire a week</h2><p>${OOPS_LINE} Unsubscribe any time.</p>${signupHTML("feed")}</section>`;
@@ -244,17 +251,17 @@ function postShell(p, ctx = {}) {
     ${p.carousel}
     <div class="pv-bar">
       ${vote}
-      <button class="pv-btn" data-act="comments" aria-label="Comments">${picon("comment")}<span class="cc-n">${thread.length}</span></button>
+      ${COMMENTS_LIVE ? `<button class="pv-btn" data-act="comments" aria-label="Comments">${picon("comment")}<span class="cc-n">${thread.length}</span></button>` : ""}
       <button class="pv-btn" data-act="share" aria-label="Share">${picon("share")}</button>
     </div>
     <p class="pv-stats">${stats} · <a href="/faq#scores">scores</a></p>
     <div class="pv-caption"><p><a href="${esc(p.path)}"><b>${esc(p.captionTitle)}</b></a> ${esc(p.caption)}${p.more ? ` <button class="pv-more" type="button" data-act="more">more</button>` : ""}</p>
       ${p.more ? `<div class="pv-full" hidden>${p.more}</div>` : ""}</div>
-    <div class="pv-comments" data-collapsed>
+    ${COMMENTS_LIVE ? `<div class="pv-comments" data-collapsed>
       ${thread.length > 2 ? `<button class="pv-viewall" type="button" data-act="comments">View all ${thread.length} comments</button>` : ""}
       <div class="pv-thread">${threadHTML(thread)}</div>
       <button class="pv-add" type="button" data-act="comment-new">Add a comment…</button>
-    </div>
+    </div>` : ""}
   </article>`;
 }
 
@@ -401,7 +408,7 @@ export function headerHTML(flags = {}) {
     <nav class="rail-nav" aria-label="Main">
       ${item("/", "home", "Home")}
       ${item("/search", "search", "Search")}
-      <button class="nav-i nav-nom" type="button" data-open-sheet="">${icon("plus")}<span>Nominate</span></button>
+      <button class="nav-i nav-nom" type="button" data-open-sheet="">${icon("plus")}<span>${NOMINATIONS_LIVE ? "Nominate" : "Suggest"}</span></button>
       ${item("/table", "table", "The Table")}
       ${item("/patterns", "patterns", "The Patterns")}
       ${item("/dashboards", "gauge", "Dashboards")}
@@ -424,7 +431,7 @@ export function headerHTML(flags = {}) {
   <nav class="tabbar" aria-label="Main">
     ${item("/", "home", "Home")}
     ${item("/search", "search", "Search")}
-    <button class="nav-i nav-nom" type="button" data-open-sheet="" aria-label="Nominate">${icon("plus")}<span>Nominate</span></button>
+    <button class="nav-i nav-nom" type="button" data-open-sheet="" aria-label="${NOMINATIONS_LIVE ? "Nominate" : "Suggest a teardown"}">${icon("plus")}<span>${NOMINATIONS_LIVE ? "Nominate" : "Suggest"}</span></button>
     ${item("/table", "table", "Table")}
     <button class="nav-i" type="button" data-menu aria-expanded="false" aria-controls="menu-panel">${icon("menu")}<span>More</span></button>
   </nav>
@@ -441,6 +448,7 @@ export function headerHTML(flags = {}) {
 
 // One form for both awards. Pick the award, then fill in what that award needs.
 export function sheetHTML() {
+  if (!NOMINATIONS_LIVE) return suggestSheetHTML();
   const cats = `<option value="">Not sure</option>` + Object.entries(DOMAINS).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join("");
   const f = (id, label, el, hint = "") => `<label class="sh-field" for="${id}"><span>${label}</span>${el}${hint ? `<small>${hint}</small>` : ""}</label>`;
   return `<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" hidden>
@@ -478,6 +486,25 @@ export function sheetHTML() {
         <p class="sh-fine">Keep it about the decision, not a person someone could identify.</p>
       </form>
       <div class="sh-done" hidden><h2>Thanks.</h2><p></p><button class="primary" type="button" data-close-sheet>Done</button></div>
+    </div>
+  </div>`;
+}
+
+// "Suggest a teardown": the newsletter, and a reply to it, instead of a nomination form.
+function suggestSheetHTML() {
+  const ways = [
+    LINKS.suggestEmail ? `<a class="primary" href="mailto:${esc(LINKS.suggestEmail)}?subject=${encodeURIComponent("A backfire to tear down")}">Email a suggestion</a>` : "",
+    LINKS.linkedin ? `<a class="ghost" href="${esc(LINKS.linkedin)}" target="_blank" rel="noopener">Message us on LinkedIn</a>` : "",
+  ].filter(Boolean).join("");
+  return `<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" hidden>
+    <div class="sheet-in sh-suggest">
+      <button class="sheet-x" type="button" data-close-sheet aria-label="Close">×</button>
+      <p class="sh-step">Suggest a teardown</p>
+      <h2 id="sheet-h">Know a fix that backfired?</h2>
+      <p>Get the Backfire Newsletter and reply to any issue with your suggestion: what it fixed, and what it broke. We read every reply and tear down the best ones.</p>
+      ${signupHTML("sheet")}
+      ${ways ? `<p class="sh-ways">${ways}</p>` : ""}
+      <p class="sh-fine">What makes a good one: it worked, it caused harm somewhere else, and there are sources. <a href="/faq#nominee">More in the FAQ</a>.</p>
     </div>
   </div>`;
 }
@@ -758,7 +785,7 @@ export function carouselHTML(n, data, flags = {}) {
       <p class="cc-award-kind">Lifetime Achievement</p>
       <h3 class="cc-title">Thomas Midgley Jr.</h3>
       <p class="cc-text">For changing the world twice.</p>
-      <p class="cc-cta">Nominate the next one at <b>${BRAND_DOMAIN}</b></p>
+      <p class="cc-cta">${NOMINATIONS_LIVE ? "Nominate" : "Suggest"} the next one at <b>${BRAND_DOMAIN}</b></p>
     </div>
     ${foot(total)}
   </section>`);
@@ -770,7 +797,7 @@ export function carouselHTML(n, data, flags = {}) {
         <div><span class="k">Facepalm Index</span><b>${pct != null ? pct + "%" : "?"}</b><span class="s">${pct != null ? n.herdTotal + " votes" : "Not enough votes yet"}</span></div>
       </div>
       <h3 class="cc-title">${esc(n.work)}: worth it?</h3>
-      <p class="cc-cta">Vote and argue at <b>${BRAND_DOMAIN}${nomineePath(n)}</b></p>
+      <p class="cc-cta">${COMMENTS_LIVE ? "Vote and argue" : "Vote"} at <b>${BRAND_DOMAIN}${nomineePath(n)}</b></p>
       <p class="cc-follow">Follow the Backfire Awards for a new backfire every week.</p>
     </div>
     ${foot(total)}

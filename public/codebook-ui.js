@@ -2,6 +2,7 @@
 // pages read without scripts; patterns.js adds the menu highlight and chart-tip.js the tooltips.
 import { CODEBOOK, CODEBOOK_VERSION, DIMENSIONS } from "./codebook.js";
 import { esc, symbol, nomineePath } from "./shared.js";
+import { CASE_IMPACTS } from "./case-impacts.js";
 
 const pad = (i) => String(i + 1).padStart(2, "0");
 export const tagged = (noms) => noms.filter((n) => n.patterns && n.patterns.length);
@@ -130,6 +131,54 @@ function pairs(noms) {
   return panel("DB-05", "Patterns that travel together", `Pairs of patterns found in the same case.${most && most < 5 ? ` Early days: no pair has turned up in more than ${most === 1 ? "one case" : most + " cases"} yet.` : ""}`, `<ol class="db-pairs">${list}</ol>`, table);
 }
 
+// Impacts over time for one case: one small chart per measured series on a shared timeline (units never share an
+// axis), harms in vermilion, benefits in teal, projections dashed, turning points marked across all of them.
+const DIR_HUE = { harm: "#E8604C", benefit: "#2BB5BB", context: "#AEB9C2" };
+const fmt = (v) => (v == null || !Number.isFinite(+v) ? "" : (v = +v, v === 0) ? "0" : Math.abs(v) >= 1e6 ? `${+(v / 1e6).toPrecision(3)}M` : Math.abs(v) >= 1e4 ? `${+(v / 1e3).toPrecision(3)}K` : `${+v.toPrecision(3)}`);
+const usd = (v) => (v >= 1e12 ? `$${+(v / 1e12).toPrecision(3)} trillion` : v >= 1e9 ? `$${+(v / 1e9).toPrecision(3)} billion` : v >= 1e6 ? `$${+(v / 1e6).toPrecision(3)} million` : `$${fmt(v)}`);
+
+export function impactPanelHTML(all, nomineeId) {
+  const c = CASE_IMPACTS.find((x) => x.nominee === nomineeId);
+  if (!c || !(c.series || []).length) return "";
+  const n = all.find((x) => x.id === nomineeId);
+  const years = c.series.filter((s) => s.featured).flatMap((s) => s.points.map((p) => p.year)).concat((c.events || []).map((e) => e.year));
+  const from = Math.floor(Math.min(...years) / 10) * 10, to = Math.ceil((Math.max(...years) + 1) / 10) * 10;
+  const x = (y) => ((y - from) / (to - from)) * 100;
+  const events = (c.events || []).map((e) => `<span class="im-ev" style="left:${x(e.year)}%" ${tip(String(e.year), [e.label])}><i></i></span>`).join("");
+  const rows = c.series.filter((s) => s.featured).map((s) => {
+    const pts = s.points.filter((p) => Number.isFinite(p.value)).sort((a, b) => a.year - b.year);
+    if (!pts.length) return "";
+    const max = Math.max(...pts.map((p) => Math.max(p.value, p.high ?? 0))) * 1.12 || 1;
+    const y = (v) => 100 - (v / max) * 100;
+    const seg = (list) => list.map((p) => `${x(p.year).toFixed(2)},${y(p.value).toFixed(2)}`).join(" ");
+    const known = pts.filter((p) => !p.projected), ahead = pts.filter((p) => p.projected);
+    const bridge = known.length && ahead.length ? [known[known.length - 1], ...ahead] : ahead;
+    const band = pts.some((p) => p.low != null && p.high != null)
+      ? `<polygon class="im-band" points="${pts.filter((p) => p.low != null && p.high != null).map((p) => `${x(p.year).toFixed(2)},${y(p.high).toFixed(2)}`).join(" ")} ${pts.filter((p) => p.low != null && p.high != null).reverse().map((p) => `${x(p.year).toFixed(2)},${y(p.low).toFixed(2)}`).join(" ")}"/>` : "";
+    const dots = pts.map((p) => `<span class="im-pt${p.projected ? " proj" : ""}${pts.length > 25 ? " sm" : ""}" style="left:${x(p.year)}%;bottom:${100 - y(p.value)}%" ${tip(`${s.label}, ${p.year}`, [
+      `${fmt(p.value)} ${s.unit}${p.low != null && p.high != null ? ` (${fmt(p.low)} to ${fmt(p.high)})` : ""}${p.projected ? ", projected" : p.estimate ? ", estimate" : ""}`,
+      p.note || "", `Source: ${p.source || s.source}`].filter(Boolean))}></span>`).join("");
+    return `<li class="im-row" style="--hue:${DIR_HUE[s.direction] || DIR_HUE.context}">
+      <div class="im-meta"><b>${esc(s.label)}</b><span>${esc([s.unit, s.geography].filter(Boolean).join(" · "))}</span><em class="im-dir">${s.direction}</em></div>
+      <div class="im-plot"><div class="im-area"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${band}
+        ${known.length > 1 ? `<polyline class="im-line" points="${seg(known)}"/>` : ""}${bridge.length > 1 ? `<polyline class="im-line proj" points="${seg(bridge)}"/>` : ""}</svg>
+        ${dots}</div><span class="im-max">${fmt(max / 1.12)}</span></div>
+    </li>`;
+  }).join("");
+  const ticks = [];
+  for (let yv = from; yv <= to; yv += 20) ticks.push(`<span style="left:${x(yv)}%">${yv}</span>`);
+  const money = (c.money || []).map((m) => `<li class="im-money ${m.direction}"><em class="im-kind">${{ harm: "Harm", avoided: "Harm avoided", benefit: "Benefit" }[m.direction] || ""}</em><b>${m.low_usd && m.high_usd ? `${usd(m.low_usd)} to ${usd(m.high_usd).replace("$", "")}` : m.total_usd ? usd(m.total_usd) : m.per_year_usd ? `${usd(m.per_year_usd)} a year` : ""}</b>
+    <span>${esc(m.label)}${m.years ? ` <em>${esc(m.years)}</em>` : ""}</span>${m.caption ? `<small class="im-note">${esc(m.caption)}</small>` : ""}<small>${esc(m.source)}${m.usd_year ? `, in ${m.usd_year} dollars` : ""}</small></li>`).join("");
+  const table = `<table><thead><tr><th>Series</th><th>Year</th><th>Value</th><th>Source</th></tr></thead><tbody>${c.series.filter((s) => s.featured).flatMap((s) => s.points.map((p) =>
+    `<tr><td>${esc(s.label)}</td><td>${p.year}${p.projected ? " (projected)" : ""}</td><td>${fmt(p.value)} ${esc(s.unit)}</td><td>${esc(p.source || s.source)}</td></tr>`)).join("")}</tbody></table>`;
+  return panel("DB-06", `Impact over time: ${n ? n.name : nomineeId}`,
+    "What the fixes gave and what they cost, year by year. Each measure has its own scale; dollar figures come from separate studies and are not added together.",
+    `<div class="im-wrap"><div class="im-events">${events}</div><ol class="im-rows">${rows}</ol><div class="im-axis">${ticks.join("")}</div></div>
+     <p class="cb-legend db-legend"><span><i class="im-key harm"></i>Harm</span><span><i class="im-key benefit"></i>Benefit</span><span><i class="im-key proj"></i>Projected</span></p>
+     ${money ? `<h4 class="im-h">In dollars, where studies estimate it</h4><ul class="im-moneys">${money}</ul>` : ""}
+     ${(c.gaps || []).length ? `<h4 class="im-h">Not yet quantified</h4><ul class="im-gaps">${c.gaps.map((g) => `<li>${esc(g)}</li>`).join("")}</ul>` : ""}`, table, " wide");
+}
+
 // The Dashboards page: every panel. The Patterns page shows the gauges and links here.
 export function dashboardsHTML(all) {
   const noms = tagged(all);
@@ -140,7 +189,7 @@ export function dashboardsHTML(all) {
       <p class="db-links"><a href="/patterns">The ten patterns</a><a href="/table">The Categoric Table</a></p>
     </header>
     ${readouts(noms)}
-    <div class="db-grid">${patternBars(noms)}${matrix(noms)}${timeline(noms)}${whoPays(noms)}${pairs(noms)}</div>
+    <div class="db-grid">${patternBars(noms)}${matrix(noms)}${timeline(noms)}${whoPays(noms)}${pairs(noms)}${CASE_IMPACTS.map((c) => impactPanelHTML(all, c.nominee)).join("")}</div>
     <p class="pp-note">Tags are provisional. Two separate automated passes coded every case and an editor settled the differences. Human coders review them next.</p>`;
 }
 
@@ -190,7 +239,7 @@ export function patternsPageHTML(all) {
           </div>
           <div class="pp-cases"><h3>Cases</h3>${cs.length
             ? `<ul>${cs.map((c) => `<li><a href="${nomineePath(c.n)}" title="${esc(c.n.work || "")}"><span class="pp-sym${c.main ? "" : " also"}">${esc(symbol(c.n.name))}</span><b>${esc(c.n.name)}</b>${c.main ? "" : "<em>also</em>"}</a></li>`).join("")}</ul>`
-            : `<p>None yet. <a href="#nominate" data-open-sheet="">Nominate one</a>.</p>`}</div>
+            : `<p>None yet. <a href="#nominate" data-open-sheet="">Suggest one</a>.</p>`}</div>
           <details class="pp-research"><summary><h3>In the research</h3><span>${p.sources.length} sources</span></summary>
             <p class="pp-terms">${p.formal.map((f) => `<span>${esc(f)}</span>`).join("")}</p>
             <ul>${p.sources.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></details>

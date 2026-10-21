@@ -23,10 +23,11 @@ import {
 } from "./shared.js";
 import { CODEBOOK, DIMENSIONS } from "./codebook.js";
 import { CASE_RISKS, cleanRisks, cleanMitigations } from "./case-risks.js";
+import { IMPACTS_VERSION, CASE_IMPACTS, impactRows } from "./case-impacts.js";
 import { patternsTeaserHTML, patternsPageHTML, dashboardsHTML } from "./codebook-ui.js";
 const PATTERN_KEYS = CODEBOOK.map((p) => p.key);
 
-const SCHEMA_VERSION = 17;
+const SCHEMA_VERSION = 18;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Old and spare domains: each forwards to the same page on backfireawards.com, so shared links keep working.
@@ -70,6 +71,19 @@ const TABLES = [
   `CREATE INDEX IF NOT EXISTS comments_nominee ON comments (nominee_id, created_at)`,
   `CREATE INDEX IF NOT EXISTS hits_k_ts ON hits (k, ts)`,
   // v4: Facepalm Index votes, stored as "herd" (yes = 1, no = 0) and judges' Oops Scores (1 to 100)
+  // Impacts over time (case-impacts.js is the source; synced whenever IMPACTS_VERSION changes).
+  `CREATE TABLE IF NOT EXISTS impact_series (
+    id TEXT PRIMARY KEY, nominee_id TEXT NOT NULL, key TEXT NOT NULL, fix TEXT, label TEXT NOT NULL, direction TEXT NOT NULL,
+    unit TEXT, kind TEXT, geography TEXT, method TEXT, source TEXT, url TEXT, sort INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS impact_points (
+    series_id TEXT NOT NULL, year INTEGER NOT NULL, value REAL NOT NULL, low REAL, high REAL, projected INTEGER NOT NULL DEFAULT 0,
+    estimate INTEGER NOT NULL DEFAULT 0, note TEXT, source TEXT, url TEXT, PRIMARY KEY (series_id, year))`,
+  `CREATE TABLE IF NOT EXISTS impact_money (
+    id TEXT PRIMARY KEY, nominee_id TEXT NOT NULL, key TEXT NOT NULL, fix TEXT, label TEXT NOT NULL, direction TEXT NOT NULL,
+    usd_year INTEGER, total_usd REAL, per_year_usd REAL, low_usd REAL, high_usd REAL, years TEXT, source TEXT, url TEXT, note TEXT, caption TEXT)`,
+  // v18: one new "Worth it?" vote per post per visitor (hashed IP) per day. Kept two days, then deleted.
+  `CREATE TABLE IF NOT EXISTS vote_days (
+    nominee_id TEXT NOT NULL, visitor TEXT NOT NULL, day TEXT NOT NULL, PRIMARY KEY (nominee_id, visitor, day))`,
   `CREATE TABLE IF NOT EXISTS herd_votes (
     nominee_id TEXT NOT NULL, voter TEXT NOT NULL, yes INTEGER NOT NULL, created_at TEXT NOT NULL,
     PRIMARY KEY (nominee_id, voter))`,
@@ -114,6 +128,7 @@ const NEW_COLUMNS = {
     // v12: one level of replies, and Goat's moderation. mod: "" (unchecked), ok, flag, hold, draft (a Goat reply awaiting approval).
     ["parent_id", "TEXT"], ["mod", "TEXT"], ["mod_reason", "TEXT"], ["goat", "INTEGER DEFAULT 0"],
     ["reply_to", "TEXT"]], // the comment a Goat reply answers, which may itself be a reply
+  impact_money: [["low_usd", "REAL"], ["high_usd", "REAL"], ["caption", "TEXT"]],
   murphys: [["slug", "TEXT"], ["featured_at", "TEXT"], ["building", "TEXT"]], // building: v15, what the founder or inventor is building // v10: featured Murphys are public posts at /m/<slug>
 };
 
@@ -360,6 +375,7 @@ async function migrate(db) {
     }
   }
   const ver = Number((await db.prepare("SELECT value FROM meta WHERE key = 'schema_version'").first())?.value || 1);
+  await syncImpacts(db);   // runs on every cold start; it only writes when IMPACTS_VERSION changes
   if (ver >= SCHEMA_VERSION) return;
 
   const seeded = await db.prepare("SELECT value FROM meta WHERE key = 'seeded'").first();
@@ -445,6 +461,19 @@ async function migrate(db) {
   }
   // The version goes last, so a migration that fails partway runs again on the next request.
   await db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)).run();
+}
+
+// Copies case-impacts.js into the impact tables when its version changes. The file is the source of truth.
+async function syncImpacts(db) {
+  const have = (await db.prepare("SELECT value FROM meta WHERE key = 'impacts_version'").first())?.value;
+  if (have === IMPACTS_VERSION) return;
+  const { series, points, money } = impactRows();
+  const ins = (table, row) => db.prepare(`INSERT INTO ${table} (${Object.keys(row).join(",")}) VALUES (${Object.keys(row).map(() => "?").join(",")})`).bind(...Object.values(row));
+  await db.batch([
+    db.prepare("DELETE FROM impact_points"), db.prepare("DELETE FROM impact_series"), db.prepare("DELETE FROM impact_money"),
+    ...series.map((r) => ins("impact_series", r)), ...points.map((r) => ins("impact_points", r)), ...money.map((r) => ins("impact_money", r)),
+    db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('impacts_version', ?)").bind(IMPACTS_VERSION),
+  ]);
 }
 
 // A slug nobody else has: "edward-bassett", then "edward-bassett-2" and so on.
@@ -898,6 +927,22 @@ async function handleApi(request, env, url, ctx) {
     return json({ voted: !had, score: s.c });
   }
 
+  // Impacts over time for one case, or every case: GET /api/impacts?n=midgley. Sourced public data, for charts and export.
+  if (path === "/api/impacts" && method === "GET") {
+    const n = clean(url.searchParams.get("n") || "", 64);
+    const where = n ? " WHERE nominee_id = ?" : "", args = n ? [n] : [];
+    const [se, pts, mo] = await db.batch([
+      db.prepare(`SELECT * FROM impact_series${where} ORDER BY nominee_id, sort`).bind(...args),
+      db.prepare(`SELECT p.* FROM impact_points p JOIN impact_series s ON s.id = p.series_id${n ? " WHERE s.nominee_id = ?" : ""} ORDER BY p.series_id, p.year`).bind(...args),
+      db.prepare(`SELECT * FROM impact_money${where} ORDER BY nominee_id, key`).bind(...args),
+    ]);
+    const bySeries = {};
+    for (const p of pts.results) (bySeries[p.series_id] = bySeries[p.series_id] || []).push({ year: p.year, value: p.value, low: p.low, high: p.high,
+      projected: !!p.projected, estimate: !!p.estimate, note: p.note || "", source: p.source || "", url: p.url || "" });
+    return json({ version: IMPACTS_VERSION, series: se.results.map((s) => ({ ...s, points: bySeries[s.id] || [] })), money: mo.results },
+      200, { "cache-control": "public, max-age=300" });
+  }
+
   if (path === "/api/herd" && method === "POST") {
     if (!flagsOf(env).scores) return bad("Voting isn't open yet.", 404);
     const b = await readBody(request);
@@ -909,11 +954,21 @@ async function handleApi(request, env, url, ctx) {
     const exists = await postExists(db, nomineeId);
     if (!exists) return bad("That nominee isn't available.", 404);
     if (vote) {
+      // A browser can change its own vote; a new vote counts once per post per visitor per day.
+      const had = await db.prepare("SELECT 1 FROM herd_votes WHERE nominee_id = ? AND voter = ?").bind(nomineeId, voter).first();
+      if (!had) {
+        const day = new Date().toISOString().slice(0, 10), who = await visitorKey(request, env);
+        const r = await db.prepare("INSERT OR IGNORE INTO vote_days (nominee_id, visitor, day) VALUES (?,?,?)").bind(nomineeId, who, day).run();
+        if (!r.meta.changes) return bad("You've already voted on this one today. Come back tomorrow.", 429);
+        await db.prepare("DELETE FROM vote_days WHERE day < ?").bind(new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10)).run();
+      }
       await db.prepare(`INSERT INTO herd_votes (nominee_id, voter, yes, created_at) VALUES (?,?,?,?)
         ON CONFLICT (nominee_id, voter) DO UPDATE SET yes = excluded.yes, created_at = excluded.created_at`)
         .bind(nomineeId, voter, vote === "yes" ? 1 : 0, new Date().toISOString()).run();
     } else {
-      await db.prepare("DELETE FROM herd_votes WHERE nominee_id = ? AND voter = ?").bind(nomineeId, voter).run();
+      const gone = await db.prepare("DELETE FROM herd_votes WHERE nominee_id = ? AND voter = ?").bind(nomineeId, voter).run();
+      // Taking back a vote that existed frees today's slot, so the reader can vote again.
+      if (gone.meta.changes) await db.prepare("DELETE FROM vote_days WHERE nominee_id = ? AND visitor = ? AND day = ?").bind(nomineeId, await visitorKey(request, env), new Date().toISOString().slice(0, 10)).run();
     }
     const t = await db.prepare("SELECT COALESCE(SUM(yes),0) AS y, COUNT(*) AS t FROM herd_votes WHERE nominee_id = ?").bind(nomineeId).first();
     await bustState(url);

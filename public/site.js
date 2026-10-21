@@ -91,6 +91,10 @@ function pick(award) {
 
 export function openSheet(award = "") {
   if (!sheet) return;
+  if ($(".sh-suggest", sheet)) {   // no nomination form for now: the newsletter and a reply instead
+    lastFocus = document.activeElement; sheet.hidden = false; document.documentElement.classList.add("sheet-open");
+    $("input[type=email]", sheet)?.focus(); return;
+  }
   if ($(".sh-pick", sheet)?.hidden) award = "midgley";   // one award for now; the Murphy is on the roadmap
   lastFocus = document.activeElement;
   sheet.hidden = false;
