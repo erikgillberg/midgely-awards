@@ -1,24 +1,26 @@
-// The Patterns page: the rail follows the chapter you're reading, chapters fade in, charts get tooltips.
+// The Patterns page: the sticky menu lights the section you're in, panels rise as they arrive, charts get tooltips.
 import "./chart-tip.js";
 
-const links = new Map([...document.querySelectorAll(".pp-rail a")].map((a) => [a.hash.slice(1), a]));
-const rail = document.querySelector(".pp-rail");
-const seen = new IntersectionObserver((entries) => entries.forEach((e) => {
-  if (!e.isIntersecting) return;
-  links.forEach((a) => a.removeAttribute("aria-current"));
-  const a = links.get(e.target.id);
-  if (a) { a.setAttribute("aria-current", "true"); rail.scrollTo({ left: a.offsetLeft - rail.clientWidth / 2 + a.offsetWidth / 2, behavior: "smooth" }); }
-  rail.classList.toggle("on", e.target.classList.contains("pp-ch"));
-}), { rootMargin: "-45% 0px -50% 0px" });
-document.querySelectorAll(".pp-ch, .pp-index, .pp-data, .pp-hero").forEach((s) => seen.observe(s));
+const nav = document.querySelector(".pp-nav");
+const links = new Map([...nav.querySelectorAll("a")].map((a) => [a.hash.slice(1), a]));
+const light = (id) => {
+  const a = links.get(id); if (!a || a.hasAttribute("aria-current")) return;
+  links.forEach((x) => x.removeAttribute("aria-current"));
+  a.setAttribute("aria-current", "true");
+  nav.scrollTo({ left: a.offsetLeft - nav.clientWidth / 2 + a.offsetWidth / 2, behavior: "smooth" });
+};
+const seen = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && light(e.target.id)),
+  { rootMargin: "-35% 0px -60% 0px" });
+links.forEach((_, id) => { const s = document.getElementById(id); if (s) seen.observe(s); });
 
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const rise = new IntersectionObserver((entries) => entries.forEach((e) => {
     if (e.isIntersecting) { e.target.classList.add("in"); rise.unobserve(e.target); }
-  }), { rootMargin: "0px 0px -10% 0px" });
-  const els = [...document.querySelectorAll(".pp-ch-head, .pp-cards > *, .pp-tiles > li, .pp-data .cb-fig")];
-  // Only what is below the fold waits to rise; a jump to #pattern, find-in-page or a slow observer never leaves a blank screen.
+  }), { rootMargin: "0px 0px -8% 0px" });
+  const els = [...document.querySelectorAll(".pp-slab, .pp-tiles > li, .db-read, .db-panel")];
+  // Only what starts below the fold waits to rise; a jump to a section or printing shows everything.
   els.filter((el) => el.getBoundingClientRect().top > innerHeight).forEach((el) => { el.classList.add("rise"); rise.observe(el); });
-  addEventListener("hashchange", () => els.forEach((el) => el.classList.add("in")));
-  addEventListener("beforeprint", () => els.forEach((el) => el.classList.add("in")));
+  const all = () => els.forEach((el) => el.classList.add("in"));
+  addEventListener("hashchange", all); addEventListener("beforeprint", all);
+  if (location.hash) all();   // arriving at a section: show it at once
 }
