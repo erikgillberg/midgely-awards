@@ -717,7 +717,8 @@ export function keyHTML(n) {
 
 // Instagram has no vote buttons, so an exported post ends by asking in the comments instead.
 // Hidden on the site; feed.js shows it only while saving cards for Instagram.
-const IG_ASK = `<section class="cc cc-igask" data-ig-only aria-hidden="true">
+const IG_ASK = `<section class="cc cc-igask cc-payoff cc-hero" data-ig-only aria-hidden="true">
+    <img class="cc-badge" src="/img/brand/bf-badge.svg" alt="">
     <div class="cc-body">
       <p class="cc-label">Your verdict</p>
       <h3 class="cc-title">Worth it?</h3>
@@ -780,7 +781,7 @@ export function carouselHTML(n, data, flags = {}) {
           : `<p class="cc-label"><span>${String(num).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
-        ${s.text && !focus ? `<p class="cc-text${s.text.length + (s.stat ? 40 : 0) > 150 ? " long" : ""}">${rich(s.text)}</p>` : ""}${ledger}${lessons}${also}${patterns}
+        ${s.text && !focus ? `<p class="cc-text${s.text.length + (s.stat ? 40 : 0) > 140 ? " long" : ""}">${rich(s.text)}</p>` : ""}${ledger}${lessons}${also}${patterns}
       </div>
       ${foot(i)}
     </section>`);
@@ -798,7 +799,8 @@ export function carouselHTML(n, data, flags = {}) {
     </div>
     ${foot(total)}
   </section>`);
-  else if (!SCORES_VISIBLE) cards.push(`<section class="cc cc-payoff" data-web-only aria-roledescription="slide" aria-label="${total} of ${total}">
+  else if (!SCORES_VISIBLE) cards.push(`<section class="cc cc-payoff cc-hero" data-web-only aria-roledescription="slide" aria-label="${total} of ${total}">
+    <img class="cc-badge" src="/img/brand/bf-badge.svg" alt="Backfire Awards badge">
     <div class="cc-body">
       <p class="cc-label">Your verdict</p>
       <h3 class="cc-title">${esc(data.verdict || `${n.work}: worth it?`)}</h3>

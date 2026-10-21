@@ -10,13 +10,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "A bag that won't give out",
-      "text": "Groceries went home in paper bags. **A Swedish team welded a strong bag from one plastic tube.** The patent named Sten Gustaf Thulin."
+      "text": "Groceries went home in paper bags. **A Swedish team welded a strong bag from one plastic tube.** The patent named Sten Gustaf Thulin.",
+      "image": "/img/n/thulin/patent.jpg",
+      "alt": "Patent drawing of a flat plastic tube with welded seams and punched-out handle shapes, and a finished bag with two handles, signed Inventor Sten Gustaf Thulin",
+      "credit": "Bag with handle of weldable plastic material, US patent 3,180,557, filed 1962, granted 1965. Sten Gustaf Thulin. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "A penny a bag",
-      "text": "Rainproof and strong, it caught on. **By 2007 it cost about a penny, paper 4 to 5 cents**, industry figures said."
+      "text": "Rainproof and strong, it caught on. **By 2007 it cost about a penny, paper 4 to 5 cents**, industry figures said.",
+      "image": "/img/n/thulin/tshirt.jpg",
+      "alt": "Two thin peach-colored plastic shopping bags with cut-out handles and a printed fruit design, one flat and one open",
+      "credit": "Plastic shopping bags, 2011. Phrontis. CC BY-SA 3.0."
     },
     {
       "kind": "oops",
@@ -24,13 +30,19 @@
       "title": "Free, so thrown away",
       "stat": "328",
       "statLabel": "bags a person a year in Ireland before 2002, a government estimate",
-      "text": "Handed out free, bags were used once and tossed. **They snagged in trees, blocked drains and drifted out to sea.**"
+      "text": "Handed out free, bags were used once and tossed. **They snagged in trees, blocked drains and drifted out to sea.**",
+      "image": "/img/n/thulin/tree.jpg",
+      "alt": "Leafless riverside bushes strung with torn white and blue plastic bags above green water, with round weaverbird nests hanging among them",
+      "credit": "Plastic bag litter on the Jukskei River, Johannesburg, 2008. NJR ZA. CC BY-SA 3.0."
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Partly",
-      "text": "Litter was easy to see, and in 1972 scientists reported plastic in the open Atlantic. **In 1986 Barry Commoner asked if society really needed plastic bags.**"
+      "text": "Litter was easy to see, and in 1972 scientists reported plastic in the open Atlantic. **In 1986 Barry Commoner asked if society really needed plastic bags.**",
+      "image": "/img/n/thulin/mola.jpg",
+      "alt": "An ocean sunfish swimming just under the surface of calm blue water, its fin breaking the surface",
+      "credit": "Ocean sunfish, which feed mainly on jellyfish and can mistake bags for them, Greater Farallones, 2015. NOAA National Marine Sanctuaries. Public domain."
     },
     {
       "kind": "cleanup",

@@ -16,13 +16,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "A shadow over Broadway",
-      "text": "Manhattan's tenements lacked light and air, and in 1915 the Equitable Building cast a seven-acre shadow. **Edward M. Bassett set out to bring the light back.**"
+      "text": "Manhattan's tenements lacked light and air, and in 1915 the Equitable Building cast a seven-acre shadow. **Edward M. Bassett set out to bring the light back.**",
+      "image": "/img/n/edward-m-bassett/equitable.jpg",
+      "alt": "The Equitable Building, a huge flat-topped office block, towering over Trinity Church and its neighbors in lower Manhattan",
+      "credit": "Equitable Building, New York City, 1915. Library of Congress. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "America's first zoning code",
-      "text": "His commission wrote the first comprehensive US zoning code in 1916, capping heights and keeping factories out of residential districts. **By 1923, 218 municipalities had zoning.**"
+      "text": "His commission wrote the first comprehensive US zoning code in 1916, capping heights and keeping factories out of residential districts. **By 1923, 218 municipalities had zoning.**",
+      "image": "/img/n/edward-m-bassett/setback.jpg",
+      "alt": "Charcoal drawing of a stepped skyscraper mass, its towers narrowing in setbacks as they rise",
+      "credit": "Study of the largest building the 1916 zoning law allowed, 1922. Hugh Ferriss. Cooper Hewitt. Public domain."
     },
     {
       "kind": "oops",

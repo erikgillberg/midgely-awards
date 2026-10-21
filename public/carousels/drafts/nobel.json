@@ -22,13 +22,19 @@
       "kind": "right",
       "label": "It worked",
       "title": "Dynamite",
-      "text": "Patented in 1867, dynamite was nitroglycerin soaked into porous earth, quite safe to handle. **One plant made 11 tons that year and 3,150 in 1874.**"
+      "text": "Patented in 1867, dynamite was nitroglycerin soaked into porous earth, quite safe to handle. **One plant made 11 tons that year and 3,150 in 1874.**",
+      "image": "/img/n/nobel/ardeer.jpg",
+      "alt": "Women in aprons mixing dynamite in wooden boxes along a bench, with a man standing at the left, inside a timber factory shed",
+      "credit": "Mixing dynamite at Nobel's Ardeer factory, Scotland, 1897. Scott Photo, Ardrossan. Public domain."
     },
     {
       "kind": "oops",
       "label": "The backfire",
       "title": "Easy to carry, for anyone",
-      "text": "A stable explosive can be carried into a city and left behind. **In 1885 bombers used it on the House of Commons.**"
+      "text": "A stable explosive can be carried into a city and left behind. **In 1885 bombers used it on the House of Commons.**",
+      "image": "/img/n/nobel/westminster.jpg",
+      "alt": "Engraving of a bomb going off in Westminster Hall, throwing back the people nearby, under two smaller scenes of shattered stonework and the wrecked House of Commons",
+      "credit": "The dynamite explosions at the Houses of Parliament, The Graphic, 1885. Henry William Brewer. Public domain."
     },
     {
       "kind": "foresight",

@@ -16,13 +16,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Wheat that snapped",
-      "text": "Around 1960, West Pakistan fell short of wheat every year, and tall wheat snapped when fed more fertilizer. **Norman Borlaug's team set out to breed shorter wheat.**"
+      "text": "Around 1960, West Pakistan fell short of wheat every year, and tall wheat snapped when fed more fertilizer. **Norman Borlaug's team set out to breed shorter wheat.**",
+      "image": "/img/n/borlaug/lodged.jpg",
+      "alt": "A wheat field with a wide patch of tall stalks knocked flat to the ground",
+      "credit": "Wheat flattened by rain and wind, 2013. Azizkhan327. CC BY-SA 3.0."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Short wheat, big harvests",
-      "text": "The dwarf wheat took two or three times the fertilizer and lifted top yields over 70 percent. **In 1968 India harvested a record 17 million tons.**"
+      "text": "The dwarf wheat took two or three times the fertilizer and lifted top yields over 70 percent. **In 1968 India harvested a record 17 million tons.**",
+      "image": "/img/n/borlaug/wheat.jpg",
+      "alt": "A broad field of ripe golden wheat beside a stretch of water under a cloudy sky in Punjab",
+      "credit": "Ripe wheat in Punjab, 2019. Harvinder Chandigarh. CC BY-SA 4.0."
     },
     {
       "kind": "oops",
@@ -30,7 +36,10 @@
       "title": "Wells that keep getting deeper",
       "stat": "109 km³",
       "statLabel": "of groundwater lost in northwest India, 2002 to 2008, one study found",
-      "text": "The seeds paid off with water, and Punjab filled with thirsty rice and wheat. **Farmers now drill 200 to 300 feet for water.**"
+      "text": "The seeds paid off with water, and Punjab filled with thirsty rice and wheat. **Farmers now drill 200 to 300 feet for water.**",
+      "image": "/img/n/borlaug/tubewell.jpg",
+      "alt": "A pump engine and pipe at a brick tube well beside a green wheat field",
+      "credit": "Tube well in Mansa district, Punjab, India, 2012. Tari Buttar. CC0."
     },
     {
       "kind": "foresight",

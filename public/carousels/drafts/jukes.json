@@ -10,13 +10,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "More meat from cheap feed",
-      "text": "After World War II, US farms struggled to meet demand for meat. **Robert Stokstad and Thomas Jukes hunted for the missing growth factor.**"
+      "text": "After World War II, US farms struggled to meet demand for meat. **Robert Stokstad and Thomas Jukes hunted for the missing growth factor.**",
+      "image": "/img/n/jukes/chicks.jpg",
+      "alt": "Hundreds of young chicks on wood-shaving litter around red feeder pans in a long, low broiler house",
+      "credit": "Chicks in a broiler house, 2009. USDA NRCS Texas. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "A pinch, a big gain",
-      "text": "A pinch of the new antibiotic aureomycin made chicks grow faster. **In trials from 1950 to 1985, young pigs gained 16% faster.**"
+      "text": "A pinch of the new antibiotic aureomycin made chicks grow faster. **In trials from 1950 to 1985, young pigs gained 16% faster.**",
+      "image": "/img/n/jukes/hogs.jpg",
+      "alt": "Dozens of pink, black and spotted hogs in a muddy lot, with round metal self-feeders and open sheds behind them",
+      "credit": "Hogs at self-feeders in an Iowa hog lot. Lynn Betts, USDA NRCS. Public domain."
     },
     {
       "kind": "oops",
@@ -24,7 +30,10 @@
       "title": "The survivors took over",
       "stat": "31% vs 7%",
       "statLabel": "of samples mostly resistant, farm family vs. neighbors (Levy, 1976)",
-      "text": "A small daily dose kills the bacteria it can reach and spares the ones that resist. **The survivors multiply and pass their resistance on.**"
+      "text": "A small daily dose kills the bacteria it can reach and spares the ones that resist. **The survivors multiply and pass their resistance on.**",
+      "image": "/img/n/jukes/plates.jpg",
+      "alt": "Two lab dishes of bacteria with white antibiotic discs: clear rings around every disc on the left, few or none on the right",
+      "credit": "Antibiotic sensitivity (left) and resistance (right), 2011. Graham Beards. CC BY-SA 4.0."
     },
     {
       "kind": "foresight",

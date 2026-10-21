@@ -16,7 +16,10 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Kill the bugs that kill us",
-      "text": "Lice spread typhus, mosquitoes spread malaria, and the best insect killer had to be sprayed weekly. **Paul Müller went looking for a better one.**"
+      "text": "Lice spread typhus, mosquitoes spread malaria, and the best insect killer had to be sprayed weekly. **Paul Müller went looking for a better one.**",
+      "image": "/img/n/muller/mosquito.jpg",
+      "alt": "Close-up of an Anopheles gambiae mosquito, a carrier of malaria, biting human skin against a blue background",
+      "credit": "Anopheles gambiae mosquito feeding, 1994. James Gathany, CDC. Public domain."
     },
     {
       "kind": "right",
@@ -30,7 +33,10 @@
       "title": "Thin shells",
       "stat": "417",
       "statLabel": "bald eagle nesting pairs in the lower 48 in 1963, by a federal count",
-      "text": "DDT lingered and built up in fatty tissue. **Some birds of prey laid shells 19 percent or more thinner.**"
+      "text": "DDT lingered and built up in fatty tissue. **Some birds of prey laid shells 19 percent or more thinner.**",
+      "image": "/img/n/muller/eagle.jpg",
+      "alt": "A bald eagle perched at the edge of a large stick nest high in a mossy tree",
+      "credit": "Bald eagle on its nest, 2021. US Fish and Wildlife Service. Public domain."
     },
     {
       "kind": "foresight",

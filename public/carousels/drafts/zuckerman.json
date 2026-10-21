@@ -16,13 +16,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Free pages, paid by ads",
-      "text": "A carmaker complained when its banner ran on a Tripod member's page about sex. **Ethan Zuckerman's fix: open the ad in its own window.**"
+      "text": "A carmaker complained when its banner ran on a Tripod member's page about sex. **Ethan Zuckerman's fix: open the ad in its own window.**",
+      "image": "/img/n/zuckerman/williamstown.jpg",
+      "alt": "Spring Street in Williamstown, Massachusetts: brick storefronts, parked cars and a leafy tree on a sunny day",
+      "credit": "Spring Street, Williamstown, Massachusetts, 2010. John Phelan. CC BY 3.0."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "A window of its own",
-      "text": "The ad sat beside the page, not on it, and others copied the trick. **Advertisers bought 11.3 billion pop-ups from January to July 2002**, Nielsen//NetRatings counted."
+      "text": "The ad sat beside the page, not on it, and others copied the trick. **Advertisers bought 11.3 billion pop-ups from January to July 2002**, Nielsen//NetRatings counted.",
+      "image": "/img/n/zuckerman/netscape.jpg",
+      "alt": "Gray About page of Netscape Navigator 2.02, the first browser to run JavaScript, with the Netscape N logo",
+      "credit": "Netscape Navigator 2.02, screenshot by Indolering, 2015. CC0."
     },
     {
       "kind": "oops",

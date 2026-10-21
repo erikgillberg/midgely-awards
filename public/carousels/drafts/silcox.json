@@ -16,7 +16,10 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Never another 1910",
-      "text": "In 1910 fires burned more than 3 million acres and killed at least 85 people. **Ferdinand Silcox argued fire could be kept out.**"
+      "text": "In 1910 fires burned more than 3 million acres and killed at least 85 people. **Ferdinand Silcox argued fire could be kept out.**",
+      "image": "/img/n/silcox/burn1910.jpg",
+      "alt": "Black and white photo of a burned hillside in 1910, covered in toppled, charred tree trunks and uprooted stumps",
+      "credit": "Burned site on Big Creek, St. Joe National Forest, Idaho, 1910. J.B. Halm, US Forest Service. Public domain."
     },
     {
       "kind": "right",
@@ -30,7 +33,10 @@
       "title": "The fuel stayed",
       "stat": "3.0M to 7.1M",
       "statLabel": "US acres burned a year, 1985 to 1994 vs. 2016 to 2025 (NIFC)",
-      "text": "Small fires had kept dry pine forests open. Without them, **fuel piled up for bigger, hotter fires.** Climate and building near forests add to it."
+      "text": "Small fires had kept dry pine forests open. Without them, **fuel piled up for bigger, hotter fires.** Climate and building near forests add to it.",
+      "image": "/img/n/silcox/dixie.jpg",
+      "alt": "Satellite view of a huge wildfire in forested mountains, with long plumes of smoke streaming north over green and brown land",
+      "credit": "The Dixie Fire, California, August 4, 2021, seen by Landsat 7. NASA Earth Observatory. Public domain."
     },
     {
       "kind": "foresight",
@@ -42,7 +48,10 @@
       "kind": "cleanup",
       "label": "The long cleanup",
       "title": "Putting fire back",
-      "text": "The Forest Service dropped the rule in 1978. **Now it burns and thins forests on purpose.** A 2022 plan targets up to 20 million more acres."
+      "text": "The Forest Service dropped the rule in 1978. **Now it burns and thins forests on purpose.** A 2022 plan targets up to 20 million more acres.",
+      "image": "/img/n/silcox/rxburn.jpg",
+      "alt": "Low flames creep through pine needles on the floor of an open ponderosa pine forest during a planned burn, with smoke among the trunks",
+      "credit": "Prescribed burn in ponderosa pine, Grand Canyon National Park, December 11, 2024. National Park Service. Public domain."
     },
     {
       "kind": "ledger",

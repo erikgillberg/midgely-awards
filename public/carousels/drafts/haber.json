@@ -15,13 +15,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Fertilizer from bird droppings",
-      "text": "Crops need nitrogen. Around 1900 most came from bird droppings and mined saltpeter, and **a chemist warned the world would run short of wheat.**"
+      "text": "Crops need nitrogen. Around 1900 most came from bird droppings and mined saltpeter, and **a chemist warned the world would run short of wheat.**",
+      "image": "/img/n/haber/guano.jpg",
+      "alt": "Workers loading guano into a rail cart at the foot of a huge pale heap, Chincha Islands, Peru, 1865",
+      "credit": "Guano mining, Chincha Islands, Peru, 1865. Henry de Witt Moulton. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Ammonia out of thin air",
-      "text": "In 1909 Fritz Haber made ammonia from the nitrogen in air, and Carl Bosch scaled it up. **One estimate: it fed 48% of the world in 2008.**"
+      "text": "In 1909 Fritz Haber made ammonia from the nitrogen in air, and Carl Bosch scaled it up. **One estimate: it fed 48% of the world in 2008.**",
+      "image": "/img/n/haber/wheat.jpg",
+      "alt": "A combine harvesting a vast golden wheat field on rolling hills",
+      "credit": "Wheat harvest on the Palouse. USDA. Public domain."
     },
     {
       "kind": "oops",
@@ -29,7 +35,10 @@
       "title": "The extra goes somewhere",
       "stat": "4,402",
       "statLabel": "square miles of Gulf of Mexico dead zone in summer 2025, per NOAA",
-      "text": "The nitrogen crops don't take up washes downriver and feeds algae. **Each summer the Gulf of Mexico gets a dead zone.**"
+      "text": "The nitrogen crops don't take up washes downriver and feeds algae. **Each summer the Gulf of Mexico gets a dead zone.**",
+      "image": "/img/n/haber/gulf.jpg",
+      "alt": "Satellite view of brown and green water spreading from the Louisiana coast into the deep blue Gulf of Mexico",
+      "credit": "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain."
     },
     {
       "kind": "foresight",

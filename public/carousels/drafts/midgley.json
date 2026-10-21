@@ -16,13 +16,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Stop the knock",
-      "text": "Early car engines knocked, wasting power and wearing out parts. **Thomas Midgley set out to stop the knock.**"
+      "text": "Early car engines knocked, wasting power and wearing out parts. **Thomas Midgley set out to stop the knock.**",
+      "image": "/img/n/midgley/traffic.jpg",
+      "alt": "A busy Los Angeles intersection in 1922, with streetcars, early automobiles and a Union Gasoline station",
+      "credit": "North Broadway and Sunset Boulevard, Los Angeles, 1922. Automobile Club of Southern California. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "A pinch of lead",
-      "text": "In 1921 Midgley found that **a little lead in gasoline stopped the knock.** It went on sale as Ethyl, hailed as a triumph of chemistry."
+      "text": "In 1921 Midgley found that **a little lead in gasoline stopped the knock.** It went on sale as Ethyl, hailed as a triumph of chemistry.",
+      "image": "/img/n/midgley/pump.jpg",
+      "alt": "A rusted red Atlantic gasoline pump with a yellow and blue Ethyl anti-knock compound emblem",
+      "credit": "Atlantic Ethyl pump, Leola, Pennsylvania. John Margolies, 1982. Library of Congress. Public domain."
     },
     {
       "kind": "oops",

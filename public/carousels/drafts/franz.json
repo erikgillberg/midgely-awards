@@ -10,13 +10,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Kill weeds without the plow",
-      "text": "Farmers fought weeds by plowing, which costs topsoil, time and fuel. **They wanted one weed killer that left the soil alone.**"
+      "text": "Farmers fought weeds by plowing, which costs topsoil, time and fuel. **They wanted one weed killer that left the soil alone.**",
+      "image": "/img/n/franz/erosion.jpg",
+      "alt": "A snowy hillside field below a tall grassy bank along a fence line, where years of plowing have carried the soil downhill",
+      "credit": "Plow erosion along a fence line, Whitman County, Washington, 1940s or 1950s. USDA. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Roundup",
-      "text": "In 1970 Monsanto chemist John Franz found glyphosate, sold as Roundup from 1974. **It controls over 125 kinds of weeds.**"
+      "text": "In 1970 Monsanto chemist John Franz found glyphosate, sold as Roundup from 1974. **It controls over 125 kinds of weeds.**",
+      "image": "/img/n/franz/no-till.jpg",
+      "alt": "Rows of young soybean plants growing up through the stalks of last year's corn in an unplowed field",
+      "credit": "Soybeans in a no-till field. Lynn Betts, USDA NRCS. Public domain."
     },
     {
       "kind": "oops",
@@ -24,7 +30,10 @@
       "title": "The survivors took over",
       "stat": "62",
       "statLabel": "weed species in 31 countries resist glyphosate, a 2026 review finds",
-      "text": "Global use rose almost 15-fold after 1996, when crops engineered to survive it arrived. **Each spraying left behind the weeds it could not kill.**"
+      "text": "Global use rose almost 15-fold after 1996, when crops engineered to survive it arrived. **Each spraying left behind the weeds it could not kill.**",
+      "image": "/img/n/franz/weeds.jpg",
+      "alt": "Broadleaf weeds growing in the gap between two rows of soybeans",
+      "credit": "Weeds in a soybean field, 2013. United Soybean Board. CC BY 2.0."
     },
     {
       "kind": "foresight",

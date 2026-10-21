@@ -16,13 +16,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "Bugs can't keep up",
-      "text": "The US was going electric, and a common insulator, shellac, came from lac insects in limited supply. **Leo Baekeland set out to make a substitute.**"
+      "text": "The US was going electric, and a common insulator, shellac, came from lac insects in limited supply. **Leo Baekeland set out to make a substitute.**",
+      "image": "/img/n/baekeland/shellac.jpg",
+      "alt": "Two piles of amber and dark red shellac flakes on white paper",
+      "credit": "Shellac flakes, 2009. Nuberger13. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Heat, pressure, Bakelite",
-      "text": "In 1907 he made Bakelite, the first fully synthetic plastic, and announced it in 1909. **Soon it was in car parts, radios and telephones.**"
+      "text": "In 1907 he made Bakelite, the first fully synthetic plastic, and announced it in 1909. **Soon it was in car parts, radios and telephones.**",
+      "image": "/img/n/baekeland/radio.jpg",
+      "alt": "A round brown Bakelite radio with a curved station dial, a cloth speaker grille and three knobs",
+      "credit": "Radio with a Bakelite case, designed by Wells Coates, 1932. Daderot. CC0."
     },
     {
       "kind": "oops",
@@ -30,7 +36,10 @@
       "title": "Made to last, so it does",
       "stat": "79%",
       "statLabel": "of plastic waste by 2015 sat in landfills or nature, one study says",
-      "text": "Most plastics after Bakelite don't biodegrade in any meaningful sense, a study author says. **Most plastic waste is still around.**"
+      "text": "Most plastics after Bakelite don't biodegrade in any meaningful sense, a study author says. **Most plastic waste is still around.**",
+      "image": "/img/n/baekeland/beach.jpg",
+      "alt": "Plastic bottles, crates, rope, a tire and other debris heaped along a beach, with surf and a mountain behind",
+      "credit": "Plastic debris in Kanapou Bay, Kaho'olawe, Hawaii, 2012. NOAA. Public domain."
     },
     {
       "kind": "foresight",

@@ -16,13 +16,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "A city out of room",
-      "text": "In 1930 New York's streets were jammed and its parks were few. **Robert Moses set out to fix both at once.**"
+      "text": "In 1930 New York's streets were jammed and its parks were few. **Robert Moses set out to fix both at once.**",
+      "image": "/img/n/moses/parkways.jpg",
+      "alt": "Aerial view of cars streaming along the Grand Central Parkway through a looping interchange among houses and fields",
+      "credit": "Grand Central Parkway at the Kew Gardens Interchange, Queens, about 1946. U.S. Department of State. National Archives. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Beaches for everyone",
-      "text": "Jones Beach drew 350,000 people in its first month. **Playgrounds went from 119 to 777.** His parkways carried families out of the city."
+      "text": "Jones Beach drew 350,000 people in its first month. **Playgrounds went from 119 to 777.** His parkways carried families out of the city.",
+      "image": "/img/n/moses/jones-beach.jpg",
+      "alt": "Aerial view of Jones Beach in 1936: wide sand, the boardwalk, bathhouses, the water tower and vast parking fields",
+      "credit": "Jones Beach from the air, 1936. U.S. Army. National Archives. Public domain."
     },
     {
       "kind": "oops",
@@ -30,7 +36,10 @@
       "title": "Then the roads filled up",
       "stat": "250,000",
       "statLabel": "people lost their homes to his highways, by Robert Caro's count",
-      "text": "And every new highway drew more cars. **The traffic came back, bigger.**"
+      "text": "And every new highway drew more cars. **The traffic came back, bigger.**",
+      "image": "/img/n/moses/cross-bronx.jpg",
+      "alt": "Traffic on the Cross Bronx Expressway in 1973, sunk below overpasses and ramps crowded with cars",
+      "credit": "Cross Bronx Expressway, 1973. Dan McCoy, EPA Documerica. National Archives. Public domain."
     },
     {
       "kind": "foresight",

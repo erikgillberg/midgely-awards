@@ -16,13 +16,19 @@
       "kind": "meant",
       "label": "The bright idea",
       "title": "A lesson you could play",
-      "text": "Lizzie Magie followed Henry George, who argued that rent enriches landowners and keeps tenants poor. **She built a board game to show it.**"
+      "text": "Lizzie Magie followed Henry George, who argued that rent enriches landowners and keeps tenants poor. **She built a board game to show it.**",
+      "image": "/img/n/magie/george.jpg",
+      "alt": "Studio portrait of the economist Henry George, balding, with a full beard and a bow tie",
+      "credit": "Henry George, about 1886. Unknown photographer. New York Public Library. Public domain."
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Patented and passed around",
-      "text": "She patented it on January 5, 1904, and players drew their own boards. **A Wharton economist taught with it in class.**"
+      "text": "She patented it on January 5, 1904, and players drew their own boards. **A Wharton economist taught with it in class.**",
+      "image": "/img/n/magie/patent.jpg",
+      "alt": "Patent drawing of a square game board with spaces marked For Sale and For Rent, railroads, a Bank, a Public Treasury and a Go to Jail corner",
+      "credit": "The Landlord's Game, US patent 748,626, 1904. Lizzie J. Magie. Public domain."
     },
     {
       "kind": "oops",

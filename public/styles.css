@@ -1569,50 +1569,37 @@ body[data-bg="patterns"] .nav-theme{display:none} /* these pages are always nigh
 .cc-hind span{display:block;margin-top:.2em;font-size:.86em;line-height:1.35;opacity:.88}
 .cc-hind span::before{content:"Might have softened it: ";font:500 .78em var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.8}
 .cc-whatif{background:radial-gradient(120% 90% at 0% 100%,var(--base) 0%,var(--deep) 65%)}
-/* The short format: a story told @foundr style. Between the cover and the verdict, each card is one statement on plain
-   paper, set big enough to fill the square, with its one key line in bold. Titles stay in the markup for screen readers. */
-.cc-short .cc:not(.cc-hook):not(.cc-payoff):not(.cc-igask){background:#F4E8D6;color:#0A2033}
-.cc-short .cc:not(.cc-hook):not(.cc-payoff):not(.cc-igask)::before{display:none}
-.cc-short .cc:not(.cc-hook):not(.cc-payoff):not(.cc-igask) .cc-body{flex:1;justify-content:center;align-items:center;text-align:center;padding:9% 8% 14%;gap:.9em}
-.cc-short .cc .cc-label{color:#53687A;font-size:.85em}
-.cc-short .cc .cc-label span{background:var(--base);color:#fff}
-.cc-short :is(.cc-meant,.cc-right,.cc-oops,.cc-foresight,.cc-cleanup) .cc-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-.cc-short .cc:not(.cc-hook):not(.cc-payoff):not(.cc-igask) .cc-text{font:400 2.1em/1.24 var(--sans);color:#4A5D6E;max-width:none;text-wrap:balance}
-.cc-short .cc-text strong{font-weight:800;color:#0A2033}
-.cc-short :is(.cc-foresight) .cc-chips,.cc-short .cc-foresight .cc-know{display:none}
-.cc-short .cc-stat{color:#0A2033}
-.cc-short .cc-stat b{font-size:3.4em;line-height:1;display:block;color:var(--base)}
-.cc-short .cc-oops .cc-stat{font:600 .9em/1.3 var(--mono);text-transform:uppercase;letter-spacing:.04em;color:#34495E}
-.cc-short .cc-foot{color:#53687A}
-.cc-short .cc-chip,.cc-short .cc-know{filter:none}
-.cc-short .cc-ledger .cc-title,.cc-short .cc-pattern .cc-title,.cc-short .cc-lessons .cc-title{font-size:3.2em;color:#0A2033}
-.cc-short .cc-ledger .cc-text{font-size:1.35em!important}
-.cc-short .cc-lg{width:100%;text-align:left}
-.cc-short .cc-lg h4{color:#53687A;font-size:.85em}
-.cc-short .cc-lg li{font-size:1.15em;line-height:1.3;color:#0A2033}
-.cc-short .cc-pattern .cc-text{font-size:1.6em!important}
-.cc-short .cc-pattern .cc-q{background:rgb(10 32 51/.07);border-left-color:var(--base);color:#0A2033;text-align:left;font-size:1.2em}
-.cc-short .cc-pattern .cc-why{color:#34495E;font-size:.95em}
-.cc-short .cc-lessons ol{text-align:left}
-.cc-short .cc-lessons li{font-size:1.3em;line-height:1.25;color:#0A2033}
-.cc-short .cc-lessons .cc-title{font-size:2.6em}
-.cc-short .cc-foresight .cc-scale{display:none}
-.cc-short .cc-lessons .cc-title{font-size:2em}
-.cc-short .cc-lessons li{font-size:1.15em}
-.cc-short .cc-pattern .cc-title{font-size:2.6em}
-.cc-short .cc-pattern .cc-text{font-size:1.4em!important}
-.cc-short .cc-pattern .cc-why{display:none}
-/* less formatting: the story cards carry only the statement */
+/* The short format: one statement per card, set big, the key line bold. Cards keep the category color and photos;
+   labels, titles and boxes stay off so the sentence is the only thing to read. */
+.cc-short .cc:not(.cc-hook):not(.cc-payoff):not(.cc-igask) .cc-body{flex:1;justify-content:center;padding:6% 7% 13%;gap:.8em}
+.cc-short .cc.has-img:not(.cc-hook) .cc-body{justify-content:flex-start;padding-top:5%}
+.cc-short .cc.has-img .cc-img{height:42%;flex:0 0 42%}
 .cc-short .cc:not(.cc-hook):not(.cc-payoff):not(.cc-igask) .cc-label{display:none}
-.cc-short .cc-pattern .cc-q{display:none}
-.cc-short .cc-oops .cc-stat{text-transform:none;letter-spacing:0;font:400 1.1em/1.3 var(--sans);color:#4A5D6E}
-.cc-short .cc-lessons ol,.cc-short ol.cc-lessons{list-style:none;padding:0;text-align:center}
-.cc-short .cc-lessons li::marker{content:none}
+.cc-short :is(.cc-meant,.cc-right,.cc-oops,.cc-foresight,.cc-cleanup) .cc-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.cc-short .cc:not(.cc-hook):not(.cc-payoff):not(.cc-igask) .cc-text{font:400 2.05em/1.24 var(--sans);color:rgb(255 255 255/.72);max-width:none;text-wrap:pretty}
+.cc-short .cc.has-img:not(.cc-hook) .cc-text{font-size:1.7em}
+.cc-short .cc:not(.cc-hook) .cc-text.long{font-size:1.6em}
+.cc-short .cc.has-img:not(.cc-hook) .cc-text.long{font-size:1.4em}
+.cc-short .cc-text strong{font-weight:800;color:#fff}
+.cc-short .cc-oops .cc-stat{font:400 1em/1.3 var(--sans);text-transform:none;letter-spacing:0;color:rgb(255 255 255/.75)}
+.cc-short .cc-oops .cc-stat b{display:block;font:900 3.2em/1 var(--display);color:#fff}
+.cc-short .cc-foresight .cc-scale,.cc-short .cc-foresight .cc-chip{display:none}
 .cc-short .cc-ledger .cc-lg{display:none}
-.cc-short .cc-ledger .cc-text{font-size:2.1em!important}
-.cc-short .cc-pattern .cc-text{font-size:1.9em!important}
-.cc-short .cc-pattern .cc-title{font-size:2.2em}
-/* short format cover: portrait, tile and headline; the who-and-when line moves under the headline */
+.cc-short :is(.cc-ledger,.cc-pattern) .cc-title{font-size:2.4em}
+.cc-short .cc-ledger .cc-text,.cc-short .cc-pattern .cc-text{font-size:1.8em!important}
+.cc-short .cc-pattern .cc-q,.cc-short .cc-pattern .cc-why{display:none}
 .cc-short .cc-hook .cc-kicker{display:none}
 .cc-short .cc-hook .cc-dek{font-size:1.05em;opacity:.85}
-.cc-short .cc:not(.cc-hook):not(.cc-payoff):not(.cc-igask) .cc-text.long{font-size:1.75em}
+/* the verdict: the hero poster, the Bf badge, the question */
+.cc-payoff.cc-hero{background:linear-gradient(180deg,rgb(10 32 51/.35),rgb(10 32 51/.92) 62%),url(/img/brand/bright-ideas-poster.jpg) center 20%/cover #0A2033}
+.cc-payoff.cc-hero .cc-body{justify-content:flex-end;height:100%}
+.cc-badge{position:absolute;top:5.5%;left:5.5%;width:16%;height:auto;filter:drop-shadow(0 .3em .8em rgb(0 0 0/.5))}
+.cc-short .cc.has-img .cc-img{height:38%;flex:0 0 38%}
+.cc-short .cc.has-img:not(.cc-hook) .cc-text{font-size:1.5em}
+.cc-short .cc.has-img:not(.cc-hook) .cc-text.long{font-size:1.32em}
+.cc-short .cc-oops.has-img .cc-stat b{font-size:2.4em}
+.cc-short .cc-oops.has-img .cc-body{gap:.5em}
+.cc-payoff.cc-hero .cc-follow{display:none}
+.cc-payoff.cc-hero .cc-body{padding-bottom:12%}
+.cc-short .cc.has-img:has(.cc-text.long) .cc-img{height:30%;flex:0 0 30%}
+.cc-short .cc.has-img:not(.cc-hook) .cc-text.long{font-size:1.4em}
