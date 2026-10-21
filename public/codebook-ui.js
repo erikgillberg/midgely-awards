@@ -4,7 +4,7 @@ import { CODEBOOK, CODEBOOK_VERSION, DIMENSIONS } from "./codebook.js";
 import { esc, symbol, nomineePath } from "./shared.js";
 
 const pad = (i) => String(i + 1).padStart(2, "0");
-const tagged = (noms) => noms.filter((n) => n.patterns && n.patterns.length);
+export const tagged = (noms) => noms.filter((n) => n.patterns && n.patterns.length);
 const casesFor = (noms, key) => noms.filter((n) => n.patterns.includes(key))
   .map((n) => ({ n, main: n.patterns[0] === key }))
   .sort((a, b) => b.main - a.main || (a.n.began || 0) - (b.n.began || 0));
@@ -16,7 +16,7 @@ const SCALE_ROWS = ["global", "national", "regional", "local"];
 const LAG_COLS = ["immediate", "years", "decades", "generations"];
 // Each pattern's color, from the Switchback family in the logo, stepped for the night background.
 // The seven chart hues pass the colorblind and contrast checks on navy; every bar also carries its name.
-const HUES = {
+export const HUES = {
   surplus: "#E56636", stable: "#6CB8E8", moved: "#1FA9AF", everyone: "#CD6199", metric: "#5981E0",
   resistance: "#E04A3F", gamed: "#D99B1F", later: "#A269C9", flipped: "#E9CFA4", buffered: "#47AA62",
 };
@@ -28,13 +28,31 @@ function panel(code, title, sub, body, table, wide = "") {
     <details class="db-table"><summary>Show as a table</summary>${table}</details></figure>`;
 }
 
-function readouts(noms) {
-  const seen = CODEBOOK.filter((p) => noms.some((n) => n.patterns.includes(p.key))).length;
-  const global = noms.filter((n) => n.scale === "global").length;
-  const sticky = noms.filter((n) => n.reversibility !== "reversible").length;
-  const multi = noms.filter((n) => n.patterns.length > 1).length;
-  const r = (v, of, label) => `<li><b>${v}${of ? `<small>/${of}</small>` : ""}</b><span>${label}</span></li>`;
-  return `<ul class="db-read">${r(noms.length, "", "Cases tagged")}${r(seen, CODEBOOK.length, "Patterns seen")}${r(global, noms.length, "Global harm")}${r(sticky, noms.length, "Slow or impossible to undo")}${r(multi, noms.length, "More than one pattern")}</ul>`;
+// Ring gauges: an instrument face per headline number. The arc is the share; the number is the count.
+function gauge(value, of, label, hue) {
+  const r = 78, c = 2 * Math.PI * r, frac = of ? value / of : 0;
+  const ticks = Array.from({ length: 60 }, (_, i) => {
+    const a = (i / 60) * 2 * Math.PI, long = i % 5 === 0;
+    const r1 = 92, r2 = long ? 99 : 96;
+    return `<line x1="${(100 + r1 * Math.sin(a)).toFixed(1)}" y1="${(100 - r1 * Math.cos(a)).toFixed(1)}" x2="${(100 + r2 * Math.sin(a)).toFixed(1)}" y2="${(100 - r2 * Math.cos(a)).toFixed(1)}"${long ? ' class="long"' : ""}/>`;
+  }).join("");
+  return `<li class="db-gauge" style="--hue:${hue}" ${tip(label, [of ? `${value} of ${of} cases` : `${value} cases`])}>
+    <span class="db-dial"><svg viewBox="0 0 200 200" aria-hidden="true"><g class="db-ticks">${ticks}</g>
+      <circle class="db-track" cx="100" cy="100" r="${r}"/>
+      ${of ? `<circle class="db-arc" cx="100" cy="100" r="${r}" stroke-dasharray="${(frac * c).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 100 100)"/>` : ""}
+    </svg>
+    <span class="db-gv"><b>${value}</b>${of ? `<small>of ${of}</small>` : ""}</span></span>
+    <span class="db-gl">${esc(label)}</span>
+  </li>`;
+}
+
+export function readouts(noms) {
+  const n = noms.length;
+  const seen = CODEBOOK.filter((p) => noms.some((x) => x.patterns.includes(p.key))).length;
+  const global = noms.filter((x) => x.scale === "global").length;
+  const sticky = noms.filter((x) => x.reversibility !== "reversible").length;
+  const multi = noms.filter((x) => x.patterns.length > 1).length;
+  return `<ul class="db-gauges">${gauge(n, 0, "Cases tagged", "#F2D6B0")}${gauge(seen, CODEBOOK.length, "Patterns seen", "#2BB5BB")}${gauge(global, n, "Global harm", "#EE6B3A")}${gauge(sticky, n, "Slow or impossible to undo", "#5981E0")}${gauge(multi, n, "More than one pattern", "#A269C9")}</ul>`;
 }
 
 function patternBars(noms) {
@@ -112,15 +130,29 @@ function pairs(noms) {
   return panel("DB-05", "Patterns that travel together", `Pairs of patterns found in the same case.${most && most < 5 ? ` Early days: no pair has turned up in more than ${most === 1 ? "one case" : most + " cases"} yet.` : ""}`, `<ol class="db-pairs">${list}</ol>`, table);
 }
 
+// The Dashboards page: every panel. The Patterns page shows the gauges and links here.
 export function dashboardsHTML(all) {
+  const noms = tagged(all);
+  return `<header class="db-hero">
+      <p class="pp-kicker">Dashboards · Codebook version ${CODEBOOK_VERSION}</p>
+      <h1>What ${noms.length} backfires have in common</h1>
+      <p>Every case we have torn down, counted by the patterns behind it, how far the harm reached, how long it took to show and who paid. ${noms.length} cases is a small sample, so read these as what we have collected, not how all backfires behave. Hover or tap any mark for the cases behind it.</p>
+      <p class="db-links"><a href="/patterns">The ten patterns</a><a href="/table">The Categoric Table</a></p>
+    </header>
+    ${readouts(noms)}
+    <div class="db-grid">${patternBars(noms)}${matrix(noms)}${timeline(noms)}${whoPays(noms)}${pairs(noms)}</div>
+    <p class="pp-note">Tags are provisional. Two separate automated passes coded every case and an editor settled the differences. Human coders review them next.</p>`;
+}
+
+export function dashboardsTeaserHTML(all) {
   const noms = tagged(all);
   return `<header class="db-head">
       <p class="pp-kicker">Dashboards</p>
       <h2 id="data-h">What ${noms.length} backfires have in common</h2>
-      <p>Every tagged case, counted. ${noms.length} cases is a small sample, so read these as what we have collected, not how all backfires behave. Hover or tap any mark for the cases behind it.</p>
+      <p>The patterns, the scale, the time lag and who paid, counted across every case.</p>
     </header>
     ${readouts(noms)}
-    <div class="db-grid">${patternBars(noms)}${matrix(noms)}${timeline(noms)}${whoPays(noms)}${pairs(noms)}</div>`;
+    <p class="pp-go db-open"><a class="primary" href="/dashboards">Open the dashboards</a></p>`;
 }
 
 // ---------------------------------------------------------------- the Patterns page
@@ -184,13 +216,13 @@ export function patternsPageHTML(all) {
           <li><b>${noms.length}</b><span>cases tagged</span></li>
           <li><b>${sources}</b><span>research sources</span></li>
         </ul>
-        <p class="pp-go"><a class="primary" href="#${CODEBOOK[0].key}">Start with pattern 1</a><a class="ghost" href="#data">Open the dashboards</a></p>
+        <p class="pp-go"><a class="primary" href="#${CODEBOOK[0].key}">Start with pattern 1</a><a class="ghost" href="/dashboards">Open the dashboards</a></p>
       </div>
     </header>
     ${nav}
     <section class="pp-index" id="index" aria-labelledby="pp-index-h"><h2 id="pp-index-h" class="pp-sec">The ten</h2><ol class="pp-tiles">${tiles}</ol></section>
     ${chapters}
-    <section class="pp-data" id="data" aria-labelledby="data-h">${dashboardsHTML(all)}</section>
+    <section class="pp-data" id="data" aria-labelledby="data-h">${dashboardsTeaserHTML(all)}</section>
     <section class="pp-dims" id="tags" aria-labelledby="pp-dims-h">
       <div class="pp-slab pp-dims-slab">
         <h2 id="pp-dims-h" class="pp-sec">Every case also gets</h2>

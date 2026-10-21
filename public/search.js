@@ -1,6 +1,6 @@
 // Search and filter every nominee and featured Murphy. The address keeps the filters, so a search can be shared.
 import { api } from "./site.js";
-import { DOMAINS, HONOREE, nomCardHTML, byTop, esc, murphyPath } from "./shared.js";
+import { DOMAINS, HONOREE, nomCardHTML, byTop, esc, murphyPath, MURPHYS_LIVE } from "./shared.js";
 import { CODEBOOK, DIMENSIONS, ERAS, periodOf } from "./codebook.js";
 
 const $ = (s) => document.querySelector(s);
@@ -22,6 +22,7 @@ $("#cat-chips").innerHTML = `<button type="button" data-v="" aria-pressed="true"
   Object.entries(DOMAINS).map(([k, v]) => `<button type="button" data-v="${k}" aria-pressed="false">${esc(v)}</button>`).join("");
 $("#facets").innerHTML = FACETS.map(([k, label, opts]) => `<label>${label} <select data-facet="${k}"><option value="">Any</option>${opts.map(([v, t]) => `<option value="${v}"${state[k] === v ? " selected" : ""}>${esc(t)}</option>`).join("")}</select></label>`).join("");
 $("#facets").addEventListener("change", (e) => { const k = e.target.dataset.facet; if (k) { state[k] = e.target.value; render(); } });
+if (!MURPHYS_LIVE) $("[data-filter=award]").hidden = true;
 $("#q").value = state.q;
 $("#sort").value = state.sort;
 document.querySelectorAll("[data-filter]").forEach((g) => g.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === state[g.dataset.filter]))));
@@ -43,7 +44,7 @@ function render() {
       && hit([n.name, n.work, n.solved, n.backfire, DOMAINS[n.domain] || "", n.pattern || "",
         ...(n.patterns || []).map((k) => CODEBOOK.find((p) => p.key === k)?.name || "")].join(" "))).map((n) => ({ kind: "n", n, c: ccount[n.id] || 0 })));
   }
-  if (state.award !== "midgley" && !state.cat && !state.status && !FACETS.some(([k]) => state[k])) {
+  if (MURPHYS_LIVE && state.award !== "midgley" && !state.cat && !state.status && !FACETS.some(([k]) => state[k])) {
     items = items.concat(data.murphys.filter((m) => hit([m.fix, m.oops, m.name].join(" "))).map((m) => ({ kind: "m", m, c: ccount[m.id] || 0 })));
   }
   const top = byTop(flags);

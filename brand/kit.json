@@ -2,8 +2,8 @@
   "id": "midgley-awards",
   "name": "The Backfire Awards",
   "scope": "The Backfire Awards site at backfireawards.com: the feed of nominee posts and Murphys, the carousels and their Instagram exports, The Midgley and The Murphy pages, the Categoric Table, search, the guidelines and terms, the Weekly Oops, and the merch.",
-  "colorNote": "Warm 1970s retro futurism, matching the rocket merch: aubergine and ivory grounds, tangerine for the one call to action, rust for oops, dusty turquoise for links. Each category has an earth tone. Type stays Big Shoulders Display, IBM Plex Sans and IBM Plex Mono. Every color has a night value. The site switches looks with html[data-look]; 70s is the approved look, classic is the earlier cool palette.",
-  "status": "Approved by Erik: the 1970s palette with the original type",
+  "colorNote": "The Switchback palette from the logo, on every page: navy and cream grounds, orange for the one call to action, vermilion for oops, petrol and faded teal for links and data. No browns: warm hues are never mixed into dark grounds or used as faded washes. The 1970s scenes stay as illustration only. Type stays Big Shoulders Display, IBM Plex Sans and IBM Plex Mono. Every color has a night value. The site look is still named 70s in code (html[data-look]) so saved choices keep working. Night dashboards use the seven chart colors in fixed order and a teal ramp for amounts; text on charts stays cream, color sits on marks only. Each of the ten patterns has its own color, listed in public/codebook-ui.js.",
+  "status": "Approved by Erik 2026-10-20: the Switchback palette from the logo as the master palette, extended for data; 1970s scenes for illustration only",
   "updated": "2026-10-20",
   "site": "https://backfireawards.com",
   "fonts": "https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap",
@@ -37,177 +37,233 @@
     }
   ],
   "theme": {
-    "dark": "#25202d",
-    "accent": "#e98946",
-    "accentLight": "#fbe3cf",
-    "accentNight": "#e98946",
-    "secondary": "#2e6b68",
-    "secondaryNight": "#7fc1bc"
+    "dark": "#0a2033",
+    "accent": "#ee6b3a",
+    "accentLight": "#fbe0d3",
+    "accentNight": "#ee6b3a",
+    "secondary": "#126282",
+    "secondaryNight": "#7cc9cf"
   },
   "colors": {
     "brand": [
       {
-        "name": "Ivory",
-        "hex": "#f3e4c8",
-        "night": "#1c1823",
+        "name": "Cream ground",
+        "hex": "#f4e8d6",
+        "night": "#08192a",
         "token": "--ground",
-        "use": "The page background by day; aubergine-black by night."
+        "use": "The page background by day; deep navy by night."
       },
       {
         "name": "Surface",
-        "hex": "#fbf4e6",
-        "night": "#25202d",
+        "hex": "#fbf5ec",
+        "night": "#0f2638",
         "token": "--surface",
         "use": "Posts, forms, panels and the comments sheet."
       },
       {
-        "name": "Aubergine",
-        "hex": "#25202d",
-        "night": "#f3e4c8",
+        "name": "Navy",
+        "hex": "#0a2033",
+        "night": "#f2d6b0",
         "token": "--ink",
-        "use": "Text, the element tile (--tile) and the dark wash on home cards."
+        "use": "Text, the element tile (--tile) and dark washes. The logo's navy."
       },
       {
         "name": "Ink 2",
-        "hex": "#584c5c",
-        "night": "#d2c3aa",
+        "hex": "#34495e",
+        "night": "#d9c3a3",
         "token": "--ink-2",
         "use": "Secondary text: captions, hints."
       },
       {
         "name": "Ink 3",
-        "hex": "#6a5c6e",
-        "night": "#a39488",
+        "hex": "#53687a",
+        "night": "#aeb9c2",
         "token": "--ink-3",
         "use": "Mono labels, years and fine print."
       },
       {
         "name": "Line",
-        "hex": "#e2cfaf",
-        "night": "#3b3344",
+        "hex": "#e2d2bc",
+        "night": "#1f3a52",
         "token": "--line",
         "use": "Borders and dividers."
       },
       {
-        "name": "Tangerine",
-        "hex": "#e98946",
-        "night": "#e98946",
-        "token": "--cta",
-        "use": "The one call to action: Nominate, Subscribe, the first button on a card. Always with aubergine text, never white."
+        "name": "Cream",
+        "hex": "#f2d6b0",
+        "night": "#f2d6b0",
+        "token": "--tile-ink",
+        "use": "The logo's cream: text on navy, the element tile's letters."
       },
       {
-        "name": "Rust",
-        "hex": "#a3432f",
-        "night": "#e07a5a",
+        "name": "Orange",
+        "hex": "#ee6b3a",
+        "night": "#ee6b3a",
+        "token": "--cta",
+        "use": "The one call to action. Always with navy text. The logo orange is #e45d2c; #ee6b3a is stepped up for button contrast."
+      },
+      {
+        "name": "Vermilion",
+        "hex": "#a9332e",
+        "night": "#f07d5a",
         "token": "--ethyl",
         "use": "What went oops: a cast vote, knowable-harm chips, the Midgley's card."
       },
       {
-        "name": "Rust soft",
-        "hex": "#f4d9cc",
-        "night": "#3a2420",
+        "name": "Vermilion soft",
+        "hex": "#f6d6cc",
+        "night": "#3b1530",
         "token": "--ethyl-soft",
         "use": "Knowable-harm chip fills."
       },
       {
-        "name": "Dusty turquoise",
-        "hex": "#2e6b68",
-        "night": "#7fc1bc",
+        "name": "Petrol",
+        "hex": "#126282",
+        "night": "#7cc9cf",
         "token": "--ozone",
-        "use": "Links and focus rings; The Murphy's button (#579996 with aubergine text). Darkened from the illustration turquoise #579996 for small text."
+        "use": "Links and focus rings by day; faded teal by night."
       },
       {
-        "name": "Turquoise soft",
-        "hex": "#d4e7e3",
-        "night": "#1e3533",
+        "name": "Petrol soft",
+        "hex": "#d3e6ec",
+        "night": "#0f3340",
         "token": "--ozone-soft",
         "use": "Unforeseeable-harm chip fills."
       },
       {
-        "name": "Avocado",
-        "hex": "#85864a",
-        "night": "#85864a",
-        "token": "--avocado",
-        "use": "Illustration and supporting color only; not for text."
-      },
-      {
-        "name": "Muted rose",
-        "hex": "#b97d87",
-        "night": "#b97d87",
-        "token": "--rose",
-        "use": "Illustration and supporting color only; not for text."
+        "name": "Faded teal",
+        "hex": "#69aab1",
+        "night": "#69aab1",
+        "token": "--teal",
+        "use": "The logo's third stripe. Illustration and supporting color."
       }
     ],
     "data": [
       {
-        "name": "Amber",
-        "hex": "#7e5a0c",
-        "night": "#e3b04b",
+        "name": "Violet",
+        "hex": "#6b47a8",
+        "night": "#c9b2f2",
         "token": "--amber",
         "use": "Mixed and contested evidence chips."
       },
       {
-        "name": "Amber soft",
-        "hex": "#f3e3bc",
-        "night": "#3a2e14",
+        "name": "Violet soft",
+        "hex": "#ece5f6",
+        "night": "#2a2550",
         "token": "--amber-soft",
         "use": "Mixed and contested chip fills."
       },
       {
-        "name": "Rust materials",
-        "hex": "#ad4935",
-        "night": "#ad4935",
+        "name": "Crimson materials",
+        "hex": "#b32d3a",
+        "night": "#b32d3a",
         "token": "--jw-ruby-b",
-        "use": "Group 1, Chemistry and Materials. Deep #3a1610, light #f2c3b5."
+        "use": "Group 1, Chemistry and Materials. Deep #3a1530, light #eac4c8. White text passes on every category base."
       },
       {
         "name": "Petrol cities",
-        "hex": "#1f6680",
-        "night": "#1f6680",
+        "hex": "#126282",
+        "night": "#126282",
         "token": "--jw-sapphire-b",
-        "use": "Group 2, Cities and Transport. Deep #0e2a33, light #b9dce6."
+        "use": "Group 2, Cities and Transport. Deep #0b3247, light #bdd3dc."
       },
       {
-        "name": "Harvest gold energy",
-        "hex": "#8e6410",
-        "night": "#8e6410",
+        "name": "Orange energy",
+        "hex": "#c4471f",
+        "night": "#c4471f",
         "token": "--jw-citrine-b",
-        "use": "Group 3, Energy and Climate. Deep #3a2a08, light #f5dda0."
+        "use": "Group 3, Energy and Climate. Deep #3a1626, light #f2cdbf."
       },
       {
-        "name": "Avocado food",
-        "hex": "#6c7630",
-        "night": "#6c7630",
+        "name": "Green food",
+        "hex": "#2e7d4f",
+        "night": "#2e7d4f",
         "token": "--jw-emerald-b",
-        "use": "Group 4, Ecology and Agriculture. Deep #262a10, light #dce0b0."
+        "use": "Group 4, Ecology and Agriculture. Deep #0f3a34, light #c4dbce."
       },
       {
-        "name": "Plum information",
-        "hex": "#7a4a7e",
-        "night": "#7a4a7e",
+        "name": "Violet information",
+        "hex": "#6b47a8",
+        "night": "#6b47a8",
         "token": "--jw-amethyst-b",
-        "use": "Group 5, Tech and AI. Deep #2a1530, light #e3c8e2."
+        "use": "Group 5, Tech and AI. Deep #2a2854, light #d6cbe7."
       },
       {
-        "name": "Turquoise governance",
-        "hex": "#36726f",
-        "night": "#36726f",
+        "name": "Teal governance",
+        "hex": "#11727a",
+        "night": "#11727a",
         "token": "--jw-tourmaline-b",
-        "use": "Group 6, Policy and Incentives. Deep #0f2e2d, light #bfe0dd."
+        "use": "Group 6, Policy and Incentives. Deep #0a3844, light #bcd8da."
       },
       {
-        "name": "Saddle brown finance",
-        "hex": "#8a5a34",
-        "night": "#8a5a34",
+        "name": "Blue finance",
+        "hex": "#2f5fb0",
+        "night": "#2f5fb0",
         "token": "--jw-garnet-b",
-        "use": "Group 7, Business and Marketing. Deep #2e1a0e, light #ebd2b8."
+        "use": "Group 7, Business and Marketing. Deep #153157, light #c5d2e9."
       },
       {
-        "name": "Muted rose health",
-        "hex": "#a35e6b",
-        "night": "#a35e6b",
+        "name": "Pink health",
+        "hex": "#a63a6e",
+        "night": "#a63a6e",
         "token": "--jw-rhodolite-b",
-        "use": "Group 8, Health and Medicine. Deep #3a1c22, light #f0cdd2."
+        "use": "Group 8, Health and Medicine. Deep #3f2440, light #e6c8d6."
+      },
+      {
+        "name": "Chart orange",
+        "hex": "#e56636",
+        "night": "#e56636",
+        "token": "--chart-1",
+        "use": "Night dashboards, categorical slot 1, always in this order. Validated on navy panels #0f2638; every mark is labeled."
+      },
+      {
+        "name": "Chart teal",
+        "hex": "#00a0a6",
+        "night": "#00a0a6",
+        "token": "--chart-2",
+        "use": "Night dashboards, categorical slot 2, always in this order. Validated on navy panels #0f2638; every mark is labeled."
+      },
+      {
+        "name": "Chart gold",
+        "hex": "#c08800",
+        "night": "#c08800",
+        "token": "--chart-3",
+        "use": "Night dashboards, categorical slot 3, always in this order. Validated on navy panels #0f2638; every mark is labeled."
+      },
+      {
+        "name": "Chart blue",
+        "hex": "#5981e0",
+        "night": "#5981e0",
+        "token": "--chart-4",
+        "use": "Night dashboards, categorical slot 4, always in this order. Validated on navy panels #0f2638; every mark is labeled."
+      },
+      {
+        "name": "Chart pink",
+        "hex": "#cd6199",
+        "night": "#cd6199",
+        "token": "--chart-5",
+        "use": "Night dashboards, categorical slot 5, always in this order. Validated on navy panels #0f2638; every mark is labeled."
+      },
+      {
+        "name": "Chart green",
+        "hex": "#47aa62",
+        "night": "#47aa62",
+        "token": "--chart-6",
+        "use": "Night dashboards, categorical slot 6, always in this order. Validated on navy panels #0f2638; every mark is labeled."
+      },
+      {
+        "name": "Chart violet",
+        "hex": "#a269c9",
+        "night": "#a269c9",
+        "token": "--chart-7",
+        "use": "Night dashboards, categorical slot 7, always in this order. Validated on navy panels #0f2638; every mark is labeled."
+      },
+      {
+        "name": "Chart teal ramp",
+        "hex": "#2bb5bb",
+        "night": "#2bb5bb",
+        "token": "--chart-seq",
+        "use": "Sequential (more): solid mixes of this teal into #0f2638; the top value is solid with navy text."
       }
     ]
   },
@@ -274,6 +330,7 @@
       }
     ],
     "use": [
+      "teardown",
       "unintended consequences",
       "worked too well",
       "nominee",

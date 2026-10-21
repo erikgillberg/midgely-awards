@@ -65,7 +65,10 @@ export const signupHTML = (where = "foot") =>
     <span class="msg" role="status"></span>
   </form>`;
 export const weeklyOopsHTML = () => signupHTML("x");
-export const OOPS_LINE = "One short email a week: a new backfire, the best Murphys, and who won.";
+export const OOPS_LINE = "One short email a week: a new backfire teardown, the pattern behind it, and who won.";
+// The Murphy (backfires founders and inventors built themselves) is on the roadmap since 2026-10-20: its pages and
+// data stay, but nothing links to it and the Nominate form takes Midgley nominations only. Flip to bring it back.
+export const MURPHYS_LIVE = false;
 // The sign-up card that sits in the feed, once, after a few posts.
 export const feedOopsHTML = () => `<section class="feed-oops" aria-labelledby="fo-h">
   <p class="ob-label">The newsletter</p><h2 id="fo-h">Get one backfire a week</h2><p>${OOPS_LINE} Unsubscribe any time.</p>${signupHTML("feed")}</section>`;
@@ -372,6 +375,7 @@ function fullSections(n) {
 const ICON = {
   home: '<path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+  gauge: '<path d="M4.5 16.5a8 8 0 1 1 15 0"/><path d="m12 13 4-4.5"/><circle cx="12" cy="13" r="1.4"/>',
   patterns: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.2 8.2l3.6 7.6M16.8 8.2l-3.6 7.6"/>',
   plus: '<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/>',
   table: '<rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="10" width="5" height="5"/><rect x="9.5" y="10" width="5" height="5"/><rect x="16" y="10" width="5" height="5"/><rect x="6" y="17.5" width="12" height="3.5"/>',
@@ -385,7 +389,7 @@ const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg
 // Every page's navigation: a rail on the left on wide screens, a top bar and a bottom tab bar on phones,
 // and the full menu (every section of the site) behind More.
 export const MENU = [
-  ["The awards", [["/midgley", "The Midgley"], ["/murphy", "The Murphy"], ["/awards", "Awards night"], ["/scores", "How scores work"], ["/table", "The Categoric Table"], ["/patterns", "The Patterns"]]],
+  ["The awards", [["/midgley", "The Midgley"], ...(MURPHYS_LIVE ? [["/murphy", "The Murphy"]] : []), ["/awards", "Awards night"], ["/scores", "How scores work"], ["/table", "The Categoric Table"], ["/patterns", "The Patterns"], ["/dashboards", "Dashboards"]]],
   ["What this is", [["/#intro", "The big picture"], ["/#rules", "What makes a good nominee"], ["/#question", "The serious question"], ["/#gap", "The gender gap"], ["/guidelines", "Community guidelines"]]],
   ["More from us", [["/shop", "Shop"], ["/#oops", "The Weekly Oops"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
 ];
@@ -399,6 +403,7 @@ export function headerHTML(flags = {}) {
       <button class="nav-i nav-nom" type="button" data-open-sheet="">${icon("plus")}<span>Nominate</span></button>
       ${item("/table", "table", "The Table")}
       ${item("/patterns", "patterns", "The Patterns")}
+      ${item("/dashboards", "gauge", "Dashboards")}
       ${item("/awards", "award", "The Awards")}
       ${item("/shop", "bag", "Shop")}
     </nav>
@@ -439,8 +444,8 @@ export function sheetHTML() {
     <div class="sheet-in">
       <button class="sheet-x" type="button" data-close-sheet aria-label="Close">×</button>
       <p class="sh-step">Nominate</p>
-      <h2 id="sheet-h">Which award?</h2>
-      <div class="sh-pick" role="radiogroup" aria-label="Award">
+      <h2 id="sheet-h">${MURPHYS_LIVE ? "Which award?" : "Nominate a backfire"}</h2>
+      <div class="sh-pick" role="radiogroup" aria-label="Award"${MURPHYS_LIVE ? "" : " hidden"}>
         <button type="button" role="radio" aria-checked="false" data-award="midgley"><span class="element aw-midgley"><span class="n">No. 1</span><span class="sym">Mg</span><span class="w">MIDGLEY</span></span><b>The Midgley</b><small>A backfire at world scale: an invention, product or decision.</small></button>
         <button type="button" role="radio" aria-checked="false" data-award="murphy"><span class="element aw-murphy"><span class="n">No. 2</span><span class="sym">Mu</span><span class="w">MURPHY</span></span><b>The Murphy</b><small>A backfire you built yourself: the fix in your product, company or invention that made things worse.</small></button>
       </div>
@@ -486,7 +491,7 @@ export function footerHTML() {
     <nav class="foot" aria-label="Site">
       <a href="/">Nominees</a>
       <a href="/midgley">The Midgley</a>
-      <a href="/murphy">The Murphy</a>
+      ${MURPHYS_LIVE ? `<a href="/murphy">The Murphy</a>` : ""}
       <a href="/awards">The Awards</a>
       <a href="/shop">Shop</a>
       <a href="/scores">How scores work</a>
@@ -809,7 +814,7 @@ export const CATEGORY_INFO = {
   food: { text: "Growing food and managing nature.", examples: ["Cane toads released in Australia", "DDT", "Kudzu planted to stop erosion"] },
   finance: { text: "Products, prices and promotions.", examples: ["Planned obsolescence", "Bottled water", "The Landlord's Game, which became Monopoly"] },
   cities: { text: "How we build places and move through them.", examples: ["Urban freeways through city neighborhoods", "Parking minimums", "Wider roads and the traffic they bring"] },
-  prospective: { text: "Decisions being made today that could win a Midgley in thirty years. Like the two rows under the periodic table, they sit apart.", examples: ["Nominate one"] },
+  prospective: { text: "Coming later: teardowns of products and decisions being made today, read against the patterns. Like the two rows under the periodic table, they sit apart.", examples: [] },
 };
 
 // Where each category sits. Positions copy the periodic table: [row, column], rows 1 to 7 plus
@@ -855,9 +860,9 @@ export function categoricLegendHTML() {
     const g = k === "prospective" ? "" : groupOf(k);
     const info = CATEGORY_INFO[k];
     return `<details class="lg-item" style="${jewelVars(j)}">
-      <summary><span class="lg-box">${g}</span><span class="lg-name">${esc(k === "prospective" ? "Prospective" : DOMAINS[k])}</span><span class="lg-more">more</span></summary>
+      <summary><span class="lg-box">${g}</span><span class="lg-name">${esc(k === "prospective" ? "Today (coming later)" : DOMAINS[k])}</span><span class="lg-more">more</span></summary>
       <p>${esc(info.text)}</p>
-      <ul>${info.examples.map((e) => `<li>${esc(e)}</li>`).join("")}</ul>
+      ${info.examples.length ? `<ul>${info.examples.map((e) => `<li>${esc(e)}</li>`).join("")}</ul>` : ""}
     </details>`;
   }).join("");
 }

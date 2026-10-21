@@ -91,6 +91,7 @@ function pick(award) {
 
 export function openSheet(award = "") {
   if (!sheet) return;
+  if ($(".sh-pick", sheet)?.hidden) award = "midgley";   // one award for now; the Murphy is on the roadmap
   lastFocus = document.activeElement;
   sheet.hidden = false;
   document.documentElement.classList.add("sheet-open");

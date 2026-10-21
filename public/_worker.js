@@ -19,13 +19,15 @@ import {
   SITE, feedOopsHTML, jewelVar, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML, categoricTableHTML, categoricLegendHTML,
-  postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath, notAFitFor, notAFitHTML, NOT_A_FIT, NOT_A_FIT_RULES,
+  postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath, MURPHYS_LIVE, notAFitFor, notAFitHTML, NOT_A_FIT, NOT_A_FIT_RULES,
 } from "./shared.js";
 import { CODEBOOK, DIMENSIONS } from "./codebook.js";
-import { patternsTeaserHTML, patternsPageHTML } from "./codebook-ui.js";
+import { CASE_RISKS, cleanRisks, cleanMitigations } from "./case-risks.js";
+import { patternsTeaserHTML, patternsPageHTML, dashboardsHTML } from "./codebook-ui.js";
+import { homeNextHTML } from "./home-next.js";
 const PATTERN_KEYS = CODEBOOK.map((p) => p.key);
 
-const SCHEMA_VERSION = 16;
+const SCHEMA_VERSION = 17;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
 // Old and spare domains: each forwards to the same page on backfireawards.com, so shared links keep working.
@@ -106,6 +108,8 @@ const NEW_COLUMNS = {
     ["born", "INTEGER"], ["helped", "INTEGER"], ["harmed", "INTEGER"],
     // v16: codebook tags (public/codebook.js). patterns: comma list, primary first. bearer: comma list.
     ["patterns", "TEXT"], ["scale", "TEXT"], ["lag", "TEXT"], ["bearer", "TEXT"], ["reversibility", "TEXT"],
+    // v17: risks and mitigations per case, as JSON (shape in case-risks.js). Not public until reviewed.
+    ["risks", "TEXT"], ["mitigations", "TEXT"],
   ],
   comments: [["hidden", "INTEGER DEFAULT 0"], ["reports", "INTEGER DEFAULT 0"],
     // v12: one level of replies, and Goat's moderation. mod: "" (unchecked), ok, flag, hold, draft (a Goat reply awaiting approval).
@@ -300,7 +304,7 @@ const CASE_TAGS = [
 
 // [nominee id, column, corrected value]. Columns are fixed names, never user input.
 const RECORD_FIXES = [
-  ["nobel", "backfire", "Armies used it within four years, in the Franco-Prussian War, and bombers made it a weapon of terror, as in the Fenian campaign in Britain, 1881 to 1885. In war it was soon overtaken by smokeless powders, including Nobel's own ballistite, and by TNT."],
+  ["nobel", "backfire", "Armies used it within three years, in the Franco-Prussian War, and bombers made it a weapon of terror, as in the Fenian campaign in Britain, 1881 to 1885. In war it was soon overtaken by smokeless powders, including Nobel's own ballistite, and by TNT."],
   ["haber", "backfire", "Explosives for Germany in World War I, fertilizer runoff, nitrous oxide emissions and a disrupted global nitrogen cycle."],
   ["magie", "knowable", "mixed"],
   ["magie", "foresight", "Partly. Her own rules made getting rich the way to win, and players were changing the rules for decades before 1935. A mass-market version that dropped the argument was harder to see."],
@@ -413,8 +417,14 @@ async function migrate(db) {
       n.gotRight, n.foresight, n.pattern, n.knowable, n.domain, n.harms, n.status, n.wikiName, n.wikiWork, n.born, n.helped, n.harmed, n.created));
   }
   stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('seeded','1')"));
-  stmts.push(db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)));
   await db.batch(stmts);
+  // v17: drafted risks and mitigations for each case (docs/risks-and-mitigations.md).
+  // v17: the fact check of the risks found one date off in a record (Franco-Prussian War, 1870: three years after the 1867 patent).
+  if (ver < 17) await db.prepare("UPDATE nominees SET backfire = REPLACE(backfire, 'within four years', 'within three years') WHERE id = 'nobel'").run();
+  if (ver < 17 && CASE_RISKS.length) {
+    await db.batch(CASE_RISKS.map((c) => db.prepare("UPDATE nominees SET risks = ?, mitigations = ? WHERE id = ?")
+      .bind(JSON.stringify(cleanRisks(c.risks)), JSON.stringify(cleanMitigations(c.mitigations)), c.id)));
+  }
   // v16: codebook tags for each case, coded by two independent coders and reconciled (docs/codebook-coding.md).
   if (ver < 16 && CASE_TAGS.length) {
     await db.batch(CASE_TAGS.map((t) => db.prepare("UPDATE nominees SET patterns = ?, scale = ?, lag = ?, bearer = ?, reversibility = ?, began = COALESCE(?, began) WHERE id = ?")
@@ -434,6 +444,8 @@ async function migrate(db) {
   for (const row of noSlug.results) {
     await db.prepare("UPDATE nominees SET slug = ? WHERE id = ?").bind(await freeSlug(db, row.seeded ? row.id : slugify(row.name)), row.id).run();
   }
+  // The version goes last, so a migration that fails partway runs again on the next request.
+  await db.prepare("INSERT OR REPLACE INTO meta (key,value) VALUES ('schema_version', ?)").bind(String(SCHEMA_VERSION)).run();
 }
 
 // A slug nobody else has: "edward-bassett", then "edward-bassett-2" and so on.
@@ -1160,6 +1172,8 @@ async function handleAdmin(request, env, url, db, path, method) {
     if ("bearer" in b) { sets.push("bearer = ?"); vals.push(pickMany(b.bearer, Object.keys(DIMENSIONS.bearer.values)) || null); }
     for (const k of ["scale", "lag", "reversibility"]) if (k in b) { sets.push(`${k} = ?`); vals.push(pick(b[k], Object.keys(DIMENSIONS[k].values)) || null); }
     if ("began" in b) { sets.push("began = ?"); vals.push(yearOf(b.began)); }
+    if ("risks" in b) { sets.push("risks = ?"); vals.push(JSON.stringify(cleanRisks(b.risks))); }
+    if ("mitigations" in b) { sets.push("mitigations = ?"); vals.push(JSON.stringify(cleanMitigations(b.mitigations))); }
     if ("domain" in b) { sets.push("domain = ?"); vals.push(pick(b.domain, DOMAINS) || null); }
     if ("harms" in b) { sets.push("harms = ?"); vals.push(pickMany(b.harms, HARMS) || null); }
     if ("knowable" in b) { sets.push("knowable = ?"); vals.push(pick(b.knowable, KNOWABLE) || null); }
@@ -1577,7 +1591,7 @@ async function moreFor(env, n) {
 async function feedHTML(request, env, url, st, exclude = "") {
   const flags = flagsOf(env);
   const noms = st.nominees.filter((x) => x.id !== HONOREE && x.id !== exclude).sort(byTop(flags));
-  const murphys = (st.murphys || []).filter((m) => m.id !== exclude);
+  const murphys = MURPHYS_LIVE ? (st.murphys || []).filter((m) => m.id !== exclude) : [];
   const thread = (id) => st.comments.filter((c) => c.nomineeId === id);
   const out = [];
   let mi = 0;
@@ -1597,7 +1611,7 @@ const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
-  const paths = ["/", "/search", "/table", "/patterns", "/midgley", "/murphy", "/awards", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
+  const paths = ["/", "/search", "/table", "/patterns", "/dashboards", "/midgley", ...(MURPHYS_LIVE ? ["/murphy"] : []), "/awards", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
   if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -1652,12 +1666,31 @@ export default {
     if (p === "/nominee" || p === "/category-page") return Response.redirect(SITE_ORIGIN(url) + "/", 302); // page shells, filled above
     const lab = p.match(/^\/lab\/carousel\/([a-z0-9-]{1,64})$/);
     if (lab && url.hostname !== SITE_HOST) return labPage(request, env, url, ctx, lab[1]);
+    if ((p === "/lab-home" || p === "/lab-home.html") && url.hostname === SITE_HOST) return new Response("Not found", { status: 404 });
+    // A sketch of the next front page, staging and local only.
+    if (p === "/lab/home" && url.hostname !== SITE_HOST) {
+      const st = await siteState(env, url, ctx);
+      const noms = st ? st.nominees : [];
+      const heads = {};
+      await Promise.all(noms.map(async (n) => {
+        const d = await env.ASSETS.fetch(new URL(`/carousels/${n.slug}.json`, url).toString()).then(jsonOrNull).catch(() => null);
+        if (d) heads[n.slug] = { headline: d.headline || "", dek: d.dek || "" };
+      }));
+      return decorate(await asset(env, url, request, "/lab-home"), env, url, { fill: { "#hn": homeNextHTML(noms, heads) } });
+    }
     if (p === "/table") {
       const st = await siteState(env, url, ctx);
       return decorate(await asset(env, url, request, "/table"), env, url, {
         canonical: SITE + "/table",
         fill: { "#pt-grid": `<div class="pt-gap" style="grid-row:8;grid-column:1"></div>` + categoricTableHTML(st ? st.nominees : []), "#pt-legend": categoricLegendHTML(),
           "#codebook": patternsTeaserHTML(st ? st.nominees : []) },
+      });
+    }
+    if (p === "/dashboards") {
+      const st = await siteState(env, url, ctx);
+      return decorate(await asset(env, url, request, "/dashboards"), env, url, {
+        canonical: SITE + "/dashboards",
+        fill: { "#db": dashboardsHTML(st ? st.nominees : []) },
       });
     }
     if (p === "/patterns") {
