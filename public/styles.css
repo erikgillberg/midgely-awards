@@ -1666,40 +1666,57 @@ body[data-bg="patterns"] .nav-theme{display:none} /* these pages are always nigh
   body[data-page="nominee"] #impact .im-axis{margin-left:calc(18em + 26px)}
 }
 @media (max-width:760px){ .rail .nav-theme{display:none} }
-/* ---- teardown pages: color and life ---- */
-/* the masthead, above the carousel */
+/* ---- teardown pages: the hero, warm 1970s scenes behind, clear glass on top (the Patterns page look) ---- */
 #td-mast:empty{display:none}
-.td-mast{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;padding:22px;color:#fff;
-  background:radial-gradient(120% 140% at 100% 0%,var(--base) 0%,var(--deep) 62%);border:1px solid color-mix(in srgb,var(--light) 30%,transparent);
-  box-shadow:0 24px 60px rgb(4 16 26/.35)}
-.td-mast::after{content:"";position:absolute;right:-8%;bottom:-30%;width:55%;aspect-ratio:1;border-radius:50%;background:var(--light);opacity:.08;filter:blur(10px)}
-.td-mast-tile .el{width:112px}
-.td-kicker{margin:0;font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--light)}
-.td-mast h1{margin:6px 0 8px;font:900 clamp(32px,4.4vw,52px)/.92 var(--display);text-transform:uppercase;text-wrap:balance}
-.td-dek{margin:0 0 12px;font-size:15px;line-height:1.45;color:rgb(255 255 255/.85)}
-.td-mast-pat{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgb(0 0 0/.22);border:1px solid rgb(255 255 255/.25);color:#fff;text-decoration:none;font:600 13px var(--sans)}
+.td-mast{overflow:hidden;box-shadow:0 24px 60px rgb(4 16 26/.35)}
+.td-hero{display:block;background:#053543}
+.td-hero img{display:block;width:100%;height:auto}
+.td-mast-bar{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;padding:20px 22px;color:#F2D6B0;
+  background:rgb(10 32 51/.62);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border-top:3px solid #EE6B3A}
+.td-mast-tile .el{width:104px}
+.td-kicker,.td-eyebrow{margin:0;font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#EE6B3A}
+.td-mast h1{margin:4px 0 6px;font:900 clamp(34px,4.6vw,56px)/.92 var(--display);text-transform:uppercase;color:#F2D6B0}
+.td-dek{margin:0 0 12px;font-size:15px;line-height:1.45;color:rgb(242 214 176/.85)}
+.td-mast-pat{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgb(255 255 255/.08);border:1px solid rgb(255 255 255/.2);color:#F2D6B0;text-decoration:none;font:600 13px var(--sans)}
 .td-mast-pat i{width:10px;height:10px;border-radius:50%;background:var(--hue);box-shadow:0 0 10px var(--hue)}
-@media (max-width:560px){ .td-mast{grid-template-columns:1fr;gap:14px} .td-mast-tile .el{width:84px} }
+@media (max-width:560px){ .td-mast-bar{grid-template-columns:1fr;gap:12px} .td-mast-tile .el{width:80px} }
+@media (min-width:641px){ .td-hero{height:min(34svh,360px)} .td-hero img{height:100%;object-fit:contain} }
 @media (min-width:1100px){
   body[data-page="nominee"] #td-mast{--tdw:min(1240px,calc(100vw - 340px));width:var(--tdw);margin-left:calc((100% - var(--tdw)) / 2)}
-  body[data-page="nominee"] .td-mast{padding:34px 40px;grid-template-columns:auto 1fr}
-  body[data-page="nominee"] .td-mast-tile .el{width:150px}
+  body[data-page="nominee"] .td-mast-bar{padding:26px 40px}
+  body[data-page="nominee"] .td-mast-tile .el{width:130px}
+  body[data-page="nominee"] .td>:is(.td-wide){grid-column:1/-1}
 }
-/* sections: the category color on the edge and the number */
-.td-sec{border-top:4px solid var(--base)!important}
-.td-n{display:inline-grid;place-items:center;min-width:28px;height:28px;margin-right:10px;background:var(--base);color:#fff;font:600 12px var(--mono);vertical-align:middle}
-.td-sec h2{display:flex;align-items:center}
-.td-pat{background:color-mix(in srgb,var(--hue) 12%,var(--surface))}
-.td-comments{border-top:4px solid var(--cta)!important}
-.td-other{border-left:4px solid var(--base)}
-.td-sym{background:var(--base);color:#fff}
-/* backgrounds that change as you scroll: the story's own photos under a navy wash */
-.td-bgs{position:fixed;inset:0;z-index:-1;pointer-events:none}
-.td-bgs span{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;
-  filter:saturate(.75) contrast(1.05)}
-.td-bgs span::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgb(8 25 40/.55),rgb(8 25 40/.8))}
+/* glass sections in the night palette, over the scenes */
+body[data-page="nominee"] .td{--ink:#F2D6B0;--ink-2:rgb(242 214 176/.8);--ink-3:rgb(242 214 176/.62);--line:rgb(255 255 255/.14);--ozone:#7CC9CF}
+.td-sec,.td-comments,.td-other{background:rgb(15 38 56/.55)!important;color:#F2D6B0;border:1px solid rgb(255 255 255/.12)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%)}
+.td-sec{border-top:3px solid #EE6B3A!important}
+.td-n{display:inline-grid;place-items:center;min-width:28px;height:28px;margin-right:10px;background:#EE6B3A;color:#0A2033;font:600 12px var(--mono)}
+.td-sec h2,.td-comments h2{display:flex;align-items:center;color:#F2D6B0}
+.td-pat{background:rgb(255 255 255/.06);color:#F2D6B0;border-color:rgb(255 255 255/.18)}
+.td-other{color:#F2D6B0}
+.td-sym{background:#F2D6B0;color:#0A2033}
+.td-btn{background:rgb(15 38 56/.55);color:#F2D6B0;border-color:rgb(255 255 255/.25)}
+.td-btn.primary{background:#EE6B3A;color:#0A2033;border-color:#EE6B3A}
+/* the pattern chapter and the gauges, as on the Patterns and Dashboards pages */
+.td-wide{overflow:visible;background:none!important}
+.td-wide .td-eyebrow{margin:14px 0 8px}
+.td-pattern .pp-ch{padding:0}
+.td-dash{padding:6px 0}
+.td-dash h2{margin:0 0 14px;font:900 clamp(30px,4vw,46px)/.95 var(--display);text-transform:uppercase;color:#F2D6B0}
+.td-link{margin:10px 0 0;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.td-link a{color:#7CC9CF}
+/* backgrounds that change as you scroll: warm scenes under a light navy wash */
+.td-bgs{position:fixed;inset:0;z-index:-1;pointer-events:none;background:#08192A}
+.td-bgs span{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease}
+.td-bgs span::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgb(8 25 40/.25),rgb(8 25 40/.55))}
 .td-bgs span.on{opacity:1}
 body[data-page="nominee"]:has(.td-bgs){background:#08192A}
 @media (prefers-reduced-motion:reduce){ .td-bgs span{transition:none} }
-/* the home hero: shorter on desktop; the art's empty sky trims, the lettering stays */
-@media (min-width:761px){ .home-hero img{max-height:min(46vh,420px);object-fit:cover;object-position:center 42%} }
+/* the home hero: the compact art, scaled to fit on its own petrol ground */
+.home-hero{background:#053543}
+@media (min-width:641px){ .home-hero{height:min(40svh,440px)} .home-hero img{height:100%;max-height:none;object-fit:contain} }
+/* on a teardown page the pattern chapter sits over bright scenes: darker glass so it reads */
+.td-pattern .pp-slab{background:linear-gradient(135deg,rgb(10 32 51/.72),rgb(10 32 51/.6));border-color:rgb(255 255 255/.14)}
+@media (max-width:560px){ .td-mast-tile{display:none} }

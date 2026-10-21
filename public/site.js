@@ -255,7 +255,7 @@ document.addEventListener("click", (e) => {
 {
   const layers = [...document.querySelectorAll(".td-bgs span")];
   if (layers.length > 1) {
-    const marks = [...document.querySelectorAll("#td-mast, .post, .td-sec, .td-comments, .td-others")];
+    const marks = [...document.querySelectorAll("#td-mast, .post, .td-sec, .td-wide, .td-comments, .td-others")];
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (!e.isIntersecting) return;
       const i = marks.indexOf(e.target) % layers.length;

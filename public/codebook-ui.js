@@ -216,21 +216,11 @@ export function dashboardsTeaserHTML(all) {
 const NAME_LINKS = CODEBOOK.map((p) => [esc(p.name), p.key]).sort((a, b) => b[0].length - a[0].length);
 const linkNames = (text) => NAME_LINKS.reduce((t, [name, key]) => t.replace(name, `<a href="#${key}">${name}</a>`), esc(text));
 
-export function patternsPageHTML(all) {
-  const noms = tagged(all);
-  const sources = CODEBOOK.reduce((s, p) => s + p.sources.length, 0);
-  const tiles = CODEBOOK.map((p, i) => {
-    const cs = casesFor(noms, p.key);
-    return `<li><a class="pp-tile" href="#${p.key}" style="--hue:${HUES[p.key]}">
-      <span class="pp-tn">${pad(i)}</span><span class="pp-tname">${esc(p.name)}</span>
-      <span class="pp-tshort">${esc(p.short)}</span>
-      <span class="pp-tcases">${cs.length ? cs.map((c) => `<i class="${c.main ? "" : "also"}" title="${esc(c.n.name)}">${esc(symbol(c.n.name))}</i>`).join("") : "<em>No cases yet</em>"}</span>
-    </a></li>`;
-  }).join("");
-
-  const chapters = CODEBOOK.map((p, i) => {
-    const cs = casesFor(noms, p.key);
-    return `<section class="pp-ch" id="${p.key}" style="--hue:${HUES[p.key]}" aria-labelledby="h-${p.key}">
+// One pattern as a chapter: definition, the test, the questions, its cases, the research. Used on the Patterns page
+// and on each teardown page for the story's main pattern. noms: tagged cases.
+export function patternChapterHTML(noms, p, i, id = p.key) {
+  const cs = casesFor(noms, p.key);
+    return `<section class="pp-ch" id="${id}" style="--hue:${HUES[p.key]}" aria-labelledby="h-${p.key}">
       <div class="pp-slab">
         <header class="pp-ch-head">
           <p class="pp-n" aria-hidden="true">${pad(i)}</p>
@@ -254,7 +244,22 @@ export function patternsPageHTML(all) {
         </div>
       </div>
     </section>`;
+}
+
+export function patternsPageHTML(all) {
+  const noms = tagged(all);
+  const sources = CODEBOOK.reduce((s, p) => s + p.sources.length, 0);
+  const tiles = CODEBOOK.map((p, i) => {
+    const cs = casesFor(noms, p.key);
+    return `<li><a class="pp-tile" href="#${p.key}" style="--hue:${HUES[p.key]}">
+      <span class="pp-tn">${pad(i)}</span><span class="pp-tname">${esc(p.name)}</span>
+      <span class="pp-tshort">${esc(p.short)}</span>
+      <span class="pp-tcases">${cs.length ? cs.map((c) => `<i class="${c.main ? "" : "also"}" title="${esc(c.n.name)}">${esc(symbol(c.n.name))}</i>`).join("") : "<em>No cases yet</em>"}</span>
+    </a></li>`;
   }).join("");
+
+  const chapters = CODEBOOK.map((p, i) => patternChapterHTML(noms, p, i)).join("");
+
 
   const nav = `<nav class="pp-nav" aria-label="On this page"><ol>
       <li><a href="#index" class="pp-nav-t">The ten</a></li>
