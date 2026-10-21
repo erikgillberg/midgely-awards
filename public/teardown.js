@@ -61,9 +61,10 @@ export function teardownHTML(n, all, media = [], url = "") {
     `<a class="td-other" href="${nomineePath(x)}"><span class="td-sym">${esc(symbol(x.name))}</span><span>${esc(x.name)}<small>${esc(x.work || "")}</small></span></a>`).join("");
 
   return `<section class="td">
-    ${share}
-    ${sec("tags", "The pattern and tags", tags)}
+    ${share.split('<div class="td-comments">')[0]}
     ${impact ? sec("impact", "Impact over time", `<div class="td-dark">${impact}</div>`) : ""}
+    ${sec("tags", "The pattern and tags", tags)}
+    <div class="td-comments">${share.split('<div class="td-comments">')[1]}
     ${refs ? sec("references", "References", `<ol class="td-refs">${refs}</ol>`, false) : ""}
     ${credits ? sec("credits", "Image credits", `<ul class="td-credits">${credits}</ul>`, false) : ""}
     ${sec("corrections", "Corrections", corrections, false)}

@@ -1650,3 +1650,19 @@ body[data-bg="patterns"] .nav-theme{display:none} /* these pages are always nigh
 .td-other{display:flex;gap:10px;align-items:center;padding:10px;background:color-mix(in srgb,var(--surface) var(--frost,92%),transparent);color:var(--ink);text-decoration:none;font:600 14px/1.2 var(--sans)}
 .td-other small{display:block;font:400 12px var(--sans);color:var(--ink-2)}
 .td-sym{display:grid;place-items:center;width:36px;height:36px;flex:none;background:var(--tile);color:var(--tile-ink);font:800 16px var(--display)}
+/* the home hero: full width of the content area, never cropped (the art carries the lettering) */
+.home-hero{display:block;margin:0 -16px}
+.home-hero img{display:block;width:100%;height:auto}
+@media (max-width:760px){ .home-hero{margin:0 -16px} }
+/* teardown pages on desktop: the record below the post runs wide so charts have room */
+@media (min-width:1100px){
+  body[data-page="nominee"] .td{--tdw:min(1240px,calc(100vw - 340px));width:var(--tdw);margin-left:calc((100% - var(--tdw)) / 2);
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+  body[data-page="nominee"] .td>:is(.td-actions,#impact,.td-more,.td-others){grid-column:1/-1}
+  body[data-page="nominee"] .td-actions{justify-content:center}
+  body[data-page="nominee"] .td-others{grid-template-columns:repeat(4,minmax(0,1fr))}
+  body[data-page="nominee"] #impact .im-row{grid-template-columns:minmax(0,18em) 1fr}
+  body[data-page="nominee"] #impact .im-events{left:calc(18em + 26px)}
+  body[data-page="nominee"] #impact .im-axis{margin-left:calc(18em + 26px)}
+}
+@media (max-width:760px){ .rail .nav-theme{display:none} }

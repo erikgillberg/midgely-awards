@@ -26,11 +26,14 @@
 </head>
 <body data-bg="fair">
 <header class="site-head" id="site-head"></header>
+<h1 class="sr-only" id="hero-h">The Backfire Awards</h1>
+<picture class="home-hero">
+  <source media="(max-width: 640px)" srcset="/img/brand/hero-mobile.webp" type="image/webp">
+  <source media="(max-width: 640px)" srcset="/img/brand/hero-mobile.jpg" type="image/jpeg">
+  <source srcset="/img/brand/hero-desktop.webp" type="image/webp">
+  <img src="/img/brand/hero-desktop.jpg" width="1920" height="768" alt="Backfire Awards. An optimistic inventor holds a bright idea while his laboratory sparks behind him. Bright Ideas. Unintended Consequences." fetchpriority="high" decoding="async">
+</picture>
 <div class="wrap home">
-  <figure class="sq sq-poster" id="poster">
-    <h1 class="sr-only" id="hero-h">The Backfire Awards</h1>
-    <img src="/img/brand/bright-ideas-poster.jpg" alt="Retro poster: a beaming 1950s inventor in a space suit holds up a glowing light bulb while his lab sparks and catches fire behind him. Backfire Awards. Bright ideas. Unintended consequences." width="1080" height="1080">
-  </figure>
 
   <section class="sq has-bg sq-hero" id="intro" style="--bg:url(/img/cards/hero.jpg)" aria-labelledby="hero-h2">
     <h2 id="hero-h2">Teardowns of historic backfires</h2>
