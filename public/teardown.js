@@ -3,7 +3,7 @@
 import { CODEBOOK, DIMENSIONS } from "./codebook.js";
 import { CASE_SOURCES } from "./case-sources.js";
 import { impactPanelHTML, HUES } from "./codebook-ui.js";
-import { esc, nomineePath, symbol } from "./shared.js";
+import { esc, nomineePath, symbol, jewelOf, jewelVars, elementHTML, DOMAINS } from "./shared.js";
 
 // Dated corrections per case: what changed, and why. Newest first. Shown on the case and on /corrections.
 export const CORRECTIONS = [
@@ -15,10 +15,11 @@ export const CORRECTIONS = [
 ];
 
 const label = (dim, v) => DIMENSIONS[dim]?.values?.[v] || v;
+let secN = 0;
 const sec = (id, title, body, open = true) =>
-  `<details class="td-sec" id="${id}"${open ? " open" : ""}><summary><h2>${esc(title)}</h2></summary><div class="td-body">${body}</div></details>`;
+  `<details class="td-sec" id="${id}" data-bg-i="${secN}"${open ? " open" : ""}><summary><h2><span class="td-n">${String(++secN).padStart(2, "0")}</span>${esc(title)}</h2></summary><div class="td-body">${body}</div></details>`;
 
-export function teardownHTML(n, all, media = [], url = "") {
+export function teardownHTML(n, all, media = [], url = "", story = {}) {
   const pats = (n.patterns || []).map((k, i) => {
     const p = CODEBOOK.find((c) => c.key === k);
     return p ? `<a class="td-pat" href="/patterns#${k}" style="--hue:${HUES[k]}"><i></i>${esc(p.name)}${i === 0 ? "<small>main</small>" : ""}</a>` : "";
@@ -60,7 +61,11 @@ export function teardownHTML(n, all, media = [], url = "") {
   const others = all.filter((x) => x.id !== n.id).slice(0, 8).map((x) =>
     `<a class="td-other" href="${nomineePath(x)}"><span class="td-sym">${esc(symbol(x.name))}</span><span>${esc(x.name)}<small>${esc(x.work || "")}</small></span></a>`).join("");
 
-  return `<section class="td">
+  secN = 0;
+  const bgs = (story.backgrounds || []).slice(0, 5);
+
+  return `${bgs.length ? `<div class="td-bgs" aria-hidden="true">${bgs.map((b, i) => `<span class="${i ? "" : "on"}" style="background-image:url(${esc(b)})"></span>`).join("")}</div>` : ""}
+  <section class="td" style="${jewelVars(jewelOf(n.domain))}">
     ${share.split('<div class="td-comments">')[0]}
     ${impact ? sec("impact", "Impact over time", `<div class="td-dark">${impact}</div>`) : ""}
     ${sec("tags", "The pattern and tags", tags)}
@@ -71,4 +76,19 @@ export function teardownHTML(n, all, media = [], url = "") {
     <h2 class="feed-h td-more">More teardowns</h2>
     <nav class="td-others" aria-label="More teardowns">${others}</nav>
   </section>`;
+}
+
+// The top of a teardown page, before the carousel: the story's headline, its tile and its main pattern,
+// in the category's color. On a first visit this is the brand's front door.
+export function teardownMastHTML(n, story = {}) {
+  const main = CODEBOOK.find((c) => c.key === (n.patterns || [])[0]);
+  return `<header class="td-mast" data-bg-i="0">
+      <div class="td-mast-tile">${elementHTML(n, "lg")}</div>
+      <div class="td-mast-txt">
+        <p class="td-kicker">The teardown · ${esc(DOMAINS[n.domain] || "")}</p>
+        <h1>${esc(n.name)}</h1>
+        <p class="td-dek">${esc(n.work)}${n.years ? ` · ${esc(n.years)}` : ""}</p>
+        ${main ? `<a class="td-mast-pat" href="/patterns#${main.key}" style="--hue:${HUES[main.key]}"><i></i>The pattern: ${esc(main.name)}</a>` : ""}
+      </div>
+    </header>`.replace("<header", `<header style="${jewelVars(jewelOf(n.domain))}"`);
 }

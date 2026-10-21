@@ -250,3 +250,17 @@ document.addEventListener("click", (e) => {
     b.disabled = true;
   }
 });
+
+// ---------- teardown pages: the background changes as each section comes into view
+{
+  const layers = [...document.querySelectorAll(".td-bgs span")];
+  if (layers.length > 1) {
+    const marks = [...document.querySelectorAll("#td-mast, .post, .td-sec, .td-comments, .td-others")];
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const i = marks.indexOf(e.target) % layers.length;
+      layers.forEach((l, k) => l.classList.toggle("on", k === i));
+    }), { rootMargin: "-45% 0px -50% 0px" });
+    marks.forEach((m) => io.observe(m));
+  }
+}

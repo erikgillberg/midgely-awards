@@ -25,7 +25,7 @@ import { CODEBOOK, DIMENSIONS } from "./codebook.js";
 import { CASE_RISKS, cleanRisks, cleanMitigations } from "./case-risks.js";
 import { IMPACTS_VERSION, CASE_IMPACTS, impactRows } from "./case-impacts.js";
 import { patternsTeaserHTML, patternsPageHTML, dashboardsHTML } from "./codebook-ui.js";
-import { teardownHTML, CORRECTIONS } from "./teardown.js";
+import { teardownHTML, teardownMastHTML, CORRECTIONS } from "./teardown.js";
 const PATTERN_KEYS = CODEBOOK.map((p) => p.key);
 
 const STAGING_OPEN = true;
@@ -1548,7 +1548,12 @@ async function nomineePage(request, env, url, ctx, key) {
     desc: `${scores ? scores + ". " : ""}Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
     fill: {
       "#list": postHTML(n, { flags, thread, open: true, carousel, more: await moreFor(env, n) }),
-      "#more-feed": teardownHTML(n, st.nominees.filter((x) => x.id !== HONOREE), await mediaFor(env, n), SITE),
+      "#td-mast": teardownMastHTML(n, { headline: cd?.headline }),
+      "#more-feed": teardownHTML(n, st.nominees.filter((x) => x.id !== HONOREE), await mediaFor(env, n), SITE, {
+        headline: cd?.headline,
+        // backgrounds that change as the reader scrolls: the story's photos, then its category scene
+        backgrounds: [...new Set([sceneOf(n), ...(cd?.slides || []).map((s) => s.image).filter(Boolean)])],
+      }),
     },
     image: shareImage || undefined,
     attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelVar(jewelOf(n.domain), "deep")}`]] },

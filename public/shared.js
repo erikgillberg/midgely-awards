@@ -640,7 +640,7 @@ export function jewelOf(domain) {
 // (see styles.css, html[data-look]) can retune every category in one place.
 const jwSlug = (j) => (j.name || "prospective").toLowerCase();
 export const jewelVar = (j, part) => `var(--jw-${jwSlug(j)}-${part[0]},${j[part]})`;
-const jewelVars = (j) => `--deep:${jewelVar(j, "deep")};--base:${jewelVar(j, "base")};--light:${jewelVar(j, "light")}`;
+export const jewelVars = (j) => `--deep:${jewelVar(j, "deep")};--base:${jewelVar(j, "base")};--light:${jewelVar(j, "light")}`;
 
 // A nominee as an element. Everything on the tile is a fixed fact, so a saved image never goes stale:
 //   top left     the category's group number (the color says the same thing)
