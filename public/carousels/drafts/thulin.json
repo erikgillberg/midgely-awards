@@ -1,0 +1,74 @@
+{
+  "slug": "thulin",
+  "format": "short",
+  "keyCard": false,
+  "headline": "The plastic bag: built to last, used once",
+  "dek": "Sten Gustaf Thulin, Celloplast, Sweden, 1960s.",
+  "verdict": "The plastic bag: worth it?",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "A bag that won't give out",
+      "text": "Groceries went home in paper bags. **A Swedish team welded a strong bag from one plastic tube.** The patent named Sten Gustaf Thulin."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "A penny a bag",
+      "text": "Rainproof and strong, it caught on. **By 2007 it cost about a penny, paper 4 to 5 cents**, industry figures said."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Free, so thrown away",
+      "stat": "328",
+      "statLabel": "bags a person a year in Ireland before 2002, a government estimate",
+      "text": "Handed out free, bags were used once and tossed. **They snagged in trees, blocked drains and drifted out to sea.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "Litter was easy to see, and in 1972 scientists reported plastic in the open Atlantic. **In 1986 Barry Commoner asked if society really needed plastic bags.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "A small price, a big drop",
+      "text": "Ireland's 15 cent levy in 2002 cut use from about 328 bags a person to 21. **By 2018, 127 of 192 countries regulated plastic bags.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "A strong, waterproof bag for about a penny, against 4 to 5 cents for paper (industry figures, 2007)",
+        "Lower climate impact than a paper bag used fewer than 3 times (UK Environment Agency, 2011)",
+        "90% of US grocery bags by 2007, an industry group said"
+      ],
+      "costs": [
+        "About 5% of Ireland's litter before its 2002 levy (Irish government)",
+        "Drains and waterways blocked in Bangladesh, which banned thin bags in 2002",
+        "42 billion lightweight bags used in the EU in 2018, about 95 a person (Eurostat)"
+      ],
+      "text": "It carried the world's shopping for about a penny a bag. **Given away free, it ended up in trees, drains and the sea.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Great for one, bad for all",
+      "patternKey": "everyone",
+      "focus": true,
+      "text": "For each shopper and store, a free bag is the sensible choice. **The cost lands on streets and seas everyone shares.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "Something built to be reused tends to be used once when it is free. **A small price on each choice can change the total.**"
+    }
+  ]
+}

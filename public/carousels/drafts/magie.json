@@ -1,0 +1,81 @@
+{
+  "slug": "magie",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Monopoly was invented to warn against monopolies",
+  "dek": "Lizzie Magie, United States, 1904 to 1935.",
+  "verdict": "Magie's game: worth it?",
+  "portrait": {
+    "image": "/img/n/magie/portrait.jpg",
+    "alt": "Photograph of Lizzie Magie in profile, with short curly hair and a pale draped top",
+    "credit": "Lizzie Magie, about 1892. Unknown photographer. Public domain.",
+    "photo": true
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "A lesson you could play",
+      "text": "Lizzie Magie followed Henry George, who argued that rent enriches landowners and keeps tenants poor. **She built a board game to show it.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Patented and passed around",
+      "text": "She patented it on January 5, 1904, and players drew their own boards. **A Wharton economist taught with it in class.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Monopoly",
+      "stat": "275 million",
+      "statLabel": "Monopoly sets sold worldwide, Hasbro said in 2015",
+      "text": "In 1935 Parker Brothers began selling a version called Monopoly. Its object: become the wealthiest player. **The warning became the goal.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Her own rules pointed the way",
+      "knowable": "mixed",
+      "text": "Her 1904 patent made getting rich the object, and the lesson relied on players noticing the cost. **A store version without the argument was harder to foresee.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Her name came back",
+      "text": "Parker Brothers paid her $500 for a revised patent in 1935, and by 1936 she was largely forgotten. **Research for a 1970s lawsuit brought her patents back.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "275 million Monopoly sets sold, Hasbro said in 2015",
+        "A board still in use, with a jail and a corner to start from (US patent 748,626)",
+        "A game economics teachers used in class"
+      ],
+      "costs": [
+        "A game against land monopoly, best known for winning one",
+        "$500 for her patent, and decades without credit",
+        "Her anti-monopolist rules, largely forgotten by 1936"
+      ],
+      "text": "It gave a board families still play, with 275 million sets sold by Hasbro's count. **It cost the lesson it was built to teach.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The lesson flipped",
+      "patternKey": "flipped",
+      "focus": true,
+      "text": "To show the harm of land-grabbing, the game made land-grabbing the way to win. Players practiced it, and **the warning did not come in the box.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "People learn what they practice, not what they are told it means. **Put the lesson in the rules, not the commentary.**"
+    }
+  ]
+}

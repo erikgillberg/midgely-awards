@@ -1,0 +1,75 @@
+{
+  "slug": "franz",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Roundup worked so well the weeds evolved",
+  "dek": "John Franz, Monsanto, United States, 1970.",
+  "verdict": "Roundup: worth it?",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Kill weeds without the plow",
+      "text": "Farmers fought weeds by plowing, which costs topsoil, time and fuel. **They wanted one weed killer that left the soil alone.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Roundup",
+      "text": "In 1970 Monsanto chemist John Franz found glyphosate, sold as Roundup from 1974. **It controls over 125 kinds of weeds.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "The survivors took over",
+      "stat": "62",
+      "statLabel": "weed species in 31 countries resist glyphosate, a 2026 review finds",
+      "text": "Global use rose almost 15-fold after 1996, when crops engineered to survive it arrived. **Each spraying left behind the weeds it could not kill.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly: the record looked clean",
+      "text": "In 1997 Monsanto scientists found no verified resistant weeds after decades of use. **But weeds had already beaten older herbicides.**",
+      "knowable": "mixed"
+    },
+    {
+      "kind": "cleanup",
+      "label": "Where it stands",
+      "title": "Still in court, still on shelves",
+      "text": "A WHO agency called glyphosate probably carcinogenic; US and EU regulators found it unlikely. **Bayer agreed to pay up to $10.9 billion over cancer claims**, admitting no liability."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "Control of over 125 kinds of weeds",
+        "Less plowing, saving topsoil, time and fuel",
+        "A key tool behind no-till farming"
+      ],
+      "costs": [
+        "62 weed species resistant to it, in 31 countries (2026 review)",
+        "Resistant weeds that often survive other herbicides too",
+        "Up to $10.9 billion in cancer settlements, no liability admitted (Bayer, 2020)"
+      ],
+      "text": "It made weeding cheaper and plowing less necessary. **Leaning on it everywhere wore down what made it work.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The cure breeds resistance",
+      "patternKey": "resistance",
+      "focus": true,
+      "text": "One weed killer on every field killed most weeds and spared the rare ones it could not. **Year after year, those survivors took over.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "The more one tool is used, the faster the problem adapts to it. **Rotate your tools before the problem learns them.**"
+    }
+  ]
+}

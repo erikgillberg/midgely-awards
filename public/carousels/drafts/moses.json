@@ -1,0 +1,80 @@
+{
+  "slug": "moses",
+  "format": "short",
+  "keyCard": false,
+  "headline": "He built roads to end traffic. Traffic won.",
+  "dek": "Robert Moses, New York, 1930s to 1960s.",
+  "verdict": "Moses's roads: worth it?",
+  "portrait": {
+    "image": "/img/n/moses/portrait.jpg",
+    "photo": true,
+    "alt": "Robert Moses in a double-breasted suit, pointing at a model of a proposed bridge",
+    "credit": "Robert Moses with a Battery Bridge model, 1939. C.M. Stieglitz, World-Telegram. Library of Congress. Public domain."
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "A city out of room",
+      "text": "In 1930 New York's streets were jammed and its parks were few. **Robert Moses set out to fix both at once.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Beaches for everyone",
+      "text": "Jones Beach drew 350,000 people in its first month. **Playgrounds went from 119 to 777.** His parkways carried families out of the city."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Then the roads filled up",
+      "stat": "250,000",
+      "statLabel": "people lost their homes to his highways, by Robert Caro's count",
+      "text": "And every new highway drew more cars. **The traffic came back, bigger.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "People said so",
+      "text": "In 1930 a transit executive warned that wider streets simply produce more traffic. **Moses's own parkways jammed soon after they opened.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Still paying",
+      "text": "In 2024 the federal government put $150 million toward easing the Cross Bronx's harm to its neighbors. **Fifty years on, the bill is still arriving.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What he gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "777 playgrounds, up from 119",
+        "34,673 acres of city park land",
+        "416 miles of parkway, by one count"
+      ],
+      "costs": [
+        "250,000 people displaced, by Caro's count",
+        "Parkways that jammed soon after opening",
+        "Neighborhoods split by expressways"
+      ],
+      "text": "He gave New York 777 playgrounds and miles of beaches. **It cost 250,000 people their homes.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Great for one, bad for all",
+      "patternKey": "everyone",
+      "focus": true,
+      "text": "A faster road makes driving easier for each driver. So more people drive, **until it is slow again.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "Traffic is thousands of choices. **Make driving easier, and you get more driving.**"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "slug": "borlaug",
+  "format": "short",
+  "keyCard": false,
+  "headline": "India's harvest miracle is draining its wells",
+  "dek": "Norman Borlaug, Mexico, Pakistan and India, 1960s.",
+  "verdict": "Dwarf wheat: worth it?",
+  "portrait": {
+    "image": "/img/n/borlaug/portrait.jpg",
+    "photo": true,
+    "alt": "Norman Borlaug at 90, white-haired, in a dark suit and dotted tie on a city street",
+    "credit": "Norman Borlaug, 2004. Ben Zinner, USAID. Public domain."
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Wheat that snapped",
+      "text": "Around 1960, West Pakistan fell short of wheat every year, and tall wheat snapped when fed more fertilizer. **Norman Borlaug's team set out to breed shorter wheat.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Short wheat, big harvests",
+      "text": "The dwarf wheat took two or three times the fertilizer and lifted top yields over 70 percent. **In 1968 India harvested a record 17 million tons.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Wells that keep getting deeper",
+      "stat": "109 km³",
+      "statLabel": "of groundwater lost in northwest India, 2002 to 2008, one study found",
+      "text": "The seeds paid off with water, and Punjab filled with thirsty rice and wheat. **Farmers now drill 200 to 300 feet for water.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "His worry was people, not water",
+      "text": "Punjab's water table was falling 18 cm a year by the mid-1980s. **Borlaug's own 1970 warning was about population, not water.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Still unfolding",
+      "text": "In 2010 Punjab pumped 45 percent more groundwater each year than rain put back. **The water bill is still arriving.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "Developing-world cereal harvests tripled in 50 years on 30 percent more land (PNAS, 2012)",
+        "India's record wheat crop of 17 million tons in 1968",
+        "Mexico self-supporting in wheat by 1956"
+      ],
+      "costs": [
+        "109 cubic kilometers of groundwater lost in northwest India, 2002 to 2008 (Nature, 2009)",
+        "Punjab pumping 45 percent more groundwater than rain puts back (Columbia Water Center, 2010)",
+        "Water use, soil damage and chemical runoff (PNAS, 2012)"
+      ],
+      "text": "It gave cereal harvests that tripled across the developing world in 50 years. **It cost wells that keep getting deeper.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Cheap now, paid later",
+      "patternKey": "later",
+      "focus": true,
+      "text": "The harvest pays every season, and flat-fee power made pumping more cost nothing extra. **The aquifer bill comes due over decades.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "A review found the damage came less from the seeds than from policies that made water cheap to overuse. **Price the resource your tool depends on.**"
+    }
+  ]
+}

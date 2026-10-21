@@ -730,6 +730,9 @@ const IG_ASK = `<section class="cc cc-igask" data-ig-only aria-hidden="true">
 
 // The carousel: a headline card, the write-up one idea per card, then the payoff and the ask.
 // data comes from /carousels/<slug>.json.
+// Card text may mark its one key sentence with **double asterisks**; it renders bold.
+const rich = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
 export function carouselHTML(n, data, flags = {}) {
   const j = jewelOf(n.domain);
   const cards = [];
@@ -767,7 +770,7 @@ export function carouselHTML(n, data, flags = {}) {
       ? `<ol class="cc-hind">${s.items.map((x) => x.risk ? `<li><b>${esc(x.risk)}</b><span>${esc(x.softened)}</span></li>` : `<li><b>${esc(x.softened)}</b></li>`).join("")}</ol>`
       : s.items && s.items.length ? `<ol class="cc-lessons">${s.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
     const ask = focus ? codeOf(s.patternKey)?.questions?.[0] : "";
-    const patterns = focus ? `<p class="cc-text">${esc(PATTERNS[pi].text)}</p>${ask ? `<p class="cc-q"><span>Ask before you ship</span>${esc(ask)}</p>` : ""}<p class="cc-why">${esc(PATTERN_WHY)}</p>`
+    const patterns = focus ? `<p class="cc-text">${s.text ? rich(s.text) : esc(PATTERNS[pi].text)}</p>${ask ? `<p class="cc-q"><span>Ask before you ship</span>${esc(ask)}</p>` : ""}<p class="cc-why">${esc(PATTERN_WHY)}</p>`
       : s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p, i) => `<li class="${p.key === s.patternKey ? "on" : ""}"><span class="pn">${p.key === s.patternKey ? "→ " : ""}#${i + 1}</span><span><b>${esc(p.name)}</b> ${esc(p.text)}</span></li>`).join("")}</ol>` : "";
     cards.push(`<section class="cc cc-${esc(s.kind)} ${img ? "has-img" : "no-img"}" data-sym="${esc(symbol(n.name))}" aria-roledescription="slide" aria-label="${i} of ${total}">
       ${img}
@@ -777,7 +780,7 @@ export function carouselHTML(n, data, flags = {}) {
           : `<p class="cc-label"><span>${String(num).padStart(2, "0")}</span> ${s.title === s.label ? "" : esc(s.label)}</p>`}
         <h3 class="cc-title">${esc(s.title)}</h3>
         ${stat}${chip}
-        ${s.text ? `<p class="cc-text">${esc(s.text)}</p>` : ""}${ledger}${lessons}${also}${patterns}
+        ${s.text && !focus ? `<p class="cc-text${s.text.length + (s.stat ? 40 : 0) > 150 ? " long" : ""}">${rich(s.text)}</p>` : ""}${ledger}${lessons}${also}${patterns}
       </div>
       ${foot(i)}
     </section>`);
@@ -798,7 +801,7 @@ export function carouselHTML(n, data, flags = {}) {
   else if (!SCORES_VISIBLE) cards.push(`<section class="cc cc-payoff" data-web-only aria-roledescription="slide" aria-label="${total} of ${total}">
     <div class="cc-body">
       <p class="cc-label">Your verdict</p>
-      <h3 class="cc-title">${esc(n.work)}: worth it?</h3>
+      <h3 class="cc-title">${esc(data.verdict || `${n.work}: worth it?`)}</h3>
       <p class="cc-igvote"><span>💡 Yes</span><span>🤦 No</span></p>
       <p class="cc-text">Vote below, then send it to a friend who is building something.</p>
       <p class="cc-follow">Follow the Backfire Awards for more teardowns.</p>
@@ -819,7 +822,7 @@ export function carouselHTML(n, data, flags = {}) {
     ${foot(total)}
   </section>`);
   cards.push(IG_ASK);
-  return `<div class="carousel" style="${jewelVars(j)}" data-carousel>
+  return `<div class="carousel${data.format === "short" ? " cc-short" : ""}" style="${jewelVars(j)}" data-carousel>
     <div class="cc-track" tabindex="0" aria-label="${esc(n.name)}, ${total} cards">${cards.join("")}</div>
     <div class="cc-nav">
       <button type="button" data-cc="prev" aria-label="Previous card">←</button>

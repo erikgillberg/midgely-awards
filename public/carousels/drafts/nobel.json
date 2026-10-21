@@ -1,0 +1,78 @@
+{
+  "slug": "nobel",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Dynamite was invented to be the safe explosive",
+  "dek": "Alfred Nobel, Sweden, 1864 to 1867.",
+  "verdict": "Dynamite: worth it?",
+  "portrait": {
+    "image": "/img/n/nobel/portrait.jpg",
+    "alt": "Photograph of Alfred Nobel seated sideways in a chair, bearded, his chin resting on his hand",
+    "credit": "Alfred Nobel, before 1896. Gösta Florman. Public domain.",
+    "photo": true
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Tame the oil",
+      "text": "In 1864 a blast at Alfred Nobel's factory killed five people, his brother among them. **He set out to make nitroglycerin safe to handle.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Dynamite",
+      "text": "Patented in 1867, dynamite was nitroglycerin soaked into porous earth, quite safe to handle. **One plant made 11 tons that year and 3,150 in 1874.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Easy to carry, for anyone",
+      "text": "A stable explosive can be carried into a city and left behind. **In 1885 bombers used it on the House of Commons.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Yes, in his lifetime",
+      "text": "Both armies used dynamite in the Franco-Prussian War, three years after the patent. **Its uses for war and terror were plain in his lifetime.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "What came next",
+      "title": "Powder for armies",
+      "text": "Nobel went on to patent ballistite in 1887, a nearly smokeless powder Italy's army adopted. **In 1894 he bought the ironworks that became Bofors arms.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "One plant's output: 11 tons in 1867, 3,150 tons in 1874",
+        "Lucerne to Milan in about 5.5 hours instead of 27, via the Gotthard tunnel (1882)",
+        "Far less risk of accidental explosion than liquid nitroglycerin"
+      ],
+      "costs": [
+        "A bombing campaign in Britain, 1881 to 1885",
+        "Dynamite used by both armies in the Franco-Prussian War",
+        "Ballistite, a smokeless military powder adopted by Italy's army"
+      ],
+      "text": "Dynamite helped build the Gotthard tunnel, cutting Lucerne to Milan from 27 hours to about 5.5. **It also put a portable bomb in anyone's hands.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The problem moves",
+      "patternKey": "moved",
+      "focus": true,
+      "text": "Nitroglycerin's danger was going off when nobody meant it to. Dynamite fixed that, so **the risk moved to whoever held the stick.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "A fix aimed at accidents does nothing about intent. **Safe to handle also means easy to use, by anyone.**"
+    }
+  ]
+}

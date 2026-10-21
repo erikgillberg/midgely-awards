@@ -1,0 +1,80 @@
+{
+  "slug": "baekeland",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Plastic was made to last. Most of it still is.",
+  "dek": "Leo Baekeland, United States, 1907.",
+  "verdict": "Bakelite: worth it?",
+  "portrait": {
+    "image": "/img/n/baekeland/portrait.jpg",
+    "photo": true,
+    "alt": "Profile photograph of Leo Baekeland, balding, with a dark beard and a light jacket",
+    "credit": "Leo Baekeland, 1916. The World's Work. Public domain."
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Bugs can't keep up",
+      "text": "The US was going electric, and a common insulator, shellac, came from lac insects in limited supply. **Leo Baekeland set out to make a substitute.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Heat, pressure, Bakelite",
+      "text": "In 1907 he made Bakelite, the first fully synthetic plastic, and announced it in 1909. **Soon it was in car parts, radios and telephones.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Made to last, so it does",
+      "stat": "79%",
+      "statLabel": "of plastic waste by 2015 sat in landfills or nature, one study says",
+      "text": "Most plastics after Bakelite don't biodegrade in any meaningful sense, a study author says. **Most plastic waste is still around.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Not in his lifetime",
+      "text": "In 1950 the world made about 2 million metric tons of plastic a year, and ocean plastic was first noticed in the 1960s. **Nothing in 1907 pointed here.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Still negotiating",
+      "text": "In 2022, 175 nations agreed to write a treaty to end plastic pollution. Talks in 2024 and 2025 ended without a deal. **The treaty is still unwritten.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "Insulation without waiting on lac insects",
+        "Molded parts for cars, radios and telephones",
+        "Over 400 million metric tons of plastic made in 2015"
+      ],
+      "costs": [
+        "79% of 6.3 billion metric tons of plastic waste in landfills or nature by 2015 (Science Advances, 2017)",
+        "Plastic particles in the blood of 17 of 22 donors in one 2022 study",
+        "A plastics treaty still unwritten after talks in 2024 and 2025"
+      ],
+      "text": "It gave an electric country its insulators and a material made at over 400 million tons a year. **It cost billions of tons of waste that lingers.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Too stable to go away",
+      "patternKey": "stable",
+      "focus": true,
+      "text": "Bakelite sold because heat could not melt it and solvents could not dissolve it. **The same toughness keeps plastic on beaches for decades.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "How long a thing lasts and how long it stays useful are different numbers. **Plan for where it goes after its job.**"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "slug": "zuckerberg",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Facebook counted anger as five likes",
+  "dek": "Mark Zuckerberg, Facebook, 2006 to 2021.",
+  "verdict": "Facebook's feed: worth it?",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Stop checking every page",
+      "text": "Early Facebook meant visiting friends' profiles one by one. **In 2006 News Feed gathered their updates in one place.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "A billion people a month",
+      "text": "Users protested at first, then stayed. **By 2012 more than a billion people used Facebook monthly.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Comments, or arguments",
+      "stat": "30 to 1",
+      "statLabel": "points for a significant comment vs. a like, Facebook's 2018 scoring",
+      "text": "In 2018, citing well-being, Facebook began ranking posts by the comments they sparked. **Its researchers found publishers and parties tilting posts toward outrage.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Seen inside by 2019",
+      "text": "Facebook's own researchers flagged the effect by 2019. **Outside researchers still argue over how much it mattered.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The cleanup",
+      "title": "Turning down the dial",
+      "text": "In September 2020 Facebook cut the angry reaction's weight to zero. **From 2021 it gave political comments and shares less weight.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "3.6 billion people a day on Meta's apps, June 2026",
+        "Friends' news in one place, free, since 2006",
+        "More than a billion monthly users by October 2012"
+      ],
+      "costs": [
+        "Publishers and parties tilting posts toward outrage, Facebook's researchers found (WSJ, 2021)",
+        "An angry reaction once counted five times a like (Washington Post, 2021)",
+        "More uncivil posts in the ranked feed than a plain timeline (Science, 2023)"
+      ],
+      "text": "The feed keeps billions of people in touch. **By its makers' own research, it also favored outrage.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Chasing the wrong number",
+      "patternKey": "metric",
+      "focus": true,
+      "text": "Facebook counted comments as a sign of meaningful talk. But a fight earns comments too, **so the count rose either way.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "A count of replies can't tell a good talk from a fight. **Before you rank by a number, ask what else moves it.**"
+    }
+  ]
+}

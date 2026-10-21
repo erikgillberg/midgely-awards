@@ -1,0 +1,80 @@
+{
+  "slug": "edward-m-bassett",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Zoning kept out factories. Then apartments.",
+  "dek": "Edward M. Bassett, New York, 1916.",
+  "verdict": "Zoning: worth it?",
+  "portrait": {
+    "image": "/img/n/edward-m-bassett/portrait.jpg",
+    "photo": true,
+    "alt": "Portrait photograph of Edward M. Bassett in a dark suit, high white collar and tie",
+    "credit": "Edward M. Bassett, about 1914. Reuben Leslie Maynard. Public domain."
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "A shadow over Broadway",
+      "text": "Manhattan's tenements lacked light and air, and in 1915 the Equitable Building cast a seven-acre shadow. **Edward M. Bassett set out to bring the light back.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "America's first zoning code",
+      "text": "His commission wrote the first comprehensive US zoning code in 1916, capping heights and keeping factories out of residential districts. **By 1923, 218 municipalities had zoning.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Homes far from everything",
+      "stat": "1.5 million",
+      "statLabel": "homes the US was short in 2022, by a Moody's estimate",
+      "text": "As zoning spread, later codes barred apartments from home districts and kept homes far from jobs. **The rules that kept out factories kept out homes.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "A judge warned. The cars came later.",
+      "text": "Striking down a zoning law, a federal judge wrote that it would \"segregate them according to their income.\" **He warned in 1924 and was overruled in 1926.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Undoing it takes new law",
+      "text": "In 2019 Oregon required cities over 10,000 people to allow duplexes on single-family land. **Undoing local codes took a state law.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "Light and air under towers like the Equitable",
+        "Homes kept apart from factories",
+        "Zoning in 218 municipalities with over 22 million people by 1923"
+      ],
+      "costs": [
+        "A shortfall of more than 1.5 million homes, by one 2022 estimate",
+        "Homes, jobs and shops set apart, so people rely on cars (EPA, 2001)",
+        "Apartments barred from home districts; Oregon needed a 2019 law to allow duplexes"
+      ],
+      "text": "It gave crowded streets light and air and kept factories away from homes. **It cost neighborhoods where jobs and shops need a car.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Cheap now, paid later",
+      "patternKey": "later",
+      "focus": true,
+      "text": "In 1916 the light and air arrived at once. **The cost grew as cities spread out under the rules.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "A rule written for one city's problem becomes a template for places that never had it. **Give every rule a date to check it again.**"
+    }
+  ]
+}

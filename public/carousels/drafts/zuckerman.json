@@ -1,0 +1,80 @@
+{
+  "slug": "zuckerman",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Pop-ups began as a fix for an upset advertiser",
+  "dek": "Ethan Zuckerman, Tripod, late 1990s.",
+  "verdict": "The pop-up: worth it?",
+  "portrait": {
+    "image": "/img/n/zuckerman/portrait.jpg",
+    "photo": true,
+    "alt": "Ethan Zuckerman smiling outdoors, with long hair, glasses and a blue floral shirt",
+    "credit": "Ethan Zuckerman, 2019. Joi Ito. CC BY 2.0."
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Free pages, paid by ads",
+      "text": "A carmaker complained when its banner ran on a Tripod member's page about sex. **Ethan Zuckerman's fix: open the ad in its own window.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "A window of its own",
+      "text": "The ad sat beside the page, not on it, and others copied the trick. **Advertisers bought 11.3 billion pop-ups from January to July 2002**, Nielsen//NetRatings counted."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Everyone shut the window",
+      "stat": "78%",
+      "statLabel": "of 2,667 web users called pop-ups very annoying (GartnerG2, 2002)",
+      "text": "Browser makers built in an off switch. **Phoenix, later Firefox, blocked pop-ups from its first release in 2002.** Netscape and Safari followed within months."
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "In a 1999 survey, 69% of users found pop-ups annoying. **A web where every site used them was harder to see.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Still closing windows",
+      "text": "Internet Explorer blocked pop-ups by default from 2004. **In 2018 Chrome began stripping ads from sites that break ad standards**, pop-ups included."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "Ads sold on members' pages without setting a brand beside the content (Zuckerman, 2014)",
+        "Free homepages; about 15 million people a day viewed Tripod pages by 1999 (Zuckerman)",
+        "11.3 billion pop-up impressions bought, January to July 2002 (Nielsen//NetRatings)"
+      ],
+      "costs": [
+        "78% of internet users surveyed called pop-ups very annoying, 2002 (GartnerG2)",
+        "Pop-up blocking built into Firefox, Netscape, Safari and Internet Explorer by 2004",
+        "$21.8 billion in ad revenue blocked worldwide in 2015 by ad blockers of every kind, one estimate (PageFair and Adobe)"
+      ],
+      "text": "It solved one advertiser's problem. **It handed the cost to every reader on the web.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Great for one, bad for all",
+      "patternKey": "everyone",
+      "focus": true,
+      "text": "One pop-up gets noticed. When thousands of sites use them, readers switch them off, **and browsers switch them off for everyone.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "A trick that works for one company can fail once everyone copies it. **Attention is shared by every site that asks for it.**"
+    }
+  ]
+}

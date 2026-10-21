@@ -1,0 +1,75 @@
+{
+  "slug": "berners-lee",
+  "format": "short",
+  "keyCard": false,
+  "headline": "The web let anyone publish. Even fake banks.",
+  "dek": "Tim Berners-Lee, CERN near Geneva, 1989.",
+  "verdict": "The open web: worth it?",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Stop losing what people know",
+      "text": "At CERN, people stayed about two years, and what they knew left with them. **In 1989 Tim Berners-Lee proposed linked documents anyone could reach.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "One site, then 1.49 billion",
+      "text": "CERN put the software in the public domain in 1993, and by 1994 there were 10,000 servers. **Netcraft now counts about 1.49 billion sites.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Open to everyone, scams too",
+      "stat": "3.8 million",
+      "statLabel": "phishing attacks counted by the Anti-Phishing Working Group in 2025",
+      "text": "The web had \"no central authority\" to ask for permission, by design. **Anyone can put up a page that looks like your bank.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Abuse, yes. This scale, no.",
+      "knowable": "mixed",
+      "text": "Abuse of networks was not new: a worm crippled thousands of computers in 1988. **But in late 1993 there were just over 500 web servers.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "The inventor's repair kit",
+      "text": "In 2018 Berners-Lee started Inrupt to build Solid, which keeps your data in a store you control. **The inventor is still building the fix.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "About 1.49 billion sites counted by Netcraft, July 2026",
+        "Free to build on: CERN put the code in the public domain in 1993",
+        "About 6 billion people online in 2025 (ITU)"
+      ],
+      "costs": [
+        "$20.9 billion in internet crime losses reported to the FBI in 2025, not only on the web",
+        "3.8 million phishing attacks counted in 2025 (APWG)",
+        "Misinformation that spreads because it gets clicks, by his own account"
+      ],
+      "text": "It put most of the world's knowledge a click away, across 1.49 billion sites. **It cost 3.8 million phishing attacks in 2025 alone.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The problem moves",
+      "patternKey": "moved",
+      "focus": true,
+      "text": "The web removed the editors who decided what reached the public, on purpose. **The job of checking moved to every reader.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "Removing a gatekeeper also removes the work the gate was doing. **Decide who does that work before you open the door.**"
+    }
+  ]
+}

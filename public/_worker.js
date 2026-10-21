@@ -1671,7 +1671,8 @@ const carouselCache = new Map();
 const jsonOrNull = (r) => (r.ok && (r.headers.get("content-type") || "").includes("json") ? r.json() : null);
 async function carouselFor(request, env, url, n) {
   // Draft carousels, on staging and local only: /n/<slug>?draft=story reads /carousels/drafts/<slug>.json.
-  if (url.hostname !== SITE_HOST && url.searchParams.get("draft") === "story") {
+  // Staging and local show a story's draft carousel by default (?draft=off shows the live one); production never does.
+  if (url.hostname !== SITE_HOST && url.searchParams.get("draft") !== "off") {
     const d = await env.ASSETS.fetch(new URL(`/carousels/drafts/${n.slug}.json`, url).toString()).then(jsonOrNull).catch(() => null);
     if (d) return carouselHTML(n, d, flagsOf(env));
   }

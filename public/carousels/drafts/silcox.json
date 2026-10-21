@@ -1,0 +1,80 @@
+{
+  "slug": "silcox",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Put out every forest fire, get bigger ones",
+  "dek": "Ferdinand Silcox, US Forest Service, 1935 to 1978.",
+  "verdict": "The 10 a.m. rule: worth it?",
+  "portrait": {
+    "image": "/img/n/silcox/portrait.jpg",
+    "photo": true,
+    "alt": "Ferdinand Silcox, white-haired, in a dark suit, seated at a desk beside a US flag in a studio surrounded by lights",
+    "credit": "Ferdinand A. Silcox, Chief of the Forest Service, Washington, DC, 1933. US Forest Service. Public domain."
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Never another 1910",
+      "text": "In 1910 fires burned more than 3 million acres and killed at least 85 people. **Ferdinand Silcox argued fire could be kept out.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Out by 10 a.m.",
+      "text": "In 1935 Silcox, now chief, ordered every fire controlled by 10 a.m. the next morning. **Yearly acres burned on western national forests fell from 455,340 to 141,975.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "The fuel stayed",
+      "stat": "3.0M to 7.1M",
+      "statLabel": "US acres burned a year, 1985 to 1994 vs. 2016 to 2025 (NIFC)",
+      "text": "Small fires had kept dry pine forests open. Without them, **fuel piled up for bigger, hotter fires.** Climate and building near forests add to it."
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "In 1943 Harold Weaver warned that keeping all fire out was harming pine forests. **How much fuel would pile up took decades to show.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Putting fire back",
+      "text": "The Forest Service dropped the rule in 1978. **Now it burns and thins forests on purpose.** A 2022 plan targets up to 20 million more acres."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "Western national forest acres burned a year: 455,340 (1926 to 1934) to 141,975 (1935 to 1943) (Loveridge, 1944)",
+        "No long-running blowup fire on western national forests, 1935 to 1944, the agency reported",
+        "Area burned a fraction of its historical extent by the 1950s and 1960s (US Forest Service)"
+      ],
+      "costs": [
+        "Dry pine stands of 40 to 60 trees an acre grown to hundreds in many places (US Forest Service)",
+        "US acres burned a year: 3.0 million (1985 to 1994) to 7.1 million (2016 to 2025), with climate and building also at work (NIFC)",
+        "Fire took 52% of the Forest Service budget in 2015, up from 16% in 1995 (USDA)"
+      ],
+      "text": "It stopped the fires of its day. **It also stored their fuel for bigger fires later.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The risk piles up",
+      "patternKey": "buffered",
+      "focus": true,
+      "text": "Every small fire put out left its fuel standing. So the few that escaped **burned through decades of stored fuel.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "Small failures can be doing a job nobody wrote down. **Before you stop them all, ask what they were clearing.**"
+    }
+  ]
+}

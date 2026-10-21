@@ -1,0 +1,81 @@
+{
+  "slug": "muller",
+  "format": "short",
+  "keyCard": false,
+  "headline": "DDT won a Nobel Prize. Then bird eggs broke.",
+  "dek": "Paul Müller, Basel, Switzerland, 1939.",
+  "verdict": "DDT: worth it?",
+  "portrait": {
+    "image": "/img/n/muller/portrait.jpg",
+    "alt": "Photograph of Paul Müller smiling, in a dark suit and tie, in front of a tree trunk",
+    "credit": "Paul Müller, 1951. Willy Pragher, Landesarchiv Baden-Württemberg. CC BY 4.0.",
+    "photo": true
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Kill the bugs that kill us",
+      "text": "Lice spread typhus, mosquitoes spread malaria, and the best insect killer had to be sprayed weekly. **Paul Müller went looking for a better one.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "A powder against typhus",
+      "text": "In 1939 he found DDT killed insects on contact. In Naples in 1944, **DDT was among the powders dusted on 50,000 people a day.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Thin shells",
+      "stat": "417",
+      "statLabel": "bald eagle nesting pairs in the lower 48 in 1963, by a federal count",
+      "text": "DDT lingered and built up in fatty tissue. **Some birds of prey laid shells 19 percent or more thinner.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "In 1946 US wildlife biologists published a study of DDT's effects on fish and wildlife. **The thinning shells were measured only after Müller died.**",
+      "knowable": "mixed"
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Banned, with one exception",
+      "text": "The US canceled DDT in 1972, and a treaty now bans it except against malaria mosquitoes. **Bald eagles recovered and came off the federal list in 2007.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "Over 50,000 people a day dusted against typhus lice in Naples, 1944, DDT among the powders",
+        "Malaria spraying once or twice a year instead of every week",
+        "Italy declared malaria-free in 1970, after spraying began in 1947"
+      ],
+      "costs": [
+        "417 bald eagle nesting pairs left in the lower 48 states in 1963",
+        "Eggshells 19 percent or more thinner in three declining US birds of prey",
+        "Residues still in the environment decades after the US ban"
+      ],
+      "text": "DDT saved people from two of the oldest killers there are. **The bill went to birds, rivers and the food chain.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Too stable to go away",
+      "patternKey": "stable",
+      "focus": true,
+      "text": "On a wall DDT lasted six months or more, where the old spray lasted a week. **Outdoors, that same staying power let it build up.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "The trait that made DDT work was the one that made it a problem. **Ask where your fix goes when its job is done.**"
+    }
+  ]
+}

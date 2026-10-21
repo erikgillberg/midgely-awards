@@ -1,0 +1,79 @@
+{
+  "slug": "haber",
+  "format": "short",
+  "keyCard": false,
+  "headline": "Fertilizer feeds billions and chokes the Gulf",
+  "dek": "Fritz Haber, Germany, 1909 to 1913.",
+  "verdict": "Haber's ammonia: worth it?",
+  "portrait": {
+    "image": "/img/n/haber/portrait.jpg",
+    "alt": "Etched profile portrait of Fritz Haber, bald, with round glasses",
+    "credit": "Fritz Haber, etching by Emil Orlik, 1922. Public domain."
+  },
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Fertilizer from bird droppings",
+      "text": "Crops need nitrogen. Around 1900 most came from bird droppings and mined saltpeter, and **a chemist warned the world would run short of wheat.**"
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Ammonia out of thin air",
+      "text": "In 1909 Fritz Haber made ammonia from the nitrogen in air, and Carl Bosch scaled it up. **One estimate: it fed 48% of the world in 2008.**"
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "The extra goes somewhere",
+      "stat": "4,402",
+      "statLabel": "square miles of Gulf of Mexico dead zone in summer 2025, per NOAA",
+      "text": "The nitrogen crops don't take up washes downriver and feeds algae. **Each summer the Gulf of Mexico gets a dead zone.**"
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "War, yes. Rivers, no.",
+      "text": "The harm to rivers, coasts and climate showed up once fertilizer use had grown many times over. **A 2008 review says Haber could not foresee it.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "Still unfolding",
+      "title": "Still unfolding",
+      "text": "The process has barely changed since 1913. **The Gulf dead zone still averages more than twice its 2035 target.**"
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
+      "gains": [
+        "Food for 48% of the world's people in 2008, one estimate finds",
+        "People fed per hectare: 1.9 in 1908, 4.3 in 2008 (same study)",
+        "No more depending on mined bird droppings and saltpeter"
+      ],
+      "costs": [
+        "Nitric acid for German explosives in World War I",
+        "A Gulf of Mexico dead zone of 4,402 square miles, summer 2025 (NOAA)",
+        "Farming: 74% of human-made nitrous oxide, a greenhouse gas, in the 2010s"
+      ],
+      "text": "It feeds about half the world, one estimate finds. **The extra nitrogen ends up in rivers, sea and air.**"
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Solve a shortage, create a surplus",
+      "patternKey": "surplus",
+      "focus": true,
+      "text": "Once nitrogen was cheap, farms could spread more than crops take up. **The shortage ended, and the surplus went downstream.**"
+    },
+    {
+      "kind": "meant",
+      "label": "Lesson",
+      "title": "What we take from it",
+      "text": "A fix for too little can quietly become a source of too much. **When something gets cheap, plan for the extra.**"
+    }
+  ]
+}
