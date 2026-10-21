@@ -27,6 +27,7 @@ import { IMPACTS_VERSION, CASE_IMPACTS, impactRows } from "./case-impacts.js";
 import { patternsTeaserHTML, patternsPageHTML, dashboardsHTML } from "./codebook-ui.js";
 const PATTERN_KEYS = CODEBOOK.map((p) => p.key);
 
+const STAGING_OPEN = true;
 const SCHEMA_VERSION = 20;
 const REPORTS_TO_HIDE = 3; // a comment hides itself after this many reports, pending review
 const STATE_TTL = 15; // seconds the public list is cached at the edge
@@ -1757,7 +1758,9 @@ export default {
     // Staging and previews live behind Cloudflare Access. This is a stopgap for a host that was never added
     // to the Access app: it only checks that Access's header is present, which a determined visitor could fake.
     // Access itself is the real lock.
-    if (url.hostname !== SITE_HOST && !/^(localhost|127\.0\.0\.1)$/.test(url.hostname) && !request.headers.get("cf-access-jwt-assertion"))
+    // STAGING_OPEN (2026-10-21): Erik opened staging while the team reviews the new carousels. Set it to false (and turn
+    // Cloudflare Access back on) to lock staging again.
+    if (!STAGING_OPEN && url.hostname !== SITE_HOST && !/^(localhost|127\.0\.0\.1)$/.test(url.hostname) && !request.headers.get("cf-access-jwt-assertion"))
       return new Response("This address is private.", { status: 403, headers: { "content-type": "text/plain", "X-Robots-Tag": "noindex" } });
     if (url.hostname === SITE_HOST && url.pathname.startsWith("/carousels/drafts/")) return new Response("Not found.", { status: 404 });
     // Server-only data modules never go out as files (risks are private until reviewed).
