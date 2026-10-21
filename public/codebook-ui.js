@@ -197,7 +197,7 @@ export function dashboardsHTML(all) {
       <p class="db-links"><a href="/patterns">The ten patterns</a><a href="/table">The Categoric Table</a></p>
     </header>
     ${readouts(noms)}
-    <div class="db-grid">${patternBars(noms)}${matrix(noms)}${timeline(noms)}${whoPays(noms)}${pairs(noms)}${CASE_IMPACTS.map((c, i) => impactPanelHTML(all, c.nominee, `DB-${String(6 + i).padStart(2, "0")}`)).join("")}</div>
+    <div class="db-grid">${patternBars(noms)}${matrix(noms)}${timeline(noms)}${whoPays(noms)}${pairs(noms)}${CASE_IMPACTS.filter((c) => all.some((n) => n.id === c.nominee)).map((c, i) => impactPanelHTML(all, c.nominee, `DB-${String(6 + i).padStart(2, "0")}`)).join("")}</div>
     <p class="pp-note">Tags are provisional. Two separate automated passes coded every case and an editor settled the differences. Human coders review them next.</p>`;
 }
 

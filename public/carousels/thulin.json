@@ -1,0 +1,146 @@
+{
+  "slug": "thulin",
+  "keyCard": false,
+  "headline": "The plastic bag: built to last, used once",
+  "dek": "In 1962 a Swedish company filed a patent for a strong one-piece plastic bag.",
+  "headlineCandidates": [
+    "The plastic bag: built to last, used once",
+    "The plastic bag was built to be reused",
+    "A penny bag, and the bill for the sea",
+    "Plastic bags beat paper. That was the trouble.",
+    "The bag that was too cheap to keep"
+  ],
+  "headlineRunnerUp": "The plastic bag was built to be reused",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "A bag that won't give out",
+      "text": "Groceries went home in paper bags. Around 1960 a small team at Celloplast in Sweden learned to cut and weld a strong bag, handles and all, from one tube of plastic. The patent named sales manager Sten Gustaf Thulin.",
+      "image": "/img/n/thulin/patent.jpg",
+      "alt": "Patent drawing of a flat plastic tube with welded seams and punched-out handle shapes, and a finished bag with two handles, signed Inventor Sten Gustaf Thulin",
+      "credit": "Bag with handle of weldable plastic material, US patent 3,180,557, filed 1962, granted 1965. Sten Gustaf Thulin. Public domain."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "A penny a bag",
+      "text": "Production began in 1961, and by the late 1960s Celloplast made about 600 million bags a year. Rainproof and strong, it cost about a penny by 2007, against 4 to 5 cents for paper, industry figures said.",
+      "image": "/img/n/thulin/tshirt.jpg",
+      "alt": "Two thin peach-colored plastic shopping bags with cut-out handles and a printed fruit design, one flat and one open",
+      "credit": "Plastic shopping bags, 2011. Phrontis. CC BY-SA 3.0."
+    },
+    {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "He kept his in his pocket",
+      "text": "In 2019 his son told the BBC that his father always carried a bag folded in his pocket and took it back to the shop, and that people simply throwing them away would have struck him as bizarre. The family says the design was meant to help the planet."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Free, so thrown away",
+      "stat": "328",
+      "statLabel": "plastic bags per person per year in Ireland before its 2002 levy, a government estimate",
+      "text": "Handed out free at every checkout, bags piled up. They snagged in trees, blocked drains and drifted out to sea. Before Ireland's levy they were about 5% of its litter.",
+      "image": "/img/n/thulin/tree.jpg",
+      "alt": "Leafless riverside bushes strung with torn white and blue plastic bags above green water, with round weaverbird nests hanging among them",
+      "credit": "Plastic bag litter on the Jukskei River, Johannesburg, 2008. NJR ZA. CC BY-SA 3.0."
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "Litter was easy to see, and in 1972 scientists reported plastic floating in the open Atlantic. In 1986 the environmentalist Barry Commoner asked if society really needed plastic bags. The full scale came later.",
+      "image": "/img/n/thulin/mola.jpg",
+      "alt": "An ocean sunfish swimming just under the surface of calm blue water, its fin breaking the surface",
+      "credit": "Ocean sunfish, which feed mainly on jellyfish and can mistake bags for them, Greater Farallones, 2015. NOAA National Marine Sanctuaries. Public domain."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "A small price, a big drop",
+      "text": "Bangladesh banned thin bags in 2002. Ireland's 15 cent levy that year cut use from about 328 bags a person to 21. England's 2015 charge cut the big supermarkets' bags by 98%. By 2018, 127 of 192 countries regulated plastic bags."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "A strong, waterproof bag for about a penny, against 4 to 5 cents for paper (industry figures, 2007)",
+        "A lower climate impact than a paper bag used fewer than 3 times, or a cotton bag used fewer than 131 times (UK Environment Agency, 2011)",
+        "90% of US grocery bags by 2007, an industry group said"
+      ],
+      "costs": [
+        "About 5% of Ireland's litter before its 2002 levy (Irish government)",
+        "Drains and waterways blocked in Bangladesh, which banned thin bags in 2002 (Guinness World Records)",
+        "42 billion lightweight bags used in the EU in 2018, about 95 a person (Eurostat)"
+      ],
+      "text": "It carried the world's shopping for a penny a bag. Given away free, it also ended up in trees, drains and the sea. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "Credit where due",
+      "text": "Thulin and his colleagues at Celloplast solved a real problem: a cheap bag strong enough to carry a full load home in the rain. By his son's account he reused his own for years. The trouble came from billions of sensible choices added up."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Great for one, bad for all",
+      "patternKey": "everyone",
+      "focus": true,
+      "eyebrow": "What's the pattern?"
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Free to each, costly to all",
+      "text": "For each shopper and each store, a free bag is the sensible choice: it costs almost nothing and saves an armful. The cost lands on streets, rivers and coasts everyone shares, and it grows with every bag. A charge puts a small price back on each choice."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Your shared account fills up too",
+      "text": "Your team shares one cloud account with no budget limits. Each engineer spins up a test server when it saves time, and it costs them nothing. A year later the bill is your second biggest expense, and nobody chose it.",
+      "also": [
+        "Everyone copies the whole team on email, so nobody reads the thread",
+        "Free API keys with no rate limit, until one customer's script slows everyone down"
+      ]
+    },
+    {
+      "kind": "hindsight",
+      "label": "With hindsight",
+      "title": "What was on the table",
+      "items": [
+        {
+          "risk": "A bag given away free gets used once, by everyone",
+          "softened": "A small charge at the checkout, which Ireland showed in 2002 cuts use by more than 90%.",
+          "question": "What happens when everyone does this, not just us?"
+        },
+        {
+          "risk": "A light, tough film lasts and travels to rivers and the sea",
+          "softened": "Take-back and collection from the start. That is what we know now.",
+          "question": "Where does it end up, and what breaks it down there?"
+        },
+        {
+          "risk": "The replacement brings its own harm",
+          "softened": "Count the replacement too: a paper bag has to be used at least 3 times to match a plastic one on climate (2011).",
+          "question": "Where does the problem go after it leaves our boundary?"
+        }
+      ]
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "Something built to be reused tends to be used once when it is free.",
+        "When each choice is cheap and the cost is shared, the total does the damage.",
+        "Swapping one material for another can trade one harm for a different one."
+      ]
+    }
+  ]
+}

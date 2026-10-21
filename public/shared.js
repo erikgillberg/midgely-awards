@@ -762,7 +762,10 @@ export function carouselHTML(n, data, flags = {}) {
     const focus = s.kind === "pattern" && s.focus;
     const ledger = s.kind === "ledger" ? `<div class="cc-lg"><div class="lg-gave"><h4>${esc(s.gainsLabel || "What it gave")}</h4><ul>${(s.gains || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div>
       <div class="lg-cost"><h4>${esc(s.costsLabel || "What it cost")}</h4><ul>${(s.costs || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div></div>` : "";
-    const lessons = s.items && s.items.length ? `<ol class="cc-lessons">${s.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
+    // "With hindsight": each risk that was on the table, and what might have softened it.
+    const lessons = s.kind === "hindsight" && s.items?.length
+      ? `<ol class="cc-hind">${s.items.map((x) => x.risk ? `<li><b>${esc(x.risk)}</b><span>${esc(x.softened)}</span></li>` : `<li><b>${esc(x.softened)}</b></li>`).join("")}</ol>`
+      : s.items && s.items.length ? `<ol class="cc-lessons">${s.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
     const ask = focus ? codeOf(s.patternKey)?.questions?.[0] : "";
     const patterns = focus ? `<p class="cc-text">${esc(PATTERNS[pi].text)}</p>${ask ? `<p class="cc-q"><span>Ask before you ship</span>${esc(ask)}</p>` : ""}<p class="cc-why">${esc(PATTERN_WHY)}</p>`
       : s.kind === "pattern" ? `<ol class="cc-patterns">${PATTERNS.map((p, i) => `<li class="${p.key === s.patternKey ? "on" : ""}"><span class="pn">${p.key === s.patternKey ? "→ " : ""}#${i + 1}</span><span><b>${esc(p.name)}</b> ${esc(p.text)}</span></li>`).join("")}</ol>` : "";

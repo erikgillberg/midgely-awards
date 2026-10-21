@@ -1,0 +1,147 @@
+{
+  "slug": "silcox",
+  "keyCard": false,
+  "headline": "Put out every forest fire, get bigger ones",
+  "dek": "In 1935 the Forest Service set a deadline for every wildfire: 10 a.m. the next day.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Never another 1910",
+      "text": "In August 1910, fires burned more than 3 million acres in Idaho, Montana and Washington and killed at least 85 people. Ferdinand Silcox, who worked the fires, argued fire could be kept out.",
+      "image": "/img/n/silcox/burn1910.jpg",
+      "alt": "Black and white photo of a burned hillside in 1910, covered in toppled, charred tree trunks and uprooted stumps",
+      "credit": "Burned site on Big Creek, St. Joe National Forest, Idaho, 1910. J.B. Halm, US Forest Service. Public domain."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "Out by 10 a.m.",
+      "text": "In 1935 Silcox, now chief, ordered every fire controlled by 10 a.m. the morning after it was reported. On western national forests, acres burned per year fell from 455,340 (1926 to 1934) to 141,975 (1935 to 1943)."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "The fuel stayed",
+      "stat": "3.0M to 7.1M",
+      "statLabel": "Average US acres burned a year, 1985 to 1994 and 2016 to 2025 (NIFC). Climate and building near forests add to it.",
+      "text": "Small fires had kept dry pine forests open. Without them, the Forest Service says, stands of 40 to 60 trees an acre grew to hundreds, and fuel piled up for bigger, hotter fires.",
+      "image": "/img/n/silcox/dixie.jpg",
+      "alt": "Satellite view of a huge wildfire in forested mountains, with long plumes of smoke streaming north over green and brown land",
+      "credit": "The Dixie Fire, California, August 4, 2021, seen by Landsat 7. NASA Earth Observatory. Public domain."
+    },
+    {
+      "kind": "encore",
+      "label": "Second act",
+      "title": "The idea comes back",
+      "text": "In May 2025 the Forest Service chief wrote that it is critical to suppress fires as swiftly as possible, with risk informed efforts to put out small fires before they grow. In July 2026 he told Congress every fire has a full suppression strategy."
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "In 1935 Elers Koch, who fought the 1910 fires, argued that remote backcountry should be left to burn. In 1943 Harold Weaver warned that keeping all fire out was harming pine forests. How much fuel would pile up took decades to show."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Putting fire back",
+      "text": "Parks began letting some fires burn in 1968, the Forest Service in 1972, and it dropped the policy in 1978. In 2022 it set out to thin or burn up to 20 million more acres in 10 years.",
+      "image": "/img/n/silcox/rxburn.jpg",
+      "alt": "Low flames creep through pine needles on the floor of an open ponderosa pine forest during a planned burn, with smoke among the trunks",
+      "credit": "Prescribed burn in ponderosa pine, Grand Canyon National Park, December 11, 2024. National Park Service. Public domain."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "Acres burned per year on western national forests: 455,340 in 1926 to 1934, 141,975 in 1935 to 1943 (Loveridge, Journal of Forestry, 1944)",
+        "No long-running blowup fire on western national forests from 1935 to 1944, the agency reported (same source)",
+        "By the 1950s and 1960s, area burned each year was a fraction of its historical extent (US Forest Service, 2022)"
+      ],
+      "costs": [
+        "Dry pine stands that once had 40 to 60 trees an acre now have hundreds in many places (US Forest Service, 2022)",
+        "Average US acres burned a year: 3.0 million in 1985 to 1994, 7.1 million in 2016 to 2025, from fewer fires (NIFC)",
+        "Fire took 52% of the Forest Service budget in 2015, up from 16% in 1995 (USDA)"
+      ],
+      "text": "It stopped the fires of its day. It also left the fuel those fires would have burned. Climate and building near forests added to the bill. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "Credit where due",
+      "text": "Silcox took on a real problem: long, costly fire seasons and the memory of 1910. The policy was recommended without a dissent by 20 regional foresters and research directors, and it did what it was built to do. It outlived him by 39 years."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "The risk piles up",
+      "patternKey": "buffered",
+      "focus": true,
+      "eyebrow": "What's the pattern?"
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Every fire out, every log left",
+      "text": "Each small fire put out left its fuel standing. Most fires were caught small, so the few that got away burned on the hottest, windiest days, through decades of stored fuel. One review says suppression left only the most extreme fire behavior."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Your code freeze does it too",
+      "text": "Every risky deploy gets held, so nothing small breaks. The changes queue up behind the freeze. Then the quarter ends, and they all ship at once in one release nobody can debug. The small failures were how the risk used to get out.",
+      "also": [
+        "A new hire never allowed a small mistake, so the first one is a big one",
+        "A bank that rolls over every small bad loan until it is a big one"
+      ]
+    },
+    {
+      "kind": "hindsight",
+      "label": "With hindsight",
+      "title": "What was on the table",
+      "items": [
+        {
+          "risk": "Fuel builds up where small fires used to clear it",
+          "softened": "Keep some low, cool fire in dry pine forests, as light burning advocates and Koch argued at the time",
+          "question": "What small failures are we preventing, and what were they releasing?"
+        },
+        {
+          "risk": "The fires that escape are the worst ones",
+          "softened": "Plan for the fire that gets away, not only for catching fires small",
+          "question": "What happens on the day the protection fails?"
+        },
+        {
+          "risk": "Firefighting costs keep climbing",
+          "softened": "Weigh spending against what is at risk, the rule the 1935 policy set aside",
+          "question": "What does this cost in twenty years, and who pays then?"
+        }
+      ]
+    },
+    {
+      "kind": "whatif",
+      "label": "What if?",
+      "title": "What if Koch had won in 1935?",
+      "text": "Speculation: had the Forest Service let remote backcountry fires burn from 1935, as Koch proposed, not from 1972, parts of the northern Rockies might have kept a patchwork of recent burns. Later studies there found recently burned ground burns less severely."
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "Small failures can be doing a job nobody wrote down.",
+        "A fix judged by what it stops this year can hide what it stores up.",
+        "The better a system is at stopping small failures, the more the one that gets through has to work with."
+      ]
+    }
+  ],
+  "portrait": {
+    "image": "/img/n/silcox/portrait.jpg",
+    "photo": true,
+    "alt": "Ferdinand Silcox, white-haired, in a dark suit, seated at a desk beside a US flag in a studio surrounded by lights",
+    "credit": "Ferdinand A. Silcox, Chief of the Forest Service, Washington, DC, 1933. US Forest Service. Public domain."
+  }
+}

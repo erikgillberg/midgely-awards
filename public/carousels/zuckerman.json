@@ -1,0 +1,145 @@
+{
+  "slug": "zuckerman",
+  "keyCard": false,
+  "headline": "Pop-ups began as a fix for an upset advertiser",
+  "dek": "A free homepage site had a carmaker's banner on the wrong page.",
+  "slides": [
+    {
+      "kind": "meant",
+      "label": "The bright idea",
+      "title": "Free pages, paid by ads",
+      "text": "Tripod, based in Williamstown, Massachusetts, gave anyone a free homepage and paid for it with ads. In the late 1990s a major carmaker found its banner on a member's page about sex, and complained.",
+      "image": "/img/n/zuckerman/williamstown.jpg",
+      "alt": "Spring Street in Williamstown, Massachusetts: brick storefronts, parked cars and a leafy tree on a sunny day",
+      "credit": "Spring Street, Williamstown, Massachusetts, 2010. John Phelan. CC BY 3.0."
+    },
+    {
+      "kind": "right",
+      "label": "It worked",
+      "title": "A window of its own",
+      "text": "Ethan Zuckerman wrote code to open the ad in its own window: tied to the member's page, not on it. He says GeoCities reused his code within weeks.",
+      "image": "/img/n/zuckerman/netscape.jpg",
+      "alt": "Gray About page of Netscape Navigator 2.02, the first browser to run JavaScript, with the Netscape N logo",
+      "credit": "Netscape Navigator 2.02, screenshot by Indolering, 2015. CC0."
+    },
+    {
+      "kind": "twist",
+      "label": "Wait, what?",
+      "title": "Everywhere, and 2%",
+      "text": "Pop-ups felt like they were on every page. Yet Nielsen//NetRatings counted 11.3 billion pop-up impressions bought from January to July 2002, just 2% of the online ad market, and 63 companies launched 80% of them."
+    },
+    {
+      "kind": "oops",
+      "label": "The backfire",
+      "title": "Everyone shut the window",
+      "stat": "78%",
+      "statLabel": "of 2,667 internet users called pop-up ads very annoying in a 2002 GartnerG2 survey",
+      "text": "Browser makers built the off switch in. Phoenix, later renamed Firefox, blocked pop-ups from its first release in 2002. Netscape and Safari followed within months. The fight then moved on to ads of every kind."
+    },
+    {
+      "kind": "foresight",
+      "label": "Could anyone have seen it coming?",
+      "title": "Partly",
+      "text": "The annoyance showed early: in a 1999 survey, 69% of users found pop-ups annoying and 23% said they would not return to a site because of them. A web where every site copied the trick, and browsers switched it off for all, was harder to see."
+    },
+    {
+      "kind": "cleanup",
+      "label": "The long cleanup",
+      "title": "Still closing windows",
+      "text": "Internet Explorer turned on pop-up blocking by default in August 2004, with Windows XP Service Pack 2. In 2018 Chrome began stripping ads from sites that fail the Better Ads Standards, which list pop-up ads among the least acceptable."
+    },
+    {
+      "kind": "ledger",
+      "label": "The ledger",
+      "title": "Worth it?",
+      "gains": [
+        "A way to sell ads on members' pages without setting a brand beside the content (Zuckerman, The Atlantic, 2014)",
+        "Free homepages for people with no credit card; about 15 million people a day viewed Tripod pages by 1999 (Zuckerman)",
+        "A format advertisers paid for: 11.3 billion pop-up impressions, January to July 2002 (Nielsen//NetRatings)"
+      ],
+      "costs": [
+        "78% of internet users surveyed called pop-ups very annoying, 2002 (GartnerG2)",
+        "Pop-up blocking built into Firefox, Netscape, Safari and Internet Explorer by 2004",
+        "$21.8 billion in ad revenue blocked worldwide in 2015 by ad blockers of every kind, one estimate (PageFair and Adobe)"
+      ],
+      "text": "It solved one advertiser's problem and handed the cost to every reader. You decide if it was worth it.",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost"
+    },
+    {
+      "kind": "thanks",
+      "label": "Credit for trying",
+      "title": "Credit where due",
+      "text": "Zuckerman took on a real problem: paying for free webpages in 1995, when most of the world had no credit card. In 2014 he wrote the apology himself: \"I'm sorry. Our intentions were good.\" His larger point was about ads as the web's default business."
+    },
+    {
+      "kind": "pattern",
+      "label": "Pattern",
+      "title": "Great for one, bad for all",
+      "patternKey": "everyone",
+      "focus": true,
+      "eyebrow": "What's the pattern?"
+    },
+    {
+      "kind": "anatomy",
+      "label": "How the pattern works",
+      "title": "Patience is the commons",
+      "text": "One pop-up gets noticed. When thousands of sites use them, readers stop looking and switch them off, and then browsers switch them off for everyone. Each site's gain drew on one shared thing: readers' patience with ads."
+    },
+    {
+      "kind": "mirror",
+      "label": "How you do this",
+      "title": "Every team sends a ping",
+      "text": "Your team adds a push alert for its new feature, and usage jumps. Every other team copies it. Within a year users mute the whole app, including the alerts that mattered. Each alert worked. All of them together did not.",
+      "also": [
+        "Marking every email urgent",
+        "Cold-email sequences that teach inboxes to filter everyone"
+      ]
+    },
+    {
+      "kind": "hindsight",
+      "label": "With hindsight",
+      "title": "What might have softened it",
+      "items": [
+        {
+          "risk": "Every site copies the trick, and readers' patience runs out.",
+          "question": "What happens when everyone does this, not just us?",
+          "softened": "Limits agreed across the industry. These came only in 2017, with the Better Ads Standards; it is what we know now."
+        },
+        {
+          "risk": "The cost lands on readers, who were never asked.",
+          "question": "Who isn't at the table who will feel this?",
+          "softened": "A paid, ad-free option. Tripod did try subscriptions, Zuckerman writes, though not as a pop-up opt-out."
+        },
+        {
+          "risk": "The fix depends on a browser feature other companies control.",
+          "question": "Where does the problem go after it leaves our boundary?",
+          "softened": "Selling ads by section, as print did, keeps the fix inside your own pages. That existed then."
+        }
+      ]
+    },
+    {
+      "kind": "whatif",
+      "label": "What if?",
+      "title": "What if Tripod had charged?",
+      "speculation": true,
+      "text": "Speculation. In 1995 Tripod chose free, ad-supported pages because charging would have shut out most users, Zuckerman writes. Paid pages might have meant no pop-up, and fewer voices, like the Malaysian activists he says found a home on Tripod."
+    },
+    {
+      "kind": "lessons",
+      "label": "Lessons",
+      "title": "What we take from it",
+      "items": [
+        "A trick that works for one company can stop working once everyone copies it.",
+        "When a fix puts its cost on people who never chose it, they find a fix of their own.",
+        "Attention is shared by every site that asks for it."
+      ]
+    }
+  ],
+  "portrait": {
+    "image": "/img/n/zuckerman/portrait.jpg",
+    "photo": true,
+    "alt": "Ethan Zuckerman smiling outdoors, with long hair, glasses and a blue floral shirt",
+    "credit": "Ethan Zuckerman, 2019. Joi Ito. CC BY 2.0."
+  }
+}

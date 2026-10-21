@@ -1562,3 +1562,10 @@ body[data-bg="patterns"] .nav-theme{display:none} /* these pages are always nigh
   .im-events{display:none}
   .im-axis{margin-left:12px}
 }
+/* "With hindsight" and "What if?" story cards */
+.cc-hind{margin:.6em 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.7em}
+.cc-hind li{padding-left:.8em;border-left:3px solid var(--light)}
+.cc-hind b{display:block;font-size:1em;line-height:1.3}
+.cc-hind span{display:block;margin-top:.2em;font-size:.86em;line-height:1.35;opacity:.88}
+.cc-hind span::before{content:"Might have softened it: ";font:500 .78em var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+.cc-whatif{background:radial-gradient(120% 90% at 0% 100%,var(--base) 0%,var(--deep) 65%)}

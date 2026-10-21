@@ -17,7 +17,7 @@
 // nothing is interpolated. Different units are never drawn on one axis: each series gets its own small chart,
 // on a shared timeline, and only dollar figures are compared directly.
 
-export const IMPACTS_VERSION = "7";
+export const IMPACTS_VERSION = "9";
 
 // "featured" series are the ones drawn on the dashboard; the rest are stored and served by the API.
 export const CASE_IMPACTS = [
@@ -11510,6 +11510,6423 @@ export const CASE_IMPACTS = [
    }
   ],
   "chartFrom": 1900
+ },
+ {
+  "nominee": "silcox",
+  "chartFrom": 1926,
+  "events": [
+   {
+    "year": 1910,
+    "label": "August 20 and 21: the Big Blowup; more than 3 million acres burn in Idaho, Montana and Washington and at least 85 people die",
+    "source": "Forest History Society, The 1910 Fires",
+    "url": "https://foresthistory.org/?p=9448"
+   },
+   {
+    "year": 1935,
+    "label": "May 7: Chief Ferdinand Silcox issues the 10 a.m. policy",
+    "source": "Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+    "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf"
+   },
+   {
+    "year": 1935,
+    "label": "Elers Koch argues in the Journal of Forestry that backcountry fires should be left to burn",
+    "source": "Sowards, High Country News, August 29, 2018",
+    "url": "https://www.hcn.org/articles/reckoning-with-history-wildfire-suppression-in-wilderness-a-decades-old-conundrum/"
+   },
+   {
+    "year": 1943,
+    "label": "Harold Weaver argues that complete fire prevention harms Pacific Slope ponderosa pine",
+    "source": "Karns and Steen-Adams, Forest History Today 2023 to 2024",
+    "url": "https://foresthistory.org/wp-content/uploads/2025/01/FHT_2023-2024_Karns_Steen-Adams_Harold_Weaver.pdf"
+   },
+   {
+    "year": 1944,
+    "label": "Smokey Bear's first fire prevention poster",
+    "source": "Smokey Bear, Smokey's history",
+    "url": "https://smokeybear.com/en/smokeys-history"
+   },
+   {
+    "year": 1963,
+    "label": "The Leopold Report blames 'overprotection' for fuel buildup in Sierra forests and recommends controlled burning",
+    "source": "Leopold and others, Wildlife Management in the National Parks, 1963",
+    "url": "https://npshistory.com/publications/admin_policies/policy4-leopold.htm"
+   },
+   {
+    "year": 1968,
+    "label": "National Park Service begins letting some natural fires burn, at Sequoia and Kings Canyon",
+    "source": "Donovan and Brown, \"Wildfire Management in the U.S. Forest Service: A Brief History,\" Natural Hazards Observer 29(6), July 2005",
+    "url": "https://research.fs.usda.gov/download/treesearch/23600.pdf"
+   },
+   {
+    "year": 1971,
+    "label": "Forest Service amends the policy to contain fires before they reach 10 acres",
+    "source": "Donovan and Brown, \"Wildfire Management in the U.S. Forest Service: A Brief History,\" Natural Hazards Observer 29(6), July 2005",
+    "url": "https://research.fs.usda.gov/download/treesearch/23600.pdf"
+   },
+   {
+    "year": 1972,
+    "label": "First Forest Service exception: White Cap area, Selway-Bitterroot Wilderness",
+    "source": "Northern Rockies Fire Science Network, Field Trip Summary 7, May 2014",
+    "url": "https://www.nrfirescience.org/sites/default/files/NRFSN_FTSummary7_40YearsWildernessFire.pdf"
+   },
+   {
+    "year": 1978,
+    "label": "Forest Service scraps the 10 a.m. policy",
+    "source": "Donovan and Brown, \"Wildfire Management in the U.S. Forest Service: A Brief History,\" Natural Hazards Observer 29(6), July 2005",
+    "url": "https://research.fs.usda.gov/download/treesearch/23600.pdf"
+   },
+   {
+    "year": 1988,
+    "label": "Yellowstone fires: almost 800,000 acres burn in the park",
+    "source": "US Forest Service, Confronting the Wildfire Crisis, FS-1187a, January 2022",
+    "url": "https://www.fs.usda.gov/sites/default/files/fs_media/fs_document/Confronting-the-Wildfire-Crisis.pdf"
+   },
+   {
+    "year": 1995,
+    "label": "Federal Wildland Fire Management Policy recognizes the natural role of fire",
+    "source": "Donovan and Brown, \"Wildfire Management in the U.S. Forest Service: A Brief History,\" Natural Hazards Observer 29(6), July 2005",
+    "url": "https://research.fs.usda.gov/download/treesearch/23600.pdf"
+   },
+   {
+    "year": 2022,
+    "label": "Forest Service Wildfire Crisis Strategy: treat up to 20 million more acres of national forest in 10 years",
+    "source": "US Forest Service, Confronting the Wildfire Crisis, FS-1187a, January 2022",
+    "url": "https://www.fs.usda.gov/sites/default/files/fs_media/fs_document/Confronting-the-Wildfire-Crisis.pdf"
+   },
+   {
+    "year": 2025,
+    "label": "Forest Service chief writes that it is critical to suppress fires as swiftly as possible",
+    "source": "Woodhouse, Boise State Public Radio (KUER), July 15, 2025",
+    "url": "https://www.kuer.org/science-environment/2025-07-15/forest-service-call-to-suppress-wildfires-as-swiftly-as-possible-reopens-an-old-debate"
+   }
+  ],
+  "gaps": [
+   "A yearly national measure of fuel load or forest density in fire-adapted forests (the evidence is plot studies and photo comparisons, not a time series).",
+   "A dollar estimate of damage caused by fire exclusion specifically, separate from climate change and building in fire-prone areas.",
+   "National acres burned at high severity per year (the MTBS satellite record from 1984 exists but is not transcribed here).",
+   "Comparable national acres burned before 1983 (NIFC warns against comparing its historical figures to later data).",
+   "The USDA 2015 forecast that fire would take two-thirds of the Forest Service budget by 2025, and the actual 2025 share: neither checked against a primary source."
+  ],
+  "series": [
+   {
+    "key": "us-acres-burned-1926-1982",
+    "fix": "10am-policy",
+    "label": "US wildland acres burned per year, 1926 to 1982 (historical, not comparable to 1983 on)",
+    "direction": "context",
+    "unit": "acres per year",
+    "kind": "flow",
+    "geography": "US (states added over time)",
+    "method": "Historical totals of acres burned, as once posted by NIFC. NIFC says sources before 1983 are unknown or cannot be confirmed and should not be compared to later data. Coverage changed over time (Alaska and Hawaii added 1959 to 1960, all 50 states from 1966), and the New Deal extended fire protection to land that had none (Donovan and Brown 2005), so the fall from the 1930s is not the national forest policy alone.",
+    "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+    "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html",
+    "featured": true,
+    "points": [
+     {
+      "year": 1926,
+      "value": 24316000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "NIFC: prior to 1983, sources of these figures are not known, or cannot be confirmed; do not compare to later data.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1927,
+      "value": 38531000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1928,
+      "value": 43542000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1929,
+      "value": 46230000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1930,
+      "value": 52266000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1931,
+      "value": 51607000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1932,
+      "value": 42063000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1933,
+      "value": 43890000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1934,
+      "value": 41821000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1935,
+      "value": 30335000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1936,
+      "value": 43207000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1937,
+      "value": 21981000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1938,
+      "value": 33815000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1939,
+      "value": 30449000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1940,
+      "value": 25848000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1941,
+      "value": 26405000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1942,
+      "value": 31854000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1943,
+      "value": 32333000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1944,
+      "value": 16549000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1945,
+      "value": 17681000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1946,
+      "value": 20691000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1947,
+      "value": 23226000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1948,
+      "value": 16557000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1949,
+      "value": 15397000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1950,
+      "value": 15519000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1951,
+      "value": 10781000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1952,
+      "value": 14187000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1953,
+      "value": 9976000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1954,
+      "value": 8833000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1955,
+      "value": 8069000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1956,
+      "value": 6606000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1957,
+      "value": 3410000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1958,
+      "value": 3280000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1959,
+      "value": 4156000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Alaska federal protected lands included from 1959; all Alaska and Hawaii lands from 1960.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1960,
+      "value": 4478188.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Alaska federal protected lands included from 1959; all Alaska and Hawaii lands from 1960.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1961,
+      "value": 3036219.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1962,
+      "value": 4078894.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1963,
+      "value": 7120768.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1964,
+      "value": 4197309.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1965,
+      "value": 2652112.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1966,
+      "value": 4574389.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "All 50 states reported from 1966, when Arizona joined the Cooperative Forest Fire Control Program.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1967,
+      "value": 4658586.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1968,
+      "value": 4231996.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1969,
+      "value": 6689081.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1970,
+      "value": 3278565.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1971,
+      "value": 4278472.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1972,
+      "value": 2641166.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1973,
+      "value": 1915273.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1974,
+      "value": 2879095.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1975,
+      "value": 1791327.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1976,
+      "value": 5109926.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1977,
+      "value": 3152644.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1978,
+      "value": 3910913.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1979,
+      "value": 2986826.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1980,
+      "value": 5260825.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1981,
+      "value": 4814206.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     },
+     {
+      "year": 1982,
+      "value": 2382036.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1926-2017), archived copy of nifc.gov/fireInfo/fireInfo_stats_totalFires.html (Wayback Machine, January 9, 2019)",
+      "url": "http://web.archive.org/web/20190109205037/https://www.nifc.gov/fireInfo/fireInfo_stats_totalFires.html"
+     }
+    ]
+   },
+   {
+    "key": "us-acres-burned-1983-2025",
+    "fix": "10am-policy",
+    "label": "US wildland acres burned per year, 1983 to 2025",
+    "direction": "harm",
+    "unit": "acres per year",
+    "kind": "flow",
+    "geography": "US",
+    "method": "Official NIFC situation report totals for federal and state lands. Area burned reflects fuels, climate, ignitions and suppression together; it is not attributable to the 1935 policy alone.",
+    "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+    "url": "https://www.nifc.gov/fire-information/statistics/wildfires",
+    "featured": true,
+    "points": [
+     {
+      "year": 1983,
+      "value": 1323666.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1984,
+      "value": 1148409.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1985,
+      "value": 2896147.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1986,
+      "value": 2719162.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1987,
+      "value": 2447296.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1988,
+      "value": 5009290.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1989,
+      "value": 1827310.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1990,
+      "value": 4621621.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1991,
+      "value": 2953578.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1992,
+      "value": 2069929.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1993,
+      "value": 1797574.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1994,
+      "value": 4073579.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1995,
+      "value": 1840546.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1996,
+      "value": 6065998.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1997,
+      "value": 2856959.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1998,
+      "value": 1329704.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1999,
+      "value": 5626093.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2000,
+      "value": 7393493.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2001,
+      "value": 3570911.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2002,
+      "value": 7184712.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2003,
+      "value": 3960842.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2004,
+      "value": 8097880.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2004 excludes North Carolina state lands.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2005,
+      "value": 8689389.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2006,
+      "value": 9873745.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2007,
+      "value": 9328045.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2008,
+      "value": 5292468.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2009,
+      "value": 5921786.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2010,
+      "value": 3422724.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2011,
+      "value": 8711367.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2012,
+      "value": 9326238.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2013,
+      "value": 4319546.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2014,
+      "value": 3595613.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2015,
+      "value": 10125149.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2016,
+      "value": 5509995.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2017,
+      "value": 10026086.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2018,
+      "value": 8767492.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2019,
+      "value": 4664364.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2020,
+      "value": 10122336.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2021,
+      "value": 7125643.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2022,
+      "value": 7577183.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2023,
+      "value": 2693910.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2024,
+      "value": 8924884.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2025,
+      "value": 5131474.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     }
+    ]
+   },
+   {
+    "key": "us-wildfires-count-1983-2025",
+    "fix": "10am-policy",
+    "label": "Number of US wildland fires per year, 1983 to 2025",
+    "direction": "context",
+    "unit": "fires per year",
+    "kind": "flow",
+    "geography": "US",
+    "method": "Official NIFC situation report counts. Shown beside acres burned: fires have not become more numerous while area burned has grown.",
+    "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+    "url": "https://www.nifc.gov/fire-information/statistics/wildfires",
+    "featured": true,
+    "points": [
+     {
+      "year": 1983,
+      "value": 18229.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Counts for 1983 and 1984 are far lower than later years; NIFC gives no explanation, so treat them with caution.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1984,
+      "value": 20493.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Counts for 1983 and 1984 are far lower than later years; NIFC gives no explanation, so treat them with caution.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1985,
+      "value": 82591.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1986,
+      "value": 85907.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1987,
+      "value": 71300.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1988,
+      "value": 72750.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1989,
+      "value": 48949.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1990,
+      "value": 66481.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1991,
+      "value": 75754.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1992,
+      "value": 87394.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1993,
+      "value": 58810.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1994,
+      "value": 79107.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1995,
+      "value": 82234.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1996,
+      "value": 96363.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1997,
+      "value": 66196.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1998,
+      "value": 81043.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1999,
+      "value": 92487.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2000,
+      "value": 92250.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2001,
+      "value": 84079.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2002,
+      "value": 73457.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2003,
+      "value": 63629.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2004,
+      "value": 65461.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2005,
+      "value": 66753.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2006,
+      "value": 96385.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2007,
+      "value": 85705.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2008,
+      "value": 78979.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2009,
+      "value": 78792.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2010,
+      "value": 71971.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2011,
+      "value": 74126.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2012,
+      "value": 67774.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2013,
+      "value": 47579.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2014,
+      "value": 63312.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2015,
+      "value": 68151.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2016,
+      "value": 67743.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2017,
+      "value": 71499.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2018,
+      "value": 58083.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2019,
+      "value": 50477.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2020,
+      "value": 58950.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2021,
+      "value": 58985.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2022,
+      "value": 68988.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2023,
+      "value": 56580.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2024,
+      "value": 64897.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2025,
+      "value": 77850.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     }
+    ]
+   },
+   {
+    "key": "us-average-fire-size-1985-2025",
+    "fix": "10am-policy",
+    "label": "Average size of a US wildland fire, 1985 to 2025",
+    "direction": "harm",
+    "unit": "acres per fire",
+    "kind": "level",
+    "geography": "US",
+    "method": "Derived: NIFC acres burned divided by NIFC number of fires for each year, no smoothing. Starts in 1985 because the 1983 and 1984 fire counts look incomplete. Many causes; not attributable to the policy alone.",
+    "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+    "url": "https://www.nifc.gov/fire-information/statistics/wildfires",
+    "featured": true,
+    "points": [
+     {
+      "year": 1985,
+      "value": 35.1,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1986,
+      "value": 31.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1987,
+      "value": 34.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1988,
+      "value": 68.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1989,
+      "value": 37.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1990,
+      "value": 69.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1991,
+      "value": 39.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1992,
+      "value": 23.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1993,
+      "value": 30.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1994,
+      "value": 51.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1995,
+      "value": 22.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1996,
+      "value": 62.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1997,
+      "value": 43.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1998,
+      "value": 16.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 1999,
+      "value": 60.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2000,
+      "value": 80.1,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2001,
+      "value": 42.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2002,
+      "value": 97.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2003,
+      "value": 62.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2004,
+      "value": 123.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2005,
+      "value": 130.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2006,
+      "value": 102.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2007,
+      "value": 108.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2008,
+      "value": 67.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2009,
+      "value": 75.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2010,
+      "value": 47.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2011,
+      "value": 117.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2012,
+      "value": 137.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2013,
+      "value": 90.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2014,
+      "value": 56.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2015,
+      "value": 148.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2016,
+      "value": 81.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2017,
+      "value": 140.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2018,
+      "value": 150.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2019,
+      "value": 92.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2020,
+      "value": 171.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2021,
+      "value": 120.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2022,
+      "value": 109.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2023,
+      "value": 47.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2024,
+      "value": 137.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     },
+     {
+      "year": 2025,
+      "value": 65.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Computed: acres divided by fires for the same year.",
+      "source": "National Interagency Fire Center, Total Wildland Fires and Acres (1983-2025)",
+      "url": "https://www.nifc.gov/fire-information/statistics/wildfires"
+     }
+    ]
+   },
+   {
+    "key": "western-nf-acres-burned-before-after",
+    "fix": "10am-policy",
+    "label": "Average acres burned per year on western national forests, before and after the 1935 policy",
+    "direction": "benefit",
+    "unit": "acres per year (period average)",
+    "kind": "flow",
+    "geography": "Western US national forest regions",
+    "method": "Period averages reported by the Forest Service's assistant chief in 1944. Each point is the average for the period ending that year, not a single-year value. Loveridge credits the CCC, roads, radio, better weather and training as well as the policy.",
+    "source": "Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+    "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf",
+    "featured": true,
+    "points": [
+     {
+      "year": 1916,
+      "value": 352921,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Average for 1911 to 1916 (wet years, earlier policy).",
+      "source": "Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+      "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf"
+     },
+     {
+      "year": 1934,
+      "value": 455340,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Average for 1926 to 1934 (before the policy).",
+      "source": "Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+      "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf"
+     },
+     {
+      "year": 1943,
+      "value": 141975,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Average for 1935 to 1943 (under the policy); 0.1 percent of the area under protection.",
+      "source": "Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+      "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf"
+     }
+    ]
+   },
+   {
+    "key": "southwestern-region-tight-control-test",
+    "fix": "10am-policy",
+    "label": "Acres burned per year in the Forest Service Southwestern Region, before and during a prompt-suppression test",
+    "direction": "benefit",
+    "unit": "acres per year (period average)",
+    "kind": "flow",
+    "geography": "Forest Service Southwestern Region",
+    "method": "Five-year averages from a regionwide test of putting out all fires promptly, reported in 1944. Special suppression costs were about the same: $57,814 and $55,125 a year.",
+    "source": "Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+    "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf",
+    "featured": false,
+    "points": [
+     {
+      "year": 1925,
+      "value": 18146,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Average for 1921 to 1925, previous policy.",
+      "source": "Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+      "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf"
+     },
+     {
+      "year": 1930,
+      "value": 6290,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Average for 1926 to 1930, tight control policy.",
+      "source": "Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+      "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf"
+     }
+    ]
+   },
+   {
+    "key": "federal-suppression-costs",
+    "fix": "10am-policy",
+    "label": "Federal wildfire suppression costs (Forest Service and Interior), 1985 to 2023",
+    "direction": "harm",
+    "unit": "US dollars per year, as reported (not adjusted for inflation)",
+    "kind": "flow",
+    "geography": "US federal lands",
+    "method": "NIFC totals of suppression spending only. Reflects fuels, climate, homes in fire-prone areas and wages, not the 1935 policy alone.",
+    "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+    "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs",
+    "featured": true,
+    "points": [
+     {
+      "year": 1985,
+      "value": 239943000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1986,
+      "value": 202778000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1987,
+      "value": 335109000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1988,
+      "value": 578926000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1989,
+      "value": 499787000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1990,
+      "value": 397952000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1991,
+      "value": 206120000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1992,
+      "value": 377466000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1993,
+      "value": 240436000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1994,
+      "value": 918335000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1995,
+      "value": 477126000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1996,
+      "value": 701183000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1997,
+      "value": 284148000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1998,
+      "value": 416704000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1999,
+      "value": 515516000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2000,
+      "value": 1410802000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2001,
+      "value": 952696000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2002,
+      "value": 1674040000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2003,
+      "value": 1327138000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2004,
+      "value": 1007244000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2005,
+      "value": 818954000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2006,
+      "value": 1704477000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2007,
+      "value": 1620145000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2008,
+      "value": 1585856000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2009,
+      "value": 920529000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2010,
+      "value": 809499000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2011,
+      "value": 1374525000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2012,
+      "value": 1902446000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2013,
+      "value": 1740934000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2014,
+      "value": 1522149000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2015,
+      "value": 2130543000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2016,
+      "value": 1975545000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2017,
+      "value": 2918165000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2018,
+      "value": 3143256000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2019,
+      "value": 1590000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2020,
+      "value": 2274000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2021,
+      "value": 4389000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2022,
+      "value": 3549000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2023,
+      "value": 3166300000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     }
+    ]
+   },
+   {
+    "key": "forest-service-suppression-costs",
+    "fix": "10am-policy",
+    "label": "Forest Service wildfire suppression costs, 1985 to 2023",
+    "direction": "harm",
+    "unit": "US dollars per year, as reported (not adjusted for inflation)",
+    "kind": "flow",
+    "geography": "US national forests",
+    "method": "NIFC, Forest Service column only.",
+    "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+    "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs",
+    "featured": false,
+    "points": [
+     {
+      "year": 1985,
+      "value": 161505000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1986,
+      "value": 111625000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1987,
+      "value": 253657000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1988,
+      "value": 429609000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1989,
+      "value": 331672000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1990,
+      "value": 253700000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1991,
+      "value": 132300000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1992,
+      "value": 290300000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1993,
+      "value": 184000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1994,
+      "value": 757200000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1995,
+      "value": 367000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1996,
+      "value": 547500000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1997,
+      "value": 179100000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1998,
+      "value": 306800000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 1999,
+      "value": 361100000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2000,
+      "value": 1076000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2001,
+      "value": 683122000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2002,
+      "value": 1279000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2003,
+      "value": 1023500000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2004,
+      "value": 726000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2005,
+      "value": 524900000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2006,
+      "value": 1280419000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2007,
+      "value": 1149654000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2008,
+      "value": 1193073000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2009,
+      "value": 702111000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2010,
+      "value": 578285000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2011,
+      "value": 1055736000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2012,
+      "value": 1436614000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2013,
+      "value": 1341735000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2014,
+      "value": 1195955000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2015,
+      "value": 1713000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2016,
+      "value": 1603806000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2017,
+      "value": 2410165000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2018,
+      "value": 2615256000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2019,
+      "value": 1150000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2020,
+      "value": 1764000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2021,
+      "value": 3741000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2022,
+      "value": 2900000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     },
+     {
+      "year": 2023,
+      "value": 2700000000.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "National Interagency Fire Center, Federal Firefighting Costs (Suppression Only), 1985 to 2023",
+      "url": "https://www.nifc.gov/fire-information/statistics/suppression-costs"
+     }
+    ]
+   },
+   {
+    "key": "forest-service-fire-budget-share",
+    "fix": "10am-policy",
+    "label": "Share of the Forest Service budget spent on wildfire",
+    "direction": "harm",
+    "unit": "percent of budget",
+    "kind": "level",
+    "geography": "US Forest Service",
+    "method": "Two values stated by the agencies in 2015. A USDA forecast of two-thirds by 2025 was reported but not checked against the primary release, so it is left out.",
+    "source": "US Department of the Interior, \"USDA, DOI, and OMB Urge Congress to Fix the Fire Budget,\" press release, September 15, 2015",
+    "url": "https://www.doi.gov/pressreleases/usda-doi-and-omb-urge-congress-fix-fire-budget",
+    "featured": true,
+    "points": [
+     {
+      "year": 1995,
+      "value": 16,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "'compared to just 16 percent in 1995'",
+      "source": "US Department of the Interior, \"USDA, DOI, and OMB Urge Congress to Fix the Fire Budget,\" press release, September 15, 2015",
+      "url": "https://www.doi.gov/pressreleases/usda-doi-and-omb-urge-congress-fix-fire-budget"
+     },
+     {
+      "year": 2015,
+      "value": 52,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "'a record 52 percent of the Forest Service's budget dedicated to fighting wildfire'",
+      "source": "US Department of the Interior, \"USDA, DOI, and OMB Urge Congress to Fix the Fire Budget,\" press release, September 15, 2015",
+      "url": "https://www.doi.gov/pressreleases/usda-doi-and-omb-urge-congress-fix-fire-budget"
+     }
+    ]
+   }
+  ],
+  "money": [
+   {
+    "key": "gisborne-1940-dividend",
+    "label": "Natural resources saved on two national forests in part of one fire season, credited to tight fire control",
+    "direction": "benefit",
+    "usd_year": 1940,
+    "total_usd": 273000,
+    "per_year_usd": null,
+    "years": "part of one fire season, about 1940",
+    "source": "Gisborne, Comparison of intensive versus limited forest fire control action, Northern Rocky Mountain Forest Experiment Station Research Note 10, 1940, quoted in Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, August 1944 (Forest History Society reprint)",
+    "url": "https://foresthistory.org/wp-content/uploads/2023/05/silcox-letter-for-10-am-policy.pdf",
+    "note": "Valued at $1.75 per acre, which Gisborne called 'ridiculously low.' Compares 5 million acres in northern Idaho and Montana with an adjacent Canadian area under limited protection.",
+    "caption": "What the early policy saved, by the agency's own count"
+   },
+   {
+    "key": "fs-suppression-2016-2020-avg",
+    "label": "Forest Service wildfire suppression spending, average per year 2016 to 2020",
+    "direction": "harm",
+    "usd_year": null,
+    "total_usd": null,
+    "per_year_usd": 1900000000,
+    "years": "2016 to 2020",
+    "source": "US Forest Service, Confronting the Wildfire Crisis, FS-1187a, January 2022",
+    "url": "https://www.fs.usda.gov/sites/default/files/fs_media/fs_document/Confronting-the-Wildfire-Crisis.pdf",
+    "note": "Stated as 'averaged more than $1.9 billion per year from 2016 to 2020.' A lower bound. Driven by fuels, climate and development together, so only part of it traces to fire exclusion.",
+    "caption": "Not all of this is the policy's doing: climate and homes near forests add to it"
+   },
+   {
+    "key": "bil-forest-service-fuels",
+    "label": "Infrastructure law money for Forest Service wildfire risk reduction and restoration",
+    "direction": "fix",
+    "usd_year": null,
+    "total_usd": 3000000000,
+    "per_year_usd": null,
+    "years": "about 2022 to 2026",
+    "source": "Forest Service testimony, House Natural Resources Subcommittee on National Parks, Forests, and Public Lands, oversight hearing, April 5, 2022 (Serial No. 117-17)",
+    "url": "https://www.govinfo.gov/content/pkg/CHRG-117hhrg47289/html/CHRG-117hhrg47289.htm",
+    "note": "'Of the $5.5 billion in funding provided by the BIL for the Forest Service, about $3 billion will be invested over five years to reduce the risk of wildland fire to communities and restore ecosystems.' Called a down payment on the 10-year strategy.",
+    "caption": "A down payment on putting fire and thinning back, per the agency"
+   }
+  ]
+ },
+ {
+  "nominee": "jukes",
+  "chartFrom": 1960,
+  "events": [
+   {
+    "year": 1945,
+    "label": "Alexander Fleming warns that small doses can teach microbes to resist penicillin",
+    "source": "McKenna, The Chicken Experiment That Shook the World, Undark (October 6, 2017), excerpted from Big Chicken (2017)",
+    "url": "https://undark.org/article/chicken-experiment-shook-world/"
+   },
+   {
+    "year": 1946,
+    "label": "Moore and others at Wisconsin report faster chick growth on feed with sulfa drugs or streptomycin",
+    "source": "Stokstad and Jukes, Further Observations on the Animal Protein Factor, Proc. Soc. Exp. Biol. Med. 73:523-528 (1950) (citing Moore and others, J. Biol. Chem. 165:437, 1946)",
+    "url": "https://doi.org/10.3181/00379727-73-17731"
+   },
+   {
+    "year": 1949,
+    "label": "Stokstad, Jukes and colleagues report extra chick growth from aureomycin fermentation product (J. Biol. Chem. 180:647)",
+    "source": "Stokstad and Jukes, Further Observations on the Animal Protein Factor, Proc. Soc. Exp. Biol. Med. 73:523-528 (1950)",
+    "url": "https://doi.org/10.3181/00379727-73-17731"
+   },
+   {
+    "year": 1950,
+    "label": "Stokstad and Jukes tie the growth effect at least in part to aureomycin; announced at the American Chemical Society meeting in April and on the front page of The New York Times",
+    "source": "Stokstad and Jukes, Further Observations on the Animal Protein Factor, Proc. Soc. Exp. Biol. Med. 73:523-528 (1950); McKenna, The Chicken Experiment That Shook the World, Undark (October 6, 2017), excerpted from Big Chicken (2017)",
+    "url": "https://doi.org/10.3181/00379727-73-17731"
+   },
+   {
+    "year": 1951,
+    "label": "FDA approves aureomycin and other antibiotics as feed additives, without public hearing",
+    "source": "McKenna, The Chicken Experiment That Shook the World, Undark (October 6, 2017), excerpted from Big Chicken (2017)",
+    "url": "https://undark.org/article/chicken-experiment-shook-world/"
+   },
+   {
+    "year": 1951,
+    "label": "Starr and Reynolds report streptomycin-resistant coliform bacteria in turkeys fed streptomycin",
+    "source": "Starr and Reynolds, Streptomycin resistance of coliform bacteria from turkeys fed streptomycin, Am. J. Public Health 41(11):1375-1380 (1951)",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/14885532"
+   },
+   {
+    "year": 1969,
+    "label": "UK Swann report recommends that antibiotics used to treat people not be used as feed additives",
+    "source": "Courvalin, The Antibiotic Food-Chain Gang, Emerging Infectious Diseases 7(3):489-490 (2001)",
+    "url": "https://wwwnc.cdc.gov/eid/article/7/3/01-7336_article"
+   },
+   {
+    "year": 1971,
+    "label": "UK bans penicillin and tetracyclines as growth promoters",
+    "source": "Alliance to Save Our Antibiotics, timeline (advocacy group)",
+    "url": "https://saveourantibiotics.org/the-issue/timeline/"
+   },
+   {
+    "year": 1976,
+    "label": "Levy and colleagues show tetracycline-resistant gut bacteria rising in a farm's family, not its neighbors, within months of drugged chicken feed",
+    "source": "Levy, FitzGerald and Macone, Changes in intestinal flora of farm personnel after introduction of a tetracycline-supplemented feed on a farm, N. Engl. J. Med. 295(11):583-588 (1976)",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/950974"
+   },
+   {
+    "year": 1977,
+    "label": "FDA proposes withdrawing penicillin and most tetracycline uses in feed; Congress directs it to wait for more research",
+    "source": "US FDA, Federal Register 76(246):79697, December 22, 2011",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2011-12-22/html/2011-32775.htm"
+   },
+   {
+    "year": 1986,
+    "label": "Sweden bans antibiotic growth promoters",
+    "source": "Teillant and Laxminarayan, Economics of Antibiotic Use in U.S. Swine and Poultry Production, Choices 30(1) (2015)",
+    "url": "https://www.choicesmagazine.org/UserFiles/file/cmsarticle_404.pdf"
+   },
+   {
+    "year": 1995,
+    "label": "Denmark bans avoparcin; virginiamycin follows in 1998, and producers stop all growth promoters from 1999",
+    "source": "Aarestrup and others, Effect of abolishment of the use of antimicrobial agents for growth promotion on occurrence of antimicrobial resistance in fecal enterococci from food animals in Denmark, Antimicrobial Agents and Chemotherapy 45(7):2054-2059 (2001)",
+    "url": "https://doi.org/10.1128/AAC.45.7.2054-2059.2001"
+   },
+   {
+    "year": 1999,
+    "label": "EU bans spiramycin, tylosin, virginiamycin and bacitracin as growth promoters",
+    "source": "Courvalin, The Antibiotic Food-Chain Gang, Emerging Infectious Diseases 7(3):489-490 (2001)",
+    "url": "https://wwwnc.cdc.gov/eid/article/7/3/01-7336_article"
+   },
+   {
+    "year": 2006,
+    "label": "EU ban on all antibiotic growth promoters takes effect January 1 (Regulation 1831/2003)",
+    "source": "Castanon, History of the use of antibiotic as growth promoters in European poultry feeds, Poultry Science 86:2466-2471 (2007), abstract",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/17954599"
+   },
+   {
+    "year": 2011,
+    "label": "FDA withdraws its unacted 1977 proposals",
+    "source": "US FDA, Federal Register 76(246):79697, December 22, 2011",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2011-12-22/html/2011-32775.htm"
+   },
+   {
+    "year": 2015,
+    "label": "mcr-1, a transferable gene for resistance to the last-resort drug colistin, is reported from Chinese pigs, meat and patients",
+    "source": "Liu and others, Lancet Infectious Diseases 16(2):161-168 (2016; online November 2015)",
+    "url": "https://doi.org/10.1016/S1473-3099(15)00424-7"
+   },
+   {
+    "year": 2017,
+    "label": "US: growth claims removed from all medically important feed antibiotics under Guidance 213 (January); China bans colistin in feed (April 30)",
+    "source": "US FDA via National Hog Farmer, FDA concludes medically important antimicrobials transition process (January 2017); Emerging Infectious Diseases 27(9) (2021)",
+    "url": "https://www.nationalhogfarmer.com/hog-health/fda-concludes-medically-important-antimicrobials-transition-process"
+   },
+   {
+    "year": 2022,
+    "label": "EU bans routine preventive dosing of groups of farm animals (January 28)",
+    "source": "Alliance to Save Our Antibiotics, timeline (advocacy group); Regulation (EU) 2019/6",
+    "url": "https://saveourantibiotics.org/the-issue/timeline/"
+   },
+   {
+    "year": 2024,
+    "label": "US sales of medically important drugs for farm animals rise 16% in a year, still 27% below the 2015 peak",
+    "source": "US FDA, CVM update on the 2024 summary report (December 2025)",
+    "url": "https://www.fda.gov/animal-veterinary/cvm-updates/fda-releases-annual-summary-sales-and-distribution-antimicrobials-2024-use-food-producing-animals"
+   }
+  ],
+  "gaps": [
+   "A count of human infections or deaths caused by resistance that started on farms. Global estimates (1.14 million deaths attributable to bacterial resistance in 2021, Lancet 2024) do not split out farm sources, and the share is still debated.",
+   "US sales of feed antibiotics before 2009, when FDA reporting began; no official yearly series from 1951 to 2008.",
+   "A yearly US series of resistance in bacteria from food animals that we verified for this page (NARMS publishes one; not yet entered).",
+   "A dollar figure for the health cost of farm-origin resistance.",
+   "Yearly mcr-1 prevalence in Chinese pigs before and after the 2017 colistin ban (reported in Wang and others, Lancet Infectious Diseases 2020; figures not verified here)."
+  ],
+  "series": [
+   {
+    "key": "us-medically-important-food-animal-sales",
+    "fix": "feed-antibiotics",
+    "label": "Medically important antimicrobials sold for US food animals",
+    "direction": "context",
+    "unit": "metric tons of active ingredient per year",
+    "kind": "flow",
+    "geography": "US",
+    "method": "Domestic sales and distribution reported by drug sponsors to FDA under ADUFA section 105, for antimicrobial classes also used in human medicine. Sales, not use: FDA notes the figures measure volume sold, not what was given to animals. 2009 to 2014 from the 2016 report; 2015 on from the 2024 data tables, which revise some earlier years slightly (2016: 8,361,740 kg in the 2016 report, 8,356,340 kg in the 2024 tables). Converted from kilograms, rounded to 0.1 tonne.",
+    "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016); US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+    "url": "https://www.fda.gov/media/189753/download?attachment",
+    "points": [
+     {
+      "year": 2009,
+      "value": 7686.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2010,
+      "value": 8229.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2011,
+      "value": 8255.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2012,
+      "value": 8897.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2013,
+      "value": 9193.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2014,
+      "value": 9479.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 9702.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2016,
+      "value": 8356.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2017,
+      "value": 5559.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2018,
+      "value": 6032.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2019,
+      "value": 6189.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2020,
+      "value": 6002.1,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2021,
+      "value": 5989.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2022,
+      "value": 6245.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2023,
+      "value": 6128.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2024,
+      "value": 7096.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "2015 was the peak year; FDA says 2024 is 27% below it.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     }
+    ],
+    "featured": true
+   },
+   {
+    "key": "us-medically-important-production-indication-sales",
+    "fix": "feed-antibiotics",
+    "label": "US sales of medically important antimicrobials labeled for growth (production) use",
+    "direction": "context",
+    "unit": "metric tons of active ingredient per year",
+    "kind": "flow",
+    "geography": "US",
+    "method": "Sales of medically important products labeled for production (growth or feed efficiency) or production plus therapeutic indications. FDA cannot report production-only labels separately, so the series includes products that also carried treatment claims. Falls to zero in 2017, when growth claims were removed under FDA Guidance for Industry 213.",
+    "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016); US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+    "url": "https://www.fda.gov/media/189753/download?attachment",
+    "points": [
+     {
+      "year": 2009,
+      "value": 5563.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2010,
+      "value": 5828.1,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2011,
+      "value": 5770.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2012,
+      "value": 6073.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2013,
+      "value": 6664.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2014,
+      "value": 6791.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 6917.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2016,
+      "value": 5770.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2017,
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2018,
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2019,
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2020,
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2021,
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2022,
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2023,
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2024,
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Sales_Indications table 7a.",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     }
+    ],
+    "featured": true
+   },
+   {
+    "key": "us-tetracycline-food-animal-sales",
+    "fix": "feed-antibiotics",
+    "label": "Tetracyclines sold for US food animals",
+    "direction": "context",
+    "unit": "metric tons of active ingredient per year",
+    "kind": "flow",
+    "geography": "US",
+    "method": "Domestic sales of tetracyclines, the drug class of aureomycin (chlortetracycline), for food-producing animals; includes some products also labeled for pets and horses.",
+    "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016); US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+    "url": "https://www.fda.gov/media/189753/download?attachment",
+    "points": [
+     {
+      "year": 2009,
+      "value": 5261.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2010,
+      "value": 5602.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2011,
+      "value": 5652.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2012,
+      "value": 5954.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2013,
+      "value": 6514.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2014,
+      "value": 6604.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 6881.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2016,
+      "value": 5861.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2017,
+      "value": 3535.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2018,
+      "value": 3974.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2019,
+      "value": 4117.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2020,
+      "value": 3948.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2021,
+      "value": 3916.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2022,
+      "value": 4056.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2023,
+      "value": 4069.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2024,
+      "value": 4895.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     }
+    ],
+    "featured": true
+   },
+   {
+    "key": "us-all-food-animal-antimicrobial-sales",
+    "fix": "feed-antibiotics",
+    "label": "All antimicrobials sold for US food animals (including ionophores)",
+    "direction": "context",
+    "unit": "metric tons of active ingredient per year",
+    "kind": "flow",
+    "geography": "US",
+    "method": "Total domestic sales of antimicrobials approved for food-producing animals, medically important or not. Ionophores, not used in human medicine, are about a third of the total and are still sold for growth claims.",
+    "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016); US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+    "url": "https://www.fda.gov/media/189753/download?attachment",
+    "points": [
+     {
+      "year": 2009,
+      "value": 12587.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2010,
+      "value": 13287.1,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2011,
+      "value": 13569.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2012,
+      "value": 14622.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2013,
+      "value": 14785.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2014,
+      "value": 15361.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2016 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals (December 2017), multi-year tables (2009 to 2016)",
+      "url": "https://www.cdfa.ca.gov/ahfss/AUS/docs/FDA_2016_Summary_Report_Antimicrobials_Sold.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 15577.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2016,
+      "value": 14026.1,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2017,
+      "value": 10933.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2018,
+      "value": 11563.1,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2019,
+      "value": 11468.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2020,
+      "value": 10449.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2021,
+      "value": 11104.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2022,
+      "value": 11170.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2023,
+      "value": 10928.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     },
+     {
+      "year": 2024,
+      "value": 12347.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "US FDA, 2024 Summary Report on Antimicrobials Sold or Distributed for Use in Food-Producing Animals, data tables 2015 to 2024 (Excel), December 2025",
+      "url": "https://www.fda.gov/media/189753/download?attachment"
+     }
+    ],
+    "featured": false
+   },
+   {
+    "key": "eu25-veterinary-antimicrobial-sales-mg-pcu",
+    "fix": "feed-antibiotics",
+    "label": "Veterinary antimicrobial sales in 25 European countries, per unit of livestock",
+    "direction": "context",
+    "unit": "mg of active ingredient per population correction unit (mg/PCU)",
+    "kind": "level",
+    "geography": "25 European countries (EU and EEA plus UK)",
+    "method": "Aggregated sales for the 25 countries that reported to ESVAC every year from 2011 to 2022, divided by the estimated weight of livestock at time of treatment (PCU). Growth promoters were already banned in the EU from 2006, so this tracks other uses.",
+    "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+    "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf",
+    "points": [
+     {
+      "year": 2011,
+      "value": 161.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2012,
+      "value": 151.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2013,
+      "value": 146.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2014,
+      "value": 155.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 140.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2016,
+      "value": 128.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2017,
+      "value": 108.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2018,
+      "value": 105.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2019,
+      "value": 86.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2020,
+      "value": 91.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2021,
+      "value": 86.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     },
+     {
+      "year": 2022,
+      "value": 75.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "EMA: down 53.0% from 2011 to 2022.",
+      "source": "EMA, Sales of veterinary antimicrobial agents in 31 European countries in 2022: trends from 2010 to 2022 (Thirteenth ESVAC report, 2023), Figure 15",
+      "url": "https://www.ema.europa.eu/en/documents/report/sales-veterinary-antimicrobial-agents-31-european-countries-2022-trends-2010-2022-thirteenth-esvac-report_en.pdf"
+     }
+    ],
+    "featured": true
+   },
+   {
+    "key": "global-food-animal-antimicrobial-use-mulchandani",
+    "fix": "feed-antibiotics",
+    "label": "Global antimicrobial use in food animals (model estimate)",
+    "direction": "context",
+    "unit": "metric tons per year",
+    "kind": "flow",
+    "geography": "world",
+    "method": "Modeled from usage data in 42 countries and FAO livestock projections for cattle, sheep, chickens and pigs; 2030 is a projection under current trends. Wide uncertainty intervals.",
+    "source": "Mulchandani, Wang, Gilbert and Van Boeckel, Global trends in antimicrobial use in food-producing animals: 2020 to 2030, PLOS Global Public Health 3(2): e0001305 (2023)",
+    "url": "https://doi.org/10.1371/journal.pgph.0001305",
+    "points": [
+     {
+      "year": 2020,
+      "value": 99502,
+      "low": 68535,
+      "high": 198052,
+      "projected": false,
+      "estimate": true,
+      "note": "95% CI 68,535 to 198,052",
+      "source": "Mulchandani, Wang, Gilbert and Van Boeckel, Global trends in antimicrobial use in food-producing animals: 2020 to 2030, PLOS Global Public Health 3(2): e0001305 (2023)",
+      "url": "https://doi.org/10.1371/journal.pgph.0001305"
+     },
+     {
+      "year": 2030,
+      "value": 107472,
+      "low": 75927,
+      "high": 202661,
+      "projected": true,
+      "estimate": true,
+      "note": "Projection, current trends. 95% CI 75,927 to 202,661",
+      "source": "Mulchandani, Wang, Gilbert and Van Boeckel, Global trends in antimicrobial use in food-producing animals: 2020 to 2030, PLOS Global Public Health 3(2): e0001305 (2023)",
+      "url": "https://doi.org/10.1371/journal.pgph.0001305"
+     }
+    ],
+    "featured": true
+   },
+   {
+    "key": "global-food-animal-antimicrobial-use-van-boeckel-2015",
+    "fix": "feed-antibiotics",
+    "label": "Global antimicrobial consumption in food animals (2015 model)",
+    "direction": "context",
+    "unit": "metric tons per year",
+    "kind": "flow",
+    "geography": "world",
+    "method": "Bayesian model from livestock density maps, meat demand projections and consumption data from high-income countries. A different method from the 2020 and 2023 models, so it is kept as its own series.",
+    "source": "Van Boeckel and others, Global trends in antimicrobial use in food animals, PNAS 112(18):5649-5654 (2015)",
+    "url": "https://doi.org/10.1073/pnas.1503141112",
+    "points": [
+     {
+      "year": 2010,
+      "value": 63151,
+      "low": 61591,
+      "high": 64711,
+      "projected": false,
+      "estimate": true,
+      "note": "Plus or minus 1,560 tons",
+      "source": "Van Boeckel and others, Global trends in antimicrobial use in food animals, PNAS 112(18):5649-5654 (2015)",
+      "url": "https://doi.org/10.1073/pnas.1503141112"
+     },
+     {
+      "year": 2030,
+      "value": 105596,
+      "low": 101991,
+      "high": 109201,
+      "projected": true,
+      "estimate": true,
+      "note": "Projection; plus or minus 3,605 tons",
+      "source": "Van Boeckel and others, Global trends in antimicrobial use in food animals, PNAS 112(18):5649-5654 (2015)",
+      "url": "https://doi.org/10.1073/pnas.1503141112"
+     }
+    ],
+    "featured": false
+   },
+   {
+    "key": "global-food-animal-antimicrobial-sales-tiseo-2020",
+    "fix": "feed-antibiotics",
+    "label": "Global antimicrobial sales for food animals (2020 model)",
+    "direction": "context",
+    "unit": "metric tons per year",
+    "kind": "flow",
+    "geography": "world",
+    "method": "Model built on 2017 sales data from chicken, cattle and pig systems in 41 countries. A different method from the 2015 and 2023 models.",
+    "source": "Tiseo, Huber, Gilbert, Robinson and Van Boeckel, Global Trends in Antimicrobial Use in Food Animals from 2017 to 2030, Antibiotics 9(12):918 (2020)",
+    "url": "https://doi.org/10.3390/antibiotics9120918",
+    "points": [
+     {
+      "year": 2017,
+      "value": 93309,
+      "low": 64443,
+      "high": 149886,
+      "projected": false,
+      "estimate": true,
+      "note": "95% CI 64,443 to 149,886",
+      "source": "Tiseo, Huber, Gilbert, Robinson and Van Boeckel, Global Trends in Antimicrobial Use in Food Animals from 2017 to 2030, Antibiotics 9(12):918 (2020)",
+      "url": "https://doi.org/10.3390/antibiotics9120918"
+     },
+     {
+      "year": 2030,
+      "value": 104079,
+      "low": 69062,
+      "high": 172711,
+      "projected": true,
+      "estimate": true,
+      "note": "Projection. 95% CI 69,062 to 172,711",
+      "source": "Tiseo, Huber, Gilbert, Robinson and Van Boeckel, Global Trends in Antimicrobial Use in Food Animals from 2017 to 2030, Antibiotics 9(12):918 (2020)",
+      "url": "https://doi.org/10.3390/antibiotics9120918"
+     }
+    ],
+    "featured": false
+   },
+   {
+    "key": "dk-broiler-glycopeptide-resistant-e-faecium",
+    "fix": "feed-antibiotics",
+    "label": "Danish broilers: E. faecium resistant to glycopeptides (vancomycin)",
+    "direction": "harm",
+    "unit": "percent of isolates",
+    "kind": "level",
+    "geography": "Denmark",
+    "method": "Share of Enterococcus faecium isolates from broiler chickens resistant to glycopeptides, in Denmark's national monitoring. Avoparcin, a glycopeptide growth promoter, was banned in Denmark in 1995. Only the endpoint years are given in the paper's abstract; intermediate years are in its tables and not entered here.",
+    "source": "Aarestrup and others, Effect of abolishment of the use of antimicrobial agents for growth promotion on occurrence of antimicrobial resistance in fecal enterococci from food animals in Denmark, Antimicrobial Agents and Chemotherapy 45(7):2054-2059 (2001)",
+    "url": "https://doi.org/10.1128/AAC.45.7.2054-2059.2001",
+    "points": [
+     {
+      "year": 1995,
+      "value": 72.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Year of the avoparcin ban",
+      "source": "Aarestrup and others, Effect of abolishment of the use of antimicrobial agents for growth promotion on occurrence of antimicrobial resistance in fecal enterococci from food animals in Denmark, Antimicrobial Agents and Chemotherapy 45(7):2054-2059 (2001)",
+      "url": "https://doi.org/10.1128/AAC.45.7.2054-2059.2001"
+     },
+     {
+      "year": 2000,
+      "value": 5.8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Aarestrup and others, Effect of abolishment of the use of antimicrobial agents for growth promotion on occurrence of antimicrobial resistance in fecal enterococci from food animals in Denmark, Antimicrobial Agents and Chemotherapy 45(7):2054-2059 (2001)",
+      "url": "https://doi.org/10.1128/AAC.45.7.2054-2059.2001"
+     }
+    ],
+    "featured": true
+   },
+   {
+    "key": "dk-pig-glycopeptide-resistant-e-faecium",
+    "fix": "feed-antibiotics",
+    "label": "Danish pigs: E. faecium resistant to glycopeptides (vancomycin)",
+    "direction": "harm",
+    "unit": "percent of isolates",
+    "kind": "level",
+    "geography": "Denmark",
+    "method": "As above, for pigs. Resistance stayed near 20% until tylosin use fell in 1998 and 1999, because the glycopeptide and macrolide resistance genes were linked.",
+    "source": "Aarestrup and others, Effect of abolishment of the use of antimicrobial agents for growth promotion on occurrence of antimicrobial resistance in fecal enterococci from food animals in Denmark, Antimicrobial Agents and Chemotherapy 45(7):2054-2059 (2001)",
+    "url": "https://doi.org/10.1128/AAC.45.7.2054-2059.2001",
+    "points": [
+     {
+      "year": 1995,
+      "value": 20,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Paper says 'around 20%' from 1995 to 1997",
+      "source": "Aarestrup and others, Effect of abolishment of the use of antimicrobial agents for growth promotion on occurrence of antimicrobial resistance in fecal enterococci from food animals in Denmark, Antimicrobial Agents and Chemotherapy 45(7):2054-2059 (2001)",
+      "url": "https://doi.org/10.1128/AAC.45.7.2054-2059.2001"
+     },
+     {
+      "year": 2000,
+      "value": 6.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Aarestrup and others, Effect of abolishment of the use of antimicrobial agents for growth promotion on occurrence of antimicrobial resistance in fecal enterococci from food animals in Denmark, Antimicrobial Agents and Chemotherapy 45(7):2054-2059 (2001)",
+      "url": "https://doi.org/10.1128/AAC.45.7.2054-2059.2001"
+     }
+    ],
+    "featured": false
+   },
+   {
+    "key": "pig-growth-response-to-feed-antibiotics",
+    "fix": "feed-antibiotics",
+    "label": "Extra daily weight gain in young pigs fed antibiotics",
+    "direction": "benefit",
+    "unit": "percent improvement in average daily gain over unmedicated pigs",
+    "kind": "level",
+    "geography": "US (experiments)",
+    "method": "Older value: Cromwell's (2002) weighted meta-analysis of 453 experiments with 13,632 starter pigs (7 to 25 kg) run from 1950 to 1985. Newer value: one study in a modern US production system (Dritz and others 2002) with 3,648 nursery pigs. Different study designs; the drop shows the gain shrinks as hygiene and nutrition improve.",
+    "source": "Teillant and Laxminarayan, Economics of Antibiotic Use in U.S. Swine and Poultry Production, Choices 30(1) (2015), Table 1, from Cromwell (2002) and Dritz and others (2002)",
+    "url": "https://www.choicesmagazine.org/UserFiles/file/cmsarticle_404.pdf",
+    "points": [
+     {
+      "year": 1967,
+      "value": 16.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Experiments 1950 to 1985; year is the period midpoint rounded down.",
+      "source": "Teillant and Laxminarayan, Economics of Antibiotic Use in U.S. Swine and Poultry Production, Choices 30(1) (2015), Table 1, from Cromwell (2002) and Dritz and others (2002)",
+      "url": "https://www.choicesmagazine.org/UserFiles/file/cmsarticle_404.pdf"
+     },
+     {
+      "year": 2002,
+      "value": 5.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Nursery phase, single study (Dritz and others 2002)",
+      "source": "Teillant and Laxminarayan, Economics of Antibiotic Use in U.S. Swine and Poultry Production, Choices 30(1) (2015), Table 1, from Cromwell (2002) and Dritz and others (2002)",
+      "url": "https://www.choicesmagazine.org/UserFiles/file/cmsarticle_404.pdf"
+     }
+    ],
+    "featured": true
+   }
+  ],
+  "money": [
+   {
+    "key": "oecd-global-agp-ban-meat-value",
+    "fix": "feed-antibiotics",
+    "label": "Meat value a worldwide ban on growth promoters would cost (OECD model)",
+    "direction": "benefit",
+    "usd_year": 2012,
+    "total_usd": null,
+    "per_year_usd": null,
+    "low_usd": 13500000000,
+    "high_usd": 44100000000,
+    "years": "per year, at 2012 producer prices",
+    "source": "Laxminarayan, Van Boeckel and Teillant, The Economic Costs of Withdrawing Anti-microbial Growth Promoters from the Livestock Sector, OECD Food, Agriculture and Fisheries Papers No. 78 (2015)",
+    "url": "https://onehealthtrust.org/wp-content/uploads/2017/06/5js64kst5wvl.pdf",
+    "note": "Global meat output would fall 1.3% (2000s growth response) to 3% (1980s growth response); valued at national producer prices from FAOSTAT 2012. No price adjustment modeled.",
+    "caption": "What growth promoters are worth to the world's meat output each year, one model finds: the value lost if they were banned everywhere."
+   },
+   {
+    "key": "nrc-us-ban-consumer-cost",
+    "fix": "feed-antibiotics",
+    "label": "Cost to US consumers of banning routine (subtherapeutic) farm antibiotics",
+    "direction": "benefit",
+    "usd_year": 1998,
+    "total_usd": null,
+    "per_year_usd": null,
+    "low_usd": 1200000000,
+    "high_usd": 2500000000,
+    "years": "per year, late 1990s",
+    "source": "National Research Council, The Use of Drugs in Food Animals: Benefits and Risks (National Academy Press, 1999); National Academies news release, July 1998",
+    "url": "https://www.nationalacademies.org/news/antibiotic-use-in-food-animals-contributes-to-microbe-resistance",
+    "note": "Release: 'about $1.2 billion to $2.5 billion a year [dash] or $4.85 to $9.72 per person.' Price year not stated; 1998 assumed.",
+    "caption": "What a US ban would have cost shoppers each year, a 1998 expert committee estimated."
+   }
+  ]
+ },
+ {
+  "nominee": "zuckerman",
+  "chartFrom": 1995,
+  "events": [
+   {
+    "year": 1994,
+    "label": "Late 1994: Ethan Zuckerman starts work at Tripod, a free homepage service in Williamstown, Massachusetts",
+    "source": "Zuckerman, Tripod, and the very early days of blogging? (blog, August 4, 2004); Lycos Form 10-K fiscal 1998",
+    "url": "https://ethanzuckerman.com/2004/08/04/tripod-and-the-very-early-days-of-blogging/"
+   },
+   {
+    "year": 1995,
+    "label": "September 18: Netscape Navigator 2.0 beta, the first browser to support JavaScript, which can open new windows",
+    "source": "Wikipedia, Netscape Navigator 2",
+    "url": "https://en.wikipedia.org/wiki/Netscape_Navigator_2"
+   },
+   {
+    "year": 1997,
+    "label": "About this time (year not documented): Tripod opens ads in separate windows, the pop-up ad, with code Zuckerman wrote",
+    "source": "Zuckerman, The Internet's Original Sin, The Atlantic (2014); year from The History of the Web timeline (secondary)",
+    "url": "https://thehistoryoftheweb.com/milestones/first-popup-ad/"
+   },
+   {
+    "year": 1998,
+    "label": "February 11: Lycos completes its purchase of Tripod in a stock deal valued at about $61.5 million",
+    "source": "Lycos Inc., Form 10-K for fiscal 1998 (SEC)",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001007992/000092701698003740/0000927016-98-003740.txt"
+   },
+   {
+    "year": 1999,
+    "label": "A Jupiter Research survey finds 69% of users consider pop-ups annoying",
+    "source": "McCoy, Everard, Polak and Galletta, Communications of the ACM 50(3), March 2007",
+    "url": "https://www.gwern.net/doc/economics/advertising/2007-mccoy.pdf"
+   },
+   {
+    "year": 2002,
+    "label": "September 23: Phoenix 0.1 (later Firefox) ships with pop-up blocking on by default",
+    "source": "LWN, September 23, 2002; mozilla.org Phoenix 0.3 release notes",
+    "url": "https://www.mozilla.org/firefox/releases/0.3.html"
+   },
+   {
+    "year": 2002,
+    "label": "December: Netscape 7.01 lets users suppress pop-up ads",
+    "source": "The Register, New Netscape kills pop-ups, December 16, 2002",
+    "url": "https://www.theregister.com/2002/12/16/new_netscape_kills_popups/"
+   },
+   {
+    "year": 2003,
+    "label": "January 7: Apple's Safari beta launches with pop-up ad blocking",
+    "source": "Apple, Apple Unveils Safari, January 7, 2003",
+    "url": "https://www.apple.com/newsroom/2003/01/07Apple-Unveils-Safari/"
+   },
+   {
+    "year": 2004,
+    "label": "August: Windows XP Service Pack 2 ships, with Internet Explorer's pop-up blocker on by default",
+    "source": "Microsoft, release to manufacturing, August 6, 2004; UNMC newsroom, August 16, 2004",
+    "url": "https://www.unmc.edu/newsroom/2004/08/16/what-will-i-see-when-microsoft-xp-service-pack-2-is-installed/"
+   },
+   {
+    "year": 2014,
+    "label": "August 14: Zuckerman's essay The Internet's Original Sin apologizes for the pop-up and calls advertising the original sin of the web",
+    "source": "Zuckerman, The Atlantic, August 14, 2014",
+    "url": "https://www.theatlantic.com/technology/archive/2014/08/advertising-is-the-internets-original-sin/376041/"
+   },
+   {
+    "year": 2017,
+    "label": "March 22: The Coalition for Better Ads publishes standards listing pop-up ads among the formats most likely to drive people to ad blockers",
+    "source": "World Federation of Advertisers, Coalition for Better Ads releases initial Better Ads Standards; betterads.org",
+    "url": "https://www.wfanet.org/news-centre/coalition-for-better-ads-releases-initial-better-ads-standards-in-north-america-and-europe/"
+   },
+   {
+    "year": 2018,
+    "label": "February 15: Chrome starts removing ads from sites that fail the Better Ads Standards",
+    "source": "Chromium Blog, Under the hood: How Chrome's ad filtering works, February 14, 2018",
+    "url": "https://blog.chromium.org/2018/02/how-chromes-ad-filtering-works.html"
+   },
+   {
+    "year": 2019,
+    "label": "72% of US adults say all, almost all or most of what they do online is tracked by advertisers, tech firms or other companies",
+    "source": "Pew Research Center, Americans and Privacy, November 15, 2019",
+    "url": "https://www.pewresearch.org/internet/2019/11/15/americans-and-privacy-concerned-confused-and-feeling-lack-of-control-over-their-personal-information/"
+   }
+  ],
+  "gaps": [
+   "The year Tripod launched its first pop-up ad: Zuckerman gives none; secondary timelines say 1997.",
+   "Revenue from pop-up ads in any year: IAB does not break pop-ups out of display advertising.",
+   "A yearly count of people using pop-up blockers from 2002 to 2010; the global ad-blocking series starts in 2011.",
+   "Ad-blocking user counts before 2011, and for the US by year on one consistent method.",
+   "How much of today's ad blocking is a response to pop-ups, as opposed to other intrusive ads and tracking."
+  ],
+  "series": [
+   {
+    "key": "us-internet-ad-revenue",
+    "fix": "popup",
+    "label": "US internet advertising revenue",
+    "direction": "context",
+    "unit": "billion US dollars per year (nominal)",
+    "kind": "flow",
+    "geography": "US",
+    "method": "IAB and PwC annual totals of US internet advertising revenue, all formats (search, display, video and more), in nominal dollars divided by 1,000 million. This is the ad-funded web the pop-up belonged to, not revenue from pop-ups, which IAB does not report separately.",
+    "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+    "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf",
+    "featured": true,
+    "points": [
+     {
+      "year": 1999,
+      "value": 4.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "As first reported in April 2001 ($4.6 billion), rounded to 0.1; later IAB editions may revise it.",
+      "source": "IAB, 2000 Q4 Internet Advertising Revenue Report (April 1, 2001), as first reported",
+      "url": "https://iab.com/insights/2000-q4-iab-internet-advertising-revenue-report"
+     },
+     {
+      "year": 2000,
+      "value": 8.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "As first reported in April 2001 ($8.2 billion). The 2012 report's 2001 decline of 12% implies 2000 was later revised to about $8.1 billion.",
+      "source": "IAB, 2000 Q4 Internet Advertising Revenue Report (April 1, 2001), as first reported",
+      "url": "https://iab.com/insights/2000-q4-iab-internet-advertising-revenue-report"
+     },
+     {
+      "year": 2001,
+      "value": 7.134,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$7,134 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, 2012 First Six Months, Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2015/07/IAB_Internet_Advertising_Revenue_Report_HY_2012.pdf"
+     },
+     {
+      "year": 2002,
+      "value": 6.01,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$6,010 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, 2012 First Six Months, Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2015/07/IAB_Internet_Advertising_Revenue_Report_HY_2012.pdf"
+     },
+     {
+      "year": 2003,
+      "value": 7.267,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$7,267 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2004,
+      "value": 9.626,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$9,626 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2005,
+      "value": 12.542,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$12,542 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2006,
+      "value": 16.879,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$16,879 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2007,
+      "value": 21.206,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$21,206 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2008,
+      "value": 23.448,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$23,448 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2009,
+      "value": 22.661,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$22,661 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2010,
+      "value": 26.041,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$26,041 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2011,
+      "value": 31.736,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$31,736 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2012,
+      "value": 36.572,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$36,572 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2013,
+      "value": 42.781,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$42,781 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2014,
+      "value": 49.451,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$49,451 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 59.551,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$59,551 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2016,
+      "value": 72.64,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$72,640 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2017,
+      "value": 88.266,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$88,266 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2018,
+      "value": 107.487,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$107,487 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2019,
+      "value": 124.613,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$124,613 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2020,
+      "value": 139.828,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$139,828 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2021,
+      "value": 189.31,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$189,310 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2022,
+      "value": 209.728,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$209,728 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2023,
+      "value": 224.954,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$224,954 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     },
+     {
+      "year": 2024,
+      "value": 258.571,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "$258,571 million",
+      "source": "IAB and PwC, Internet Advertising Revenue Report, Full Year 2024 (April 2025), Historical data findings, annual totals",
+      "url": "https://iab.com/wp-content/uploads/2025/04/IAB_PwC-Internet-Ad-Revenue-Report-Full-Year-2024.pdf"
+     }
+    ]
+   },
+   {
+    "key": "global-ad-blocking-users",
+    "fix": "popup",
+    "label": "People blocking ads worldwide (desktop and mobile)",
+    "direction": "context",
+    "unit": "million active users",
+    "kind": "level",
+    "geography": "World",
+    "method": "Read from the labeled points of the eyeo 2026 chart; labels sit on year boundaries and are taken as fourth-quarter values (the report states Q4 2025 in text). Modeled estimate of active users across desktop and mobile; methods changed over time, so it differs from earlier PageFair figures. Ad blockers answer intrusive ads of every kind, not pop-ups alone.",
+    "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+    "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf",
+    "featured": true,
+    "points": [
+     {
+      "year": 2011,
+      "value": 44,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2011, chart label",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2013,
+      "value": 240,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2013, chart label",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 558,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2015, chart label",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2017,
+      "value": 691,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2017, chart label",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2019,
+      "value": 764,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2019, chart label",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2021,
+      "value": 820,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "About Q4 2021, chart label; equals desktop 290M plus mobile 530M",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2023,
+      "value": 912,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q2 2023, stated in text",
+      "source": "Blockthrough, 2023 eyeo Ad-Filtering Report summary page (previously the PageFair Adblock Report)",
+      "url": "https://blockthrough.com/blog/2023-pagefair-adblock-report/"
+     },
+     {
+      "year": 2025,
+      "value": 1100,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2025, stated in text as 1.1 billion",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     }
+    ]
+   },
+   {
+    "key": "desktop-ad-blocking-users",
+    "fix": "popup",
+    "label": "People blocking ads on desktop computers worldwide",
+    "direction": "context",
+    "unit": "million active users",
+    "kind": "level",
+    "geography": "World",
+    "method": "Read from the labeled points of the eyeo 2026 chart; labels sit on year boundaries and are taken as fourth-quarter values (the report states Q4 2025 in text). Modeled estimate of active users across desktop and mobile; methods changed over time, so it differs from earlier PageFair figures. Desktop is where pop-up windows lived.",
+    "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+    "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf",
+    "featured": false,
+    "points": [
+     {
+      "year": 2011,
+      "value": 44,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2011",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2013,
+      "value": 142,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2013",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 276,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2015",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2017,
+      "value": 295,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2017",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2019,
+      "value": 236,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2019",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2021,
+      "value": 290,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2021; the 2022 PageFair report also gives 290M monthly active desktop users",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2023,
+      "value": 416,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "About Q4 2023, chart label",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2025,
+      "value": 448,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2025, stated in text",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     }
+    ]
+   },
+   {
+    "key": "mobile-ad-blocking-users",
+    "fix": "popup",
+    "label": "People blocking ads on mobile devices worldwide",
+    "direction": "context",
+    "unit": "million active users",
+    "kind": "level",
+    "geography": "World",
+    "method": "Read from the labeled points of the eyeo 2026 chart; labels sit on year boundaries and are taken as fourth-quarter values (the report states Q4 2025 in text). Modeled estimate of active users across desktop and mobile; methods changed over time, so it differs from earlier PageFair figures. Most mobile ad-blocking users are in low- and middle-income countries, where saving data costs is a stated reason (eyeo 2026).",
+    "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+    "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf",
+    "featured": false,
+    "points": [
+     {
+      "year": 2013,
+      "value": 99,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2013",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2015,
+      "value": 282,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2015",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2017,
+      "value": 396,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2017",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2019,
+      "value": 527,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2019",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2021,
+      "value": 530,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2021",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2024,
+      "value": 611,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "About Q4 2024, chart label",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2025,
+      "value": 629,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q4 2025, stated in text",
+      "source": "eyeo, Ad-blocking report 2026 (May 2026), page 3 to 5 charts, point labels",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     }
+    ]
+   },
+   {
+    "key": "global-ad-block-rate-gwi",
+    "fix": "popup",
+    "label": "Share of internet users who block ads, worldwide (GWI survey)",
+    "direction": "context",
+    "unit": "percent of internet users",
+    "kind": "level",
+    "geography": "World",
+    "method": "GWI Consumer Insights survey, global ad-blocking rate as charted in the eyeo 2026 report; only the 2021 and 2025 endpoints are labeled. The rate fell because internet users grew faster than ad-block users (eyeo).",
+    "source": "eyeo, Ad-blocking report 2026, page 7, citing GWI Consumer Insights Platform",
+    "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf",
+    "featured": true,
+    "points": [
+     {
+      "year": 2021,
+      "value": 37.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Global line, 2021 label",
+      "source": "eyeo, Ad-blocking report 2026, page 7, citing GWI",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     },
+     {
+      "year": 2025,
+      "value": 30.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Global line, 2025 label; US 33% in the same table",
+      "source": "eyeo, Ad-blocking report 2026, page 7, citing GWI",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     }
+    ]
+   },
+   {
+    "key": "share-online-population-blocking-pagefair",
+    "fix": "popup",
+    "label": "Share of the world's internet population blocking ads (PageFair)",
+    "direction": "context",
+    "unit": "percent of internet users",
+    "kind": "level",
+    "geography": "World",
+    "method": "PageFair estimate: active ad-block users divided by the global internet population. 2015 counts desktop browser extensions only; 2016 adds mobile. A different method from the GWI survey, so not drawn on the same line.",
+    "source": "PageFair, The State of the Blocked Web: 2017 Global Adblock Report, quick facts (February 1, 2017)",
+    "url": "https://blockthrough.com/blog/adblockreport/",
+    "featured": true,
+    "points": [
+     {
+      "year": 2015,
+      "value": 6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q2 2015: 198 million monthly active users of the major ad-blocking browser extensions were 6% of the global internet population",
+      "source": "PageFair and Adobe, The Cost of Ad Blocking: 2015 Ad Blocking Report (August 2015), copy hosted by gwern.net",
+      "url": "https://www.gwern.net/docs/traffic/2015-pagefair.pdf"
+     },
+     {
+      "year": 2016,
+      "value": 11,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "End of 2016: 615 million devices, desktop and mobile",
+      "source": "PageFair, The State of the Blocked Web: 2017 Global Adblock Report, quick facts (February 1, 2017)",
+      "url": "https://blockthrough.com/blog/adblockreport/"
+     }
+    ]
+   },
+   {
+    "key": "us-share-online-population-blocking",
+    "fix": "popup",
+    "label": "Share of US internet users blocking ads",
+    "direction": "harm",
+    "unit": "percent of internet users",
+    "kind": "level",
+    "geography": "US",
+    "method": "Two different measures, kept for reference: PageFair's share of the US online population with desktop ad-block extensions (Q2 2015), and GWI's survey rate (2025). Not comparable to each other.",
+    "source": "PageFair and Adobe, The Cost of Ad Blocking: 2015 Ad Blocking Report (August 2015), copy hosted by gwern.net",
+    "url": "https://www.gwern.net/docs/traffic/2015-pagefair.pdf",
+    "featured": false,
+    "points": [
+     {
+      "year": 2015,
+      "value": 16,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Q2 2015, PageFair: 45 million monthly active users",
+      "source": "PageFair and Adobe, The Cost of Ad Blocking: 2015 Ad Blocking Report (August 2015), copy hosted by gwern.net",
+      "url": "https://www.gwern.net/docs/traffic/2015-pagefair.pdf"
+     },
+     {
+      "year": 2025,
+      "value": 33,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "2025, GWI survey rate",
+      "source": "eyeo, Ad-blocking report 2026, page 7, citing GWI",
+      "url": "https://eyeo.com/wp-content/uploads/2026/05/eyeo_2026-ad-blocking-report.pdf"
+     }
+    ]
+   },
+   {
+    "key": "popup-impressions-2002",
+    "fix": "popup",
+    "label": "Pop-up ad impressions bought, US web",
+    "direction": "benefit",
+    "unit": "billion impressions",
+    "kind": "flow",
+    "geography": "US (Nielsen//NetRatings AdRelevance panel)",
+    "method": "Nielsen//NetRatings count of pop-up ad impressions purchased in the first seven months of 2002, 2% of the online ad market. A partial year, so not an annual total.",
+    "source": "Editor and Publisher, \"Less Than 10% Of Advertisers Use Pop-Ups\" (2002), reporting Nielsen//NetRatings data",
+    "url": "https://www.editorandpublisher.com/stories/less-than-10-of-advertisers-use-pop-ups,23628",
+    "featured": false,
+    "points": [
+     {
+      "year": 2002,
+      "value": 11.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "January to July 2002 only",
+      "source": "Editor and Publisher, reporting Nielsen//NetRatings data",
+      "url": "https://www.editorandpublisher.com/stories/less-than-10-of-advertisers-use-pop-ups,23628"
+     }
+    ]
+   },
+   {
+    "key": "popup-annoyance-surveys",
+    "fix": "popup",
+    "label": "Internet users who find pop-up ads annoying",
+    "direction": "harm",
+    "unit": "percent of respondents",
+    "kind": "level",
+    "geography": "Survey samples (not national)",
+    "method": "Two different surveys with different wording: Jupiter Research 1999 (\"annoying\") and GartnerG2 July 2002 (\"very annoying\", 2,667 internet users). Both known only through secondary reports.",
+    "source": "McCoy and others, Communications of the ACM 50(3), 2007; Network World, Ads infinitum",
+    "url": "https://www.gwern.net/doc/economics/advertising/2007-mccoy.pdf",
+    "featured": false,
+    "points": [
+     {
+      "year": 1999,
+      "value": 69,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Jupiter Research; 23% said they would not return to a site because of the ads",
+      "source": "McCoy, Everard, Polak and Galletta, The Effects of Online Advertising, Communications of the ACM 50(3), March 2007, citing Jupiter Research",
+      "url": "https://www.gwern.net/doc/economics/advertising/2007-mccoy.pdf"
+     },
+     {
+      "year": 2002,
+      "value": 78.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Said \"very annoying\"; 12% used ad-blocking software",
+      "source": "Network World, Ads infinitum (column), citing a GartnerG2 consumer survey of July 2002",
+      "url": "https://www.networkworld.com/article/878834/software-ads-infinitum.html"
+     }
+    ]
+   }
+  ],
+  "money": [
+   {
+    "key": "ad-blocking-revenue-blocked-2015",
+    "fix": "popup",
+    "label": "Ad revenue blocked by ad blockers worldwide, 2015",
+    "direction": "harm",
+    "usd_year": 2015,
+    "total_usd": null,
+    "per_year_usd": 21800000000,
+    "low_usd": null,
+    "high_usd": null,
+    "years": "2015, estimate",
+    "source": "PageFair and Adobe, The Cost of Ad Blocking: 2015 Ad Blocking Report (August 2015), copy hosted by gwern.net",
+    "url": "https://www.gwern.net/docs/traffic/2015-pagefair.pdf",
+    "note": "Industry estimate from an ad-block recovery company and Adobe; the same report projected $41.4 billion for 2016. Covers ad blocking of every kind, not pop-ups.",
+    "caption": "One industry estimate of ad revenue lost to ad blockers in 2015, from a company that sells a fix for ad blocking."
+   },
+   {
+    "key": "ad-blocking-cost-2024-projection",
+    "fix": "popup",
+    "label": "Projected cost of ad blocking to publishers, 2024",
+    "direction": "harm",
+    "usd_year": 2024,
+    "total_usd": null,
+    "per_year_usd": 54000000000,
+    "low_usd": null,
+    "high_usd": null,
+    "years": "2024, projection",
+    "source": "Blockthrough, 2023 eyeo Ad-Filtering Report summary page (previously the PageFair Adblock Report)",
+    "url": "https://blockthrough.com/blog/2023-pagefair-adblock-report/",
+    "note": "Projection: about 8% of a projected $695 billion global digital ad spend (eMarketer), per eyeo, an ad-filtering company.",
+    "caption": "A projection from an ad-filtering company, not a measured loss."
+   }
+  ]
+ },
+ {
+  "nominee": "thulin",
+  "chartFrom": 1960,
+  "events": [
+   {
+    "year": 1961,
+    "label": "Celloplast begins making the one-piece plastic bag in Norrkoping, Sweden"
+   },
+   {
+    "year": 1962,
+    "label": "US patent filed for the bag with handles, naming Sten Gustaf Thulin"
+   },
+   {
+    "year": 1965,
+    "label": "US patent 3,180,557 granted"
+   },
+   {
+    "year": 1972,
+    "label": "Scientists report plastic floating in the Sargasso Sea"
+   },
+   {
+    "year": 1977,
+    "label": "Mobil gets Celloplast's US patent overturned"
+   },
+   {
+    "year": 1982,
+    "label": "Kroger and Safeway switch to plastic bags"
+   },
+   {
+    "year": 2002,
+    "label": "Bangladesh bans thin bags; Ireland starts a 15 cent levy"
+   },
+   {
+    "year": 2007,
+    "label": "Ireland raises its levy to 22 cent"
+   },
+   {
+    "year": 2015,
+    "label": "England's 5p charge; EU Plastic Bags Directive"
+   },
+   {
+    "year": 2018,
+    "label": "127 of 192 countries regulate plastic bags (UNEP)"
+   },
+   {
+    "year": 2021,
+    "label": "England's charge rises to 10p for all shops"
+   }
+  ],
+  "gaps": [
+   "A yearly count of plastic bags used worldwide. Published figures are rough and range widely (100 billion to 1 trillion in industry and press estimates in 2007; up to 5 trillion in a 2018 UN report as reported by news outlets).",
+   "A yearly count of countries regulating plastic bags; only the 2018 UNEP snapshot (127 of 192) was found.",
+   "A dollar cost of bag litter: cleanup, blocked drains or harm to marine life. No study isolating bags was found.",
+   "A dollar value of what the bag gave: the saving against paper (about 1 cent against 4 to 5 cents a bag in 2007 industry figures) has never been totaled.",
+   "A long, comparable series of bags in beach or sea litter. Cefas found bags on the seafloor around the UK fell in 2010 to 2017 against earlier years (Maes and others, 2018), but no yearly series was taken from it."
+  ],
+  "series": [
+   {
+    "key": "celloplast-bag-production",
+    "fix": "bag",
+    "label": "Celloplast plastic bag production",
+    "direction": "benefit",
+    "unit": "million bags per year",
+    "kind": "flow",
+    "geography": "Celloplast (Sweden and its plants abroad)",
+    "method": "Approximate yearly output reported in Swedish local press and by the Swedish inventors' museum; the sources give decades, not exact years. Production began in 1961 (no volume given), shown as an event.",
+    "source": "Norrkopings Tidningar, '50 ar sedan plastpasen uppfanns' (2015), archived",
+    "url": "https://web.archive.org/web/20151017025926/http://www.nt.se/nyheter/norrkoping/50-ar-sedan-plastpasen-uppfanns-11150239.aspx",
+    "featured": true,
+    "points": [
+     {
+      "year": 1969,
+      "value": 600,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "'I slutet pa 1960-talet' (late 1960s); 1969 is a placeholder year for that decade end. Same figure in Svenskt UppfinnareMuseum.",
+      "source": "Norrkopings Tidningar, '50 ar sedan plastpasen uppfanns' (2015), archived",
+      "url": "https://web.archive.org/web/20151017025926/http://www.nt.se/nyheter/norrkoping/50-ar-sedan-plastpasen-uppfanns-11150239.aspx"
+     },
+     {
+      "year": 1972,
+      "value": 760,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "'Som mest producerades 760 miljoner i borjan pa 1970-talet' (early 1970s, the peak); 1972 is a placeholder year.",
+      "source": "Norrkopings Tidningar, '50 ar sedan plastpasen uppfanns' (2015), archived",
+      "url": "https://web.archive.org/web/20151017025926/http://www.nt.se/nyheter/norrkoping/50-ar-sedan-plastpasen-uppfanns-11150239.aspx"
+     }
+    ]
+   },
+   {
+    "key": "ireland-leviable-bags-per-capita",
+    "fix": "levy",
+    "label": "Disposable plastic bags per person in Ireland",
+    "direction": "context",
+    "unit": "bags per person per year",
+    "kind": "flow",
+    "geography": "Ireland",
+    "method": "Department of the Environment estimate from the number of bags on which levy was remitted to the Environment Fund, divided by CSO population. The department says the figures are indicative of trends, not a precise count (late returns and audits shift receipts between years).",
+    "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+    "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml",
+    "featured": true,
+    "points": [
+     {
+      "year": 2001,
+      "value": 328,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Estimated per capita use before the levy began in March 2002; year is the pre-levy baseline.",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2002,
+      "value": 21,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "10 months of levy (March to December 2002).",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2003,
+      "value": 22,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2004,
+      "value": 25,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2005,
+      "value": 28,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2006,
+      "value": 31,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Rise that led to the increase to 22 cent from 1 July 2007.",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2007,
+      "value": 28,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2008,
+      "value": 27,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2009,
+      "value": 24,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2010,
+      "value": 18,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2011,
+      "value": 16,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2012,
+      "value": 14,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Estimate by end of 2012.",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2013,
+      "value": 15,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Estimate by end of 2013.",
+      "source": "Dail Eireann written answer, Tax Yield, 17 July 2014 (Question 485)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2014-07-17/writtens/mul@/dbsect_443.xml"
+     },
+     {
+      "year": 2014,
+      "value": 13,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Estimate by end of 2014.",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 October 2015 (Question 726)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2015-10-06/writtens/mul@/dbsect_587.xml"
+     },
+     {
+      "year": 2016,
+      "value": 8,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Estimate by end of 2016. No 2015 figure found.",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 19 June 2018 (Questions 454 and 455)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2018-06-19/writtens/mul@/dbsect_418.xml"
+     }
+    ]
+   },
+   {
+    "key": "ireland-bags-share-of-litter",
+    "fix": "levy",
+    "label": "Plastic bags as a share of litter in Ireland",
+    "direction": "harm",
+    "unit": "percent of litter items",
+    "kind": "level",
+    "geography": "Ireland",
+    "method": "National Litter Pollution Monitoring System results as reported by the Minister in parliamentary answers; the pre-levy figure is an estimate.",
+    "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+    "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml",
+    "featured": true,
+    "points": [
+     {
+      "year": 2001,
+      "value": 5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "'Approximately 5% of litter arisings prior to the introduction of the levy'; year is the pre-levy baseline.",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2010,
+      "value": 0.25,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Includes reusable bags.",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 June 2012 (Question 582, Minister Phil Hogan)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml"
+     },
+     {
+      "year": 2012,
+      "value": 0.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2013,
+      "value": 0.14,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 17 July 2014 (Question 485)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2014-07-17/writtens/mul@/dbsect_443.xml"
+     },
+     {
+      "year": 2014,
+      "value": 0.13,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 6 October 2015 (Question 726)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2015-10-06/writtens/mul@/dbsect_587.xml"
+     },
+     {
+      "year": 2016,
+      "value": 0.23,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Plastic Bag Levy, 19 June 2018 (Questions 454 and 455)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2018-06-19/writtens/mul@/dbsect_418.xml"
+     }
+    ]
+   },
+   {
+    "key": "england-main-retailers-single-use-bags",
+    "fix": "charge",
+    "label": "Single-use carrier bags from England's 7 main supermarkets",
+    "direction": "context",
+    "unit": "million bags per year",
+    "kind": "flow",
+    "geography": "England",
+    "method": "Bags sold under the charge as reported by Asda, Marks and Spencer, Morrisons, Sainsbury's, Tesco, The Co-operative Group and Waitrose to Defra; the 2014 baseline is WRAP's count of bags issued before the charge.",
+    "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+    "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026",
+    "featured": true,
+    "points": [
+     {
+      "year": 2014,
+      "value": 7640,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Calendar year 2014, before the charge; covers 6 of the 7 main retailers; about 140 bags per person. Single-use bags of all materials, not only plastic.",
+      "source": "WRAP, UK Voluntary Carrier Bag Agreement, 2014 data, as cited in Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2016,
+      "value": 1327,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2016 to 6 April 2017; plotted at 2016.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2017,
+      "value": 1039,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2017 to 6 April 2018; plotted at 2017.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2018,
+      "value": 566,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2018 to 6 April 2019; plotted at 2018.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2019,
+      "value": 271,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2019 to 6 April 2020; plotted at 2019.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2020,
+      "value": 294,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2020 to 6 April 2021; plotted at 2020. Defra: not comparable with other years (COVID-19).",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2021,
+      "value": 197,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2021 to 6 April 2022; plotted at 2021. Charge rose to 10p on 21 May 2021.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2022,
+      "value": 160,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2022 to 6 April 2023; plotted at 2022.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2023,
+      "value": 155,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2023 to 6 April 2024; plotted at 2023.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2024,
+      "value": 164,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2024 to 6 April 2025; plotted at 2024.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2025,
+      "value": 126,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2025 to 6 April 2026; plotted at 2025.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     }
+    ]
+   },
+   {
+    "key": "england-all-reporting-retailers-single-use-bags",
+    "fix": "charge",
+    "label": "Single-use plastic carrier bags sold by all reporting retailers in England",
+    "direction": "context",
+    "unit": "million bags per year",
+    "kind": "flow",
+    "geography": "England",
+    "method": "Total bags reported to Defra by retailers with 250 or more employees (plus a few voluntary reporters). Excludes small businesses, which have charged since 2021 but do not report.",
+    "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+    "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026",
+    "featured": true,
+    "points": [
+     {
+      "year": 2016,
+      "value": 2116,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2016 to 6 April 2017; plotted at 2016.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2017,
+      "value": 1754,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2017 to 6 April 2018; plotted at 2017.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2018,
+      "value": 1127,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2018 to 6 April 2019; plotted at 2018.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2019,
+      "value": 628,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2019 to 6 April 2020; plotted at 2019.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2020,
+      "value": 489,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2020 to 6 April 2021; plotted at 2020. Not comparable with other years (COVID-19).",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2021,
+      "value": 497,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2021 to 6 April 2022; plotted at 2021. From 21 May 2021 the 10p charge covers all businesses; only large retailers report.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2022,
+      "value": 434,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2022 to 6 April 2023; plotted at 2022.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2023,
+      "value": 407,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2023 to 6 April 2024; plotted at 2023.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2024,
+      "value": 437,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2024 to 6 April 2025; plotted at 2024.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     },
+     {
+      "year": 2025,
+      "value": 399,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Reporting year 7 April 2025 to 6 April 2026; plotted at 2025.",
+      "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+      "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026"
+     }
+    ]
+   },
+   {
+    "key": "eu-lightweight-bags-per-capita",
+    "fix": "charge",
+    "label": "Lightweight plastic carrier bags per person in the EU",
+    "direction": "context",
+    "unit": "bags per person per year",
+    "kind": "flow",
+    "geography": "EU27",
+    "method": "Eurostat estimate of lightweight plastic carrier bags (wall thickness under 50 microns, including very lightweight bags) consumed per inhabitant, from national reporting under Directive (EU) 2015/720. Countries use different calculation methods.",
+    "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+    "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020",
+    "featured": true,
+    "points": [
+     {
+      "year": 2018,
+      "value": 94.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Eurostat publishes these as estimates; earlier releases gave slightly different values (for example 66.6 for 2022 in the November 2024 news release).",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2019,
+      "value": 92.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Eurostat publishes these as estimates; earlier releases gave slightly different values (for example 66.6 for 2022 in the November 2024 news release).",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2020,
+      "value": 86.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Eurostat publishes these as estimates; earlier releases gave slightly different values (for example 66.6 for 2022 in the November 2024 news release).",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2021,
+      "value": 77.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Eurostat publishes these as estimates; earlier releases gave slightly different values (for example 66.6 for 2022 in the November 2024 news release).",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2022,
+      "value": 67.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Eurostat publishes these as estimates; earlier releases gave slightly different values (for example 66.6 for 2022 in the November 2024 news release).",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2023,
+      "value": 64.1,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Eurostat publishes these as estimates; earlier releases gave slightly different values (for example 66.6 for 2022 in the November 2024 news release).",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2025,
+      "value": 40,
+      "low": null,
+      "high": null,
+      "projected": true,
+      "estimate": false,
+      "note": "Target, not a forecast: the Plastic Bags Directive aims for no more than 40 lightweight bags per person by 31 December 2025, excluding very lightweight bags under 15 microns (which the plotted series includes).",
+      "source": "Eurostat news release, '4.7 billion fewer lightweight plastic bags in 2022', 12 November 2024",
+      "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20241112-2"
+     }
+    ]
+   },
+   {
+    "key": "eu-lightweight-bags-total",
+    "fix": "charge",
+    "label": "Lightweight plastic carrier bags consumed in the EU",
+    "direction": "context",
+    "unit": "million bags per year",
+    "kind": "flow",
+    "geography": "EU27",
+    "method": "Same Eurostat dataset, total number (unit NR) converted to millions.",
+    "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+    "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020",
+    "featured": false,
+    "points": [
+     {
+      "year": 2018,
+      "value": 42222.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2019,
+      "value": 41395.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2020,
+      "value": 38493.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2021,
+      "value": 34495.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2022,
+      "value": 29967.0,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     },
+     {
+      "year": 2023,
+      "value": 28772.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "",
+      "source": "Eurostat, Consumption of lightweight plastic carrier bags by their wall thickness (env_waspcb), EU27_2020, less than 50 microns, data updated 2026-05-11",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_waspcb?format=JSON&lang=EN&geo=EU27_2020"
+     }
+    ]
+   },
+   {
+    "key": "ireland-plastic-bag-levy-receipts",
+    "fix": "levy",
+    "label": "Irish plastic bag levy receipts",
+    "direction": "context",
+    "unit": "million euros per year (nominal)",
+    "kind": "flow",
+    "geography": "Ireland",
+    "method": "Levy receipts paid into the Environment Fund, as tabled by the Minister.",
+    "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+    "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml",
+    "featured": false,
+    "points": [
+     {
+      "year": 2002,
+      "value": 10.4,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2003,
+      "value": 12.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2004,
+      "value": 15.3,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2005,
+      "value": 17.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2006,
+      "value": 19.9,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2007,
+      "value": 22.6,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "15 cent until 30 June, 22 cent from 1 July 2007.",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2008,
+      "value": 26.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2009,
+      "value": 23.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2010,
+      "value": 17.5,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2011,
+      "value": 15.7,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     },
+     {
+      "year": 2012,
+      "value": 14.2,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": true,
+      "note": "Estimate, cash basis.",
+      "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+      "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml"
+     }
+    ]
+   },
+   {
+    "key": "countries-regulating-plastic-bags",
+    "fix": "regulation",
+    "label": "Countries with national laws regulating plastic bags",
+    "direction": "context",
+    "unit": "countries (of 192 reviewed)",
+    "kind": "level",
+    "geography": "world",
+    "method": "UNEP and WRI review of national laws as of mid-2018; a single point, no comparable count for other years was found.",
+    "source": "UNEP and WRI, Legal Limits on Single-Use Plastics and Microplastics (December 2018), as summarized by IISD SDG Knowledge Hub, 12 December 2018",
+    "url": "https://sdg.iisd.org/news/unep-wri-report-finds-regulations-focus-on-plastic-bags-overlook-microbeads/",
+    "featured": false,
+    "points": [
+     {
+      "year": 2018,
+      "value": 127,
+      "low": null,
+      "high": null,
+      "projected": false,
+      "estimate": false,
+      "note": "Report landing page: https://wedocs.unep.org/handle/20.500.11822/27113 . The figure was read from IISD's summary, not the 40 MB report itself.",
+      "source": "UNEP and WRI, Legal Limits on Single-Use Plastics and Microplastics (2018), via IISD SDG Knowledge Hub",
+      "url": "https://sdg.iisd.org/news/unep-wri-report-finds-regulations-focus-on-plastic-bags-overlook-microbeads/"
+     }
+    ]
+   }
+  ],
+  "money": [
+   {
+    "key": "ireland-levy-receipts-2002-2013",
+    "fix": "levy",
+    "label": "Irish plastic bag levy receipts, March 2002 to June 2013",
+    "direction": "fix",
+    "usd_year": null,
+    "total_usd": null,
+    "per_year_usd": null,
+    "low_usd": null,
+    "high_usd": null,
+    "years": "2002 to mid-2013",
+    "source": "Dail Eireann written answer, Tax Yield, 16 July 2013 (Questions 743 and 844)",
+    "url": "https://data.oireachtas.ie/akn/ie/debateRecord/dail/2013-07-16/writtens/mul@/dbsect_572.xml",
+    "note": "203.4 million euros in nominal terms (2012 and 2013 partly estimated). Not converted to dollars because it spans eleven years of exchange rates. Paid by shoppers into the Environment Fund, which funds environmental projects, so it is a transfer, not a loss.",
+    "caption": "What Irish shoppers paid in bag levies, 2002 to mid-2013: 203.4 million euros, spent on environmental projects."
+   },
+   {
+    "key": "england-bag-charge-donations",
+    "fix": "charge",
+    "label": "Carrier bag charge proceeds donated to good causes in England",
+    "direction": "fix",
+    "usd_year": null,
+    "total_usd": null,
+    "per_year_usd": null,
+    "low_usd": null,
+    "high_usd": null,
+    "years": "October 2015 to April 2026",
+    "source": "Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026, Figure 1",
+    "url": "https://www.gov.uk/government/publications/carrier-bag-charge-summary-of-data-in-england/single-use-plastic-carrier-bags-charge-data-for-england-2025-to-2026",
+    "note": "Over 234 million pounds reported donated by retailers who chose to report; Defra says the true total is likely higher. Not converted to dollars because it spans many years.",
+    "caption": "Charge money English retailers reported giving to good causes since 2015: over 234 million pounds."
+   }
+  ]
  }
 ];
 

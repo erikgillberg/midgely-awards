@@ -636,5 +636,289 @@ export const CASE_RISKS = [
     "verified": false
    }
   ]
+ },
+ {
+  "id": "silcox",
+  "risks": [
+   {
+    "risk": "In dry, fire-adapted forests, putting out every fire leaves the fuel that frequent low fires used to clear, so dense young trees and brush build up for a larger, hotter fire later.",
+    "pattern": "buffered",
+    "knowable": "partly",
+    "evidence": "Light burning was practiced and argued for before 1910, especially in the Southeast. In 1943 Harold Weaver argued in the Journal of Forestry that complete prevention of fires in Pacific Slope ponderosa pine had undesirable effects; the editors flagged it as controversial. The 1963 Leopold Report called Sierra thickets 'a direct function of overprotection from natural ground fires.' Measured severity effects came later (Steel, Safford and Viers 2015).",
+    "source": "Donovan and Brown, \"Wildfire Management in the U.S. Forest Service: A Brief History,\" Natural Hazards Observer 29(6), July 2005; Karns and Steen-Adams, \"Photography and Early Fire Ecology: The Life of Harold Weaver,\" Forest History Today 2023 to 2024; Leopold and others, Wildlife Management in the National Parks (1963); Steel, Safford and Viers, Ecosphere 6(1), 2015",
+    "verified": true
+   },
+   {
+    "risk": "When nearly every fire is caught small, the few that escape are the ones burning in the most extreme weather, through accumulated fuel, so damage concentrates in rare, very large fires.",
+    "pattern": "buffered",
+    "knowable": "later",
+    "evidence": "Calkin, Thompson and Finney (2015) write that aggressive suppression is one of the major factors driving the extent, intensity and damage of the small number of large wildfires that cannot be suppressed, and that management has 'changed the distribution of fire behavior to only the most extreme.' In 1935 the reasoning ran the other way: one large fire was thought to cost more than many small ones.",
+    "source": "Calkin, Thompson and Finney, \"Negative consequences of positive feedbacks in US wildfire management,\" Forest Ecosystems 2:9, 2015; Loveridge, \"The Fire Suppression Policy of the U.S. Forest Service,\" Journal of Forestry 42(8):549 to 554, 1944",
+    "verified": true
+   },
+   {
+    "risk": "Suppression spending grows without a matching drop in damage and crowds out the agency's other work.",
+    "pattern": "later",
+    "knowable": "partly",
+    "evidence": "The 1935 letter set aside the least-cost-plus-loss rule in favor of attacking every fire, expecting costs plus losses to fall 'in the long run.' By the 1970s rising suppression spending had not reduced damages, which helped end the policy in 1978. Fire took 16% of the Forest Service budget in 1995 and 52% in 2015.",
+    "source": "Loveridge 1944 (Silcox letter of May 7, 1935); Donovan and Brown, Natural Hazards Observer, July 2005; US Department of the Interior press release, \"USDA, DOI, and OMB Urge Congress to Fix the Fire Budget,\" September 15, 2015",
+    "verified": true
+   },
+   {
+    "risk": "Remote backcountry fires cost a great deal to fight and make little difference to acres burned.",
+    "pattern": "later",
+    "knowable": "then",
+    "evidence": "In 1935, the year of the policy, Elers Koch, who had fought the 1910 fires, argued in the Journal of Forestry that three decades of effort in the Lochsa and Selway country had made 'no appreciable difference' in acres burned, and proposed letting such country burn.",
+    "source": "Koch, \"The Passing of the Lolo Trail,\" Journal of Forestry 33 (1935), as summarized in Sowards, High Country News, August 29, 2018, and Larson, Fire Ecology 12:1 to 6, 2016",
+    "verified": true
+   }
+  ],
+  "mitigations": [
+   {
+    "mitigation": "Keep some low, cool fire in dry pine forests through light or prescribed burning, so fuel is cleared a little at a time.",
+    "risk": 0,
+    "existedThen": true,
+    "question": "What small failures are we preventing, and what were they releasing?",
+    "source": "Existed: light burning was practiced and advocated before 1910 (Donovan and Brown, Natural Hazards Observer, July 2005). The 1935 letter itself allowed 'control burning' only where it sped suppression (Loveridge 1944). Prescribed burning was later recommended by the Leopold Report (1963).",
+    "verified": true
+   },
+   {
+    "mitigation": "Let lightning fires in remote backcountry burn under watch, instead of fighting every one.",
+    "risk": 3,
+    "existedThen": true,
+    "question": "What happens on the day the protection fails?",
+    "source": "Proposed then: Koch 1935. Adopted later: National Park Service in 1968 at Sequoia and Kings Canyon; Forest Service in 1972 in the White Cap area of the Selway-Bitterroot Wilderness (NRFSN Field Trip Summary 7, May 2014). Later research there found burn severity significantly lower in recently burned areas.",
+    "verified": true
+   },
+   {
+    "mitigation": "Judge fire spending against the values at risk, the least-cost-plus-loss rule, rather than a single deadline for every fire.",
+    "risk": 2,
+    "existedThen": true,
+    "question": "What does this cost in twenty years, and who pays then?",
+    "source": "Existed: the least-cost-plus-loss principle was presented by R. Headley in 1916 and refined by W. N. Sparhawk in 1925 (Donovan and Brown, July 2005). After 1978 the Forest Service was required to do cost-benefit analysis on presuppression budgets.",
+    "verified": true
+   },
+   {
+    "mitigation": "Track what is building up, not only acres burned: repeat surveys and photo points of stand density and fuel.",
+    "risk": 0,
+    "existedThen": true,
+    "question": "What small failures are we preventing, and what were they releasing?",
+    "source": "Existed: Weaver used photographs of stand conditions from field surveys to document the effect of fire exclusion in his 1943 article (Karns and Steen-Adams, Forest History Today 2023 to 2024). Systematic national fuel monitoring is what we know to do now.",
+    "verified": true
+   }
+  ]
+ },
+ {
+  "id": "jukes",
+  "risks": [
+   {
+    "risk": "Low, steady doses in feed kill the gut bacteria the drug can reach and leave the resistant ones to multiply in every treated animal.",
+    "pattern": "resistance",
+    "knowable": "then",
+    "evidence": "Alexander Fleming warned in 1945 that small doses can teach microbes to resist penicillin. In November 1951 Starr and Reynolds reported streptomycin-resistant coliform bacteria in turkeys fed streptomycin. In Levy's 1976 farm study, the chickens' gut flora was almost entirely tetracycline-resistant within one week of medicated feed.",
+    "source": "McKenna, \"The Chicken Experiment That Shook the World,\" Undark, October 6, 2017; Starr and Reynolds, \"Streptomycin resistance of coliform bacteria from turkeys fed streptomycin,\" American Journal of Public Health 41(11):1375-1380, 1951 (PMID 14885532); Levy, FitzGerald and Macone, New England Journal of Medicine 295(11):583-588, 1976 (PMID 950974)",
+    "verified": true
+   },
+   {
+    "risk": "Resistant bacteria and transferable resistance genes pass from farm animals to the people who work with them, to food and to patients who never chose the practice.",
+    "pattern": "moved",
+    "knowable": "partly",
+    "evidence": "Transfer to people was argued in the 1960s and shown on a farm in 1976: within six months, 31.3% of weekly stool samples from farm dwellers held mostly tetracycline-resistant bacteria, against 6.8% for neighbors, and the bacteria carried transferable multi-drug resistance plasmids. In 2015 the colistin-resistance gene mcr-1 was found on a transferable plasmid in 21% of 804 animals, 15% of 523 raw meat samples and 1% of 1,322 hospital patients' samples in China. A 1998 National Research Council committee still described documented cases of transfer to people as few, so the size of the human toll was contested.",
+    "source": "Levy, FitzGerald and Macone, NEJM 295(11):583-588, 1976 (PMID 950974); Liu and others, Lancet Infectious Diseases 16(2):161-168, 2016 (PMID 26603172); National Academies news release on The Use of Drugs in Food Animals, July 1998",
+    "verified": true
+   },
+   {
+    "risk": "Each farm gains from the growth effect, while the drugs' power to treat infections, a resource shared by every farm, vet and hospital, wears down with the total use.",
+    "pattern": "everyone",
+    "knowable": "partly",
+    "evidence": "The 1969 Swann report recommended that antibiotics used to treat people not be used as feed additives, treating drug effectiveness as something to protect for everyone. Production is estimated to fall only 1.3% to 3% worldwide without growth promoters, a small gain per farm set against a shared loss.",
+    "source": "Courvalin, \"The Antibiotic Food-Chain Gang,\" Emerging Infectious Diseases 7(3):489-490, 2001 (citing Swann, HMSO, 1969); Laxminarayan, Van Boeckel and Teillant, OECD Food, Agriculture and Fisheries Papers No. 78, 2015",
+    "verified": true
+   },
+   {
+    "risk": "Rules aimed at one label let use shift: drugs leave the growth claim and come back as routine prevention.",
+    "pattern": "gamed",
+    "knowable": "later",
+    "evidence": "Swann's 1969 recommendations ended growth claims for penicillin and tetracyclines in the UK in 1971 but did not ban preventive mass medication; an advocacy group reports that farm use of those classes rose about 600% by 1999. The EU banned routine group prevention only from January 28, 2022.",
+    "source": "Alliance to Save Our Antibiotics, timeline (advocacy group), https://saveourantibiotics.org/the-issue/timeline/",
+    "verified": false
+   }
+  ],
+  "mitigations": [
+   {
+    "mitigation": "Monitor resistance in the bacteria of fed animals from the first approval, and set a level that triggers review.",
+    "risk": 0,
+    "existedThen": true,
+    "question": "What survives this, and what happens when that's all that's left?",
+    "source": "Existed: Starr and Reynolds measured resistance in streptomycin-fed turkeys in 1951, the year the FDA approved feed antibiotics. A trigger level is our suggestion. Starr and Reynolds, American Journal of Public Health 41(11):1375-1380, 1951; McKenna, Undark, 2017 (FDA approval in 1951)",
+    "verified": true
+   },
+   {
+    "mitigation": "Keep antibiotics that matter in human medicine out of animal feed; use only classes with no human use for growth.",
+    "risk": 2,
+    "existedThen": false,
+    "question": "Are we relying on one control?",
+    "source": "Proposed in 1969 by Britain's Swann committee, 18 years after US approval. Courvalin, Emerging Infectious Diseases 7(3):489-490, 2001",
+    "verified": true
+   },
+   {
+    "mitigation": "Use antibiotics only to treat sick animals, on a vet's order, and replace routine dosing with hygiene, vaccines and housing changes.",
+    "risk": 1,
+    "existedThen": false,
+    "question": "Are we relying on one control?",
+    "source": "What we know now: Sweden banned growth promoters in 1986; Denmark ended them by 2000 at a net cost a WHO panel put at about 1.04 euros per pig and nothing for poultry. Teillant and Laxminarayan, Choices 30(1), 2015 (citing WHO 2002 and Wierup 2001)",
+    "verified": true
+   },
+   {
+    "mitigation": "Hold a public hearing on the human-health risk before wide release, and act on it.",
+    "risk": 1,
+    "existedThen": true,
+    "question": "Who isn't at the table who will feel this?",
+    "source": "Existed: the FDA approved feed antibiotics in 1951 without advance public notice or a hearing (McKenna, Undark, 2017). It proposed withdrawing penicillin and most tetracycline feed uses in 1977, but Congress directed it to wait for more research and the notices were withdrawn in 2011 (Federal Register 76(246):79697, December 22, 2011).",
+    "verified": true
+   }
+  ]
+ },
+ {
+  "id": "zuckerman",
+  "risks": [
+   {
+    "risk": "If every site copies the trick, readers' patience with ads runs out and they shut ads out for everyone.",
+    "pattern": "everyone",
+    "knowable": "partly",
+    "evidence": "By 1999 a Jupiter Research survey found 69% of users considered pop-ups annoying and 23% said they would not return to a site because of them. In the first seven months of 2002 advertisers bought 11.3 billion pop-up impressions, and in a July 2002 GartnerG2 survey 78.3% of 2,667 internet users called pop-ups very annoying.",
+    "source": "McCoy, Everard, Polak and Galletta, \"The Effects of Online Advertising,\" Communications of the ACM 50(3), March 2007, citing Jupiter Research; Editor and Publisher, \"Less Than 10% Of Advertisers Use Pop-Ups\" (Nielsen//NetRatings data, 2002); Network World, \"Ads infinitum\" (citing GartnerG2, July 2002)",
+    "verified": true
+   },
+   {
+    "risk": "The fix moves the advertiser's problem onto the reader's screen, where the reader pays in attention and was never asked.",
+    "pattern": "moved",
+    "knowable": "then",
+    "evidence": "Zuckerman describes the pop-up as a way to associate an ad with a user's page without putting it on the page, to spare the advertiser. Readers had little remedy other than to close the windows (McCoy and others, 2007).",
+    "source": "Zuckerman, \"The Internet's Original Sin,\" The Atlantic, August 14, 2014; McCoy, Everard, Polak and Galletta, Communications of the ACM 50(3), March 2007",
+    "verified": true
+   },
+   {
+    "risk": "The fix depends on a browser feature other companies control, and they can switch it off.",
+    "pattern": "everyone",
+    "knowable": "partly",
+    "evidence": "Opening a window from a script depended on JavaScript, which arrived with Netscape Navigator 2 (beta from September 1995). Browser makers then switched pop-ups off: Phoenix by default from September 2002, Netscape 7.01 as an option in December 2002, Safari in January 2003 and Internet Explorer by default in August 2004.",
+    "source": "Wikipedia, Netscape Navigator 2; mozilla.org Phoenix 0.1 and 0.3 release notes; The Register, \"New Netscape kills pop-ups,\" December 16, 2002; Apple, \"Apple Unveils Safari,\" January 7, 2003; UNMC newsroom, August 16, 2004",
+    "verified": true
+   },
+   {
+    "risk": "Making advertising the default way to fund the web pushes companies toward collecting ever more data about users.",
+    "pattern": "moved",
+    "knowable": "later",
+    "evidence": "This is Zuckerman's own argument, made in 2014 and drawing on Maciej Ceglowski: investors reward the promise of better targeting, which requires more surveillance. In 2019, 72% of US adults said all, almost all or most of what they do online is tracked by advertisers, technology firms or other companies. The causal link to the pop-up itself is not documented.",
+    "source": "Zuckerman, \"The Internet's Original Sin,\" The Atlantic, August 14, 2014; Pew Research Center, \"Americans and Privacy,\" November 15, 2019",
+    "verified": true
+   }
+  ],
+  "mitigations": [
+   {
+    "mitigation": "Agree on limits for intrusive formats across the industry before the format spreads.",
+    "risk": 0,
+    "existedThen": false,
+    "question": "What happens when everyone does this, not just us?",
+    "source": "What we know now: the Coalition for Better Ads standards (2017) list pop-up ads among the experiences most likely to drive people to install ad blockers, and Chrome began enforcing them on February 15, 2018. Coalition for Better Ads, Better Ads Standards; Chromium Blog, February 14, 2018",
+    "verified": true
+   },
+   {
+    "mitigation": "Offer readers a paid, ad-free option so the people bearing the cost have a say.",
+    "risk": 1,
+    "existedThen": true,
+    "question": "Who isn't at the table who will feel this?",
+    "source": "Existed: Tripod tried running as a subscription service among dozens of revenue models, Zuckerman writes. He also notes that in 1995 most of the world had no credit card, which limited this option. Zuckerman, \"The Internet's Original Sin,\" The Atlantic, August 14, 2014",
+    "verified": true
+   },
+   {
+    "mitigation": "Sell ads by section or topic, as print did, so brand placement is handled inside your own pages instead of in a window the browser controls.",
+    "risk": 2,
+    "existedThen": true,
+    "question": "Where does the problem go after it leaves our boundary?",
+    "source": "Existed: Tripod already grouped member pages into more than 140 interest-based community pods with editorial content (Lycos Form 10-K, fiscal 1998). Whether pods could have carried the carmaker's ad safely is our inference, not documented.",
+    "verified": false
+   },
+   {
+    "mitigation": "Charge for services and promise not to sell user data, as Zuckerman proposed in 2014.",
+    "risk": 3,
+    "existedThen": false,
+    "question": "Who isn't at the table who will feel this?",
+    "source": "Proposed later: Zuckerman cites Pinboard (launched 2009), a paid bookmarking service that sells no ads and no data. Zuckerman, \"The Internet's Original Sin,\" The Atlantic, August 14, 2014",
+    "verified": true
+   }
+  ]
+ },
+ {
+  "id": "thulin",
+  "risks": [
+   {
+    "risk": "A bag that is strong but almost free gets handed out at every checkout and thrown away after one trip, by everyone, so the total piles up as litter in streets, rivers and coasts that everyone shares.",
+    "pattern": "everyone",
+    "knowable": "partly",
+    "evidence": "Litter from bags was visible as use spread; Ireland estimated 328 bags per person per year and bags at about 5% of litter before its 2002 levy. Barry Commoner publicly asked in 1986 whether society needed plastic bags. The global scale (42 billion lightweight bags in the EU alone in 2018) was measured much later.",
+    "source": "Dail Eireann written answers, Plastic Bag Levy, 6 June 2012 (Question 582) and 19 June 2018 (Question 454), https://data.oireachtas.ie/akn/ie/debateRecord/dail/2012-06-06/writtens/mul@/dbsect_450.xml ; Eurostat dataset env_waspcb ; Commoner via 99% Invisible, 'Paper or Plastic?'",
+    "verified": true
+   },
+   {
+    "risk": "A tough, light polyethylene film lasts long after use and travels by wind and water to drains, rivers and the sea, where animals can mistake it for food.",
+    "pattern": "stable",
+    "knowable": "partly",
+    "evidence": "Plastic floating in the open Atlantic (Sargasso Sea) was reported by Carpenter and Smith in 1972, a decade after production began. NOAA notes a floating bag can look like a jellyfish to animals such as ocean sunfish. Bags blocking drains were a driver of Bangladesh's 2002 ban.",
+    "source": "Carpenter and Smith, Science 175 (1972), as summarized in WHOI Oceanus 48(2), https://www.whoi.edu/cms/files/OceanusV48N2_Plastics_74012.pdf ; NOAA National Marine Sanctuaries photo caption, https://commons.wikimedia.org/wiki/File:GFNMS_-_mola_mola_(30550424153).jpg ; Guinness World Records, First country to ban single-use plastic bags",
+    "verified": true
+   },
+   {
+    "risk": "The cost of collecting and cleaning up bags falls on towns, drainage systems and wildlife, not on the store that gives the bag away or the shopper who takes it.",
+    "pattern": "moved",
+    "knowable": "partly",
+    "evidence": "Ireland introduced its levy primarily as an anti-litter measure, after a 1998 government-commissioned study of fiscal measures. Bangladesh's Ministry of Environment campaigned from 1993 against bags blocking drains before its 2002 ban.",
+    "source": "Dail Eireann written answer, 17 July 2014 (Question 485), https://data.oireachtas.ie/akn/ie/debateRecord/dail/2014-07-17/writtens/mul@/dbsect_443.xml ; Anastasio and Nix, Plastic Bag Levy in Ireland, IEEP case study (2016) ; Guinness World Records, First country to ban single-use plastic bags",
+    "verified": true
+   },
+   {
+    "risk": "Replacing the plastic bag with paper or cotton raises other impacts: a paper bag must be used at least 3 times, and a cotton bag at least 131 times, to have lower global warming potential than a plastic bag used once.",
+    "pattern": "moved",
+    "knowable": "later",
+    "evidence": "A UK Environment Agency life cycle assessment of bags available in 2006, published in 2011, found this. It did not assess litter.",
+    "source": "Environment Agency, Life cycle assessment of supermarket carrier bags: a review of the bags available in 2006, Report SC030148 (February 2011), https://assets.publishing.service.gov.uk/media/5a7bff74ed915d01ba1ca7c7/scho0711buan-e-e.pdf",
+    "verified": true
+   }
+  ],
+  "mitigations": [
+   {
+    "mitigation": "Put a small price on each bag at the checkout so the shopper weighs it.",
+    "risk": 0,
+    "existedThen": false,
+    "question": "What happens when everyone does this, not just us?",
+    "source": "Known from 2002 on: Ireland's 15 cent levy cut use from an estimated 328 bags per person to 21 by the end of 2002; England's 5p charge from October 2015 cut the main retailers' bags by 98% against 2014. Dail Eireann written answer, 6 June 2012; Defra, Single-use plastic carrier bags charge: data for England 2025 to 2026",
+    "verified": true
+   },
+   {
+    "mitigation": "Make the reusable version the default: a thicker bag sold for reuse, used at least 4 times.",
+    "risk": 0,
+    "existedThen": false,
+    "question": "What shared thing gets used up when it spreads?",
+    "source": "What we know now: the 2011 Environment Agency study found an LDPE bag for life must be used at least 4 times to beat a single-use HDPE bag on global warming potential. Environment Agency, Report SC030148 (2011)",
+    "verified": true
+   },
+   {
+    "mitigation": "Set up take-back and recycling at the store from the start.",
+    "risk": 1,
+    "existedThen": false,
+    "question": "Where does it end up, and what breaks it down there?",
+    "source": "What we know now: by 2007 California required large supermarkets to set up plastic bag recycling, and Rhode Island worked with grocers to collect bags. Conway, 'Taking Aim at All Those Plastic Bags,' New York Times, April 1, 2007, https://dpw.lacounty.gov/epd/AboutTheBag/resource/pdfs/NewYorkTimes_04-01-07.pdf",
+    "verified": true
+   },
+   {
+    "mitigation": "Compare the whole life cycle, litter included, before switching materials, and favor reuse of whatever bag people already have.",
+    "risk": 3,
+    "existedThen": false,
+    "question": "Where does the problem go after it leaves our boundary?",
+    "source": "What we know now: the Environment Agency (2011) found reuse is the key to lowering impacts for every bag type. UNEP (2020) reviewed bag life cycle studies and noted alternatives do not necessarily outperform plastic in all categories. Environment Agency Report SC030148; UNEP, Single-use Plastic Bags and their Alternatives: Recommendations from Life Cycle Assessments (2020), https://wedocs.unep.org/handle/20.500.11822/31932",
+    "verified": true
+   }
+  ]
  }
 ];
