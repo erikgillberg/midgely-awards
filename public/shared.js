@@ -372,6 +372,7 @@ function fullSections(n) {
 const ICON = {
   home: '<path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+  patterns: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.2 8.2l3.6 7.6M16.8 8.2l-3.6 7.6"/>',
   plus: '<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/>',
   table: '<rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="10" width="5" height="5"/><rect x="9.5" y="10" width="5" height="5"/><rect x="16" y="10" width="5" height="5"/><rect x="6" y="17.5" width="12" height="3.5"/>',
   award: '<circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5 5 2.5-1.5-8"/>',
@@ -384,7 +385,7 @@ const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg
 // Every page's navigation: a rail on the left on wide screens, a top bar and a bottom tab bar on phones,
 // and the full menu (every section of the site) behind More.
 export const MENU = [
-  ["The awards", [["/midgley", "The Midgley"], ["/murphy", "The Murphy"], ["/awards", "Awards night"], ["/scores", "How scores work"], ["/table", "The Categoric Table"]]],
+  ["The awards", [["/midgley", "The Midgley"], ["/murphy", "The Murphy"], ["/awards", "Awards night"], ["/scores", "How scores work"], ["/table", "The Categoric Table"], ["/patterns", "The Patterns"]]],
   ["What this is", [["/#intro", "The big picture"], ["/#rules", "What makes a good nominee"], ["/#question", "The serious question"], ["/#gap", "The gender gap"], ["/guidelines", "Community guidelines"]]],
   ["More from us", [["/shop", "Shop"], ["/#oops", "The Weekly Oops"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
 ];
@@ -397,6 +398,7 @@ export function headerHTML(flags = {}) {
       ${item("/search", "search", "Search")}
       <button class="nav-i nav-nom" type="button" data-open-sheet="">${icon("plus")}<span>Nominate</span></button>
       ${item("/table", "table", "The Table")}
+      ${item("/patterns", "patterns", "The Patterns")}
       ${item("/awards", "award", "The Awards")}
       ${item("/shop", "bag", "Shop")}
     </nav>

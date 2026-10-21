@@ -22,7 +22,7 @@ import {
   postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath, notAFitFor, notAFitHTML, NOT_A_FIT, NOT_A_FIT_RULES,
 } from "./shared.js";
 import { CODEBOOK, DIMENSIONS } from "./codebook.js";
-import { codebookHTML, dataHTML } from "./codebook-ui.js";
+import { patternsTeaserHTML, patternsPageHTML } from "./codebook-ui.js";
 const PATTERN_KEYS = CODEBOOK.map((p) => p.key);
 
 const SCHEMA_VERSION = 16;
@@ -1597,7 +1597,7 @@ const SITE_ORIGIN = (url) => (url.hostname === SITE_HOST ? SITE : url.origin);
 async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
-  const paths = ["/", "/search", "/table", "/midgley", "/murphy", "/awards", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
+  const paths = ["/", "/search", "/table", "/patterns", "/midgley", "/murphy", "/awards", "/shop", "/scores", "/guidelines", "/privacy", "/terms"];
   if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -1657,7 +1657,14 @@ export default {
       return decorate(await asset(env, url, request, "/table"), env, url, {
         canonical: SITE + "/table",
         fill: { "#pt-grid": `<div class="pt-gap" style="grid-row:8;grid-column:1"></div>` + categoricTableHTML(st ? st.nominees : []), "#pt-legend": categoricLegendHTML(),
-          "#codebook": codebookHTML(st ? st.nominees : []), "#data": dataHTML(st ? st.nominees : []) },
+          "#codebook": patternsTeaserHTML(st ? st.nominees : []) },
+      });
+    }
+    if (p === "/patterns") {
+      const st = await siteState(env, url, ctx);
+      return decorate(await asset(env, url, request, "/patterns"), env, url, {
+        canonical: SITE + "/patterns",
+        fill: { "#pp": patternsPageHTML(st ? st.nominees : []) },
       });
     }
     if (p === "/midgley") return honoreePage(request, env, url, ctx);
