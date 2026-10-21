@@ -52,8 +52,8 @@ export const LINKS = {
   waitlistForm: "kbakOe",                    // Tally: Backfire Awards shop waitlist (form id, embedded on /shop/waitlist)
   beehiivForm: "71cdf4c1-b2c8-4913-bb03-cc836734a7b1", // Beehiiv: The Backfire Newsletter sign-up form
   socials: [{ name: "Instagram", url: "https://www.instagram.com/backfireawards/" }],
-  suggestEmail: "",   // where teardown suggestions go, once there is a public address
-  linkedin: "",       // the LinkedIn profile or page that takes suggestions
+  suggestEmail: "teardowns@backfireawards.com",          // where teardown suggestions go
+  linkedin: "https://www.linkedin.com/in/erikgillberg",  // Erik's profile: people talk to a person
 };
 
 // The Backfire Newsletter sign-up: our own form. The server keeps the address and passes it on to the newsletter service.
