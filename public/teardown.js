@@ -3,7 +3,7 @@
 import { CODEBOOK, DIMENSIONS } from "./codebook.js";
 import { CASE_SOURCES } from "./case-sources.js";
 import { impactPanelHTML, HUES, patternChapterHTML, readouts, tagged } from "./codebook-ui.js";
-import { esc, nomineePath, symbol, jewelOf, jewelVars, elementHTML, DOMAINS } from "./shared.js";
+import { esc, nomineePath, symbol, jewelOf, jewelVars, elementHTML, DOMAINS, LI_MARK } from "./shared.js";
 
 // Dated corrections per case: what changed, and why. Newest first. Shown on the case and on /corrections.
 export const CORRECTIONS = [
@@ -48,7 +48,7 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
 
   const page = (url || "https://backfireawards.com") + nomineePath(n);
   const share = `<div class="td-actions">
-      <a class="td-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(page)}" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(n.id)}">Share on LinkedIn</a>
+      <a class="td-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(page)}" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(n.id)}">${LI_MARK}Share on LinkedIn</a>
       <button class="td-btn" type="button" data-copy-link="${esc(page)}">Copy link</button>
     </div>
     <aside class="td-comments td-float" id="discussion" aria-label="Discussion">
@@ -61,7 +61,7 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
     `<a class="td-other" href="${nomineePath(x)}"><span class="td-sym">${esc(symbol(x.name))}</span><span>${esc(x.name)}<small>${esc(x.work || "")}</small></span></a>`).join("");
 
   secN = 0;
-  const bgs = (story.backgrounds || []).slice(0, 5);
+  const bgs = (story.backgrounds || []).slice(0, 6);
 
   return `${bgs.length ? `<div class="td-bgs" aria-hidden="true">${bgs.map((b, i) => `<span class="${i ? "" : "on"}" style="background-image:url(${esc(b)})"></span>`).join("")}</div>` : ""}
   <section class="td" style="${jewelVars(jewelOf(n.domain))}">
@@ -100,15 +100,15 @@ export function teardownMastHTML(n, story = {}) {
         
         <h1>${esc(n.name)}</h1>
         <p class="td-dek">${esc(n.work)}${n.years ? ` · ${esc(n.years)}` : ""}</p>
-        ${main ? `<a class="td-mast-pat" href="#pattern" style="--hue:${HUES[main.key]}"><i></i>The pattern: ${esc(main.name)}</a>` : ""}
+        ${main ? `<a class="td-mast-pat" href="#pattern" data-hint="Jump to the pattern behind this backfire" style="--hue:${HUES[main.key]}"><i></i>The pattern: ${esc(main.name)}</a>` : ""}
       </div>
     </header>
     <span id="story" class="td-anchor"></span>
     <nav class="td-nav" aria-label="On this page"><ol>${stops.map(([id, l]) => `<li><a href="#${id}" data-stop="${id}">${l}</a></li>`).join("")}</ol>
       <div class="td-nav-act">
-        <a class="td-nav-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://backfireawards.com" + nomineePath(n))}" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(n.id)}">Share</a>
-        <button class="td-nav-btn" type="button" data-copy-link="${esc("https://backfireawards.com" + nomineePath(n))}">Copy link</button>
-        <button class="td-nav-btn cta" type="button" data-intent="comment-login" data-id="${esc(n.id)}">Comment</button>
+        <a class="td-nav-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://backfireawards.com" + nomineePath(n))}" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(n.id)}" data-hint="Post this teardown to LinkedIn">${LI_MARK}Share</a>
+        <button class="td-nav-btn" type="button" data-hint="Copy this page's link" data-copy-link="${esc("https://backfireawards.com" + nomineePath(n))}">Copy link</button>
+        <button class="td-nav-btn cta" type="button" data-hint="Comments are coming. Click to tell us you want them." data-intent="comment-login" data-id="${esc(n.id)}">Comment</button>
       </div>
       <p class="td-intent" hidden>Comments open soon. Thanks: we counted your click.</p></nav>`;
 }

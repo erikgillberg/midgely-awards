@@ -76,6 +76,7 @@ export const MURPHYS_LIVE = false;
 // teardowns by replying to the newsletter (or by email or LinkedIn once those are set in LINKS), and the newsletter is
 // the one call to action. The forms, the comment code and the data stay; flip these to bring them back.
 export const NOMINATIONS_LIVE = false;
+export const LI_MARK = `<svg class="li-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>`;
 export const COMMENTS_LIVE = false;
 // Scores (the judges' Oops Score and the Facepalm Index numbers) are hidden for now; the "Worth it?" vote stays.
 export const SCORES_VISIBLE = false;
@@ -238,8 +239,8 @@ function postShell(p, ctx = {}) {
   const pct = p.herdTotal >= MIN_HERD_VOTES ? Math.round((100 * p.herdYes) / p.herdTotal) : null;
   const vote = flags.scores || p.kind === "murphy"
     ? `<div class="pv-vote" role="group" aria-label="${esc(p.worthy)}"><span class="pv-q">${esc(p.worthy)}</span>
-        <button class="pv-btn pv-yes" data-act="herd" data-vote="no" aria-pressed="false" aria-label="Yes, worth it"><span class="emo" aria-hidden="true">💡</span><span>Yes</span></button>
-        <button class="pv-btn pv-no" data-act="herd" data-vote="yes" aria-pressed="false" aria-label="No, a facepalm"><span class="emo" aria-hidden="true">🤦</span><span>No</span></button></div>`
+        <button class="pv-btn pv-yes" data-act="herd" data-vote="no" aria-pressed="false" aria-label="Yes, worth it" data-hint="Yes: the good it did was worth the backfire"><span class="emo" aria-hidden="true">💡</span><span>Yes</span></button>
+        <button class="pv-btn pv-no" data-act="herd" data-vote="yes" aria-pressed="false" aria-label="No, a facepalm" data-hint="No: the backfire outweighed the good"><span class="emo" aria-hidden="true">🤦</span><span>No</span></button></div>`
     : `<button class="pv-btn" data-act="vote" aria-pressed="false">${upIcon}<span class="c">${p.score}</span></button>`;
   const stats = [
     p.kind !== "murphy" && flags.scores ? `Oops <b>${p.oops ?? "?"}</b>` : "",
@@ -247,15 +248,15 @@ function postShell(p, ctx = {}) {
   ].filter(Boolean).join(" · ");
   return `<article class="post" id="post-${esc(p.id)}" data-id="${esc(p.id)}" data-kind="${p.kind}" data-path="${esc(p.path)}" style="${p.vars || ""}">
     <header class="pv-head">
-      <a class="pv-who" href="${esc(p.path)}">${p.tile}<span><b>${esc(p.title)}</b><small>${esc(p.sub)}</small></span></a>
-      <details class="pv-menu"><summary aria-label="More options">${picon("dots")}</summary>
-        <div>${p.kind === "nominee" && !ctx.open ? `<a href="${esc(p.path)}" class="pv-open">Open the full teardown</a>` : ""}<a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://backfireawards.com" + p.path)}" class="pv-li" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(p.id)}">Post to LinkedIn</a><button type="button" data-act="share-link">Copy link</button><button type="button" data-act="share-ig">Save cards for Instagram</button><button type="button" data-act="report">Report</button></div></details>
+      <a class="pv-who" href="${esc(p.path)}" data-hint="Open the full teardown">${p.tile}<span><b>${esc(p.title)}</b><small>${esc(p.sub)}</small></span></a>
+      <details class="pv-menu"><summary aria-label="More options" data-hint="More: full teardown, LinkedIn, copy link">${picon("dots")}</summary>
+        <div>${p.kind === "nominee" && !ctx.open ? `<a href="${esc(p.path)}" class="pv-open">Open the full teardown</a>` : ""}<a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://backfireawards.com" + p.path)}" class="pv-li" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(p.id)}">${LI_MARK}Post to LinkedIn</a><button type="button" data-act="share-link">Copy link</button><button type="button" data-act="share-ig">Save cards for Instagram</button><button type="button" data-act="report">Report</button></div></details>
     </header>
     ${p.carousel}
     <div class="pv-bar">
       ${vote}
       ${COMMENTS_LIVE ? `<button class="pv-btn" data-act="comments" aria-label="Comments">${picon("comment")}<span class="cc-n">${thread.length}</span></button>` : ""}
-      <button class="pv-btn" data-act="share" aria-label="Share">${picon("share")}</button>
+      <button class="pv-btn" data-act="share" aria-label="Share" data-hint="Share this teardown">${picon("share")}</button>
     </div>
     ${SCORES_VISIBLE ? `<p class="pv-stats">${stats} · <a href="/faq#scores">scores</a></p>` : ""}
     <div class="pv-caption"><p><a href="${esc(p.path)}"><b>${esc(p.captionTitle)}</b></a> ${esc(p.caption)}${p.more ? ` <button class="pv-more" type="button" data-act="more">more</button>` : ""}</p>
@@ -311,7 +312,7 @@ export function murphyCarouselHTML(m) {
       <section class="cc no-img" data-sym="Mu"><div class="cc-body"><p class="cc-label"><span>01</span> What went oops</p><h3 class="cc-title">${esc(m.oops)}</h3></div>${foot(2)}</section>
       <section class="cc cc-payoff"><div class="cc-body"><p class="cc-label">Murphy's law</p><h3 class="cc-title">Anything that can go wrong will go wrong.</h3><p class="cc-cta">Got one? Share yours at <b>${BRAND_DOMAIN}</b></p><p class="cc-follow site-follow">Follow the Backfire Awards for a new backfire every week.</p></div>${foot(3)}</section>${IG_ASK}
     </div>
-    <div class="cc-nav"><button type="button" data-cc="prev" aria-label="Previous card">←</button><span class="cc-dots"><i data-cc-dot="0"></i><i data-cc-dot="1"></i><i data-cc-dot="2"></i></span><button type="button" data-cc="next" aria-label="Next card">→</button></div>
+    <div class="cc-nav"><button type="button" data-cc="prev" aria-label="Previous card" data-hint="Previous card" data-hint-up>←</button><span class="cc-dots"><i data-cc-dot="0"></i><i data-cc-dot="1"></i><i data-cc-dot="2"></i></span><button type="button" data-cc="next" aria-label="Next card" data-hint="Next card" data-hint-up>→</button></div>
   </div>`;
 }
 export function murphyPostHTML(m, ctx = {}) {
@@ -405,7 +406,7 @@ export const MENU = [
   ["More from us", [["/shop", "Shop"], ["/#oops", "The newsletter"], ["/privacy", "Privacy"], ["/terms", "Terms"]]],
 ];
 export function headerHTML(flags = {}) {
-  const item = (href, k, label, extra = "") => `<a class="nav-i" href="${href}" ${extra}>${icon(k)}<span>${label}</span></a>`;
+  const item = (href, k, label, extra = "") => `<a class="nav-i" href="${href}" data-hint="${label}" ${extra}>${icon(k)}<span>${label}</span></a>`;
   return `<div class="rail">
     <a class="brand" href="/"><span class="mini" aria-hidden="true">Bf</span><span class="brand-t">The Backfire Awards</span></a>
     <nav class="rail-nav" aria-label="Main">
@@ -418,7 +419,7 @@ export function headerHTML(flags = {}) {
       ${item("/awards", "award", "The Awards")}
       ${item("/shop", "bag", "Shop")}
     </nav>
-    <button class="nav-i nav-theme" type="button" data-theme-toggle aria-label="Switch between night and day">${icon("sun")}<span class="t-day">Day mode</span><span class="t-night">Night mode</span></button>
+    <button class="nav-i nav-theme" type="button" data-theme-toggle aria-label="Switch between night and day" data-hint="Switch between night and day">${icon("sun")}<span class="t-day">Day mode</span><span class="t-night">Night mode</span></button>
     <button class="nav-i nav-oops" type="button" data-oops aria-haspopup="dialog">${icon("mail")}<span>Newsletter</span></button>
     <button class="nav-i nav-more" type="button" data-menu aria-expanded="false" aria-controls="menu-panel">${icon("menu")}<span>More</span></button>
   </div>
@@ -824,9 +825,9 @@ export function carouselHTML(n, data, flags = {}) {
   return `<div class="carousel${data.format === "short" ? " cc-short" : ""}" style="${jewelVars(j)}" data-carousel>
     <div class="cc-track" tabindex="0" aria-label="${esc(n.name)}, ${total} cards">${cards.join("")}</div>
     <div class="cc-nav">
-      <button type="button" data-cc="prev" aria-label="Previous card">←</button>
+      <button type="button" data-cc="prev" aria-label="Previous card" data-hint="Previous card" data-hint-up>←</button>
       <span class="cc-dots">${Array.from({ length: total }, (_, i) => `<i data-cc-dot="${i}"></i>`).join("")}</span>
-      <button type="button" data-cc="next" aria-label="Next card">→</button>
+      <button type="button" data-cc="next" aria-label="Next card" data-hint="Next card" data-hint-up>→</button>
     </div>
   </div>`;
 }
