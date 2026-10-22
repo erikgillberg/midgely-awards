@@ -1,6 +1,8 @@
 # Backfire Awards: soft launch checklist and two-week plan
 
-Written October 22, 2026. Soft launch on Friday, October 23. Public launch on Monday, November 2: the date the site already gives, the anniversary of Midgley's death. Budget for Erik: about 20 minutes a day, most of it posting and replying on LinkedIn.
+Written October 22, 2026. **Superseded the same day** for cadence and automation by the Google Doc "Backfire Awards launch sprint" (one nominee a week, weekly approval). The checklist in sections 1 and 2 still stands.
+
+ Soft launch on Friday, October 23. Public launch on Monday, November 2: the date the site already gives, the anniversary of Midgley's death. Budget for Erik: about 20 minutes a day, most of it posting and replying on LinkedIn.
 
 ## 1. Before the soft launch (Erik, about 45 minutes, once)
 
