@@ -1858,3 +1858,5 @@ body[data-bg="warm"] .wrap.doc :is(table,th,td){border-color:rgb(255 255 255/.14
 /* post menu: drops over the carousel instead of under it */
 .post{overflow:visible!important}
 .pv-head{position:relative;z-index:8}
+.pv-menu a.pv-li{display:block;padding:12px 14px;font:500 14px var(--sans);color:var(--ink);text-decoration:none}
+.pv-menu a.pv-li:hover{background:var(--ground)}
