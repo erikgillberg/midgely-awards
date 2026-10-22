@@ -1848,3 +1848,5 @@ body[data-bg="warm"] .wrap.doc :is(table,th,td){border-color:rgb(255 255 255/.14
 .pp-nav a[aria-current]{background:#EE6B3A!important;color:#0A2033!important}
 .pp-hero{padding-top:64px}
 @media (max-width:760px){ .pp-nav{top:0!important} }
+.pv-menu a.pv-open{display:block;padding:12px 14px;font:700 14px var(--sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.pv-menu a.pv-open:hover{background:var(--ground)}

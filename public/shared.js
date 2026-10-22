@@ -249,7 +249,7 @@ function postShell(p, ctx = {}) {
     <header class="pv-head">
       <a class="pv-who" href="${esc(p.path)}">${p.tile}<span><b>${esc(p.title)}</b><small>${esc(p.sub)}</small></span></a>
       <details class="pv-menu"><summary aria-label="More options">${picon("dots")}</summary>
-        <div><button type="button" data-act="share-link">Copy link</button><button type="button" data-act="share-ig">Save cards for Instagram</button><button type="button" data-act="report">Report</button></div></details>
+        <div>${p.kind === "nominee" && !ctx.open ? `<a href="${esc(p.path)}" class="pv-open">Open the full teardown</a>` : ""}<button type="button" data-act="share-link">Copy link</button><button type="button" data-act="share-ig">Save cards for Instagram</button><button type="button" data-act="report">Report</button></div></details>
     </header>
     ${p.carousel}
     <div class="pv-bar">
