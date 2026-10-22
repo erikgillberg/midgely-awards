@@ -1547,7 +1547,7 @@ async function nomineePage(request, env, url, ctx, key) {
     title: `${n.name}: ${n.work} · The Backfire Awards`,
     desc: `${scores ? scores + ". " : ""}Nominated for outstanding achievement in unintended consequences. ${n.backfire}`.slice(0, 280),
     fill: {
-      "#list": postHTML(n, { flags, thread, open: true, carousel, more: await moreFor(env, n) }),
+      "#list": postHTML(n, { flags, thread, open: true, carousel, more: ledgerMore(n, true) }),
       "#td-mast": teardownMastHTML(n, { headline: cd?.headline }),
       "#more-feed": teardownHTML(n, st.nominees.filter((x) => x.id !== HONOREE), await mediaFor(env, n), SITE, {
         headline: cd?.headline,
@@ -1700,7 +1700,7 @@ async function carouselFor(request, env, url, n) {
   // Staging and local show a story's draft carousel by default (?draft=off shows the live one); production never does.
   if (url.hostname !== SITE_HOST && url.searchParams.get("draft") !== "off") {
     const d = await env.ASSETS.fetch(new URL(`/carousels/drafts/${n.slug}.json`, url).toString()).then(jsonOrNull).catch(() => null);
-    if (d) return carouselHTML(n, d, flagsOf(env));
+    if (d) { carouselCache.set(n.slug, d); return carouselHTML(n, d, flagsOf(env)); }
   }
   if (!carouselCache.has(n.slug)) {
     // A plain request (no browser cache headers), so the answer is the file itself, never "not modified".
@@ -1715,6 +1715,14 @@ async function mediaFor(env, n) {
   const db = findD1(env);
   if (!db) return [];
   return (await db.prepare("SELECT * FROM media WHERE nominee_id = ? ORDER BY role").bind(n.id).all().catch(() => ({ results: [] }))).results;
+}
+
+// Under a post's caption: the ledger from its carousel and where the sources are. The cards tell the story already.
+function ledgerMore(n, onPage = false) {
+  const lg = (carouselCache.get(n.slug)?.slides || []).find((s) => s.kind === "ledger");
+  const list = (h, items) => (items?.length ? `<div><h3>${esc(h)}</h3><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>` : "");
+  return `<div class="writeup ledger-more">${lg ? `<section class="lm-ledger">${list(lg.gainsLabel || "What it gave", lg.gains)}${list(lg.costsLabel || "What it cost", lg.costs)}</section>` : ""}
+    <p class="lm-src"><a href="${onPage ? "#references" : nomineePath(n) + "#references"}">Sources and references</a></p></div>`;
 }
 
 async function moreFor(env, n) {
@@ -1749,7 +1757,7 @@ async function feedHTML(request, env, url, st, exclude = "") {
   let mi = 0;
   for (let i = 0; i < noms.length; i++) {
     const n = noms[i];
-    out.push(postHTML(n, { flags, thread: thread(n.id), carousel: await carouselFor(request, env, url, n), more: writeupHTML(n) }));
+    out.push(postHTML(n, { flags, thread: thread(n.id), carousel: await carouselFor(request, env, url, n), more: ledgerMore(n) }));
     if (i === 4) out.push(feedOopsHTML());
     if ((i + 1) % 3 === 0 && mi < murphys.length) { const m = murphys[mi++]; out.push(murphyPostHTML(m, { flags, thread: thread(m.id) })); }
   }

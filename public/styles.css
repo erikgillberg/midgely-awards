@@ -1860,3 +1860,8 @@ body[data-bg="warm"] .wrap.doc :is(table,th,td){border-color:rgb(255 255 255/.14
 .pv-head{position:relative;z-index:8}
 .pv-menu a.pv-li{display:block;padding:12px 14px;font:500 14px var(--sans);color:var(--ink);text-decoration:none}
 .pv-menu a.pv-li:hover{background:var(--ground)}
+.ledger-more .lm-ledger{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ledger-more h3{margin:0 0 6px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.ledger-more ul{margin:0;padding-left:18px;font-size:14px;line-height:1.45}
+.lm-src{margin:12px 0 0;font-size:14px}
+@media (max-width:560px){ .ledger-more .lm-ledger{grid-template-columns:1fr} }
