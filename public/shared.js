@@ -346,7 +346,7 @@ export const sceneOf = (n) => `/img/scenes/${n.status === "prospective" || !DOMA
 export function nomCardHTML(n, flags = {}) {
   const j = jewelOf(n.domain);
   const pct = herdPct(n);
-  const scores = flags.scores
+  const scores = flags.scores && SCORES_VISIBLE
     ? `<p class="nc-scores"><span>Oops <b>${n.oops ?? "?"}</b></span><span>Facepalm <b>${pct != null ? pct + "%" : "?"}</b></span></p>`
     : `<p class="nc-scores"><span>${n.score} upvote${n.score === 1 ? "" : "s"}</span></p>`;
   return `<article class="nom-card" id="nom-${esc(n.id)}" data-id="${esc(n.id)}" style="${jewelVars(j)}">

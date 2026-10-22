@@ -1811,3 +1811,40 @@ body[data-page="nominee"] :is(.td-sec,.td-wide,#more,#list){scroll-margin-top:64
 .td-other small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
 /* footer: full width, square */
 .site-foot{border-radius:0!important;width:calc(100vw - var(--railw));margin-left:calc((100% - (100vw - var(--pl) - 16px)) / 2 - (var(--pl) - var(--railw)));box-sizing:border-box;padding-inline:max(16px,calc((100vw - var(--railw) - 880px) / 2))!important}
+/* ======================================================================
+   Site-wide design rules (2026-10-21, see docs/design-guidelines.md)
+   1. Square objects, rounded containers.  2. Square menus and footers pinned to the page edges.
+   3. Night glass over warm 1970s scenes.  4. One accent: orange.
+   ====================================================================== */
+/* the footer: full width, square, and at the bottom of the window even on short pages */
+body{display:flex;flex-direction:column;min-height:100svh}
+body>.wrap{width:100%;box-sizing:border-box}
+.wrap{padding-bottom:40px}
+.wrap.foot-wrap{margin-top:auto;padding:0;gap:0}
+.foot-wrap .site-foot{margin-bottom:0}
+/* rounded controls and containers outside the carousel cards */
+:is(.primary,.ghost,.nom-btn,.signup button,.cc-nav button):not(.cc *){border-radius:999px}
+.post .cc-nav button{border-radius:999px}
+.search-box input,.search-bar select,.facets select,.sh-field :is(input,textarea,select){border-radius:12px}
+:is(.lg-item,.pt-view,.notice,.sheet-in,.menu-in,.oops-box-in,.search-box,.shop-soon){border-radius:16px}
+.pt-view{overflow:auto}
+/* text pages: night glass over a warm scene */
+body[data-bg="warm"]{background:#08192A}
+body[data-bg="warm"]::before,body[data-bg="orbit"]::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgb(8 25 40/.5),rgb(8 25 40/.74)),url(/img/seventies/04-desert-research-city-sq.jpg) center/cover no-repeat}
+body[data-bg="orbit"]{background:#08192A!important}
+body[data-bg="orbit"]::before{background:linear-gradient(180deg,rgb(8 25 40/.5),rgb(8 25 40/.74)),url(/img/seventies/01-tokyo-skyways-wide.jpg) center/cover no-repeat}
+body[data-bg="warm"] .wrap.doc{margin-top:32px;padding:clamp(22px,4vw,44px);border-radius:24px;max-width:820px;
+  background:rgb(15 38 56/.62);border:1px solid rgb(255 255 255/.12);color:#F2D6B0;
+  -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);
+  --ink:#F2D6B0;--ink-2:rgb(242 214 176/.82);--ink-3:rgb(242 214 176/.65);--line:rgb(255 255 255/.14);--ozone:#7CC9CF}
+body[data-bg="warm"] .wrap.doc a{color:#7CC9CF}
+body[data-bg="warm"] .wrap.doc :is(table,th,td){border-color:rgb(255 255 255/.14)}
+/* section menus (Patterns page): the same square bar pinned across the top as on teardowns */
+.pp-nav{position:fixed!important;top:0!important;left:var(--railw);right:0;width:auto!important;max-width:none!important;margin:0!important;
+  border-radius:0!important;border:0!important;border-bottom:1px solid rgb(255 255 255/.14)!important;padding:6px 16px!important;
+  background:rgb(10 32 51/.82)!important;opacity:1!important;visibility:visible!important;transform:none!important;pointer-events:auto!important}
+.pp-nav a{border-radius:0!important}
+.pp-nav a[aria-current]{background:#EE6B3A!important;color:#0A2033!important}
+.pp-hero{padding-top:64px}
+@media (max-width:760px){ .pp-nav{top:0!important} }
