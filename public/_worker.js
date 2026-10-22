@@ -1541,7 +1541,6 @@ async function nomineePage(request, env, url, ctx, key) {
   const pct = herdPct(n);
   const carousel = await carouselFor(request, env, url, n);
   const cd = carouselCache.get(n.slug) || await env.ASSETS.fetch(new URL(`/carousels/${n.slug}.json`, url).toString()).then(jsonOrNull).catch(() => null);
-  const shareImage = cd?.portrait?.image || cd?.slides?.find((s) => s.image)?.image || "";
   const scores = flags.scores && SCORES_VISIBLE ? [n.oops != null ? `Oops Score ${n.oops}` : "", pct != null ? `Facepalm Index ${pct}%` : ""].filter(Boolean).join(", ") : "";
   return decorate(page, env, url, {
     canonical: SITE + nomineePath(n),
@@ -1559,12 +1558,12 @@ async function nomineePage(request, env, url, ctx, key) {
           "/img/seventies/03-west-african-future-sq.jpg", "/img/seventies/07-silent-orbit-wide.jpg"],
       }),
     },
-    image: shareImage || undefined,
+    image: `/img/og/${n.slug}.jpg`, // 1200x630 share card from tools/og-cards.mjs
     jsonld: {
       "@context": "https://schema.org", "@type": "Article",
       headline: cd?.headline || `${n.name}: ${n.work}`, name: `${n.name}: ${n.work}`,
       description: n.backfire, url: SITE + nomineePath(n), mainEntityOfPage: SITE + nomineePath(n),
-      image: SITE + (shareImage || "/og.png"), inLanguage: "en-US",
+      image: SITE + `/img/og/${n.slug}.jpg`, inLanguage: "en-US",
       about: [{ "@type": "Thing", name: n.work }, ...(n.years ? [{ "@type": "Person", name: n.name }] : [])],
       author: { "@type": "Organization", name: "The Backfire Awards", url: SITE },
       publisher: { "@type": "Organization", name: "The Backfire Awards", url: SITE, logo: { "@type": "ImageObject", url: SITE + "/og.png" } },
@@ -1600,6 +1599,7 @@ async function honoreePage(request, env, url, ctx) {
   const flags = flagsOf(env);
   return decorate(page, env, url, {
     canonical: SITE + "/midgley",
+    image: "/img/og/midgley.jpg",
     fill: {
       "#mg-post": postHTML(n, { flags, thread: st.comments.filter((c) => c.nomineeId === n.id), open: true, carousel: await carouselFor(request, env, url, n), more: await moreFor(env, n) }),
       "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, n.id),
