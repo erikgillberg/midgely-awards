@@ -790,7 +790,7 @@ export function carouselHTML(n, data, flags = {}) {
   const pct = herdPct(n);
   const band = oopsBand(n.oops);
   if (n.id === HONOREE) cards.push(`<section class="cc cc-award" aria-roledescription="slide" aria-label="${total} of ${total}">
-    <figure class="cc-trophy"><img src="/img/brand/lifetime-midgley.jpg" alt="A bronze figure of Thomas Midgley Jr. under a glass dome. The plaque reads: The Midgley. Contains lead. In case of emergency, do not break glass." loading="lazy"></figure>
+    <figure class="cc-trophy"><img src="/img/n/midgley/portrait.jpg" alt="Studio portrait of Thomas Midgley Jr. in round glasses. Blank and Stoller, New York. Science History Institute." loading="lazy"></figure>
     <div class="cc-body">
       <h3 class="cc-title">Thomas Midgley Jr.</h3>
       <p class="cc-text">Winner of the first Midgley, for changing the world twice.</p>
