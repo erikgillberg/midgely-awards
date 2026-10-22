@@ -1850,3 +1850,11 @@ body[data-bg="warm"] .wrap.doc :is(table,th,td){border-color:rgb(255 255 255/.14
 @media (max-width:760px){ .pp-nav{top:0!important} }
 .pv-menu a.pv-open{display:block;padding:12px 14px;font:700 14px var(--sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
 .pv-menu a.pv-open:hover{background:var(--ground)}
+/* home: the hero runs full width, trimmed 30px top and bottom */
+.home-hero{height:auto!important;overflow:hidden;background:none!important}
+.home-hero img{width:100%!important;height:auto!important;max-height:none!important;object-fit:initial!important;margin:-30px 0}
+/* the intro's audience line, readable */
+.sq-hero .sq-for{font:700 1.15em/1.35 var(--sans);letter-spacing:0;text-transform:none;opacity:1}
+/* post menu: drops over the carousel instead of under it */
+.post{overflow:visible!important}
+.pv-head{position:relative;z-index:8}
