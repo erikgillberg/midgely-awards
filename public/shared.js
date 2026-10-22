@@ -310,7 +310,7 @@ export function murphyCarouselHTML(m) {
         <div class="cc-hook-top"><div class="el lg mu-el"><span class="el-num">2</span><span class="el-year"></span><span class="el-sym">Mu</span><span class="el-name">MURPHY</span><span class="el-up"></span><span class="el-down"></span></div><p class="cc-kicker">A Murphy<br>${esc(who)}</p></div>
         <h2 class="cc-headline mid">The fix</h2><p class="cc-dek">${esc(m.fix)}</p><p class="cc-swipe" aria-hidden="true">Swipe <span>→</span></p>${foot(1)}</section>
       <section class="cc no-img" data-sym="Mu"><div class="cc-body"><p class="cc-label"><span>01</span> What went oops</p><h3 class="cc-title">${esc(m.oops)}</h3></div>${foot(2)}</section>
-      <section class="cc cc-payoff"><div class="cc-body"><p class="cc-label">Murphy's law</p><h3 class="cc-title">Anything that can go wrong will go wrong.</h3><p class="cc-cta">Got one? Share yours at <b>${BRAND_DOMAIN}</b></p><p class="cc-follow site-follow">Follow the Backfire Awards for a new backfire every week.</p></div>${foot(3)}</section>${IG_ASK}
+      <section class="cc cc-payoff"><div class="cc-body"><p class="cc-label">Murphy's law</p><h3 class="cc-title">Anything that can go wrong will go wrong.</h3><p class="cc-cta">Got one? Share yours at <b>${BRAND_DOMAIN}</b></p><p class="cc-follow site-follow">Follow the Backfire Awards for a new backfire every week.</p></div>${foot(3)}</section>${igAsk()}
     </div>
     <div class="cc-nav"><button type="button" data-cc="prev" aria-label="Previous card" data-hint="Previous card" data-hint-up>←</button><span class="cc-dots"><i data-cc-dot="0"></i><i data-cc-dot="1"></i><i data-cc-dot="2"></i></span><button type="button" data-cc="next" aria-label="Next card" data-hint="Next card" data-hint-up>→</button></div>
   </div>`;
@@ -719,10 +719,10 @@ export function keyHTML(n) {
 
 // Instagram has no vote buttons, so an exported post ends by asking in the comments instead.
 // Hidden on the site; feed.js shows it only while saving cards for Instagram.
-const IG_ASK = `<section class="cc cc-igask cc-payoff cc-hero" data-ig-only aria-hidden="true">
+const igAsk = (title = "Worth it?") => `<section class="cc cc-igask cc-payoff cc-hero" data-ig-only aria-hidden="true">
     <img class="cc-badge" src="/img/brand/bf-badge.svg" alt="">
     <div class="cc-body">
-            <h3 class="cc-title">Worth it?</h3>
+            <h3 class="cc-title">${esc(title)}</h3>
       <p class="cc-igvote"><span>💡 Yes</span><span>🤦 No</span></p>
       <p class="cc-text">Answer in the comments, and send it to a friend who is building something.</p>
       <p class="cc-follow">Follow, like and share. Help your fellow humans avoid the lion at the watering hole.</p>
@@ -821,7 +821,7 @@ export function carouselHTML(n, data, flags = {}) {
     </div>
     ${foot(total)}
   </section>`);
-  cards.push(IG_ASK);
+  cards.push(igAsk(data.verdict || `${n.work}: worth it?`));
   return `<div class="carousel${data.format === "short" ? " cc-short" : ""}" style="${jewelVars(j)}" data-carousel>
     <div class="cc-track" tabindex="0" aria-label="${esc(n.name)}, ${total} cards">${cards.join("")}</div>
     <div class="cc-nav">
