@@ -1438,7 +1438,8 @@ function decorate(res, env, url, meta = {}, status = 0) {
     // The site "look": classic, or the 1970s palette. LOOK_DEFAULT picks it per environment;
     // ?look=70s or ?look=classic overrides it for this browser (kept in localStorage).
     .on("html", new SetAttr("data-look-default", env.LOOK_DEFAULT === "70s" ? "70s" : "classic"))
-    .on("head", new Append(LOOK_SCRIPT + THEME_SCRIPT));
+    .on("head", new Append(LOOK_SCRIPT + THEME_SCRIPT + `<link rel="alternate" type="application/rss+xml" title="The Backfire Awards: teardowns" href="${SITE}/feed.xml">`
+      + (meta.jsonld ? `<script type="application/ld+json">${JSON.stringify(meta.jsonld).replace(/</g, "\\u003c")}</script>` : "")));
 
   if (meta.canonical) {
     rw = rw.on('meta[property="og:url"]', new SetAttr("content", meta.canonical))
@@ -1511,7 +1512,7 @@ async function homePage(request, env, url, ctx, category) {
   if (st) fill[category ? "#list" : "#feed-posts"] = category ? listHTML(noms, st.comments, flags) : await feedHTML(request, env, url, st);
   if (flags.categories) fill["#cats"] = categoryChipsHTML(category, counts);
   const page = await asset(env, url, request, category ? "/category-page" : "/");
-  if (!category) return decorate(page, env, url, { canonical: SITE + "/", fill });
+  if (!category) return decorate(page, env, url, { canonical: SITE + "/", fill, jsonld: SITE_JSONLD });
   const name = DOMAIN_LABELS[category];
   const path = `/category/${CATEGORY_SLUGS[category]}`;
   fill["#cat-title"] = `Backfires in ${esc(name)}`;
@@ -1559,6 +1560,16 @@ async function nomineePage(request, env, url, ctx, key) {
       }),
     },
     image: shareImage || undefined,
+    jsonld: {
+      "@context": "https://schema.org", "@type": "Article",
+      headline: cd?.headline || `${n.name}: ${n.work}`, name: `${n.name}: ${n.work}`,
+      description: n.backfire, url: SITE + nomineePath(n), mainEntityOfPage: SITE + nomineePath(n),
+      image: SITE + (shareImage || "/og.png"), inLanguage: "en-US",
+      about: [{ "@type": "Thing", name: n.work }, ...(n.years ? [{ "@type": "Person", name: n.name }] : [])],
+      author: { "@type": "Organization", name: "The Backfire Awards", url: SITE },
+      publisher: { "@type": "Organization", name: "The Backfire Awards", url: SITE, logo: { "@type": "ImageObject", url: SITE + "/og.png" } },
+      isPartOf: { "@type": "WebSite", name: "The Backfire Awards", url: SITE },
+    },
     attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelVar(jewelOf(n.domain), "deep")}`]] },
   });
 }
@@ -1773,11 +1784,68 @@ async function sitemap(env, url, ctx) {
   const flags = flagsOf(env);
   const st = await siteState(env, url, ctx);
   const paths = ["/", "/search", "/table", "/patterns", "/dashboards", "/midgley", ...(MURPHYS_LIVE ? ["/murphy"] : []), "/awards", "/shop", "/faq", "/corrections", "/guidelines", "/privacy", "/terms"];
-  if (flags.categories) Object.values(CATEGORY_SLUGS).forEach((s) => paths.push("/category/" + s));
   if (st) st.nominees.filter((n) => n.id !== HONOREE).forEach((n) => paths.push(nomineePath(n)));
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     paths.map((p) => `  <url><loc>${SITE}${p}</loc></url>`).join("\n") + `\n</urlset>\n`;
   return new Response(body, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" } });
+}
+
+const SITE_JSONLD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", "@id": SITE + "/#org", name: "The Backfire Awards", url: SITE, logo: SITE + "/og.png",
+      sameAs: ["https://www.instagram.com/backfireawards/"] },
+    { "@type": "WebSite", "@id": SITE + "/#site", name: "The Backfire Awards", url: SITE, publisher: { "@id": SITE + "/#org" },
+      description: "Teardowns of historic backfires for founders and inventors: famous fixes that worked, then created new problems.",
+      potentialAction: { "@type": "SearchAction", target: SITE + "/search?q={q}", "query-input": "required name=q" } },
+  ],
+};
+
+// Crawlers and AI agents are welcome on the public site; staging and previews stay out of every index.
+function robots(url) {
+  const body = url.hostname === SITE_HOST
+    ? `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin\nDisallow: /lab\n\nSitemap: ${SITE}/sitemap.xml\n`
+    : "User-agent: *\nDisallow: /\n";
+  return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=3600" } });
+}
+
+const liveTeardowns = (st) => (st ? st.nominees.filter((n) => n.id !== HONOREE) : []);
+
+// llms.txt (llmstxt.org): a plain map of the site for AI agents and answer engines.
+async function llmsTxt(env, url, ctx) {
+  const list = liveTeardowns(await siteState(env, url, ctx));
+  const body = `# The Backfire Awards
+
+> Teardowns of historic backfires for founders and inventors: famous fixes that worked, then created new problems. Each teardown names the fix, what it solved, how it backfired, whether it was foreseeable, and the pattern behind it, with sources.
+
+The annual award, the Midgley, is named for Thomas Midgley Jr., who invented leaded gasoline and Freon. Winners are named each May 18, his birthday. Readers vote on every teardown: was it worth it?
+
+## Key pages
+- [The Midgley](${SITE}/midgley): the honoree the award is named for
+- [The Patterns](${SITE}/patterns): ten recurring patterns behind backfires, with the cases that show each
+- [Dashboards](${SITE}/dashboards): what the backfires have in common, by scale, time lag, who pays and how reversible
+- [The Categoric Table](${SITE}/table): every teardown as a periodic table
+- [FAQ](${SITE}/faq): how cases are chosen, scored and sourced
+- [Corrections](${SITE}/corrections): every dated correction
+
+## Teardowns
+${list.map((n) => `- [${n.name}: ${n.work}](${SITE}${nomineePath(n)})${n.years ? ` (${n.years})` : ""}: ${n.backfire}`).join("\n")}
+
+## Optional
+- [Sitemap](${SITE}/sitemap.xml)
+- [RSS feed of teardowns](${SITE}/feed.xml)
+`;
+  return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=3600" } });
+}
+
+const xmlEsc = (t) => String(t ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+// An RSS feed of the teardowns, for readers, aggregators and newsletter tools.
+async function rssFeed(env, url, ctx) {
+  const list = liveTeardowns(await siteState(env, url, ctx));
+  const items = list.map((n) => `  <item><title>${xmlEsc(`${n.name}: ${n.work}`)}</title><link>${SITE}${nomineePath(n)}</link><guid>${SITE}${nomineePath(n)}</guid><description>${xmlEsc(n.backfire)}</description></item>`).join("\n");
+  const body = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>\n  <title>The Backfire Awards</title>\n  <link>${SITE}/</link>\n  <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml"/>\n  <description>Teardowns of historic backfires for founders and inventors.</description>\n  <language>en-us</language>\n${items}\n</channel></rss>\n`;
+  return new Response(body, { headers: { "content-type": "application/rss+xml; charset=utf-8", "cache-control": "public, max-age=3600" } });
 }
 
 // /micro sends people to the Murphy form, keeping utm_ tags so the form can record where they came from.
@@ -1872,6 +1940,10 @@ export default {
     if (p === "/shop") return shopPage(request, env, url, ctx);
     if (p === "/shop/waitlist" || p === "/shop/waitlist.html") return Response.redirect(SITE_ORIGIN(url) + "/shop", 301); // the shop is open; the Tally waitlist is retired
     if (p === "/sitemap.xml") return sitemap(env, url, ctx);
+    if (p === "/robots.txt") return robots(url);
+    if (p === "/llms.txt") return llmsTxt(env, url, ctx);
+    if (p === "/feed.xml" || p === "/rss.xml") return rssFeed(env, url, ctx);
+    if (p === "/favicon.ico") return Response.redirect(SITE_ORIGIN(url) + "/favicon.svg", 301);
     if (p === "/murphy") return decorate(await asset(env, url, request, "/micro"), env, url, { canonical: SITE + "/murphy", fill: { "#murphy-embed": tallyHTML(LINKS.microFormId, "Share your Murphy") } });
     if (p === "/goat") return Response.redirect(SITE_ORIGIN(url) + "/faq", 301); // Goat retired as a character
     if (p === "/scores" || p === "/scores.html") return Response.redirect(SITE_ORIGIN(url) + "/faq", 302); // scores are hidden for now
