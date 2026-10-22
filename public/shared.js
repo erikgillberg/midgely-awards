@@ -248,7 +248,7 @@ function postShell(p, ctx = {}) {
   ].filter(Boolean).join(" · ");
   return `<article class="post" id="post-${esc(p.id)}" data-id="${esc(p.id)}" data-kind="${p.kind}" data-path="${esc(p.path)}" style="${p.vars || ""}">
     <header class="pv-head">
-      <a class="pv-who" href="${esc(p.path)}" data-hint="Open the full teardown">${p.tile}<span><b>${esc(p.title)}</b><small>${esc(p.sub)}</small></span></a>
+      <a class="pv-who" href="${esc(p.path)}"${ctx.open ? "" : ' data-hint="Open the full teardown"'}>${p.tile}<span><b>${esc(p.title)}</b><small>${esc(p.sub)}</small></span></a>
       <details class="pv-menu"><summary aria-label="More options" data-hint="More: full teardown, LinkedIn, copy link">${picon("dots")}</summary>
         <div>${p.kind === "nominee" && !ctx.open ? `<a href="${esc(p.path)}" class="pv-open">Open the full teardown</a>` : ""}<a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://backfireawards.com" + p.path)}" class="pv-li" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(p.id)}">${LI_MARK}Post to LinkedIn</a><button type="button" data-act="share-link">Copy link</button><button type="button" data-act="share-ig">Save cards for Instagram</button><button type="button" data-act="report">Report</button></div></details>
     </header>
@@ -256,7 +256,7 @@ function postShell(p, ctx = {}) {
     <div class="pv-bar">
       ${vote}
       ${COMMENTS_LIVE ? `<button class="pv-btn" data-act="comments" aria-label="Comments">${picon("comment")}<span class="cc-n">${thread.length}</span></button>` : ""}
-      <button class="pv-btn" data-act="share" aria-label="Share" data-hint="Share this teardown">${picon("share")}</button>
+      <button class="pv-btn" data-act="share" aria-label="Share" data-hint="Copy link">${picon("share")}</button>
     </div>
     ${SCORES_VISIBLE ? `<p class="pv-stats">${stats} · <a href="/faq#scores">scores</a></p>` : ""}
     <div class="pv-caption"><p><a href="${esc(p.path)}"><b>${esc(p.captionTitle)}</b></a> ${esc(p.caption)}${p.more ? ` <button class="pv-more" type="button" data-act="more">more</button>` : ""}</p>

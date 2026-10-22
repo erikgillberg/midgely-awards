@@ -108,7 +108,7 @@ export function teardownMastHTML(n, story = {}) {
       <div class="td-nav-act">
         <a class="td-nav-btn li" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://backfireawards.com" + nomineePath(n))}" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(n.id)}" data-hint="Post this teardown to LinkedIn">${LI_MARK}Share</a>
         <button class="td-nav-btn" type="button" data-hint="Copy this page's link" data-copy-link="${esc("https://backfireawards.com" + nomineePath(n))}">Copy link</button>
-        <button class="td-nav-btn cta" type="button" data-hint="Comments are coming. Click to tell us you want them." data-intent="comment-login" data-id="${esc(n.id)}">Comment</button>
+        <button class="td-nav-btn cta" type="button" data-hint="Comments open soon. A click counts your interest." data-intent="comment-login" data-id="${esc(n.id)}">Comment</button>
       </div>
       <p class="td-intent" hidden>Comments open soon. Thanks: we counted your click.</p></nav>`;
 }
