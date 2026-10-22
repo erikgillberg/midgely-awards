@@ -25,7 +25,7 @@ const nameOf = (key) => CODEBOOK.find((c) => c.key === key)?.name || "";
 
 function panel(code, title, sub, body, table, wide = "") {
   // code "" drops the panel's own label and title (a teardown page names the section already)
-  return `<figure class="db-panel${wide}">${code ? `<figcaption><p class="db-code">${code}</p><h3>${esc(title)}</h3><p>${esc(sub)}</p></figcaption>` : `<figcaption><p>${esc(sub)}</p></figcaption>`}
+  return `<figure class="db-panel${wide}">${code ? `<figcaption><h3>${esc(title)}</h3><p>${esc(sub)}</p></figcaption>` : `<figcaption><p>${esc(sub)}</p></figcaption>`}
     <div class="db-plot">${body}</div>
     <details class="db-table"><summary>Show as a table</summary>${table}</details></figure>`;
 }
@@ -193,7 +193,6 @@ export function impactPanelHTML(all, nomineeId, code = "DB-06") {
 export function dashboardsHTML(all) {
   const noms = tagged(all);
   return `<header class="db-hero">
-      <p class="pp-kicker">Dashboards · Codebook version ${CODEBOOK_VERSION}</p>
       <h1>What ${noms.length} backfires have in common</h1>
       <p>Every case we have torn down, counted by the patterns behind it, how far the harm reached, how long it took to show and who paid. ${noms.length} cases is a small sample, so read these as what we have collected, not how all backfires behave. Hover or tap any mark for the cases behind it.</p>
       <p class="db-links"><a href="/patterns">The ten patterns</a><a href="/table">The Categoric Table</a></p>
@@ -206,7 +205,6 @@ export function dashboardsHTML(all) {
 export function dashboardsTeaserHTML(all) {
   const noms = tagged(all);
   return `<header class="db-head">
-      <p class="pp-kicker">Dashboards</p>
       <h2 id="data-h">What ${noms.length} backfires have in common</h2>
       <p>The patterns, the scale, the time lag and who paid, counted across every case.</p>
     </header>
@@ -226,8 +224,8 @@ export function patternChapterHTML(noms, p, i, id = p.key) {
       <div class="pp-slab">
         <header class="pp-ch-head">
           <p class="pp-n" aria-hidden="true">${pad(i)}</p>
-          <p class="pp-kicker">Pattern ${i + 1} of ${CODEBOOK.length}</p>
-          <h2 id="h-${p.key}">${esc(p.name)}</h2>
+          
+          <h2 id="h-${p.key}">${id === p.key ? "" : "The pattern: "}${esc(p.name)}</h2>
           <p class="pp-short">${esc(p.short)}</p>
           <p class="pp-def">${esc(p.definition)}</p>
         </header>
@@ -272,7 +270,7 @@ export function patternsPageHTML(all) {
 
   return `<header class="pp-hero">
       <div class="glass frost pp-hero-card">
-        <p class="pp-label">The codebook · Version ${CODEBOOK_VERSION}</p>
+        
         <h1>The Patterns</h1>
         <p class="pp-lede">Ten ways a good fix backfires. Every case we collect is taken apart and tagged with the patterns behind it, so the next builder can spot one before shipping it.</p>
         <ul class="pp-stats">
@@ -284,12 +282,12 @@ export function patternsPageHTML(all) {
       </div>
     </header>
     ${nav}
-    <section class="pp-index" id="index" aria-labelledby="pp-index-h"><h2 id="pp-index-h" class="pp-sec">The ten</h2><ol class="pp-tiles">${tiles}</ol></section>
+    <section class="pp-index" id="index" aria-labelledby="pp-index-h"><h2 id="pp-index-h" class="pp-sec">All ten patterns</h2><ol class="pp-tiles">${tiles}</ol></section>
     ${chapters}
     <section class="pp-data" id="data" aria-labelledby="data-h">${dashboardsTeaserHTML(all)}</section>
     <section class="pp-dims" id="tags" aria-labelledby="pp-dims-h">
       <div class="pp-slab pp-dims-slab">
-        <h2 id="pp-dims-h" class="pp-sec">Every case also gets</h2>
+        <h2 id="pp-dims-h" class="pp-sec">Other tags on every case</h2>
         <div class="pp-dim-grid">${Object.values(DIMENSIONS).map((d) => `<div><h3>${esc(d.label)}</h3><p>${esc(d.help)}</p><p class="pp-terms">${Object.values(d.values).map((v) => `<span>${esc(v)}</span>`).join("")}</p></div>`).join("")}</div>
         <p class="pp-note">Tags are provisional. Two separate automated passes coded every case and an editor settled the differences. Human coders review them next, and the codebook gets a new version number whenever a definition changes.</p>
       </div>
@@ -300,7 +298,6 @@ export function patternsPageHTML(all) {
 export function patternsTeaserHTML(all) {
   const noms = tagged(all);
   return `<header class="cb-head">
-      <p class="label">The codebook</p>
       <h2 id="codebook-h">Ten ways a good fix backfires</h2>
       <p class="lede">Every case on the table is tagged with the patterns behind it. <a href="/patterns">See all ten patterns</a>, the test for each and the dashboards.</p>
     </header>

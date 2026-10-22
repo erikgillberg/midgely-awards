@@ -14,7 +14,7 @@
     {
       "kind": "meant",
       "label": "The bright idea",
-      "title": "Fertilizer from bird droppings",
+      "title": "Fertilizer was running short",
       "text": "Crops need nitrogen. Around 1900 most came from bird droppings and mined saltpeter, and **a chemist warned the world would run short of wheat.**",
       "image": "/img/n/haber/guano.jpg",
       "alt": "Workers loading guano into a rail cart at the foot of a huge pale heap, Chincha Islands, Peru, 1865",
@@ -32,7 +32,7 @@
     {
       "kind": "oops",
       "label": "The backfire",
-      "title": "The extra goes somewhere",
+      "title": "Runoff feeds a dead zone",
       "stat": "4,402",
       "statLabel": "square miles of Gulf of Mexico dead zone in summer 2025, per NOAA",
       "text": "The nitrogen crops don't take up washes downriver and feeds algae. **Each summer the Gulf of Mexico gets a dead zone.**",
@@ -48,8 +48,8 @@
     },
     {
       "kind": "cleanup",
-      "label": "Still unfolding",
-      "title": "Still unfolding",
+      "label": "The long cleanup",
+      "title": "Same process, same dead zone",
       "text": "The process has barely changed since 1913. **The Gulf dead zone still averages more than twice its 2035 target.**"
     },
     {
@@ -81,7 +81,7 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
+      "title": "When something gets cheap, plan for the extra",
       "text": "A fix for too little can quietly become a source of too much. **When something gets cheap, plan for the extra.**"
     }
   ]

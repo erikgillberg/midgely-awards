@@ -15,13 +15,13 @@
     {
       "kind": "meant",
       "label": "The bright idea",
-      "title": "Tame the oil",
+      "title": "Tame nitroglycerin",
       "text": "In 1864 a blast at Alfred Nobel's factory killed five people, his brother among them. **He set out to make nitroglycerin safe to handle.**"
     },
     {
       "kind": "right",
       "label": "It worked",
-      "title": "Dynamite",
+      "title": "Nitroglycerin, soaked into earth",
       "text": "Patented in 1867, dynamite was nitroglycerin soaked into porous earth, quite safe to handle. **One plant made 11 tons that year and 3,150 in 1874.**",
       "image": "/img/n/nobel/ardeer.jpg",
       "alt": "Women in aprons mixing dynamite in wooden boxes along a bench, with a man standing at the left, inside a timber factory shed",
@@ -39,7 +39,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Yes, in his lifetime",
+      "title": "Yes: armies used it by 1870",
       "text": "Both armies used dynamite in the Franco-Prussian War, three years after the patent. **Its uses for war and terror were plain in his lifetime.**"
     },
     {
@@ -77,8 +77,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "A fix aimed at accidents does nothing about intent. **Safe to handle also means easy to use, by anyone.**"
+      "title": "Safe to handle means easy to use, by anyone",
+      "text": "A fix aimed at accidents does nothing about intent. **Safe to handle means easy to use, by anyone.**"
     }
   ]
 }

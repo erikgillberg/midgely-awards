@@ -33,7 +33,7 @@
     {
       "kind": "oops",
       "label": "The backfire",
-      "title": "Monopoly",
+      "title": "Sold as Monopoly, played to win",
       "stat": "275 million",
       "statLabel": "Monopoly sets sold worldwide, Hasbro said in 2015",
       "text": "In 1935 Parker Brothers began selling a version called Monopoly. Its object: become the wealthiest player. **The warning became the goal.**"
@@ -80,8 +80,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "People learn what they practice, not what they are told it means. **Put the lesson in the rules, not the commentary.**"
+      "title": "Put the lesson in the rules",
+      "text": "People learn what they practice, not what they are told it means. **Put the lesson in the rules.**"
     }
   ]
 }

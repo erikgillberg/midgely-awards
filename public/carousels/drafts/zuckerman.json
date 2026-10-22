@@ -41,7 +41,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Partly",
+      "title": "Partly: users already found them annoying",
       "text": "In a 1999 survey, 69% of users found pop-ups annoying. **A web where every site used them was harder to see.**"
     },
     {
@@ -79,8 +79,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "A trick that works for one company can fail once everyone copies it. **Attention is shared by every site that asks for it.**"
+      "title": "A trick for one fails when everyone copies it",
+      "text": "Attention is shared by every site that asks for it. **A trick for one fails when everyone copies it.**"
     }
   ]
 }

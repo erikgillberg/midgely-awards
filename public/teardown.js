@@ -75,7 +75,7 @@ export function teardownHTML(n, all, media = [], url = "", story = {}) {
         <section class="td-wide pp td-dash" id="dashboards"><h2>What ${noms.length} backfires have in common</h2>${readouts(noms)}
         <p class="td-link"><a href="/dashboards">Open the dashboards →</a></p></section>`;
     })()}
-    ${sec("tags", "The pattern and tags", tags)}
+    ${sec("tags", "Tags for this case", tags)}
 
     ${refs ? sec("references", "References", `<ol class="td-refs">${refs}</ol>`, false) : ""}
     ${credits ? sec("credits", "Image credits", `<ul class="td-credits">${credits}</ul>`, false) : ""}
@@ -97,7 +97,7 @@ export function teardownMastHTML(n, story = {}) {
     <header class="td-mast" style="${jewelVars(jewelOf(n.domain))}">
       <div class="td-mast-tile">${elementHTML(n, "lg")}</div>
       <div class="td-mast-txt">
-        <p class="td-kicker">A Backfire teardown · ${esc(DOMAINS[n.domain] || "")}</p>
+        
         <h1>${esc(n.name)}</h1>
         <p class="td-dek">${esc(n.work)}${n.years ? ` · ${esc(n.years)}` : ""}</p>
         ${main ? `<a class="td-mast-pat" href="#pattern" style="--hue:${HUES[main.key]}"><i></i>The pattern: ${esc(main.name)}</a>` : ""}

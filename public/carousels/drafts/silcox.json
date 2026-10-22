@@ -15,7 +15,7 @@
     {
       "kind": "meant",
       "label": "The bright idea",
-      "title": "Never another 1910",
+      "title": "No more fires like 1910",
       "text": "In 1910 fires burned more than 3 million acres and killed at least 85 people. **Ferdinand Silcox argued fire could be kept out.**",
       "image": "/img/n/silcox/burn1910.jpg",
       "alt": "Black and white photo of a burned hillside in 1910, covered in toppled, charred tree trunks and uprooted stumps",
@@ -41,7 +41,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Partly",
+      "title": "Partly: a warning came in 1943",
       "text": "In 1943 Harold Weaver warned that keeping all fire out was harming pine forests. **How much fuel would pile up took decades to show.**"
     },
     {
@@ -82,8 +82,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "Small failures can be doing a job nobody wrote down. **Before you stop them all, ask what they were clearing.**"
+      "title": "Ask what the small failures were clearing",
+      "text": "Small failures can be doing a job nobody wrote down. **Ask what the small failures were clearing.**"
     }
   ]
 }

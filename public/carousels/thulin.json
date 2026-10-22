@@ -38,7 +38,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Partly",
+      "title": "Partly: the litter was easy to see",
       "text": "Litter was easy to see, and in 1972 scientists reported plastic in the open Atlantic. **In 1986 Barry Commoner asked if society really needed plastic bags.**",
       "image": "/img/n/thulin/mola.jpg",
       "alt": "An ocean sunfish swimming just under the surface of calm blue water, its fin breaking the surface",
@@ -79,8 +79,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "Something built to be reused tends to be used once when it is free. **A small price on each choice can change the total.**"
+      "title": "A small price can change the total",
+      "text": "Something built to be reused tends to be used once when it is free. **A small price can change the total.**"
     }
   ]
 }

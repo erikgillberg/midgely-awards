@@ -29,7 +29,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Seen inside by 2019",
+      "title": "Yes, inside Facebook by 2019",
       "text": "Facebook's own researchers flagged the effect by 2019. **Outside researchers still argue over how much it mattered.**"
     },
     {
@@ -67,8 +67,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "A count of replies can't tell a good talk from a fight. **Before you rank by a number, ask what else moves it.**"
+      "title": "Ask what else moves your number",
+      "text": "A count of replies can't tell a good talk from a fight. **Ask what else moves your number.**"
     }
   ]
 }

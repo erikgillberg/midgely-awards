@@ -18,7 +18,7 @@
     {
       "kind": "right",
       "label": "It worked",
-      "title": "Roundup",
+      "title": "One spray, over 125 kinds of weeds",
       "text": "In 1970 Monsanto chemist John Franz found glyphosate, sold as Roundup from 1974. **It controls over 125 kinds of weeds.**",
       "image": "/img/n/franz/no-till.jpg",
       "alt": "Rows of young soybean plants growing up through the stalks of last year's corn in an unplowed field",
@@ -77,8 +77,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "The more one tool is used, the faster the problem adapts to it. **Rotate your tools before the problem learns them.**"
+      "title": "Rotate tools before the problem learns them",
+      "text": "The more one tool is used, the faster the problem adapts to it. **Rotate tools before the problem learns them.**"
     }
   ]
 }

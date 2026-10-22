@@ -41,7 +41,7 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "The lead, yes",
+      "title": "Lead's danger was known",
       "text": "Lead poisoning had been known for centuries. In 1924 workers making the additive began to die, and **the deaths made the papers.**"
     },
     {
@@ -79,8 +79,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "Whether a fix works and who pays for it are separate questions. **Ask both before it ships.**"
+      "title": "Ask who pays before it ships",
+      "text": "Whether a fix works and who pays for it are separate questions. **Ask who pays before it ships.**"
     }
   ]
 }

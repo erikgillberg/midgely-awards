@@ -81,7 +81,7 @@ export const COMMENTS_LIVE = false;
 export const SCORES_VISIBLE = false;
 // The sign-up card that sits in the feed, once, after a few posts.
 export const feedOopsHTML = () => `<section class="feed-oops" aria-labelledby="fo-h">
-  <p class="ob-label">The newsletter</p><h2 id="fo-h">Get one backfire a week</h2><p>${OOPS_LINE} Unsubscribe any time.</p>${signupHTML("feed")}</section>`;
+  <h2 id="fo-h">Get one backfire a week</h2><p>${OOPS_LINE} Unsubscribe any time.</p>${signupHTML("feed")}</section>`;
 // Scores
 export const MIN_JUDGES = 2;      // an Oops Score is public once this many judges have scored
 export const MIN_HERD_VOTES = 10; // a Facepalm Index shows once this many readers have voted
@@ -425,7 +425,7 @@ export function headerHTML(flags = {}) {
   <div class="oops-box" id="oops-box" role="dialog" aria-modal="true" aria-labelledby="ob-h" hidden>
     <div class="oops-box-in">
       <button class="menu-x" type="button" data-oops-close aria-label="Close">×</button>
-      <p class="ob-label">The newsletter</p>
+      
       <h2 id="ob-h">The Backfire Newsletter</h2>
       <p>${OOPS_LINE}</p>
       ${signupHTML("rail")}
@@ -457,7 +457,7 @@ export function sheetHTML() {
   return `<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" hidden>
     <div class="sheet-in">
       <button class="sheet-x" type="button" data-close-sheet aria-label="Close">×</button>
-      <p class="sh-step">Nominate</p>
+      
       <h2 id="sheet-h">${MURPHYS_LIVE ? "Which award?" : "Nominate a backfire"}</h2>
       <div class="sh-pick" role="radiogroup" aria-label="Award"${MURPHYS_LIVE ? "" : " hidden"}>
         <button type="button" role="radio" aria-checked="false" data-award="midgley"><span class="element aw-midgley"><span class="n">No. 1</span><span class="sym">Mg</span><span class="w">MIDGLEY</span></span><b>The Midgley</b><small>A backfire at world scale: an invention, product or decision.</small></button>
@@ -502,7 +502,7 @@ function suggestSheetHTML() {
   return `<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" hidden>
     <div class="sheet-in sh-suggest">
       <button class="sheet-x" type="button" data-close-sheet aria-label="Close">×</button>
-      <p class="sh-step">Suggest a teardown</p>
+      
       <h2 id="sheet-h">Know a fix that backfired?</h2>
       <p>Get the Backfire Newsletter and reply to any issue with your suggestion: what it fixed, and what it broke. We read every reply and tear down the best ones.</p>
       ${signupHTML("sheet")}
@@ -721,8 +721,7 @@ export function keyHTML(n) {
 const IG_ASK = `<section class="cc cc-igask cc-payoff cc-hero" data-ig-only aria-hidden="true">
     <img class="cc-badge" src="/img/brand/bf-badge.svg" alt="">
     <div class="cc-body">
-      <p class="cc-label">Your verdict</p>
-      <h3 class="cc-title">Worth it?</h3>
+            <h3 class="cc-title">Worth it?</h3>
       <p class="cc-igvote"><span>💡 Yes</span><span>🤦 No</span></p>
       <p class="cc-text">Answer in the comments, and send it to a friend who is building something.</p>
       <p class="cc-follow">Follow, like and share. Help your fellow humans avoid the lion at the watering hole.</p>
@@ -792,10 +791,8 @@ export function carouselHTML(n, data, flags = {}) {
   if (n.id === HONOREE) cards.push(`<section class="cc cc-award" aria-roledescription="slide" aria-label="${total} of ${total}">
     <figure class="cc-trophy"><img src="/img/brand/lifetime-midgley.jpg" alt="A bronze figure of Thomas Midgley Jr. under a glass dome. The plaque reads: The Midgley. Contains lead. In case of emergency, do not break glass." loading="lazy"></figure>
     <div class="cc-body">
-      <p class="cc-label">The first Midgley</p>
-      <p class="cc-award-kind">Lifetime Achievement</p>
       <h3 class="cc-title">Thomas Midgley Jr.</h3>
-      <p class="cc-text">For changing the world twice.</p>
+      <p class="cc-text">Winner of the first Midgley, for changing the world twice.</p>
       <p class="cc-cta">${NOMINATIONS_LIVE ? "Nominate" : "Suggest"} the next one at <b>${BRAND_DOMAIN}</b></p>
     </div>
     ${foot(total)}
@@ -803,8 +800,7 @@ export function carouselHTML(n, data, flags = {}) {
   else if (!SCORES_VISIBLE) cards.push(`<section class="cc cc-payoff cc-hero" data-web-only aria-roledescription="slide" aria-label="${total} of ${total}">
     <img class="cc-badge" src="/img/brand/bf-badge.svg" alt="Backfire Awards badge">
     <div class="cc-body">
-      <p class="cc-label">Your verdict</p>
-      <h3 class="cc-title">${esc(data.verdict || `${n.work}: worth it?`)}</h3>
+            <h3 class="cc-title">${esc(data.verdict || `${n.work}: worth it?`)}</h3>
       <p class="cc-igvote"><span>💡 Yes</span><span>🤦 No</span></p>
       <p class="cc-text">Vote below, then send it to a friend who is building something.</p>
       <p class="cc-follow">Follow the Backfire Awards for more teardowns.</p>

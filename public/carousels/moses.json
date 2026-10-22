@@ -44,13 +44,13 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "People said so",
+      "title": "Yes, and people said so",
       "text": "In 1930 a transit executive warned that wider streets simply produce more traffic. **Moses's own parkways jammed soon after they opened.**"
     },
     {
       "kind": "cleanup",
       "label": "The long cleanup",
-      "title": "Still paying",
+      "title": "Still paying for the Cross Bronx",
       "text": "In 2024 the federal government put $150 million toward easing the Cross Bronx's harm to its neighbors. **Fifty years on, the bill is still arriving.**"
     },
     {
@@ -82,8 +82,8 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
-      "text": "Traffic is thousands of choices. **Make driving easier, and you get more driving.**"
+      "title": "Make driving easier, get more driving",
+      "text": "Traffic is thousands of choices. **Make driving easier, get more driving.**"
     }
   ]
 }

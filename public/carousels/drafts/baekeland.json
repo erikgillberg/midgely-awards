@@ -15,7 +15,7 @@
     {
       "kind": "meant",
       "label": "The bright idea",
-      "title": "Bugs can't keep up",
+      "title": "Shellac came from bugs",
       "text": "The US was going electric, and a common insulator, shellac, came from lac insects in limited supply. **Leo Baekeland set out to make a substitute.**",
       "image": "/img/n/baekeland/shellac.jpg",
       "alt": "Two piles of amber and dark red shellac flakes on white paper",
@@ -50,7 +50,7 @@
     {
       "kind": "cleanup",
       "label": "The long cleanup",
-      "title": "Still negotiating",
+      "title": "No plastics treaty yet",
       "text": "In 2022, 175 nations agreed to write a treaty to end plastic pollution. Talks in 2024 and 2025 ended without a deal. **The treaty is still unwritten.**"
     },
     {
@@ -82,7 +82,7 @@
     {
       "kind": "meant",
       "label": "Lesson",
-      "title": "What we take from it",
+      "title": "Plan for where it goes after its job",
       "text": "How long a thing lasts and how long it stays useful are different numbers. **Plan for where it goes after its job.**"
     }
   ]

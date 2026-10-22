@@ -1514,7 +1514,7 @@ async function homePage(request, env, url, ctx, category) {
   if (!category) return decorate(page, env, url, { canonical: SITE + "/", fill });
   const name = DOMAIN_LABELS[category];
   const path = `/category/${CATEGORY_SLUGS[category]}`;
-  fill["#cat-title"] = esc(name);
+  fill["#cat-title"] = `Backfires in ${esc(name)}`;
   return decorate(page, env, url, {
     canonical: SITE + path, title: `${name} · The Backfire Awards`,
     desc: `Nominees in ${name}: inventions and decisions that solved one problem and caused another.`,
