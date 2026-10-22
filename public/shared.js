@@ -249,7 +249,7 @@ function postShell(p, ctx = {}) {
   return `<article class="post" id="post-${esc(p.id)}" data-id="${esc(p.id)}" data-kind="${p.kind}" data-path="${esc(p.path)}" style="${p.vars || ""}">
     <header class="pv-head">
       <a class="pv-who" href="${esc(p.path)}"${ctx.open ? "" : ' data-hint="Open the full teardown"'}>${p.tile}<span><b>${esc(p.title)}</b><small>${esc(p.sub)}</small></span></a>
-      <details class="pv-menu"><summary aria-label="More options" data-hint="More: full teardown, LinkedIn, copy link">${picon("dots")}</summary>
+      <details class="pv-menu"><summary aria-label="More options" data-hint="${ctx.open ? "More: LinkedIn, copy link" : "More: full teardown, LinkedIn, copy link"}">${picon("dots")}</summary>
         <div>${p.kind === "nominee" && !ctx.open ? `<a href="${esc(p.path)}" class="pv-open">Open the full teardown</a>` : ""}<a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://backfireawards.com" + p.path)}" class="pv-li" target="_blank" rel="noopener" data-intent="share-linkedin" data-id="${esc(p.id)}">${LI_MARK}Post to LinkedIn</a><button type="button" data-act="share-link">Copy link</button><button type="button" data-act="share-ig">Save cards for Instagram</button><button type="button" data-act="report">Report</button></div></details>
     </header>
     ${p.carousel}
