@@ -1,14 +1,16 @@
 {
   "slug": "berners-lee",
+  "format": "short",
   "keyCard": false,
   "headline": "The web let anyone publish. Even fake banks.",
-  "dek": "In 1989 Tim Berners-Lee proposed a way for one lab to stop losing what it knew.",
+  "dek": "Tim Berners-Lee, CERN near Geneva, 1989.",
+  "verdict": "The open web: worth it?",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Stop losing what people know",
-      "text": "At CERN, the physics lab near Geneva, people often stayed about two years, and what they knew left with them. In March 1989 Tim Berners-Lee proposed linked documents anyone could reach.",
+      "text": "At CERN, people stayed about two years, and what they knew left with them. **In 1989 Tim Berners-Lee proposed linked documents anyone could reach.**",
       "image": "/img/n/berners-lee/cern.jpg",
       "alt": "Aerial view of CERN's main site near Geneva: low lab buildings, parking lots and roads set among farm fields and woods",
       "credit": "CERN's main site near Geneva from the air, 2012. Brücke-Osteuropa. CC0."
@@ -17,16 +19,10 @@
       "kind": "right",
       "label": "It worked",
       "title": "One site, then 1.49 billion",
-      "text": "The first web server ran at CERN by Christmas 1990. In April 1993 CERN put the software in the public domain. By the end of 1994 there were 10,000 servers. Netcraft now counts about 1.49 billion sites.",
+      "text": "CERN put the software in the public domain in 1993, and by 1994 there were 10,000 servers. **Netcraft now counts about 1.49 billion sites.**",
       "image": "/img/n/berners-lee/server.jpg",
       "alt": "A black NeXT computer and monitor in a museum case, with a handwritten label on the computer reading \"This machine is a server. DO NOT POWER IT DOWN!!\"",
       "credit": "The NeXT computer that ran the first web server, shown at CERN, 2005. Coolcaesar. CC BY-SA 3.0."
-    },
-    {
-      "kind": "twist",
-      "label": "Wait, what?",
-      "title": "No one to ask",
-      "text": "The design had no gatekeeper. In his words, it was built on there being \"no central authority\" you had to ask for permission. Anyone could publish a page or link to any other. That was the point."
     },
     {
       "kind": "oops",
@@ -34,47 +30,38 @@
       "title": "Open to everyone, scams too",
       "stat": "3.8 million",
       "statLabel": "phishing attacks counted by the Anti-Phishing Working Group in 2025",
-      "text": "With no gate, anyone can put up a page that looks like your bank. In 2017 Berners-Lee wrote that it was too easy for misinformation to spread on the web, and that online political ads needed transparency.",
-      "also": [
-        "Source: APWG Phishing Activity Trends, 2025"
-      ]
+      "text": "The web had \"no central authority\" to ask for permission, by design. **Anyone can put up a page that looks like your bank.**"
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Abuse, yes. This scale, no.",
-      "text": "Abuse of open networks was not new: the first mass ad email went out in 1978, and a worm crippled thousands of computers in 1988. The scale was not foreseeable: the 1989 proposal was for one lab, and in late 1993 there were just over 500 web servers.",
-      "knowable": "mixed"
+      "knowable": "mixed",
+      "text": "Abuse of networks was not new: a worm crippled thousands of computers in 1988. **But in late 1993 there were just over 500 web servers.**"
     },
     {
       "kind": "cleanup",
-      "label": "The cleanup",
+      "label": "The long cleanup",
       "title": "The inventor's repair kit",
-      "text": "In 2018 Berners-Lee started Inrupt to build Solid, which keeps your data in a personal store you control. In 2019 his Web Foundation launched the Contract for the Web: nine principles for governments, companies and citizens. In 2024 the foundation announced it was closing."
+      "text": "In 2018 Berners-Lee started Inrupt to build Solid, which keeps your data in a store you control. **The inventor is still building the fix.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
         "About 1.49 billion sites counted by Netcraft, July 2026",
-        "Free to use and build on: CERN released the code to the public domain in 1993",
-        "About 6 billion people online in 2025, three in four people on Earth (ITU)"
+        "Free to build on: CERN put the code in the public domain in 1993",
+        "About 6 billion people online in 2025 (ITU)"
       ],
       "costs": [
-        "$20.9 billion in internet crime losses reported to the FBI in 2025, by email, phone and apps as well as the web",
+        "$20.9 billion in internet crime losses reported to the FBI in 2025, not only on the web",
         "3.8 million phishing attacks counted in 2025 (APWG)",
         "Misinformation that spreads because it gets clicks, by his own account"
       ],
-      "text": "The web put most of the world's knowledge a click away. It also opened a door that nobody guards.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "We owe him one",
-      "text": "Berners-Lee took on a real problem, knowledge walking out the door, and his answer was made free, with no patent and no royalties. When the costs showed up, he named them in public, and he is still building fixes."
+      "text": "It put most of the world's knowledge a click away, across 1.49 billion sites. **It cost 3.8 million phishing attacks in 2025 alone.**"
     },
     {
       "kind": "pattern",
@@ -82,33 +69,13 @@
       "title": "The problem moves",
       "patternKey": "moved",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "The web removed the editors who decided what reached the public, on purpose. **The job of checking moved to every reader.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "The gate came down",
-      "text": "Before the web, publishers, editors and broadcasters decided what reached the public. The web removed that gate, on purpose. The job of checking what is true, and who is selling what, didn't disappear. It moved to every reader."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your open doors move work too",
-      "text": "You launch an open API with no sign-up so developers can start in a minute. Usage takes off. So do scrapers and spam bots, and your support team spends its week telling real users from abuse. The checking didn't go away. It moved.",
-      "also": [
-        "An open comment section that someone now has to moderate",
-        "A sign-up form with no check that fills with spam"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "Removing a gatekeeper also removes the work the gate was doing.",
-        "A design that fits a lab of colleagues can behave very differently when the whole world joins.",
-        "An open design hands every reader the job of deciding what to trust."
-      ]
+      "text": "Removing a gatekeeper also removes the work the gate was doing. **Decide who does that work before you open the door.**"
     }
   ]
 }

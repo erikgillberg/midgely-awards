@@ -1,14 +1,22 @@
 {
   "slug": "magie",
+  "format": "short",
   "keyCard": false,
   "headline": "Monopoly was invented to warn against monopolies",
-  "dek": "In 1904 Lizzie Magie patented a board game with a lesson built in.",
+  "dek": "Lizzie Magie, United States, 1904 to 1935.",
+  "verdict": "Magie's game: worth it?",
+  "portrait": {
+    "image": "/img/n/magie/portrait.jpg",
+    "alt": "Photograph of Lizzie Magie in profile, with short curly hair and a pale draped top",
+    "credit": "Lizzie Magie, about 1892. Unknown photographer. Public domain.",
+    "photo": true
+  },
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "A lesson you could play",
-      "text": "Lizzie Magie followed the economist Henry George, who argued that rent enriches landowners and keeps tenants poor. In 1902 she called her game \"a practical demonstration of the present system of land-grabbing.\"",
+      "text": "Lizzie Magie followed Henry George, who argued that rent enriches landowners and keeps tenants poor. **She built a board game to show it.**",
       "image": "/img/n/magie/george.jpg",
       "alt": "Studio portrait of the economist Henry George, balding, with a full beard and a bow tie",
       "credit": "Henry George, about 1886. Unknown photographer. New York Public Library. Public domain."
@@ -17,16 +25,10 @@
       "kind": "right",
       "label": "It worked",
       "title": "Patented and passed around",
-      "text": "She was granted a US patent on January 5, 1904. Players drew their own boards and changed the street names. A Wharton economist used it in class, and Quakers in Atlantic City played it with local streets.",
+      "text": "She patented it on January 5, 1904, and players drew their own boards. **A Wharton economist taught with it in class.**",
       "image": "/img/n/magie/patent.jpg",
       "alt": "Patent drawing of a square game board with spaces marked For Sale and For Rent, railroads, a Bank, a Public Treasury and a Go to Jail corner",
       "credit": "The Landlord's Game, US patent 748,626, 1904. Lizzie J. Magie. Public domain."
-    },
-    {
-      "kind": "twist",
-      "label": "Wait, what?",
-      "title": "To win, get rich",
-      "text": "Her 1904 patent says the object of the game is to obtain as much wealth or money as possible. The lesson depended on players seeing what that did to everyone else. In 1932 she added Prosperity rules, where everyone gains when someone gets rich."
     },
     {
       "kind": "oops",
@@ -34,47 +36,38 @@
       "title": "Monopoly",
       "stat": "275 million",
       "statLabel": "Monopoly sets sold worldwide, Hasbro said in 2015",
-      "text": "In 1935 Parker Brothers began selling a version as Monopoly, bought from Charles Darrow, who claimed he invented it. Its rules: become the wealthiest player, and the last player left in the game wins. The warning became the goal.",
-      "also": [
-        "Source: Hasbro figures, reported February 2015"
-      ]
+      "text": "In 1935 Parker Brothers began selling a version called Monopoly. Its object: become the wealthiest player. **The warning became the goal.**"
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Her own rules pointed the way",
-      "text": "Her own 1904 rules made getting rich the way to win, and the lesson rested on players noticing the cost. Before 1935 people were copying the board and changing its rules. A store-bought version that kept the race and dropped the argument was harder to see.",
-      "knowable": "mixed"
+      "knowable": "mixed",
+      "text": "Her 1904 patent made getting rich the object, and the lesson relied on players noticing the cost. **A store version without the argument was harder to foresee.**"
     },
     {
       "kind": "cleanup",
       "label": "The long cleanup",
       "title": "Her name came back",
-      "text": "In 1935 Parker Brothers paid Magie $500 for a revised patent. By 1936 she and her anti-monopolist rules were largely forgotten. In the 1970s, research for a lawsuit over a game called Anti-Monopoly brought her patents back to light."
+      "text": "Parker Brothers paid her $500 for a revised patent in 1935, and by 1936 she was largely forgotten. **Research for a 1970s lawsuit brought her patents back.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
-        "275 million Monopoly sets sold worldwide, Hasbro said in 2015",
-        "A board still in use: spaces around the edge, a jail, a corner to start from (US patent 748,626, 1904)",
-        "A game economics teachers used in class decades before it hit stores"
+        "275 million Monopoly sets sold, Hasbro said in 2015",
+        "A board still in use, with a jail and a corner to start from (US patent 748,626)",
+        "A game economics teachers used in class"
       ],
       "costs": [
-        "A game built to criticize land monopoly, best known as a game about winning one",
-        "$500 from Parker Brothers for her patent, and decades without credit",
+        "A game against land monopoly, best known for winning one",
+        "$500 for her patent, and decades without credit",
         "Her anti-monopolist rules, largely forgotten by 1936"
       ],
-      "text": "Millions learned to play. Fewer learned what she meant.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "We owe her one",
-      "text": "Magie took on a hard problem: making an economic argument something people could feel at a kitchen table. She kept refining it, with a second patent in 1924. The board she designed is still the one families play."
+      "text": "It gave a board families still play, with 275 million sets sold by Hasbro's count. **It cost the lesson it was built to teach.**"
     },
     {
       "kind": "pattern",
@@ -82,39 +75,13 @@
       "title": "The lesson flipped",
       "patternKey": "flipped",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "To show the harm of land-grabbing, the game made land-grabbing the way to win. Players practiced it, and **the warning did not come in the box.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "Players learn the rules",
-      "text": "To show the harm of land-grabbing, the game made land-grabbing the way to win. Players practiced the winning moves. The warning lived in the commentary, and the commentary did not come in the box."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your warnings flip too",
-      "text": "You start a channel of the worst customer emails so the team learns how not to treat people. Within a month it is the most popular channel at work, and people post the emails to laugh at the customers. The lesson flipped.",
-      "also": [
-        "A biggest-bill leaderboard meant to shame waste that people try to top",
-        "A scary safety video that people quote for fun"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "People learn what they practice, not what they are told it means.",
-        "A message that depends on its explanation can lose the explanation when it spreads.",
-        "The version that sells is not always the version that was meant."
-      ]
+      "text": "People learn what they practice, not what they are told it means. **Put the lesson in the rules, not the commentary.**"
     }
-  ],
-  "portrait": {
-    "image": "/img/n/magie/portrait.jpg",
-    "alt": "Photograph of Lizzie Magie in profile, with short curly hair and a pale draped top",
-    "credit": "Lizzie Magie, about 1892. Unknown photographer. Public domain.",
-    "photo": true
-  }
+  ]
 }

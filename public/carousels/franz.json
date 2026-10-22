@@ -1,14 +1,16 @@
 {
   "slug": "franz",
+  "format": "short",
   "keyCard": false,
   "headline": "Roundup worked so well the weeds evolved",
-  "dek": "In 1970 John Franz found a weed killer that left the soil alone.",
+  "dek": "John Franz, Monsanto, United States, 1970.",
+  "verdict": "Roundup: worth it?",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Kill weeds without the plow",
-      "text": "Farmers controlled weeds by plowing, which costs topsoil, time and fuel. What they wanted was one weed killer that took out tough annual and perennial weeds alike and did not stay active in the soil.",
+      "text": "Farmers fought weeds by plowing, which costs topsoil, time and fuel. **They wanted one weed killer that left the soil alone.**",
       "image": "/img/n/franz/erosion.jpg",
       "alt": "A snowy hillside field below a tall grassy bank along a fence line, where years of plowing have carried the soil downhill",
       "credit": "Plow erosion along a fence line, Whitman County, Washington, 1940s or 1950s. USDA. Public domain."
@@ -17,27 +19,18 @@
       "kind": "right",
       "label": "It worked",
       "title": "Roundup",
-      "text": "In 1970 Franz, a Monsanto chemist, found glyphosate. Sold as Roundup from 1974, it controls over 125 kinds of weeds and helped make no-till farming possible. He won the National Medal of Technology.",
+      "text": "In 1970 Monsanto chemist John Franz found glyphosate, sold as Roundup from 1974. **It controls over 125 kinds of weeds.**",
       "image": "/img/n/franz/no-till.jpg",
       "alt": "Rows of young soybean plants growing up through the stalks of last year's corn in an unplowed field",
       "credit": "Soybeans in a no-till field. Lynn Betts, USDA NRCS. Public domain."
-    },
-    {
-      "kind": "twist",
-      "label": "Wait, what?",
-      "title": "The same year",
-      "text": "In 1996 the first crop engineered to survive glyphosate, a soybean, went on sale in the US. That same year, in an Australian apple orchard, the first weed was found that had evolved to survive glyphosate too."
     },
     {
       "kind": "oops",
       "label": "The backfire",
       "title": "The survivors took over",
       "stat": "62",
-      "statLabel": "weed species that have evolved resistance to glyphosate, in 31 countries",
-      "text": "Global use rose almost 15-fold after those crops arrived, often as the only weed killer on a field. Each spraying left the rare weeds it could not kill. Many now survive other herbicides too.",
-      "also": [
-        "Source: Alcántara-de la Cruz and others, Pest Management Science, 2026"
-      ],
+      "statLabel": "weed species in 31 countries resist glyphosate, a 2026 review finds",
+      "text": "Global use rose almost 15-fold after 1996, when crops engineered to survive it arrived. **Each spraying left behind the weeds it could not kill.**",
       "image": "/img/n/franz/weeds.jpg",
       "alt": "Broadleaf weeds growing in the gap between two rows of soybeans",
       "credit": "Weeds in a soybean field, 2013. United Soybean Board. CC BY 2.0."
@@ -46,38 +39,32 @@
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Partly: the record looked clean",
-      "text": "In 1997 Monsanto scientists wrote that decades of use had produced no verified resistant weeds. That record came before tolerant crops made glyphosate the only weed killer on many fields, and weeds had already beaten older herbicides.",
+      "text": "In 1997 Monsanto scientists found no verified resistant weeds after decades of use. **But weeds had already beaten older herbicides.**",
       "knowable": "mixed"
     },
     {
       "kind": "cleanup",
       "label": "Where it stands",
       "title": "Still in court, still on shelves",
-      "text": "On cancer, a WHO agency called glyphosate probably carcinogenic in 2015; US and EU regulators found it unlikely to be. In 2020 Bayer, which owns Monsanto, agreed to pay up to $10.9 billion over cancer claims, admitting no liability."
+      "text": "A WHO agency called glyphosate probably carcinogenic; US and EU regulators found it unlikely. **Bayer agreed to pay up to $10.9 billion over cancer claims**, admitting no liability."
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
-        "Control of over 125 kinds of annual and perennial weeds (National Inventors Hall of Fame)",
-        "Weed control with less plowing, saving topsoil, time and fuel (National Inventors Hall of Fame)",
-        "A key tool behind no-till farming (Lemelson-MIT)"
+        "Control of over 125 kinds of weeds",
+        "Less plowing, saving topsoil, time and fuel",
+        "A key tool behind no-till farming"
       ],
       "costs": [
-        "62 weed species resistant to it, in 31 countries (Pest Management Science, 2026)",
+        "62 weed species resistant to it, in 31 countries (2026 review)",
         "Resistant weeds that often survive other herbicides too",
-        "A cancer question still argued, and up to $10.9 billion in settlements (Bayer, 2020)"
+        "Up to $10.9 billion in cancer settlements, no liability admitted (Bayer, 2020)"
       ],
-      "text": "Glyphosate made weeding cheaper and plowing less necessary. Leaning on it everywhere wore down the very thing that made it work.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "We owe him one",
-      "text": "Franz took on a real problem: weeds that cost farmers crops, fuel and soil. His discovery did that job better than almost anything before it. What the rest of us learned is how fast weeds adapt to a tool that is used everywhere."
+      "text": "It made weeding cheaper and plowing less necessary. **Leaning on it everywhere wore down what made it work.**"
     },
     {
       "kind": "pattern",
@@ -85,27 +72,13 @@
       "title": "The cure breeds resistance",
       "patternKey": "resistance",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "One weed killer on every field killed most weeds and spared the rare ones it could not. **Year after year, those survivors took over.**"
     },
     {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your filters train the spammers",
-      "text": "Your team blocks spam by banning a list of words. Most junk stops. The messages that slip through are the ones with clever misspellings, and those senders keep at it. Soon nearly all your spam is misspelled, and the list catches none of it.",
-      "also": [
-        "A fraud rule that teaches fraudsters which amounts slip under it",
-        "Bot checks that leave only the bots smart enough to pass"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "The more one tool is used, the faster the problem adapts to it.",
-        "A long record with no resistance said little about what heavier use would bring.",
-        "A safety question can stay open for decades while the product stays on the shelf."
-      ]
+      "text": "The more one tool is used, the faster the problem adapts to it. **Rotate your tools before the problem learns them.**"
     }
   ]
 }

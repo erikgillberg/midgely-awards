@@ -1,14 +1,22 @@
 {
   "slug": "moses",
+  "format": "short",
   "keyCard": false,
   "headline": "He built roads to end traffic. Traffic won.",
-  "dek": "Robert Moses built 416 miles of parkway to get New York moving.",
+  "dek": "Robert Moses, New York, 1930s to 1960s.",
+  "verdict": "Moses's roads: worth it?",
+  "portrait": {
+    "image": "/img/n/moses/portrait.jpg",
+    "photo": true,
+    "alt": "Robert Moses in a double-breasted suit, pointing at a model of a proposed bridge",
+    "credit": "Robert Moses with a Battery Bridge model, 1939. C.M. Stieglitz, World-Telegram. Library of Congress. Public domain."
+  },
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
-      "title": "Jammed streets, too few parks",
-      "text": "New York needed parks, and its streets were jammed. A 1930 plan from a parks group Robert Moses chaired called for buying thousands of acres of the city's last natural land, plus parkways to fix the traffic.",
+      "title": "A city out of room",
+      "text": "In 1930 New York's streets were jammed and its parks were few. **Robert Moses set out to fix both at once.**",
       "image": "/img/n/moses/parkways.jpg",
       "alt": "Aerial view of cars streaming along the Grand Central Parkway through a looping interchange among houses and fields",
       "credit": "Grand Central Parkway at the Kew Gardens Interchange, Queens, about 1946. U.S. Department of State. National Archives. Public domain."
@@ -16,8 +24,8 @@
     {
       "kind": "right",
       "label": "It worked",
-      "title": "Beaches, pools, playgrounds",
-      "text": "Jones Beach opened in 1929, and 350,000 people came in the first month. As parks commissioner from 1934 to 1960, Moses took New York from 119 playgrounds to 777 and opened 11 huge pools in the summer of 1936.",
+      "title": "Beaches for everyone",
+      "text": "Jones Beach drew 350,000 people in its first month. **Playgrounds went from 119 to 777.** His parkways carried families out of the city.",
       "image": "/img/n/moses/jones-beach.jpg",
       "alt": "Aerial view of Jones Beach in 1936: wide sand, the boardwalk, bathhouses, the water tower and vast parking fields",
       "credit": "Jones Beach from the air, 1936. U.S. Army. National Archives. Public domain."
@@ -25,13 +33,10 @@
     {
       "kind": "oops",
       "label": "The backfire",
-      "title": "More road, more cars",
+      "title": "Then the roads filled up",
       "stat": "250,000",
-      "statLabel": "people displaced for his highways alone, by biographer Robert Caro's count",
-      "text": "Caro found that the more highways were built to relieve congestion, the more cars poured in to fill them. Expressways like the Cross Bronx, built 1948 to 1972, cut through working-class neighborhoods.",
-      "also": [
-        "Source: Robert Caro, The Power Broker, 1974"
-      ],
+      "statLabel": "people lost their homes to his highways, by Robert Caro's count",
+      "text": "And every new highway drew more cars. **The traffic came back, bigger.**",
       "image": "/img/n/moses/cross-bronx.jpg",
       "alt": "Traffic on the Cross Bronx Expressway in 1973, sunk below overpasses and ramps crowded with cars",
       "credit": "Cross Bronx Expressway, 1973. Dan McCoy, EPA Documerica. National Archives. Public domain."
@@ -39,38 +44,32 @@
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
-      "title": "Yes, and people said so",
-      "text": "In 1930 a transit executive told a St. Louis commission that widening streets simply produces more traffic. Caro documents Moses's own new parkways jamming soon after they opened, and Moses proposing about 200 more miles of road by 1942."
+      "title": "People said so",
+      "text": "In 1930 a transit executive warned that wider streets simply produce more traffic. **Moses's own parkways jammed soon after they opened.**"
     },
     {
       "kind": "cleanup",
       "label": "The long cleanup",
-      "title": "Studying the damage",
-      "text": "In 2022 the federal government gave New York City $2 million to study how to ease the Cross Bronx's harm to nearby neighborhoods. In 2024 it added $150 million for a connector road with bus lanes and paths for bikes and walkers."
+      "title": "Still paying",
+      "text": "In 2024 the federal government put $150 million toward easing the Cross Bronx's harm to its neighbors. **Fifty years on, the bill is still arriving.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What he gave",
+      "costsLabel": "What it cost",
       "gains": [
-        "Playgrounds up from 119 to 777 in his 26 years as parks commissioner",
-        "City park land up from 14,000 to 34,673 acres",
-        "13 bridges and 416 miles of parkway, by one count"
+        "777 playgrounds, up from 119",
+        "34,673 acres of city park land",
+        "416 miles of parkway, by one count"
       ],
       "costs": [
-        "250,000 people displaced for his highways alone, by Robert Caro's count",
-        "Parkways that jammed soon after opening, as Caro documents",
-        "Bronx neighborhoods exposed to the Cross Bronx's noise and air pollution, officials say"
+        "250,000 people displaced, by Caro's count",
+        "Parkways that jammed soon after opening",
+        "Neighborhoods split by expressways"
       ],
-      "text": "He gave a crowded city beaches, pools and parks. His roads moved cars well until more cars came, and some neighborhoods paid with their homes.",
-      "gainsLabel": "What he gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "We owe him one",
-      "text": "Moses took on real problems: a city that needed parks and streets choked with traffic. Jones Beach is still a state park. His roads also became a textbook case of what planners now call induced demand."
+      "text": "He gave New York 777 playgrounds and miles of beaches. **It cost 250,000 people their homes.**"
     },
     {
       "kind": "pattern",
@@ -78,39 +77,13 @@
       "title": "Great for one, bad for all",
       "patternKey": "everyone",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "A faster road makes driving easier for each driver. So more people drive, **until it is slow again.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "Faster for one, slower for all",
-      "text": "A new road makes the trip faster for each driver, so more people choose to drive, until it is slow again. A study of US cities found driving grows in step with highway miles and concluded more roads are unlikely to relieve congestion."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your shortcuts fill up too",
-      "text": "Every team marks its requests to engineering urgent so theirs get done first. It works for the first team, so the others follow. Soon every ticket is urgent, the label means nothing, and work ships no faster than before.",
-      "also": [
-        "Every startup in a category bidding on the same ad keywords",
-        "Every feature asking for push notifications, until users turn them all off"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "Making something easier tends to bring more of it.",
-        "Traffic is thousands of separate choices, and it responds to what gets built.",
-        "The people who pay for a road are often not the people who drive on it."
-      ]
+      "text": "Traffic is thousands of choices. **Make driving easier, and you get more driving.**"
     }
-  ],
-  "portrait": {
-    "image": "/img/n/moses/portrait.jpg",
-    "photo": true,
-    "alt": "Robert Moses in a double-breasted suit, pointing at a model of a proposed bridge",
-    "credit": "Robert Moses with a Battery Bridge model, 1939. C.M. Stieglitz, World-Telegram. Library of Congress. Public domain."
-  }
+  ]
 }

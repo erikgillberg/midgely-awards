@@ -1,14 +1,22 @@
 {
   "slug": "baekeland",
+  "format": "short",
   "keyCard": false,
   "headline": "Plastic was made to last. Most of it still is.",
-  "dek": "In 1907 Leo Baekeland made the first fully synthetic plastic.",
+  "dek": "Leo Baekeland, United States, 1907.",
+  "verdict": "Bakelite: worth it?",
+  "portrait": {
+    "image": "/img/n/baekeland/portrait.jpg",
+    "photo": true,
+    "alt": "Profile photograph of Leo Baekeland, balding, with a dark beard and a light jacket",
+    "credit": "Leo Baekeland, 1916. The World's Work. Public domain."
+  },
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Bugs can't keep up",
-      "text": "The US was wiring itself for electricity, and a common insulator was shellac, made by lac insects in Asia. Supply was limited. Leo Baekeland, a chemist, set out to make a substitute in the lab.",
+      "text": "The US was going electric, and a common insulator, shellac, came from lac insects in limited supply. **Leo Baekeland set out to make a substitute.**",
       "image": "/img/n/baekeland/shellac.jpg",
       "alt": "Two piles of amber and dark red shellac flakes on white paper",
       "credit": "Shellac flakes, 2009. Nuberger13. Public domain."
@@ -17,27 +25,18 @@
       "kind": "right",
       "label": "It worked",
       "title": "Heat, pressure, Bakelite",
-      "text": "In 1907 he combined phenol and formaldehyde under controlled heat and pressure and got Bakelite, the first fully synthetic plastic. He announced it in 1909. It soon went into car parts, radios and telephones.",
+      "text": "In 1907 he made Bakelite, the first fully synthetic plastic, and announced it in 1909. **Soon it was in car parts, radios and telephones.**",
       "image": "/img/n/baekeland/radio.jpg",
       "alt": "A round brown Bakelite radio with a curved station dial, a cloth speaker grille and three knobs",
       "credit": "Radio with a Bakelite case, designed by Wells Coates, 1932. Daderot. CC0."
-    },
-    {
-      "kind": "twist",
-      "label": "Wait, what?",
-      "title": "Heat can't touch it",
-      "text": "Once Bakelite set, heat could not melt it and solvents could not dissolve it. That was the selling point: a part that resisted heat and carried no current would keep its shape for good."
     },
     {
       "kind": "oops",
       "label": "The backfire",
       "title": "Made to last, so it does",
       "stat": "79%",
-      "statLabel": "of the 6.3 billion metric tons of plastic waste made by 2015 sat in landfills or the environment, one study estimates",
-      "text": "Bakelite came first. Most plastics after it don't biodegrade in any meaningful sense, a study author says. A 2022 study found plastic particles in the blood of 17 of 22 donors.",
-      "also": [
-        "Source: Geyer, Jambeck and Law, Science Advances, 2017"
-      ],
+      "statLabel": "of plastic waste by 2015 sat in landfills or nature, one study says",
+      "text": "Most plastics after Bakelite don't biodegrade in any meaningful sense, a study author says. **Most plastic waste is still around.**",
       "image": "/img/n/baekeland/beach.jpg",
       "alt": "Plastic bottles, crates, rope, a tire and other debris heaped along a beach, with surf and a mountain behind",
       "credit": "Plastic debris in Kanapou Bay, Kaho'olawe, Hawaii, 2012. NOAA. Public domain."
@@ -46,37 +45,31 @@
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Not in his lifetime",
-      "text": "In 1950, six years after Baekeland died, the world made about 2 million metric tons of plastic a year. Plastic in the ocean was first noticed in the 1960s, and scientists named microplastics in 2004. Nothing in 1907 pointed here."
+      "text": "In 1950 the world made about 2 million metric tons of plastic a year, and ocean plastic was first noticed in the 1960s. **Nothing in 1907 pointed here.**"
     },
     {
       "kind": "cleanup",
       "label": "The long cleanup",
       "title": "Still negotiating",
-      "text": "In 2022, 175 nations agreed at the UN to write a binding treaty to end plastic pollution, aiming for a draft by the end of 2024. Talks in 2024 and again in 2025 ended without a deal. In 2026 negotiators chose a new chair to try again."
+      "text": "In 2022, 175 nations agreed to write a treaty to end plastic pollution. Talks in 2024 and 2025 ended without a deal. **The treaty is still unwritten.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
-        "Insulation for a country going electric, without waiting on lac insects",
-        "Molded parts for cars, radios and telephones, made quickly and cheaply",
-        "A material the world was making at about 400 million metric tons a year by 2015"
+        "Insulation without waiting on lac insects",
+        "Molded parts for cars, radios and telephones",
+        "Over 400 million metric tons of plastic made in 2015"
       ],
       "costs": [
-        "79% of 6.3 billion metric tons of plastic waste in landfills or the environment by 2015 (Science Advances, 2017)",
+        "79% of 6.3 billion metric tons of plastic waste in landfills or nature by 2015 (Science Advances, 2017)",
         "Plastic particles in the blood of 17 of 22 donors in one 2022 study",
-        "A treaty to end plastic pollution, still unwritten after four years of talks"
+        "A plastics treaty still unwritten after talks in 2024 and 2025"
       ],
-      "text": "Bakelite solved a real shortage. The bill for the age it opened came due long after its inventor died.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "We owe him one",
-      "text": "Baekeland went after a real supply problem in a country running on new electricity, and solved it with chemistry. The waste came from scale and decades he never saw. Asking where a material goes after its job is a question his age taught us."
+      "text": "It gave an electric country its insulators and a material made at over 400 million tons a year. **It cost billions of tons of waste that lingers.**"
     },
     {
       "kind": "pattern",
@@ -84,38 +77,13 @@
       "title": "Too stable to go away",
       "patternKey": "stable",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "Bakelite sold because heat could not melt it and solvents could not dissolve it. **The same toughness keeps plastic on beaches for decades.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "The feature is the flaw",
-      "text": "Bakelite was prized because it would not break down. Much of what came after shares that toughness. The quality that keeps a part working in a radio for decades keeps a bottle cap intact on a beach for decades."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "You build things to last too",
-      "text": "You keep every user's data forever because storage is cheap and you might need it. Nothing breaks. Ten years later a breach exposes customers who left long ago. The data outlived its use, and it was still there to lose.",
-      "also": [
-        "A feature flag left on years after launch",
-        "A temporary workaround still running five years later"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "How long a thing lasts and how long it stays useful are different numbers.",
-        "A harm can wait for scale: one factory's output looks nothing like a planet's."
-      ]
+      "text": "How long a thing lasts and how long it stays useful are different numbers. **Plan for where it goes after its job.**"
     }
-  ],
-  "portrait": {
-    "image": "/img/n/baekeland/portrait.jpg",
-    "photo": true,
-    "alt": "Profile photograph of Leo Baekeland, balding, with a dark beard and a light jacket",
-    "credit": "Leo Baekeland, 1916. The World's Work. Public domain."
-  }
+  ]
 }

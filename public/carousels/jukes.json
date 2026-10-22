@@ -1,15 +1,16 @@
 {
   "slug": "jukes",
+  "format": "short",
   "keyCard": false,
   "headline": "Antibiotics in feed: bigger pigs, tougher germs",
-  "headlineAlt": "Antibiotics grew the chickens. And the superbugs.",
-  "dek": "In 1950 two lab scientists showed a pinch of a new antibiotic made chicks grow faster.",
+  "dek": "Robert Stokstad and Thomas Jukes, US farms, 1950s on.",
+  "verdict": "Feed antibiotics: worth it?",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "More meat from cheap feed",
-      "text": "After World War II, US farms struggled to meet demand for meat, and animals on plant feed grew slowly. At Lederle Laboratories, Robert Stokstad and Thomas Jukes hunted for the missing growth factor.",
+      "text": "After World War II, US farms struggled to meet demand for meat. **Robert Stokstad and Thomas Jukes hunted for the missing growth factor.**",
       "image": "/img/n/jukes/chicks.jpg",
       "alt": "Hundreds of young chicks on wood-shaving litter around red feeder pans in a long, low broiler house",
       "credit": "Chicks in a broiler house, 2009. USDA NRCS Texas. Public domain."
@@ -18,24 +19,18 @@
       "kind": "right",
       "label": "It worked",
       "title": "A pinch, a big gain",
-      "text": "Waste mash from making the antibiotic aureomycin sped chick growth, and so did the pure drug, in tiny doses. The FDA approved antibiotics in feed in 1951. In trials from 1950 to 1985, young pigs gained 16% faster.",
+      "text": "A pinch of the new antibiotic aureomycin made chicks grow faster. **In trials from 1950 to 1985, young pigs gained 16% faster.**",
       "image": "/img/n/jukes/hogs.jpg",
       "alt": "Dozens of pink, black and spotted hogs in a muddy lot, with round metal self-feeders and open sheds behind them",
       "credit": "Hogs at self-feeders in an Iowa hog lot. Lynn Betts, USDA NRCS. Public domain."
-    },
-    {
-      "kind": "twist",
-      "label": "Wait, what?",
-      "title": "Front-page wonder",
-      "text": "They reported it at a chemistry meeting in April 1950. The New York Times put it on the front page as a wonder drug that spurs growth. Recommended doses later climbed, from 10 to 20 grams per ton of feed in the early 1950s to 30 to 110 grams by the 2010s."
     },
     {
       "kind": "oops",
       "label": "The backfire",
       "title": "The survivors took over",
       "stat": "31% vs 7%",
-      "statLabel": "of weekly stool samples from a farm's family were mostly tetracycline-resistant within six months of drugged chicken feed, against 7% for neighbors (Levy, 1976)",
-      "text": "A small daily dose kills the gut bacteria it can reach and spares the ones that resist it. Those multiply, and pass their resistance genes to other bacteria, animals and people.",
+      "statLabel": "of samples mostly resistant, farm family vs. neighbors (Levy, 1976)",
+      "text": "A small daily dose kills the bacteria it can reach and spares the ones that resist. **The survivors multiply and pass their resistance on.**",
       "image": "/img/n/jukes/plates.jpg",
       "alt": "Two lab dishes of bacteria with white antibiotic discs: clear rings around every disc on the left, few or none on the right",
       "credit": "Antibiotic sensitivity (left) and resistance (right), 2011. Graham Beards. CC BY-SA 4.0."
@@ -44,37 +39,31 @@
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Yes, and early",
-      "text": "In 1945 Alexander Fleming warned that too-small doses teach microbes to resist penicillin. In 1951 a study reported streptomycin-resistant bacteria in turkeys fed streptomycin. How much farm use harmed people stayed in dispute for decades."
+      "text": "In 1945 Alexander Fleming warned that too-small doses teach microbes to resist. **In 1951 a study found resistance in turkeys fed the drug.**"
     },
     {
       "kind": "cleanup",
       "label": "The long cleanup",
       "title": "Fifty years of phase-outs",
-      "text": "A British report urged keeping drugs used in people out of feed in 1969. Sweden banned growth promoters in 1986 and the EU in 2006. The US ended growth use of medically important drugs in 2017. In 2024, US sales of those drugs for farm animals rose 16%."
+      "text": "The EU banned growth promoters in 2006; the US ended growth use of medically important drugs in 2017. **In 2024, US farm sales of those drugs rose 16%.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
-        "Young pigs gained weight 16% faster and used feed 7% more efficiently, in trials from 1950 to 1985 (Cromwell, 2002)",
-        "A worldwide ban would cut meat output 1.3% to 3%, worth $13.5 billion to $44.1 billion a year, one 2015 OECD estimate finds",
-        "A US ban would cost consumers $1.2 billion to $2.5 billion a year, a 1998 National Research Council committee estimated"
+        "Young pigs gained 16% faster and used feed 7% more efficiently, trials 1950 to 1985 (Cromwell, 2002)",
+        "A worldwide ban would cut meat output 1.3% to 3%, one 2015 OECD estimate finds",
+        "A US ban would cost consumers $1.2 billion to $2.5 billion a year (National Research Council, 1998)"
       ],
       "costs": [
-        "Farm dwellers carrying mostly tetracycline-resistant gut bacteria within six months of drugged feed (Levy, 1976)",
+        "Farm dwellers carrying mostly tetracycline-resistant gut bacteria within six months (Levy, 1976)",
         "72.7% of Danish broiler E. faecium resistant to vancomycin-type drugs in 1995, after avoparcin feed (Aarestrup, 2001)",
-        "A gene that defeats the last-resort drug colistin, found in 21% of farm animals sampled in China, 2011 to 2014, where colistin was widely used in feed (Lancet Infectious Diseases, 2016)"
+        "A gene that defeats last-resort colistin in 21% of farm animals sampled in China, 2011 to 2014 (Lancet Infectious Diseases, 2016)"
       ],
-      "text": "It made meat cheaper to raise. It also gave farm bacteria daily practice at surviving drugs that people need. You decide if it was worth it.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "Credit where due",
-      "text": "Stokstad and Jukes took on a real problem, growing more food from cheaper feed, and published their work openly. The growth effect they found held up in hundreds of later trials. Jukes went on to help found the neutral theory of molecular evolution."
+      "text": "It made meat cheaper to raise. **It also gave bacteria daily practice surviving drugs people need.**"
     },
     {
       "kind": "pattern",
@@ -82,57 +71,13 @@
       "title": "The cure breeds resistance",
       "patternKey": "resistance",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "Growth doses were low, daily and given to whole herds. **Bacteria met the drug constantly, at levels some could survive.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "Low dose, every day, everyone",
-      "text": "A treatment is short and aimed at sick animals. Growth doses were low, daily and given to whole flocks and herds. Bacteria met the drug constantly at levels some could survive, and each farm's gain added to one shared loss."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your filter trains its enemies",
-      "text": "Your fraud rules block the clumsy attacks. The fraudsters who get through keep going and copy what worked; the rest give up. A year later, nearly every attack you see is one built to get past your rules.",
-      "also": [
-        "A spam filter that stops the lazy spammers and teaches the rest",
-        "A CAPTCHA that only blocks the cheapest bots"
-      ]
-    },
-    {
-      "kind": "hindsight",
-      "label": "With hindsight",
-      "title": "What might have softened it",
-      "items": [
-        {
-          "softened": "Watch resistance in farm bacteria from the first approval, as a 1951 turkey study showed was possible.",
-          "question": "What survives this, and what happens when that's all that's left?"
-        },
-        {
-          "softened": "Keep drugs used in people out of feed, as Britain's Swann committee proposed in 1969.",
-          "question": "Are we relying on one control?"
-        },
-        {
-          "softened": "Treat sick animals instead of dosing whole herds, backed by hygiene and vaccines, as Sweden and Denmark later did; Denmark's net cost was about 1% of pig production costs (WHO, 2002)."
-        }
-      ]
-    },
-    {
-      "kind": "whatif",
-      "label": "What if?",
-      "title": "What if the 1977 hearings happened?",
-      "text": "Speculation. In 1977 the FDA proposed pulling penicillin and most tetracycline uses from feed. Congress told it to wait for more research, and the notices sat until 2011. Had hearings gone ahead, the US might have reached its 2017 rules decades sooner."
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "A fix aimed at a living population is also a test that population can learn to pass.",
-        "The gain went to each farm. The resistance went to everyone who needs the same drugs.",
-        "Easy to start, slow to stop: 66 years passed between US approval and the end of growth use for drugs that matter in medicine."
-      ]
+      "text": "A fix aimed at living things is also a test they can learn to pass. **Ask what survives it, and what happens next.**"
     }
   ]
 }

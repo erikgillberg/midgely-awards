@@ -1,73 +1,60 @@
 {
   "slug": "zuckerberg",
+  "format": "short",
   "keyCard": false,
   "headline": "Facebook counted anger as five likes",
-  "dek": "In 2018 Mark Zuckerberg retuned Facebook's feed to favor posts people talked about.",
+  "dek": "Mark Zuckerberg, Facebook, 2006 to 2021.",
+  "verdict": "Facebook's feed: worth it?",
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Stop checking every page",
-      "text": "On early Facebook, seeing what friends were up to meant visiting their profiles one by one. On September 5, 2006, Facebook launched News Feed, which gathered friends' updates in one place."
+      "text": "Early Facebook meant visiting friends' profiles one by one. **In 2006 News Feed gathered their updates in one place.**"
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "A billion people a month",
-      "text": "Users protested at first: one group against it drew more than 700,000 members in days. Then the feed became the heart of the site. By October 2012 more than a billion people used Facebook each month. In June 2026, 3.6 billion a day used Meta's apps."
-    },
-    {
-      "kind": "twist",
-      "label": "Wait, what?",
-      "title": "A fix for passive scrolling",
-      "text": "In January 2018 Zuckerberg changed the feed's goal from relevant content to \"meaningful social interactions,\" citing people's well-being. Posts likely to spark comments and replies would rank higher. He said he expected time spent on Facebook to fall."
+      "text": "Users protested at first, then stayed. **By 2012 more than a billion people used Facebook monthly.**"
     },
     {
       "kind": "oops",
       "label": "The backfire",
       "title": "Comments, or arguments",
       "stat": "30 to 1",
-      "statLabel": "points for a \"significant\" comment against 1 for a like in Facebook's 2018 feed scoring, internal documents show",
-      "text": "Facebook's researchers found publishers and political parties tilting their posts toward outrage, which drew comments. They also wrote that \"misinformation, toxicity, and violent content are inordinately prevalent among reshares.\"",
-      "also": [
-        "Sources: internal documents reported by CNN, the Wall Street Journal and the Washington Post, 2021. Facebook says the formula is continually refined."
-      ]
+      "statLabel": "points for a significant comment vs. a like, Facebook's 2018 scoring",
+      "text": "In 2018, citing well-being, Facebook began ranking posts by the comments they sparked. **Its researchers found publishers and parties tilting posts toward outrage.**"
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Seen inside by 2019",
-      "text": "Facebook's own researchers flagged the effect by 2019. Outside, the science is contested: a 2023 study run with Meta found a chronological feed didn't measurably change polarization in three months. Critics said Meta's election measures muddied that."
+      "text": "Facebook's own researchers flagged the effect by 2019. **Outside researchers still argue over how much it mattered.**"
     },
     {
       "kind": "cleanup",
       "label": "The cleanup",
       "title": "Turning down the dial",
-      "text": "In September 2020 Facebook cut the weight of an angry reaction to zero. From 2021 it put less weight on how likely people are to comment on or share political posts. Zuckerberg called the claim that it pushes angry content for profit \"deeply illogical.\""
+      "text": "In September 2020 Facebook cut the angry reaction's weight to zero. **From 2021 it gave political comments and shares less weight.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
         "3.6 billion people a day on Meta's apps, June 2026",
-        "Friends' news in one place, free to use, since 2006",
-        "Ranked feeds showed less untrustworthy and political content than a plain timeline (Science, 2023)"
+        "Friends' news in one place, free, since 2006",
+        "More than a billion monthly users by October 2012"
       ],
       "costs": [
         "Publishers and parties tilting posts toward outrage, Facebook's researchers found (WSJ, 2021)",
-        "On Facebook, the ranked feed showed more uncivil posts and slurs than a plain timeline (same study)",
-        "An angry reaction once counted five times a like (Washington Post, 2021)"
+        "An angry reaction once counted five times a like (Washington Post, 2021)",
+        "More uncivil posts in the ranked feed than a plain timeline (Science, 2023)"
       ],
-      "text": "The feed keeps billions of people in touch. By its makers' own research, it also favored outrage in politics and news. How much that changed society is still argued over.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "Credit where it's due",
-      "text": "Zuckerberg took on a real problem: keeping up with the people you care about. In 2018 he chose a goal he said would cost time on the site. His company also opened data to outside researchers studying the 2020 election, which is part of why we know this much."
+      "text": "The feed keeps billions of people in touch. **By its makers' own research, it also favored outrage.**"
     },
     {
       "kind": "pattern",
@@ -75,33 +62,13 @@
       "title": "Chasing the wrong number",
       "patternKey": "metric",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "Facebook counted comments as a sign of meaningful talk. But a fight earns comments too, **so the count rose either way.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "Replies can't tell you why",
-      "text": "The feed counted comments and reshares as signs of meaningful talk. An angry post earns comments too. The number went up whether people were connecting or fighting, so the ranking couldn't tell the two apart."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your numbers drift too",
-      "text": "You judge your newsletter by its open rate. Subject lines get punchier, then a little alarming. Opens go up. So do unsubscribes, and readers start skimming past you. The number you chased stopped meaning what you wanted.",
-      "also": [
-        "A sales team paid per call, not per sale",
-        "Support tickets closed fast, then reopened"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "A number stands in for a goal only until people learn what moves the number.",
-        "A count of replies can't tell a good conversation from a fight.",
-        "Inside research often spots a problem early. What happens next is a separate decision."
-      ]
+      "text": "A count of replies can't tell a good talk from a fight. **Before you rank by a number, ask what else moves it.**"
     }
   ]
 }

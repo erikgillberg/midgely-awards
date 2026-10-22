@@ -1,14 +1,22 @@
 {
   "slug": "edward-m-bassett",
+  "format": "short",
   "keyCard": false,
   "headline": "Zoning kept out factories. Then apartments.",
-  "dek": "In 1916 New York wrote the first US zoning code to bring light back to its streets.",
+  "dek": "Edward M. Bassett, New York, 1916.",
+  "verdict": "Zoning: worth it?",
+  "portrait": {
+    "image": "/img/n/edward-m-bassett/portrait.jpg",
+    "photo": true,
+    "alt": "Portrait photograph of Edward M. Bassett in a dark suit, high white collar and tie",
+    "credit": "Edward M. Bassett, about 1914. Reuben Leslie Maynard. Public domain."
+  },
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "A shadow over Broadway",
-      "text": "Manhattan in the 1910s had crowded tenements with little light or air, and factories creeping toward Fifth Avenue. In 1915 the 538-foot Equitable Building went up and cast a seven-acre shadow on its neighbors.",
+      "text": "Manhattan's tenements lacked light and air, and in 1915 the Equitable Building cast a seven-acre shadow. **Edward M. Bassett set out to bring the light back.**",
       "image": "/img/n/edward-m-bassett/equitable.jpg",
       "alt": "The Equitable Building, a huge flat-topped office block, towering over Trinity Church and its neighbors in lower Manhattan",
       "credit": "Equitable Building, New York City, 1915. Library of Congress. Public domain."
@@ -17,63 +25,48 @@
       "kind": "right",
       "label": "It worked",
       "title": "America's first zoning code",
-      "text": "Edward M. Bassett, a lawyer and former congressman, chaired the commission behind New York's 1916 code, the first comprehensive zoning in the US. It capped heights and kept factories out of residential districts.",
+      "text": "His commission wrote the first comprehensive US zoning code in 1916, capping heights and keeping factories out of residential districts. **By 1923, 218 municipalities had zoning.**",
       "image": "/img/n/edward-m-bassett/setback.jpg",
       "alt": "Charcoal drawing of a stepped skyscraper mass, its towers narrowing in setbacks as they rise",
       "credit": "Study of the largest building the 1916 zoning law allowed, 1922. Hugh Ferriss. Cooper Hewitt. Public domain."
-    },
-    {
-      "kind": "twist",
-      "label": "Wait, what?",
-      "title": "Further than he went",
-      "text": "Bassett warned that banning apartments from home districts might not survive in court. In 1926 the Supreme Court upheld a code that did, in Euclid, Ohio, calling an apartment house near homes very often \"a mere parasite.\""
     },
     {
       "kind": "oops",
       "label": "The backfire",
       "title": "Homes far from everything",
       "stat": "1.5 million",
-      "statLabel": "homes the US was short in 2022, a Moody's estimate the White House cited",
-      "text": "As zoning spread, codes kept homes, shops and jobs in separate districts. The EPA noted in 2001 that this leaves people relying on cars. In 2022 the White House said exclusionary zoning inflates home prices.",
-      "also": [
-        "Source: White House Housing Supply Action Plan fact sheet, May 2022"
-      ]
+      "statLabel": "homes the US was short in 2022, by a Moody's estimate",
+      "text": "As zoning spread, later codes barred apartments from home districts and kept homes far from jobs. **The rules that kept out factories kept out homes.**"
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "A judge warned. The cars came later.",
-      "text": "In 1924 a federal judge struck down a zoning law, writing that its result was to \"classify the population and segregate them according to their income.\" The Supreme Court reversed him in 1926. The cost in driving came later, when cities spread out."
+      "text": "Striking down a zoning law, a federal judge wrote that it would \"segregate them according to their income.\" **He warned in 1924 and was overruled in 1926.**"
     },
     {
       "kind": "cleanup",
       "label": "The long cleanup",
       "title": "Undoing it takes new law",
-      "text": "In 2019 Oregon required its cities of more than 10,000 people to allow duplexes on land zoned for single-family homes, with deadlines in 2021 and 2022. It took a state law to change what local codes had fixed in place."
+      "text": "In 2019 Oregon required cities over 10,000 people to allow duplexes on single-family land. **Undoing local codes took a state law.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
-        "Light and air for streets under towers like the Equitable, whose shadow covered seven acres",
+        "Light and air under towers like the Equitable",
         "Homes kept apart from factories",
-        "A tool so useful that 218 municipalities with over 22 million people had zoning by the end of 1923"
+        "Zoning in 218 municipalities with over 22 million people by 1923"
       ],
       "costs": [
         "A shortfall of more than 1.5 million homes, by one 2022 estimate",
-        "Homes, jobs and shops set far apart, so people rely on cars (EPA, 2001)",
-        "Districts closed to apartments in later codes; Oregon needed a 2019 state law to allow duplexes in them"
+        "Homes, jobs and shops set apart, so people rely on cars (EPA, 2001)",
+        "Apartments barred from home districts; Oregon needed a 2019 law to allow duplexes"
       ],
-      "text": "Zoning fixed real dangers in a crowded city. The rules it spread outlived the conditions they were written for.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "We owe him one",
-      "text": "Bassett took on real harms: dark streets, crowded tenements and factories next to homes. His code worked well enough that hundreds of cities copied it. Today's zoning reformers start by asking what those rules were for."
+      "text": "It gave crowded streets light and air and kept factories away from homes. **It cost neighborhoods where jobs and shops need a car.**"
     },
     {
       "kind": "pattern",
@@ -81,39 +74,13 @@
       "title": "Cheap now, paid later",
       "patternKey": "later",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "In 1916 the light and air arrived at once. **The cost grew as cities spread out under the rules.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "The bill came with growth",
-      "text": "In 1916 the benefit was immediate: light, air and homes safe from factories. The cost arrived slowly, as cities grew outward under rules that kept homes, shops and jobs apart and made it hard to add homes where people wanted to live."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your rules send bills too",
-      "text": "After one bad release, your team rules that every change needs sign-off from three leads. Mistakes drop right away. Years later the team is five times bigger, and that rule is why nothing ships.",
-      "also": [
-        "A cheap lease with a rent jump in year five",
-        "A pricing rule written for your first ten customers, applied to ten thousand"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "A rule written for one city's problem becomes a template for places that never had it.",
-        "The costs of a rule can keep growing long after the people who wrote it are gone.",
-        "Courts and copycats can take a rule further than the person who wrote it."
-      ]
+      "text": "A rule written for one city's problem becomes a template for places that never had it. **Give every rule a date to check it again.**"
     }
-  ],
-  "portrait": {
-    "image": "/img/n/edward-m-bassett/portrait.jpg",
-    "photo": true,
-    "alt": "Portrait photograph of Edward M. Bassett in a dark suit, high white collar and tie",
-    "credit": "Edward M. Bassett, about 1914. Reuben Leslie Maynard. Public domain."
-  }
+  ]
 }

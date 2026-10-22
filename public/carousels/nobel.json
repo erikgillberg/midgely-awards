@@ -1,20 +1,28 @@
 {
   "slug": "nobel",
+  "format": "short",
   "keyCard": false,
   "headline": "Dynamite was invented to be the safe explosive",
-  "dek": "Nitroglycerin was killing the people who handled it. Alfred Nobel found a fix.",
+  "dek": "Alfred Nobel, Sweden, 1864 to 1867.",
+  "verdict": "Dynamite: worth it?",
+  "portrait": {
+    "image": "/img/n/nobel/portrait.jpg",
+    "alt": "Photograph of Alfred Nobel seated sideways in a chair, bearded, his chin resting on his hand",
+    "credit": "Alfred Nobel, before 1896. Gösta Florman. Public domain.",
+    "photo": true
+  },
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Tame the oil",
-      "text": "Nitroglycerin was a powerful blasting oil, and it went off in transit and in storage. In 1864 an explosion at Nobel's factory in Stockholm killed five people, including his younger brother Emil. The city banned the experiments."
+      "text": "In 1864 a blast at Alfred Nobel's factory killed five people, his brother among them. **He set out to make nitroglycerin safe to handle.**"
     },
     {
       "kind": "right",
       "label": "It worked",
       "title": "Dynamite",
-      "text": "Nobel soaked nitroglycerin into a porous earth called kieselguhr and patented it in 1867 as dynamite. Even soaked through, it was quite safe to handle. His Krümmel plant made 11 tons that year, 3,150 in 1874.",
+      "text": "Patented in 1867, dynamite was nitroglycerin soaked into porous earth, quite safe to handle. **One plant made 11 tons that year and 3,150 in 1874.**",
       "image": "/img/n/nobel/ardeer.jpg",
       "alt": "Women in aprons mixing dynamite in wooden boxes along a bench, with a man standing at the left, inside a timber factory shed",
       "credit": "Mixing dynamite at Nobel's Ardeer factory, Scotland, 1897. Scott Photo, Ardrossan. Public domain."
@@ -23,52 +31,40 @@
       "kind": "oops",
       "label": "The backfire",
       "title": "Easy to carry, for anyone",
-      "text": "A stable explosive can be carried into a city and left behind. From 1881 to 1885 Irish republican bombers waged a dynamite campaign in Britain, hitting the House of Commons and the Tower of London in 1885.",
-      "also": [
-        "Source: Niall Whelehan, The Dynamiters, Cambridge University Press"
-      ],
+      "text": "A stable explosive can be carried into a city and left behind. **In 1885 bombers used it on the House of Commons.**",
       "image": "/img/n/nobel/westminster.jpg",
       "alt": "Engraving of a bomb going off in Westminster Hall, throwing back the people nearby, under two smaller scenes of shattered stonework and the wrecked House of Commons",
       "credit": "The dynamite explosions at the Houses of Parliament, The Graphic, 1885. Henry William Brewer. Public domain."
     },
     {
-      "kind": "encore",
-      "label": "What came next",
-      "title": "Powder for armies",
-      "text": "In 1887 Nobel patented ballistite, a nearly smokeless powder for firing military projectiles, and Italy's army adopted it. In 1894 he bought the Bofors ironworks in Sweden, the basis of the Bofors arms company.",
-      "image": "/img/n/nobel/ballistite.jpg",
-      "alt": "A paper rocket case with a wooden nose and metal fittings, inscribed in ink and dated September 1896, in a museum display",
-      "credit": "Ballistite rocket case by Alfred Nobel and W. T. Unge, 1896, Tekniska museet. Photo: Daderot. CC0."
-    },
-    {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "Yes, in his lifetime",
-      "text": "Armies used dynamite in the Franco-Prussian War of 1870 to 1871, three years after the patent. Bombers used it in Britain from 1881, and in 1887 Nobel patented a powder for armies himself. The uses for war and terror were plain in his lifetime."
+      "text": "Both armies used dynamite in the Franco-Prussian War, three years after the patent. **Its uses for war and terror were plain in his lifetime.**"
+    },
+    {
+      "kind": "cleanup",
+      "label": "What came next",
+      "title": "Powder for armies",
+      "text": "Nobel went on to patent ballistite in 1887, a nearly smokeless powder Italy's army adopted. **In 1894 he bought the ironworks that became Bofors arms.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
-        "One plant's dynamite output: 11 tons in 1867, 3,150 tons in 1874 (Nobel Foundation)",
-        "Lucerne to Milan by rail in about 5.5 hours instead of 27, once the Gotthard tunnel opened in 1882",
-        "A much lower risk of accidental explosion than liquid nitroglycerin"
+        "One plant's output: 11 tons in 1867, 3,150 tons in 1874",
+        "Lucerne to Milan in about 5.5 hours instead of 27, via the Gotthard tunnel (1882)",
+        "Far less risk of accidental explosion than liquid nitroglycerin"
       ],
       "costs": [
-        "A bombing campaign in Britain, 1881 to 1885, aimed at Parliament and the Tower of London",
-        "A smokeless military powder, ballistite, adopted by Italy's army",
-        "Dynamite used by both armies in the Franco-Prussian War, 1870 to 1871, three years after the patent"
+        "A bombing campaign in Britain, 1881 to 1885",
+        "Dynamite used by both armies in the Franco-Prussian War",
+        "Ballistite, a smokeless military powder adopted by Italy's army"
       ],
-      "text": "Dynamite built tunnels, mines and roads. It also put a portable bomb within reach of anyone who could buy it.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "We owe him one",
-      "text": "Nobel took on a deadly problem: a blasting oil that exploded in factories, in storage and in transit. He made it safe to handle. In 1895 his will left most of his fortune to prizes for those who confer the greatest benefit on mankind."
+      "text": "Dynamite helped build the Gotthard tunnel, cutting Lucerne to Milan from 27 hours to about 5.5. **It also put a portable bomb in anyone's hands.**"
     },
     {
       "kind": "pattern",
@@ -76,39 +72,13 @@
       "title": "The problem moves",
       "patternKey": "moved",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "Nitroglycerin's danger was going off when nobody meant it to. Dynamite fixed that, so **the risk moved to whoever held the stick.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "From accident to intent",
-      "text": "The danger of nitroglycerin was that it went off when nobody meant it to. Dynamite fixed that. The same stability made it easy to carry, hide and set off on purpose. The risk moved from the factory floor to whoever held the stick."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your fixes move risk too",
-      "text": "Analysts kept breaking the fragile scripts that pulled customer data, so you build a one-click export. The broken scripts stop. Now anyone can put the whole customer list on a laptop. The risk didn't go away. It moved.",
-      "also": [
-        "A public-link setting that ends the sharing requests",
-        "A shared password that ends the access requests"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "Making something safe to handle also makes it easy to use, by anyone.",
-        "A fix aimed at accidents does nothing about intent.",
-        "The people who use an invention decide much of what it does."
-      ]
+      "text": "A fix aimed at accidents does nothing about intent. **Safe to handle also means easy to use, by anyone.**"
     }
-  ],
-  "portrait": {
-    "image": "/img/n/nobel/portrait.jpg",
-    "alt": "Photograph of Alfred Nobel seated sideways in a chair, bearded, his chin resting on his hand",
-    "credit": "Alfred Nobel, before 1896. Gösta Florman. Public domain.",
-    "photo": true
-  }
+  ]
 }

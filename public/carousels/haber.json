@@ -1,14 +1,21 @@
 {
   "slug": "haber",
+  "format": "short",
   "keyCard": false,
   "headline": "Fertilizer feeds billions and chokes the Gulf",
-  "dek": "In 1909 a chemist learned to pull fertilizer out of thin air.",
+  "dek": "Fritz Haber, Germany, 1909 to 1913.",
+  "verdict": "Haber's ammonia: worth it?",
+  "portrait": {
+    "image": "/img/n/haber/portrait.jpg",
+    "alt": "Etched profile portrait of Fritz Haber, bald, with round glasses",
+    "credit": "Fritz Haber, etching by Emil Orlik, 1922. Public domain."
+  },
   "slides": [
     {
       "kind": "meant",
       "label": "The bright idea",
       "title": "Fertilizer from bird droppings",
-      "text": "Crops need nitrogen. Around 1900 most of it came from bird droppings dug off islands near Peru and saltpeter mined in Chile. In 1898 the chemist William Crookes warned the world would soon run short of wheat.",
+      "text": "Crops need nitrogen. Around 1900 most came from bird droppings and mined saltpeter, and **a chemist warned the world would run short of wheat.**",
       "image": "/img/n/haber/guano.jpg",
       "alt": "Workers loading guano into a rail cart at the foot of a huge pale heap, Chincha Islands, Peru, 1865",
       "credit": "Guano mining, Chincha Islands, Peru, 1865. Henry de Witt Moulton. Public domain."
@@ -17,66 +24,51 @@
       "kind": "right",
       "label": "It worked",
       "title": "Ammonia out of thin air",
-      "text": "In July 1909 Fritz Haber made ammonia from the nitrogen in air. Carl Bosch scaled it up at BASF, and the first plant started in September 1913. One estimate finds about half the world's people are fed by it.",
+      "text": "In 1909 Fritz Haber made ammonia from the nitrogen in air, and Carl Bosch scaled it up. **One estimate: it fed 48% of the world in 2008.**",
       "image": "/img/n/haber/wheat.jpg",
       "alt": "A combine harvesting a vast golden wheat field on rolling hills",
       "credit": "Wheat harvest on the Palouse. USDA. Public domain."
     },
     {
-      "kind": "twist",
-      "label": "Wait, what?",
-      "title": "Same ammonia, other use",
-      "text": "In World War I a blockade cut Germany off from Chilean saltpeter. Ammonia from the new plants was turned into nitric acid and then into explosives, including TNT and nitroglycerin."
-    },
-    {
       "kind": "oops",
       "label": "The backfire",
       "title": "The extra goes somewhere",
-      "stat": "100 to 17",
-      "statLabel": "million tonnes of factory nitrogen spread on farms in 2005, against 17 million in all the food people ate, one study estimates",
-      "text": "Crops take up only part of the nitrogen. The rest washes into rivers and the sea, feeds algae and uses up the oxygen. Each summer the Gulf of Mexico gets a dead zone, mostly from farm runoff.",
+      "stat": "4,402",
+      "statLabel": "square miles of Gulf of Mexico dead zone in summer 2025, per NOAA",
+      "text": "The nitrogen crops don't take up washes downriver and feeds algae. **Each summer the Gulf of Mexico gets a dead zone.**",
       "image": "/img/n/haber/gulf.jpg",
       "alt": "Satellite view of brown and green water spreading from the Louisiana coast into the deep blue Gulf of Mexico",
-      "credit": "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain.",
-      "also": [
-        "Source: Erisman and others, Nature Geoscience, 2008"
-      ]
+      "credit": "Sediment and phytoplankton in the Gulf of Mexico, 2023. NASA. Public domain."
     },
     {
       "kind": "foresight",
       "label": "Could anyone have seen it coming?",
       "title": "War, yes. Rivers, no.",
-      "text": "The use in explosives was plain by World War I. The damage to rivers, coasts and the climate came into view much later, once fertilizer use had grown many times over. A 2008 review says Haber could not have foreseen it."
+      "text": "The harm to rivers, coasts and climate showed up once fertilizer use had grown many times over. **A 2008 review says Haber could not foresee it.**"
     },
     {
       "kind": "cleanup",
-      "label": "The long cleanup",
+      "label": "Still unfolding",
       "title": "Still unfolding",
-      "text": "The process itself has barely changed since 1913. The Gulf dead zone measured 4,402 square miles in 2025. Its five-year average is more than twice the size of the target set for 2035."
+      "text": "The process has barely changed since 1913. **The Gulf dead zone still averages more than twice its 2035 target.**"
     },
     {
       "kind": "ledger",
       "label": "The ledger",
       "title": "Worth it?",
+      "gainsLabel": "What it gave",
+      "costsLabel": "What it cost",
       "gains": [
-        "Food for 48% of the world's people in 2008, one estimate finds (Nature Geoscience, 2008)",
-        "People fed per hectare of farmland: 1.9 in 1908, 4.3 in 2008 (same study)",
-        "An end to depending on mined bird droppings and saltpeter"
+        "Food for 48% of the world's people in 2008, one estimate finds",
+        "People fed per hectare: 1.9 in 1908, 4.3 in 2008 (same study)",
+        "No more depending on mined bird droppings and saltpeter"
       ],
       "costs": [
-        "Nitric acid for German explosives in World War I, after the blockade cut off Chilean saltpeter (Nature Geoscience, 2008)",
+        "Nitric acid for German explosives in World War I",
         "A Gulf of Mexico dead zone of 4,402 square miles, summer 2025 (NOAA)",
-        "Farming: 74% of human-made nitrous oxide, a greenhouse gas, in the 2010s (Global Carbon Project)"
+        "Farming: 74% of human-made nitrous oxide, a greenhouse gas, in the 2010s"
       ],
-      "text": "It feeds billions. It also sends nitrogen where nobody wants it.",
-      "gainsLabel": "What it gave",
-      "costsLabel": "What it cost"
-    },
-    {
-      "kind": "thanks",
-      "label": "Credit for trying",
-      "title": "Credit where due",
-      "text": "Haber took on a real problem, a world short of the nitrogen its farms needed, and solved it, winning the 1918 Nobel Prize. This nomination is for the ammonia. His 1915 chlorine gas attack at Ypres was a separate decision."
+      "text": "It feeds about half the world, one estimate finds. **The extra nitrogen ends up in rivers, sea and air.**"
     },
     {
       "kind": "pattern",
@@ -84,38 +76,13 @@
       "title": "Solve a shortage, create a surplus",
       "patternKey": "surplus",
       "focus": true,
-      "eyebrow": "What's the pattern?"
+      "text": "Once nitrogen was cheap, farms could spread more than crops take up. **The shortage ended, and the surplus went downstream.**"
     },
     {
-      "kind": "anatomy",
-      "label": "How the pattern works",
-      "title": "Cheap makes plenty",
-      "text": "Once nitrogen was cheap to make, farms could apply more than the crop would take up. The shortage ended at the factory gate. The surplus ended up in rivers, the sea and the air."
-    },
-    {
-      "kind": "mirror",
-      "label": "How you do this",
-      "title": "Your fixes overflow too",
-      "text": "New hires kept waiting days for laptops, so you set up a standing order. Nobody waits now. Two years later a closet of unopened laptops is aging out of warranty. The shortage is gone, and the extra had to go somewhere.",
-      "also": [
-        "Free cloud credits that leave servers running for nobody",
-        "A hiring push that leaves a team with more people than work"
-      ]
-    },
-    {
-      "kind": "lessons",
-      "label": "Lessons",
+      "kind": "meant",
+      "label": "Lesson",
       "title": "What we take from it",
-      "items": [
-        "A fix for too little can quietly become a source of too much.",
-        "When something gets cheap, people use more of it than they need.",
-        "The same breakthrough can feed people and arm a war at the same time."
-      ]
+      "text": "A fix for too little can quietly become a source of too much. **When something gets cheap, plan for the extra.**"
     }
-  ],
-  "portrait": {
-    "image": "/img/n/haber/portrait.jpg",
-    "alt": "Etched profile portrait of Fritz Haber, bald, with round glasses",
-    "credit": "Fritz Haber, etching by Emil Orlik, 1922. Public domain."
-  }
+  ]
 }
