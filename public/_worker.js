@@ -1432,8 +1432,8 @@ function decorate(res, env, url, meta = {}, status = 0) {
     .on("body", new Append(sheetHTML()))
     .on("#weekly-oops", new SetHTML(signupHTML("home")))
     .on("#waitlist-embed", new SetHTML(waitlistHTML()))
-    .on('meta[property="og:image"]', new SetAttr("content", meta.image ? SITE + meta.image : SITE + "/og.png"))
-    .on('meta[name="twitter:image"]', new SetAttr("content", meta.image ? SITE + meta.image : SITE + "/og.png"))
+    .on('meta[property="og:image"]', new SetAttr("content", meta.image ? SITE + meta.image : SITE + "/og.jpg"))
+    .on('meta[name="twitter:image"]', new SetAttr("content", meta.image ? SITE + meta.image : SITE + "/og.jpg"))
     .on("body", new SetAttr("data-flags", [flags.scores && "scores", flags.categories && "categories"].filter(Boolean).join(" ")))
     // The site "look": classic, or the 1970s palette. LOOK_DEFAULT picks it per environment;
     // ?look=70s or ?look=classic overrides it for this browser (kept in localStorage).
@@ -1566,7 +1566,7 @@ async function nomineePage(request, env, url, ctx, key) {
       image: SITE + `/img/og/${n.slug}.jpg`, inLanguage: "en-US",
       about: [{ "@type": "Thing", name: n.work }, ...(n.years ? [{ "@type": "Person", name: n.name }] : [])],
       author: { "@type": "Organization", name: "The Backfire Awards", url: SITE },
-      publisher: { "@type": "Organization", name: "The Backfire Awards", url: SITE, logo: { "@type": "ImageObject", url: SITE + "/og.png" } },
+      publisher: { "@type": "Organization", name: "The Backfire Awards", url: SITE, logo: { "@type": "ImageObject", url: SITE + "/og.jpg" } },
       isPartOf: { "@type": "WebSite", name: "The Backfire Awards", url: SITE },
     },
     attrs: { body: [["data-nominee", n.id], ["data-bg", "cat"], ["style", `--scene:url(${sceneOf(n)});--cat:${jewelVar(jewelOf(n.domain), "deep")}`]] },
@@ -1793,7 +1793,7 @@ async function sitemap(env, url, ctx) {
 const SITE_JSONLD = {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "Organization", "@id": SITE + "/#org", name: "The Backfire Awards", url: SITE, logo: SITE + "/og.png",
+    { "@type": "Organization", "@id": SITE + "/#org", name: "The Backfire Awards", url: SITE, logo: SITE + "/og.jpg",
       sameAs: ["https://www.instagram.com/backfireawards/"] },
     { "@type": "WebSite", "@id": SITE + "/#site", name: "The Backfire Awards", url: SITE, publisher: { "@id": SITE + "/#org" },
       description: "Teardowns of historic backfires for founders and inventors: famous fixes that worked, then created new problems.",
