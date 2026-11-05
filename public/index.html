@@ -23,19 +23,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/styles.css">
+<!-- The hero is the largest thing on the first screen: fetch the right size before the page is parsed. -->
+<link rel="preload" as="image" type="image/avif" imagesrcset="/img/brand/hero-compact-960.avif 960w, /img/brand/hero-compact-1440.avif 1440w, /img/brand/hero-compact-1920.avif 1920w" imagesizes="100vw" fetchpriority="high">
 </head>
 <body data-bg="fair">
 <header class="site-head" id="site-head"></header>
 <h1 class="sr-only" id="hero-h">The Backfire Awards</h1>
 <picture class="home-hero">
-  <source media="(max-width: 640px)" srcset="/img/brand/hero-mobile.webp" type="image/webp">
-  <source media="(max-width: 640px)" srcset="/img/brand/hero-mobile.jpg" type="image/jpeg">
-  <source srcset="/img/brand/hero-compact.webp" type="image/webp">
-  <img src="/img/brand/hero-compact.jpg" width="1920" height="640" alt="Backfire Awards. An optimistic inventor holds a bright idea while his laboratory sparks behind him. Bright Ideas. Unintended Consequences." fetchpriority="high" decoding="async">
+  <source type="image/avif" srcset="/img/brand/hero-compact-960.avif 960w, /img/brand/hero-compact-1440.avif 1440w, /img/brand/hero-compact-1920.avif 1920w" sizes="100vw">
+  <source type="image/webp" srcset="/img/brand/hero-compact-960.webp 960w, /img/brand/hero-compact-1440.webp 1440w, /img/brand/hero-compact-1920.webp 1920w" sizes="100vw">
+  <img src="/img/brand/hero-compact-1440.webp" width="1920" height="640" alt="Backfire Awards. An optimistic inventor holds a bright idea while his laboratory sparks behind him. Bright Ideas. Unintended Consequences." fetchpriority="high" loading="eager">
 </picture>
 <div class="wrap home">
 
-  <section class="sq has-bg sq-hero" id="intro" style="--bg:url(/img/cards/hero.jpg)" aria-labelledby="hero-h2">
+  <!-- The featured backfire: set by FEATURED in shared.js (or FEATURED_NOMINEE in the Pages settings). -->
+  <section class="featured feed" id="featured" aria-label="Featured backfire"></section>
+
+  <h2 class="feed-h" id="feed">More backfires</h2>
+  <div class="feed" id="feed-posts"></div>
+
+  <section class="sq has-bg sq-hero" id="intro" style="--bg:url(/img/cards/hero.webp)" aria-labelledby="hero-h2">
     <h2 id="hero-h2">Teardowns of historic backfires</h2>
     <p class="sq-for">For founders, inventors, and everyone trying to make a difference.</p>
     <p class="sq-text">Thomas Midgley discovered that leaded gasoline made engines run better. And then it reduced the IQ of millions. Oops.</p>
@@ -45,7 +52,7 @@
 
   <div class="carousel sq-carousel" id="midgley" data-carousel>
     <div class="cc-track" tabindex="0" aria-label="The Midgley, 5 cards">
-      <section class="sq has-bg sq-award aw-midgley" style="--bg:url(/img/cards/midgley.jpg)" aria-labelledby="mg-h">
+      <section class="sq has-bg sq-award aw-midgley" style="--bg:url(/img/cards/midgley.webp)" aria-labelledby="mg-h">
     <div class="element" aria-hidden="true"><span class="n">No. 1</span><span class="sym">Mg</span><span class="w">MIDGLEY</span></div>
     <h2 id="mg-h">The Midgley</h2>
     <p class="sq-for">An award for backfires at world scale</p>
@@ -65,10 +72,8 @@
     </div>
   </div>
 
-  <h2 class="feed-h" id="feed">The teardowns</h2>
-  <div class="feed" id="feed-posts"></div>
 
-  <section class="sq has-bg sq-oops" style="--bg:url(/img/cards/oops.jpg)" id="oops" aria-labelledby="sub-h">
+  <section class="sq has-bg sq-oops" style="--bg:url(/img/cards/oops.webp)" id="oops" aria-labelledby="sub-h">
     <h2 id="sub-h">The Backfire Newsletter</h2>
     <p class="sq-text">One short email a week: a new backfire teardown, the pattern behind it, and who won. Unsubscribe any time.</p>
     <div id="weekly-oops"></div>

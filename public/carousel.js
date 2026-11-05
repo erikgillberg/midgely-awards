@@ -21,3 +21,16 @@ document.querySelectorAll("[data-carousel]").forEach((root) => {
   });
   sync();
 });
+
+// Card backgrounds load as they come near. The head script marks the page "lazy-bgs" and CSS holds every
+// card background back until its card gets .bg-in. A card inside a carousel loads with its whole carousel,
+// so swiping never waits on an image. Every page with card backgrounds loads this file.
+{
+  const LAZY = ".has-bg, .cc-payoff.cc-hero:not(.cc-igask)";
+  const units = new Set([...document.querySelectorAll(LAZY)].map((el) => el.closest("[data-carousel]") || el));
+  const show = (u) => [u, ...u.querySelectorAll(LAZY)].filter((el) => el.matches(LAZY)).forEach((el) => el.classList.add("bg-in"));
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } }), { rootMargin: "600px 0px" });
+    units.forEach((u) => io.observe(u));
+  } else units.forEach(show);
+}

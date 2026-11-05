@@ -253,25 +253,30 @@ document.addEventListener("click", (e) => {
 
 // ---------- warm scenes behind every page, changing by distance scrolled (not by which sections are open)
 {
-  const SCENES = ["/img/seventies/01-tokyo-skyways-wide.jpg", "/img/seventies/04-desert-research-city-sq.jpg", "/img/seventies/02-indian-solar-city-sq.jpg",
-    "/img/seventies/03-west-african-future-sq.jpg", "/img/seventies/07-silent-orbit-wide.jpg", "/img/seventies/05-orbital-home-sq.jpg"];
+  const SCENES = ["/img/seventies/01-tokyo-skyways-wide.webp", "/img/seventies/04-desert-research-city-sq.webp", "/img/seventies/02-indian-solar-city-sq.webp",
+    "/img/seventies/03-west-african-future-sq.webp", "/img/seventies/07-silent-orbit-wide.webp", "/img/seventies/05-orbital-home-sq.webp"];
   let host = document.querySelector(".td-bgs");
   const scenic = document.body.matches("[data-bg]") && !document.body.matches('[data-page="shop"]');
   if (!host && scenic) {
     host = document.createElement("div"); host.className = "td-bgs"; host.setAttribute("aria-hidden", "true");
-    host.innerHTML = SCENES.map((s, i) => `<span class="${i ? "" : "on"}" style="background-image:url(${s})"></span>`).join("");
+    // Each scene's image is fetched only when it is about to show, so six backgrounds never compete with the first screen.
+    host.innerHTML = SCENES.map((s, i) => `<span class="${i ? "" : "on"}" data-scene="${s}"></span>`).join("");
     document.body.prepend(host);
   }
   if (host) {
     document.body.classList.add("has-scenes");
     const layers = [...host.children];
+    const load = (el) => { if (el && el.dataset.scene) { el.style.backgroundImage = `url(${el.dataset.scene})`; delete el.dataset.scene; } };
     let cur = 0;
     const pick = () => {
       const long = document.documentElement.scrollHeight > innerHeight * 2.5;
       const i = long ? Math.floor(scrollY / (innerHeight * 1.8)) % layers.length : 0;
-      if (i !== cur) { layers[cur].classList.remove("on"); layers[i].classList.add("on"); cur = i; }
+      if (i !== cur) { load(layers[i]); layers[cur].classList.remove("on"); layers[i].classList.add("on"); cur = i; }
+      load(layers[(i + 1) % layers.length]); // the next scene, ready before it fades in
     };
-    addEventListener("scroll", pick, { passive: true }); pick();
+    // The first scene waits for the page itself to finish loading.
+    const start = () => { load(layers[cur]); addEventListener("scroll", pick, { passive: true }); pick(); };
+    if (document.readyState === "complete") start(); else addEventListener("load", start, { once: true });
   }
 }
 

@@ -16,7 +16,7 @@
 // The schema creates and migrates itself on first request (v1 databases upgrade in place).
 
 import {
-  SITE, feedOopsHTML, jewelVar, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
+  SITE, FEATURED, feedOopsHTML, jewelVar, DOMAINS as DOMAIN_LABELS, CATEGORY_SLUGS, AWARDS as AWARD_LABELS, LINKS, MIN_JUDGES, HONOREE, signupHTML,
   esc, slugify, nomineePath, cardHTML, headerHTML, footerHTML, herdPct, byTop, topValue, categoryChipsHTML,
   carouselHTML, tableHTML, keyHTML, JEWELS, CATEGORY_JEWEL, BUILD, sheetHTML, nomCardHTML, categoricTableHTML, categoricLegendHTML,
   postHTML, writeupHTML, autoCarousel, sceneOf, jewelOf, murphyPostHTML, murphyPath, MURPHYS_LIVE, SCORES_VISIBLE, notAFitFor, notAFitHTML, NOT_A_FIT, NOT_A_FIT_RULES,
@@ -1409,6 +1409,9 @@ class Versioned {
 // Night is the default; the reader's choice (the Day / Night switch in the menu) is remembered.
 const THEME_SCRIPT = `<script>(function(){var d=document.documentElement,t=null;try{t=localStorage.getItem("bf.theme")}catch(e){}
 t=t==="light"?"light":"dark";d.setAttribute("data-theme",t);var m=document.querySelector('meta[name="theme-color"]');if(m&&t==="light")m.content="#F4E8D6"})();</script>`;
+// Card backgrounds wait for carousel.js to call them in (see the end of carousel.js), so they never
+// compete with the first screen.
+const LAZY_BG_SCRIPT = `<script>document.documentElement.classList.add("lazy-bgs")</script>`;
 const LOOK_SCRIPT = `<script>(function(){var d=document.documentElement,k="bf.look",l=null,q=new URLSearchParams(location.search).get("look");
 if(q!=="70s"&&q!=="classic")q=null;
 try{if(q)localStorage.setItem(k,q);l=localStorage.getItem(k)}catch(e){}
@@ -1438,7 +1441,7 @@ function decorate(res, env, url, meta = {}, status = 0) {
     // The site "look": classic, or the 1970s palette. LOOK_DEFAULT picks it per environment;
     // ?look=70s or ?look=classic overrides it for this browser (kept in localStorage).
     .on("html", new SetAttr("data-look-default", env.LOOK_DEFAULT === "70s" ? "70s" : "classic"))
-    .on("head", new Append(LOOK_SCRIPT + THEME_SCRIPT + `<link rel="alternate" type="application/rss+xml" title="The Backfire Awards: teardowns" href="${SITE}/feed.xml">`
+    .on("head", new Append(LOOK_SCRIPT + THEME_SCRIPT + LAZY_BG_SCRIPT + `<link rel="alternate" type="application/rss+xml" title="The Backfire Awards: teardowns" href="${SITE}/feed.xml">`
       + (meta.jsonld ? `<script type="application/ld+json">${JSON.stringify(meta.jsonld).replace(/</g, "\\u003c")}</script>` : "")));
 
   if (meta.canonical) {
@@ -1509,7 +1512,9 @@ async function homePage(request, env, url, ctx, category) {
   all.forEach((n) => n.domain && (counts[n.domain] = (counts[n.domain] || 0) + 1));
   const noms = category ? all.filter((n) => n.domain === category) : all;
   const fill = {};
-  if (st) fill[category ? "#list" : "#feed-posts"] = category ? listHTML(noms, st.comments, flags) : await feedHTML(request, env, url, st);
+  const featured = !category && st ? st.nominees.find((x) => x.slug === (env.FEATURED_NOMINEE || FEATURED) && x.id !== HONOREE) : null;
+  if (featured) fill["#featured"] = await featuredHTML(request, env, url, st, featured);
+  if (st) fill[category ? "#list" : "#feed-posts"] = category ? listHTML(noms, st.comments, flags) : await feedHTML(request, env, url, st, featured?.id);
   if (flags.categories) fill["#cats"] = categoryChipsHTML(category, counts);
   const page = await asset(env, url, request, category ? "/category-page" : "/");
   if (!category) return decorate(page, env, url, { canonical: SITE + "/", fill, jsonld: SITE_JSONLD });
@@ -1554,8 +1559,8 @@ async function nomineePage(request, env, url, ctx, key) {
         everyone: st.nominees,
         // backgrounds that change as the reader scrolls: the story's photos, then its category scene
         // the warm 1970s scenes behind the page, changing as the reader scrolls
-        backgrounds: ["/img/seventies/01-tokyo-skyways-wide.jpg", "/img/seventies/04-desert-research-city-sq.jpg", "/img/seventies/02-indian-solar-city-sq.jpg",
-          "/img/seventies/03-west-african-future-sq.jpg", "/img/seventies/07-silent-orbit-wide.jpg"],
+        backgrounds: ["/img/seventies/01-tokyo-skyways-wide.webp", "/img/seventies/04-desert-research-city-sq.webp", "/img/seventies/02-indian-solar-city-sq.webp",
+          "/img/seventies/03-west-african-future-sq.webp", "/img/seventies/07-silent-orbit-wide.webp"],
       }),
     },
     image: `/img/og/${n.slug}.jpg`, // 1200x630 share card from tools/og-cards.mjs
@@ -1757,6 +1762,19 @@ async function moreFor(env, n) {
     }
   }
   return parts.join("");
+}
+
+// The featured backfire at the top of the home page: the full post with its carousel and vote, then a
+// "Next backfire" link that feed.js shows once this browser has voted. Its cover photo loads right away,
+// since it is on the first screen. data-next lists the rest in feed order, so the link skips teardowns
+// this browser has already voted on.
+async function featuredHTML(request, env, url, st, n) {
+  const flags = flagsOf(env);
+  const rest = st.nominees.filter((x) => x.id !== HONOREE && x.id !== n.id).sort(byTop(flags)).map((x) => [x.id, nomineePath(x)]);
+  const carousel = (await carouselFor(request, env, url, n)).replace('loading="lazy"', 'loading="eager"');
+  return `<h2 class="feed-h feat-h">Featured backfire</h2>`
+    + postHTML(n, { flags, thread: st.comments.filter((c) => c.nomineeId === n.id), carousel, more: ledgerMore(n) })
+    + (rest.length ? `<p class="feat-next" hidden data-next="${esc(JSON.stringify(rest))}"><a class="feat-next-btn" href="${esc(rest[0][1])}">Next backfire <span aria-hidden="true">→</span></a></p>` : "");
 }
 
 // The feed: nominees by the top sort, with a featured Murphy after every third.

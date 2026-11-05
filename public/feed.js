@@ -23,6 +23,20 @@ export function toast(t) {
   clearTimeout(toastTimer); toastTimer = setTimeout(() => (el.hidden = true), 2600);
 }
 
+// The featured backfire on the home page: once this browser has voted on it, "Next backfire" appears and
+// points at the first teardown in feed order it hasn't voted on yet.
+const voted = new Set();
+function showNext() {
+  const next = $("#featured .feat-next");
+  if (!next) return;
+  const id = $("#featured .post")?.dataset.id;
+  if (!voted.has(id)) return;
+  const rest = JSON.parse(next.dataset.next || "[]");
+  const pick = rest.find(([nid]) => !voted.has(nid)) || rest[0];
+  if (pick) $("a", next).href = pick[1];
+  next.hidden = false;
+}
+
 // Show which way this browser already voted.
 api("/api/my-votes?voter=" + encodeURIComponent(voter)).then((r) => {
   (r.myVotes || []).forEach((id) => document.querySelectorAll(`.post[data-id="${CSS.escape(id)}"] [data-act="vote"]`).forEach((b) => b.setAttribute("aria-pressed", "true")));
@@ -30,6 +44,9 @@ api("/api/my-votes?voter=" + encodeURIComponent(voter)).then((r) => {
     const btn = document.querySelector(`.post[data-id="${CSS.escape(id)}"] [data-act="herd"][data-vote="${yes ? "yes" : "no"}"]`);
     if (btn) btn.setAttribute("aria-pressed", "true");
   });
+  (r.myVotes || []).forEach((id) => voted.add(id));
+  Object.keys(r.myHerd || {}).forEach((id) => voted.add(id));
+  showNext();
 }).catch(() => {});
 
 const name = () => store.get("midgley.name") || "";
@@ -227,6 +244,7 @@ document.addEventListener("click", async (e) => {
   if (act === "vote") {
     const on = btn.getAttribute("aria-pressed") === "true";
     btn.setAttribute("aria-pressed", String(!on));
+    if (!on) { voted.add(id); showNext(); }
     try {
       const r = await api("/api/vote", { method: "POST", body: JSON.stringify({ nomineeId: id, voter }) });
       btn.setAttribute("aria-pressed", String(r.voted)); $(".c", btn).textContent = r.score;
@@ -238,6 +256,7 @@ document.addEventListener("click", async (e) => {
     const was = group.querySelector('[aria-pressed="true"]');
     const vote = was === btn ? "" : btn.dataset.vote;   // tapping your answer again takes it back
     group.querySelectorAll("[data-act=herd]").forEach((b) => b.setAttribute("aria-pressed", String(b === btn && vote !== "")));
+    if (vote) { voted.add(id); showNext(); } // right away, inside the tap, so the button never jumps in late
     try {
       const r = await api("/api/herd", { method: "POST", body: JSON.stringify({ nomineeId: id, voter, vote }) });
       const h = $(".pv-herd", post); if (h) h.innerHTML = herdLine(r.herdYes, r.herdTotal);

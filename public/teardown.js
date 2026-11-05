@@ -92,7 +92,11 @@ export function teardownMastHTML(n, story = {}) {
   const stops = [["story", "The story"], ["impact", "Impact"], ["pattern", "Pattern"], ["dashboards", "Dashboards"], ["tags", "Tags"],
     ["references", "Sources"], ["corrections", "Corrections"], ["more", "More"]];
   return `<a class="td-hero" href="/" aria-label="The Backfire Awards home">
-      <img src="/img/brand/hero-compact.jpg" srcset="/img/brand/hero-compact.webp" width="1920" height="640" alt="Backfire Awards. Bright Ideas. Unintended Consequences.">
+      <picture>
+        <source type="image/avif" srcset="/img/brand/hero-compact-960.avif 960w, /img/brand/hero-compact-1440.avif 1440w, /img/brand/hero-compact-1920.avif 1920w" sizes="(max-width: 960px) 100vw, 960px">
+        <source type="image/webp" srcset="/img/brand/hero-compact-960.webp 960w, /img/brand/hero-compact-1440.webp 1440w, /img/brand/hero-compact-1920.webp 1920w" sizes="(max-width: 960px) 100vw, 960px">
+        <img src="/img/brand/hero-compact-960.webp" width="1920" height="640" alt="Backfire Awards. Bright Ideas. Unintended Consequences." fetchpriority="high">
+      </picture>
     </a>
     <header class="td-mast" style="${jewelVars(jewelOf(n.domain))}">
       <div class="td-mast-tile">${elementHTML(n, "lg")}</div>

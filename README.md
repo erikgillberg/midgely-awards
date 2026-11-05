@@ -46,6 +46,7 @@ Set these under the Pages project's **Settings**, for **Production**:
 | `FEATURE_SCORES` | Variable, set to `1` | No | Turns on the Oops Score and the Facepalm Index, which replace upvotes |
 | `FEATURE_CATEGORIES` | Variable, set to `1` | No | Turns on category chips and the `/category/...` pages |
 | `CF_BEACON_TOKEN` | Variable | No | Cloudflare Web Analytics token. The server adds the analytics script to every page |
+| `FEATURED_NOMINEE` | Variable | No | The featured backfire at the top of the home page, by slug (the part after `/n/`). Wins over `FEATURED` in `public/shared.js`, which is `magie` |
 
 Changes to settings take effect on the next deployment.
 
