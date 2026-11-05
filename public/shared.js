@@ -310,7 +310,7 @@ export function murphyCarouselHTML(m) {
   const foot = (i) => `<footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>${i} / 3</span></footer>`;
   return `<div class="carousel mu-carousel" data-carousel style="--deep:#0B2230;--base:#2F6E8F;--light:#BFE0EF">
     <div class="cc-track" tabindex="0" aria-label="A Murphy, 3 cards">
-      <section class="cc cc-hook mu-hook"><img class="cc-scene" src="/img/scenes/murphy.jpg" alt="" loading="lazy">
+      <section class="cc cc-hook mu-hook"><img class="cc-scene" src="/img/scenes/murphy.webp" alt="" loading="lazy">
         <div class="cc-hook-top"><div class="el lg mu-el"><span class="el-num">2</span><span class="el-year"></span><span class="el-sym">Mu</span><span class="el-name">MURPHY</span><span class="el-up"></span><span class="el-down"></span></div><p class="cc-kicker">A Murphy<br>${esc(who)}</p></div>
         <h2 class="cc-headline mid">The fix</h2><p class="cc-dek">${esc(m.fix)}</p><p class="cc-swipe" aria-hidden="true">Swipe <span>→</span></p>${foot(1)}</section>
       <section class="cc no-img" data-sym="Mu"><div class="cc-body"><p class="cc-label"><span>01</span> What went oops</p><h3 class="cc-title">${esc(m.oops)}</h3></div>${foot(2)}</section>
@@ -345,7 +345,7 @@ export function autoCarousel(n) {
   slides.forEach((s) => { if (s.text && s.title && s.text.startsWith(s.title)) s.text = s.text.slice(s.title.length).trim(); if (s.title.length > 70) { s.text = s.title + " " + (s.text || ""); s.title = s.label; } });
   return { slug: n.slug, headline: String(n.work).split(" (")[0], dek: first(n.solved), scene: sceneOf(n), slides, auto: true };
 }
-export const sceneOf = (n) => `/img/scenes/${n.status === "prospective" || !DOMAINS[n.domain] ? "unsure" : n.domain}.jpg`;
+export const sceneOf = (n) => `/img/scenes/${n.status === "prospective" || !DOMAINS[n.domain] ? "unsure" : n.domain}.webp`;
 
 // A nominee in the list: a square card in its category's jewel, with its element tile.
 export function nomCardHTML(n, flags = {}) {

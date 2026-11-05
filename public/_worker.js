@@ -1514,10 +1514,12 @@ async function homePage(request, env, url, ctx, category) {
   const fill = {};
   const featured = !category && st ? st.nominees.find((x) => x.slug === (env.FEATURED_NOMINEE || FEATURED) && x.id !== HONOREE) : null;
   if (featured) fill["#featured"] = await featuredHTML(request, env, url, st, featured);
+  const attrs = featured || category ? {} : { "#featured": ["hidden", ""] }; // no featured backfire: the plain list, as before
+  if (!featured && !category) fill["#feed"] = "The teardowns";
   if (st) fill[category ? "#list" : "#feed-posts"] = category ? listHTML(noms, st.comments, flags) : await feedHTML(request, env, url, st, featured?.id);
   if (flags.categories) fill["#cats"] = categoryChipsHTML(category, counts);
   const page = await asset(env, url, request, category ? "/category-page" : "/");
-  if (!category) return decorate(page, env, url, { canonical: SITE + "/", fill, jsonld: SITE_JSONLD });
+  if (!category) return decorate(page, env, url, { canonical: SITE + "/", fill, attrs, jsonld: SITE_JSONLD });
   const name = DOMAIN_LABELS[category];
   const path = `/category/${CATEGORY_SLUGS[category]}`;
   fill["#cat-title"] = `Backfires in ${esc(name)}`;
@@ -1591,7 +1593,7 @@ async function murphyPage(request, env, url, ctx, key) {
       "#list": murphyPostHTML(m, { flags: flagsOf(env), thread: st.comments.filter((c) => c.nomineeId === m.id), open: true }),
       "#more-feed": `<h2 class="feed-h">More backfires</h2>` + await feedHTML(request, env, url, st, m.id),
     },
-    attrs: { body: [["data-nominee", m.id], ["data-bg", "cat"], ["style", "--scene:url(/img/scenes/murphy.jpg);--cat:#0B2230"]] },
+    attrs: { body: [["data-nominee", m.id], ["data-bg", "cat"], ["style", "--scene:url(/img/scenes/murphy.webp);--cat:#0B2230"]] },
   });
 }
 
