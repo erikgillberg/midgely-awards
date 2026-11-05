@@ -1765,13 +1765,13 @@ async function moreFor(env, n) {
 }
 
 // The featured backfire at the top of the home page: the full post with its carousel and vote, then a
-// "Next backfire" link that feed.js shows once this browser has voted. Its cover photo loads right away,
-// since it is on the first screen. data-next lists the rest in feed order, so the link skips teardowns
-// this browser has already voted on.
+// "Next backfire" link that feed.js shows once this browser has voted. Its cover photo loads right away
+// at normal priority, since it is on the first screen; other carousel photos load lazily at low priority.
+// data-next lists the rest in feed order, so the link skips teardowns this browser has already voted on.
 async function featuredHTML(request, env, url, st, n) {
   const flags = flagsOf(env);
   const rest = st.nominees.filter((x) => x.id !== HONOREE && x.id !== n.id).sort(byTop(flags)).map((x) => [x.id, nomineePath(x)]);
-  const carousel = (await carouselFor(request, env, url, n)).replace('loading="lazy"', 'loading="eager"');
+  const carousel = (await carouselFor(request, env, url, n)).replace('loading="lazy" fetchpriority="low"', 'loading="eager"');
   return `<h2 class="feed-h feat-h">Featured backfire</h2>`
     + postHTML(n, { flags, thread: st.comments.filter((c) => c.nomineeId === n.id), carousel, more: ledgerMore(n) })
     + (rest.length ? `<p class="feat-next" hidden data-next="${esc(JSON.stringify(rest))}"><a class="feat-next-btn" href="${esc(rest[0][1])}">Next backfire <span aria-hidden="true">→</span></a></p>` : "");

@@ -746,8 +746,8 @@ export function carouselHTML(n, data, flags = {}) {
   const total = data.slides.length + (key ? 3 : 2);
   const foot = (i) => `<footer class="cc-foot"><span>${BRAND_DOMAIN}</span><span>${i} / ${total}</span></footer>`;
   cards.push(`<section class="cc cc-hook" aria-roledescription="slide" aria-label="1 of ${total}">
-    ${data.portrait ? `<figure class="cc-portrait${data.portrait.photo ? " photo" : ""}"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="lazy"></figure>`
-      : `<img class="cc-scene" src="${esc(data.scene || sceneOf(n))}" alt="" loading="lazy">`}
+    ${data.portrait ? `<figure class="cc-portrait${data.portrait.photo ? " photo" : ""}"><img src="${esc(data.portrait.image)}" alt="${esc(data.portrait.alt)}" loading="lazy" fetchpriority="low"></figure>`
+      : `<img class="cc-scene" src="${esc(data.scene || sceneOf(n))}" alt="" loading="lazy" fetchpriority="low">`}
     <div class="cc-hook-top">${elementHTML(n, "lg")}<p class="cc-kicker">${esc(n.name)}<br>${esc(n.years || "")}<br>${esc(DOMAINS[n.domain] || "")}</p></div>
     <h2 class="cc-headline ${data.headline.length > 22 ? "long" : data.headline.length > 13 ? "mid" : ""}">${esc(data.headline)}</h2>
     <p class="cc-dek">${esc(data.dek)}</p>
@@ -762,7 +762,7 @@ export function carouselHTML(n, data, flags = {}) {
   data.slides.forEach((s, k) => {
     const i = k + (key ? 3 : 2);
     if (s.kind !== "pattern") num++;
-    const img = s.image ? `<figure class="cc-img"><img src="${esc(s.image)}" alt="${esc(s.alt || "")}" loading="lazy"><figcaption>${esc(s.credit || "")}</figcaption></figure>` : "";
+    const img = s.image ? `<figure class="cc-img"><img src="${esc(s.image)}" alt="${esc(s.alt || "")}" loading="lazy" fetchpriority="low"><figcaption>${esc(s.credit || "")}</figcaption></figure>` : "";
     const stat = s.stat ? `<p class="cc-stat"><b>${esc(s.stat)}</b> ${esc(s.statLabel || "")}</p>` : "";
     const chip = s.kind === "foresight" ? foresightHTML(s.knowable || n.knowable) : ""; // a story may correct the rating
     const also = s.also && s.also.length ? `<ul class="cc-also">${s.also.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : "";
