@@ -1912,6 +1912,6 @@ html.lazy-bgs :is(.has-bg,.cc-payoff.cc-hero:not(.cc-igask)):not(.bg-in){backgro
 /* Wide screens: the banner keeps to the feed's width, so the featured story and its vote fit the first screen */
 @media (min-width:900px){
   .home-hero{max-width:480px;margin:14px auto 0!important;border-radius:16px}
-  .featured>:is(.feat-h,.post){width:clamp(360px,calc(100svh - 380px),600px);margin-inline:auto;box-sizing:border-box}
+  .featured>:is(.feat-h,.post){width:clamp(320px,calc(100svh - 380px),600px);margin-inline:auto;box-sizing:border-box}
   .featured .feat-h{margin-top:8px;margin-bottom:-8px;font-size:22px}
 }
